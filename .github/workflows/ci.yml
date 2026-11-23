@@ -1,0 +1,41 @@
+name: PetroPID-Agent Offline CI & Safety Gate
+
+on:
+  push:
+    branches: [ main, v4.3.3-final ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      PETROPID_LLM_DISABLE_DOTENV: "1"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run full pytest safety, audit, and algorithm suite
+        run: pytest 04_algorithms/tests/ 05_skills/tests/ -v
+
+      - name: Run MCP protocol integration tests (14/14)
+        run: python 06_mcp/mcp_client.py
+
+      - name: Validate OWL ontology, SQL DDL, and knowledge triples
+        run: python 03_models/validate_models.py
+
+      - name: Recompute 30-loop independent benchmark
+        run: python 07_agents/benchmark_runner.py
+
+      - name: Independently recompute 144-trial ablation summary
+        run: python 07_agents/recompute_ablation.py

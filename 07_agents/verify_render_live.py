@@ -9,7 +9,7 @@ from pathlib import Path
 import httpx
 
 BASE = "https://petropid-agent.onrender.com"
-OUT = Path(__file__).resolve().parents[1] / "competition_v4" / "final_audit_v432" / "render_v432_live_verification.json"
+OUT = Path(__file__).resolve().parents[1] / "competition_v4" / "final_release_v433" / "render_v433_live_verification.json"
 
 
 def _timed(fn):
@@ -26,10 +26,10 @@ def main() -> None:
         "checks": {},
     }
     with httpx.Client(timeout=45.0) as client:
-        # Wait up to 120s for Render to finish rolling over to 4.3.2
+        # Wait up to 120s for Render to finish rolling over to 4.3.3
         for _ in range(15):
             r, ms = _timed(lambda: client.get(f"{BASE}/healthz"))
-            if r.status_code == 200 and r.json().get("version") == "4.3.2":
+            if r.status_code == 200 and r.json().get("version") == "4.3.3":
                 break
             time.sleep(8.0)
 

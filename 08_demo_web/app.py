@@ -40,7 +40,7 @@ from decision_engine import ALGORITHM_VERSION, DATASET_VERSION, verify_audit_rec
 from openjiuwen_adapter import export_openjiuwen_manifest
 from mcp_server import PetroPIDMCPServer
 
-app = FastAPI(title="PetroPID-Agent V4.3.2 | 石化复杂过程多智能体自适应 PID 工程工作站", version="4.3.2")
+app = FastAPI(title="PetroPID-Agent V4.3.3 | 石化复杂过程多智能体自适应 PID 工程工作站", version="4.3.3")
 static_dir = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
@@ -521,7 +521,7 @@ def healthz(probe_llm: bool = False) -> JSONResponse:
     build_ts = bt_file.read_text(encoding="utf-8").strip() if bt_file.exists() else BUILD_TIME
     return JSONResponse(content={
         "status": "ok",
-        "version": "4.3.2",
+        "version": "4.3.3",
         "algorithm_version": ALGORITHM_VERSION,
         "dataset_version": DATASET_VERSION,
         "code_commit": CODE_COMMIT,

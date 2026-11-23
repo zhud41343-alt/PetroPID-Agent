@@ -76,6 +76,10 @@ def test_end_to_end_skills_and_deduplication():
 
 
 def test_openjiuwen_native_sdk_tool_registration():
+    import importlib.util
+    import pytest
+    if importlib.util.find_spec("openjiuwen") is None:
+        pytest.skip("openjiuwen native SDK not installed in lightweight Linux CI container")
     sys.path.insert(0, str(ROOT / "07_agents"))
     from openjiuwen_adapter import build_native_openjiuwen_tools, export_openjiuwen_manifest
 

@@ -1,0 +1,7 @@
+system,total_trials,decision_correct_rate_pct,fault_recovery_rate_pct,duplicate_prevented_total,audit_verified_rate_pct,mean_serialized_handoff_bytes,est_tokens_bytes_div_4,latency_ms_p50,latency_ms_p95,latency_ms_p99
+A0_fixed_baseline,24,75.0,0.0,0,0.0,15023,3756,36.14,223.24,225.02
+A1_fixed_plus_retry,24,100.0,100.0,0,0.0,15023,3756,127.63,220.57,224.38
+A2_fixed_plus_retry_cache,24,100.0,100.0,6,0.0,15023,3756,128.07,230.83,233.88
+B1_single_agent_monolithic_real_audit,24,95.83,100.0,6,100.0,11463,2866,142.62,246.31,252.07
+B2_single_agent_compact_real_audit,24,95.83,100.0,6,100.0,201,50,136.55,237.9,241.52
+C_petropid_5agent_blackboard,24,100.0,100.0,6,100.0,2632,658,172.12,249.37,260.54

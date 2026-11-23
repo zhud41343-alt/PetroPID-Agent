@@ -27,7 +27,7 @@ from dataclasses import dataclass, asdict
 from typing import Any, Dict, Iterable, List, Optional
 
 DATASET_VERSION = "petropid-sim-30loops-v2.0"
-ALGORITHM_VERSION = "petropid-alg-v4.3.2"
+ALGORITHM_VERSION = "petropid-alg-v4.3.3"
 INPUT_HASH_SCHEMA = "petropid.input_evidence.v4.2"
 OUTPUT_HASH_SCHEMA = "petropid.output_evidence.v4.2"
 RECORD_DIGEST_SCHEMA = "petropid.full_record_digest.v4.3.2"
