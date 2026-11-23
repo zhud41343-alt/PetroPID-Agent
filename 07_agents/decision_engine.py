@@ -19,16 +19,19 @@ V4.2 P0 Hardening:
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
 import math
+import re
 from dataclasses import dataclass, asdict
 from typing import Any, Dict, Iterable, List, Optional
 
 DATASET_VERSION = "petropid-sim-30loops-v2.0"
-ALGORITHM_VERSION = "petropid-alg-v4.3"
+ALGORITHM_VERSION = "petropid-alg-v4.3.2"
 INPUT_HASH_SCHEMA = "petropid.input_evidence.v4.2"
 OUTPUT_HASH_SCHEMA = "petropid.output_evidence.v4.2"
-RECORD_DIGEST_SCHEMA = "petropid.full_record_digest.v4.3"
+RECORD_DIGEST_SCHEMA = "petropid.full_record_digest.v4.3.2"
+_HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 
 FINAL_STATUS_SPECS: Dict[str, Dict[str, Any]] = {
     "INPUT_DATA_INVALID": {
@@ -220,12 +223,14 @@ def verify_pre_decision_audit_evidence(
 
 
 def compute_full_record_digest(record: Dict[str, Any]) -> str:
-    """P1-1: Canonical SHA-256 digest covering the COMPLETE auditable record content
-    (audit_meta bindings + final_decision + final_pid + diagnosis + identification + safety + trace).
+    """P0-01 (V4.3.2): Mandatory canonical SHA-256 digest covering the COMPLETE auditable record:
+    audit_meta bindings + final_decision + final_pid + diagnosis + identification + tuning +
+    safety + baseline_comparison + trace + exported waveforms.
 
-    Note on security boundary: This provides deterministic data-integrity and accidental-tamper
-    detection within isolated simulation; cryptographic non-repudiation requires an external
-    signing key / KMS root not present in this local simulation environment.
+    Note on security boundary: Provides deterministic data-integrity and tamper detection within
+    isolated simulation; cryptographic non-repudiation requires an external KMS/PKI signing root.
+    Display-only auxiliary plots (`identification_plot`, `phase_portrait`, `nyquist_plot`) are
+    explicitly excluded from this digest and documented as non-protected display projections.
     """
     am = record.get("audit_meta") or {}
     return compute_canonical_hash({
@@ -246,13 +251,16 @@ def compute_full_record_digest(record: Dict[str, Any]) -> str:
         "final_decision": record.get("final_decision"),
         "diagnosis": record.get("diagnosis"),
         "identification": record.get("identification"),
+        "tuning": record.get("tuning"),
         "safety": record.get("safety"),
+        "baseline_comparison": record.get("baseline_comparison"),
         "trace": record.get("trace"),
+        "waveforms": record.get("waveforms"),
     })
 
 
 def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
-    """Phase-2 independent tamper & completeness verifier for persisted/served run records (P0-04 + P1-1)."""
+    """Phase-2 independent tamper & completeness verifier (V4.3.2 P0-01: record_digest_sha256 is MANDATORY)."""
     errors: List[str] = []
     am = record.get("audit_meta")
     fd = record.get("final_decision")
@@ -275,7 +283,7 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
     errors.extend(pre["errors"])
 
     out_hash = am.get("output_hash")
-    if not out_hash or not isinstance(out_hash, str) or len(out_hash) != 64:
+    if not isinstance(out_hash, str) or not _HEX64_RE.match(out_hash):
         errors.append("AUDIT_MISSING_OR_INVALID_OUTPUT_HASH")
     else:
         recomputed = compute_canonical_output_hash(
@@ -284,15 +292,18 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
             reason_codes=fd.get("reason_codes", []),
             gate_matrix=fd.get("gate_matrix", {}),
         )
-        if recomputed != out_hash:
+        if not hmac.compare_digest(recomputed, out_hash):
             errors.append("AUDIT_OUTPUT_HASH_MISMATCH")
 
-    # P1-1: Verify full record digest if present (detects in-place value tampering of trace/model/safety/timestamp)
+    # P0-01 (V4.3.2): Full record digest is STRICTLY MANDATORY — NEVER skipped if absent or None!
     rec_digest = am.get("record_digest_sha256")
-    if rec_digest is not None:
-        if not isinstance(rec_digest, str) or len(rec_digest) != 64:
-            errors.append("AUDIT_INVALID_RECORD_DIGEST")
-        elif compute_full_record_digest(record) != rec_digest:
+    if rec_digest is None or rec_digest == "":
+        errors.append("AUDIT_MISSING_RECORD_DIGEST_LEGACY_OR_UNVERIFIED")
+    elif not isinstance(rec_digest, str) or not _HEX64_RE.match(rec_digest):
+        errors.append("AUDIT_MALFORMED_RECORD_DIGEST")
+    else:
+        expected_digest = compute_full_record_digest(record)
+        if not hmac.compare_digest(expected_digest, rec_digest):
             errors.append("AUDIT_FULL_RECORD_DIGEST_MISMATCH")
 
     if record.get("deployment_authorized") is not False:
@@ -301,7 +312,6 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
     if record.get("final_status") != fd.get("final_status") or am.get("final_status") != fd.get("final_status"):
         errors.append("AUDIT_STATUS_CONSISTENCY_MISMATCH")
 
-    # If model or safety was evaluated, ensure corresponding structured objects exist
     gm = fd.get("gate_matrix") or {}
     if gm.get("model_validity_gate") in ("PASS", "FAIL") and record.get("identification") is None:
         errors.append("AUDIT_MISSING_MODEL_EVIDENCE")
@@ -311,7 +321,9 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "audit_status": "PASS" if not errors else "FAIL",
         "errors": errors,
-        "integrity_scope": "canonical_sha256_hash_integrity_without_external_kms",
+        "digest_schema": RECORD_DIGEST_SCHEMA,
+        "integrity_scope": "canonical_sha256_full_record_integrity_without_external_kms",
+        "non_protected_display_fields": ["identification_plot", "phase_portrait", "nyquist_plot", "knowledge", "anti_bloat_metrics"],
     }
 
 
