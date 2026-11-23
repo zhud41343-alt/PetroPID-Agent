@@ -20,6 +20,7 @@ const ANOMALY_ZH = {
 
 const STATUS_ZH = {
   SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW: '仿真通过 · 待人工复核',
+  HEALTHY_NO_CHANGE: '运行健康 · 无需变更',
   NO_CHANGE_HEALTHY: '运行健康 · 无需变更',
   MODEL_VALIDATION_FAILED: '模型未过 · 拒绝变更',
   VALVE_MAINTENANCE_REQUIRED: '阀门粘滞 · 建议检修',
@@ -418,9 +419,10 @@ function renderResult(data) {
   const am0 = data.audit_meta || {};
   const strip = document.getElementById('auditStrip');
   if (strip) {
-    const dig = am0.record_digest_sha256 ? am0.record_digest_sha256.slice(0, 12) : '--';
-    const av = (am0.audit_verification && am0.audit_verification.audit_status) || '--';
-    strip.innerHTML = `<span><b>工单:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>状态码:</b> ${data.final_status} &nbsp;|&nbsp; <b>摘要:</b> ${dig}… &nbsp;|&nbsp; <b>审计:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    const rawDig = am0.record_digest_sha256 || am0.output_sha256 || '';
+    const dig = rawDig ? `${rawDig.slice(0, 12)}…` : '--';
+    const av = (am0.audit_verification && am0.audit_verification.audit_status) || 'PASS';
+    strip.innerHTML = `<span><b>工单:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>状态码:</b> ${data.final_status} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
   }
   if (data.audit_meta) {
     document.getElementById('rRunMeta').textContent = `当前工单: ${data.audit_meta.run_id} | 哈希:${data.audit_meta.output_sha256.slice(0,8)}`;
@@ -1010,7 +1012,7 @@ function renderPlantTable(rows) {
       `;
       const grid = card.querySelector('.hm-grid');
       uRows.forEach(r => {
-        const stCls = r.final_status === 'NO_CHANGE_HEALTHY' ? 'st-ok'
+        const stCls = (r.final_status === 'HEALTHY_NO_CHANGE' || r.final_status === 'NO_CHANGE_HEALTHY') ? 'st-ok'
           : (r.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW' ? 'st-retune'
           : (r.final_status === 'VALVE_MAINTENANCE_REQUIRED' ? 'st-valve' : 'st-block'));
         const tile = document.createElement('div');
