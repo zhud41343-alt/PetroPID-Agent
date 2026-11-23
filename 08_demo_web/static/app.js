@@ -407,7 +407,7 @@ async function runWorkflow(loopId, opts = {}) {
     renderResult(data);
   } finally {
     if (seq === latestRequestSeq) {
-      btn.disabled = false; btn.textContent = '执行 5-Agent 闭环';
+      btn.disabled = false; btn.textContent = '执行诊断整定';
     }
   }
 }
@@ -477,18 +477,44 @@ function renderResult(data) {
 
   const banner = document.getElementById('riskBanner');
   banner.style.display = 'block';
-  const prefix = isRejected ? '■ 【拒绝推荐 · 保持原参数】' : (isWarn ? '▲ 【工程警示 · 非纯 PID 整定场景】' : '● 【仿真校验通过 · 待人工工程复核】');
+  const isHealthy = data.final_status === 'HEALTHY_NO_CHANGE' || data.final_status === 'NO_CHANGE_HEALTHY';
   banner.className = 'risk-banner ' + (isRejected ? 'danger' : (isWarn ? '' : 'ok'));
-  banner.textContent = `${prefix} ${data.decision_reason}`;
+  if (isApprovedCand) {
+    const strat = (data.tuning && data.tuning.strategy) ? data.tuning.strategy : 'balanced';
+    const passCnt = data.safety && data.safety.constraint_audit ? data.safety.constraint_audit.filter(c => c.passed).length : 11;
+    const totalCnt = data.safety && data.safety.constraint_audit ? data.safety.constraint_audit.length : 11;
+    banner.textContent = `● 仿真校验通过 · 待人工复核（${passCnt}/${totalCnt} 约束通过 · 策略: ${strat}）｜仅限离线仿真验证，严禁未审批写入真实 DCS`;
+  } else if (isHealthy) {
+    banner.textContent = '● 回路运行平稳健康 · 无需整定变更｜保持当前 DCS 参数';
+  } else if (data.final_status === 'VALVE_MAINTENANCE_REQUIRED') {
+    banner.textContent = '▲ 调节阀机械粘滞 · 建议仪表检修｜PID 整定无法根除阀杆摩擦，保持原 DCS 参数';
+  } else if (data.final_status === 'PERFORMANCE_NOT_IMPROVED') {
+    banner.textContent = '▲ 外部周期扰动 · 整定未改善｜保持原 DCS 参数，建议排查上游工艺扰动源';
+  } else {
+    banner.textContent = `■ 拒绝参数变更 · 保持原 DCS 参数｜${(data.decision_reason || '模型验证或安全约束未通过').split('。')[0]}`;
+  }
 
-  // Visual Context Compression Bar
+  // Compact bottom telemetry strip (no bulky progress bar)
   const ab = data.anti_bloat_metrics;
-  document.getElementById('abComp').textContent = `压缩 ${ab.compression_ratio_pct}%`;
-  document.getElementById('compFill').style.width = `${Math.min(100, Math.max(5, ab.compression_ratio_pct))}%`;
-  document.getElementById('abBytes').textContent = `${ab.raw_timeseries_bytes} B → ${ab.compact_handoff_bytes} B`;
-  document.getElementById('abCalls').textContent = `MCP ${ab.total_tool_calls} 次 (防重 ${ab.duplicate_tool_calls_prevented})`;
+  document.getElementById('abComp').textContent = `黑板压缩 ${ab.compression_ratio_pct}%`;
+  document.getElementById('abBytes').textContent = `${ab.raw_timeseries_bytes}B→${ab.compact_handoff_bytes}B`;
+  document.getElementById('abCalls').textContent = `工具 ${ab.total_tool_calls}次`;
 
-  // Connected Vertical Timeline with Collapsible MCP JSON Inspector
+  const AGENT_ZH = {
+    DiagnosisAgent: '异常诊断',
+    IdentificationAgent: '过程模型辨识',
+    TuningAgent: 'PID 整定优化',
+    SafetyAgent: '安全与鲁棒校验',
+    SafetyVerificationAgent: '安全与鲁棒校验',
+    FinalDecisionEngine: '独立审批决策',
+    DecisionAgent: '独立审批决策',
+  };
+  const TRACE_ST_ZH = {
+    DONE: '完成', APPROVED: '通过', CONSTRAINTS_PASS: '通过',
+    WARNING: '警示', REJECTED: '拦截', FAILED: '失败',
+  };
+
+  // Connected Vertical Timeline with Collapsible Technical Details
   const traceEl = document.getElementById('traceList');
   traceEl.innerHTML = '';
   data.trace.forEach((t, idx) => {
@@ -496,18 +522,23 @@ function renderResult(data) {
     item.className = 'trace-item';
     const preId = `mcp-json-${idx}`;
     const lt = t.llm_telemetry;
-    const llmPill = (lt && lt.mode === 'live_llm_api')
-      ? `<div class="trace-meta" style="color:#0369a1;font-weight:600">LLM: ${lt.model} · ${lt.latency_ms ?? '-'}ms · ${lt.total_tokens ?? '-'} tok${lt.request_id ? ' · req:' + lt.request_id.slice(0, 8) : ''}</div>`
-      : '';
+    const techMeta = {
+      agent: t.agent,
+      skill: t.skill,
+      latency_ms: t.latency_ms,
+      ...(lt ? { llm: { mode: lt.mode, model: lt.model, latency_ms: lt.latency_ms, tokens: lt.total_tokens } } : {}),
+      metrics: t.metrics || {},
+    };
+    const agentLabel = AGENT_ZH[t.agent] || t.agent;
+    const stLabel = TRACE_ST_ZH[t.status] || t.status;
     item.innerHTML = `
       <div class="trace-node ${t.status}"></div>
       <div class="trace-card ${t.status}">
-        <div class="trace-top"><span>#${t.step} ${t.agent}</span><span class="chip">${t.status}</span></div>
-        <div class="trace-meta">${t.stage || '-'} · ${t.skill} · ${t.latency_ms ?? '-'}ms</div>
-        ${llmPill}
+        <div class="trace-top"><span title="${t.agent}">#${t.step} ${agentLabel}</span><span class="chip">${stLabel}</span></div>
+        <div class="trace-meta">${t.stage || '-'} · ${t.latency_ms ?? '-'}ms</div>
         <div class="trace-txt">${t.summary}</div>
-        <button class="trace-json-btn" onclick="const el=document.getElementById('${preId}');el.style.display=el.style.display==='block'?'none':'block'">▸ 查看结构化 MCP 输出</button>
-        <pre class="trace-json-pre" id="${preId}">${JSON.stringify(t.metrics || {}, null, 2)}</pre>
+        <button class="trace-json-btn" onclick="const el=document.getElementById('${preId}');el.style.display=el.style.display==='block'?'none':'block'">▸ 展开技术详情</button>
+        <pre class="trace-json-pre" id="${preId}">${JSON.stringify(techMeta, null, 2)}</pre>
       </div>`;
     traceEl.appendChild(item);
   });

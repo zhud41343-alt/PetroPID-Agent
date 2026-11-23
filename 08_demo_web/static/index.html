@@ -11,8 +11,8 @@
     <div class="brand">
       <div class="brand-mark">PID</div>
       <div>
-        <h1>PetroPID-Agent V4.3 · 石化装置控制回路性能监测与智能整定工作站</h1>
-        <small>ISA-101 高性能工业 HMI · 9 态独立安全决策引擎 · 隔离机理仿真专用 (deployment_authorized=false)</small>
+        <h1>PetroPID-Agent · 石化控制回路性能监测与整定工作站</h1>
+        <small>ISA-101 工业 HMI · 离线机理仿真与安全校验</small>
       </div>
     </div>
     <nav class="nav-tabs">
@@ -52,13 +52,13 @@
         <div class="filter-box">
           <input id="loopSearch" type="text" placeholder="搜索位号/编号/装置 (如 TIC-201)..." />
           <select id="anomalyFilter">
-            <option value="ALL">全部 6 类工况 (30 回路)</option>
-            <option value="AGGRESSIVE_TUNING">激进振荡 (AGGRESSIVE · 6)</option>
-            <option value="MODEL_MISMATCH">工况漂移失配 (MISMATCH · 5)</option>
-            <option value="SLUGGISH_TUNING">保守迟缓 (SLUGGISH · 6)</option>
-            <option value="VALVE_STICTION">调节阀粘滞 (STICTION · 5)</option>
-            <option value="EXTERNAL_DISTURBANCE">外部周期扰动 (DISTURB · 3)</option>
-            <option value="NORMAL">健康运行 (NORMAL · 5)</option>
+            <option value="ALL">全部工况 (30)</option>
+            <option value="AGGRESSIVE_TUNING">激进振荡 (6)</option>
+            <option value="MODEL_MISMATCH">模型失配 (5)</option>
+            <option value="SLUGGISH_TUNING">保守迟缓 (6)</option>
+            <option value="VALVE_STICTION">阀门粘滞 (5)</option>
+            <option value="EXTERNAL_DISTURBANCE">外部扰动 (3)</option>
+            <option value="NORMAL">运行正常 (5)</option>
           </select>
         </div>
         <div class="loop-list" id="loopList"></div>
@@ -79,14 +79,14 @@
             <h2 id="selectedTitle">正在加载控制回路...</h2>
             <div class="toolbar">
               <select id="strategySelect" class="btn">
-                <option value="">策略：智能体自动选择</option>
-                <option value="conservative">强制：保守稳健 (Conservative)</option>
-                <option value="balanced">强制：SIMC 均衡 (Balanced)</option>
-                <option value="performance">强制：高性能快速 (Performance)</option>
+                <option value="">自动策略</option>
+                <option value="conservative">保守稳健</option>
+                <option value="balanced">SIMC 均衡</option>
+                <option value="performance">快速响应</option>
               </select>
-              <button class="btn btn-primary" id="runBtn">执行 5-Agent 闭环</button>
-              <button class="btn btn-green" id="approvalBtn">导出 DCS 复核单</button>
-              <button class="btn btn-ghost" id="bundleBtn" title="导出含输入输出哈希、时间戳与11项约束的可审计测试包">导出审计包 JSON</button>
+              <button class="btn btn-primary" id="runBtn">执行诊断整定</button>
+              <button class="btn btn-green" id="approvalBtn">导出复核单</button>
+              <button class="btn btn-ghost" id="bundleBtn" title="导出含哈希、时间戳与11项约束的可审计包">审计包</button>
             </div>
           </div>
           <div class="card-body">
@@ -107,10 +107,10 @@
         <div class="card">
           <div class="card-head">
             <div class="sub-tabs" id="chartTabs">
-              <button class="c-tab active" data-chart="time">1. 时域响应与阀位磨损</button>
-              <button class="c-tab" data-chart="ident">2. FOPDT 独立验证 (65/35)</button>
-              <button class="c-tab" data-chart="phase">3. PV-OP 粘滞相图</button>
-              <button class="c-tab" data-chart="nyquist">4. 频域 Nyquist 与 Ms 圆</button>
+              <button class="c-tab active" data-chart="time">时域响应</button>
+              <button class="c-tab" data-chart="ident">模型验证</button>
+              <button class="c-tab" data-chart="phase">阀门相图</button>
+              <button class="c-tab" data-chart="nyquist">Nyquist 稳定域</button>
             </div>
             <div class="toolbar">
               <button class="btn btn-ghost" id="replayBtn" title="动画演示整定前后 600s 响应过程">▶ 动态回放</button>
@@ -136,9 +136,9 @@
         <div class="card">
           <div class="card-head">
             <div class="sub-tabs" id="detailTabs">
-              <button class="d-tab active" data-detail="pane-audit">11 项安全硬约束审计 (含 C-000)</button>
-              <button class="d-tab" data-detail="pane-regime">5 工况跨边界鲁棒验证 (含专用红线)</button>
-              <button class="d-tab" data-detail="pane-baseline">公平算法基线对照 (原PID / SIMC / 本系统)</button>
+              <button class="d-tab active" data-detail="pane-audit">安全硬约束 (11)</button>
+              <button class="d-tab" data-detail="pane-regime">多工况鲁棒性 (5)</button>
+              <button class="d-tab" data-detail="pane-baseline">方案对照</button>
             </div>
           </div>
           <div class="card-body" style="padding:0">
@@ -166,22 +166,24 @@
 
       <aside class="panel-right">
         <div class="right-tabs">
-          <button class="r-tab active" data-right="right-trace">5-Agent 协作时间线</button>
-          <button class="r-tab" data-right="right-copilot">AI 自控工程副驾驶</button>
+          <button class="r-tab active" data-right="right-trace">诊断与校验流程</button>
+          <button class="r-tab" data-right="right-copilot">工程指令助手</button>
         </div>
 
         <div id="right-trace" class="right-pane active">
-          <div class="comp-box">
-            <div class="comp-head"><span>防上下文膨胀 · 状态黑板压缩</span><span id="abComp" style="color:var(--green)">--</span></div>
-            <div class="comp-track"><div class="comp-fill" id="compFill" style="width:0%"></div></div>
-            <div class="comp-sub"><span id="abBytes">--</span><span id="abCalls">--</span></div>
-          </div>
           <div class="trace-section" id="traceList"></div>
+          <div class="comp-box" style="border-top:1px solid var(--border);border-bottom:none;padding:7px 12px">
+            <div class="comp-sub" style="margin-top:0">
+              <span id="abBytes">--</span>
+              <span id="abComp" style="color:var(--green);font-weight:700">--</span>
+              <span id="abCalls">--</span>
+            </div>
+          </div>
         </div>
 
         <div id="right-copilot" class="right-pane">
           <div class="copilot-log" id="copilotLog">
-            <div class="msg msg-bot">你好！我是 PetroPID 自控工程副驾驶。点击下方快捷按钮将<strong>自动立即发送</strong>执行（无需再点发送），也可自由输入工程指令。</div>
+            <div class="msg msg-bot">输入工程查询或整定指令，或点击下方快捷操作：</div>
           </div>
           <div class="quick-prompts">
             <button class="q-chip" data-q="巡检全厂30个回路，列出最危险的Top5">全厂风险 Top5</button>
