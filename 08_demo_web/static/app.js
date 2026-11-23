@@ -137,6 +137,23 @@ function setupEvents() {
     };
   });
 
+  document.querySelectorAll('.demo-btn').forEach(btn => {
+    btn.onclick = () => {
+      if (btn.dataset.demoView) {
+        document.querySelector(`.nav-tab[data-view="${btn.dataset.demoView}"]`)?.click();
+        return;
+      }
+      if (btn.dataset.demoChart) {
+        activeChart = btn.dataset.demoChart;
+        document.querySelectorAll('.c-tab').forEach(x => x.classList.toggle('active', x.dataset.chart === activeChart));
+      }
+      if (btn.dataset.demoLoop) {
+        const target = allLoops.find(x => x.loop_id === btn.dataset.demoLoop);
+        if (target) { selectLoop(target); runCurrentLoop(); }
+      }
+    };
+  });
+
   [['sK','vK'],['sTau','vTau'],['sTheta','vTheta'],['sKc','vKc'],['sTi','vTi'],['sS','vS'],['sOs','vOs']].forEach(([s,v]) => {
     const el = document.getElementById(s);
     el.oninput = () => document.getElementById(v).textContent = el.value;

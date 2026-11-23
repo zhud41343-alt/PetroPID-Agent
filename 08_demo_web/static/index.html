@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetroPID-Agent V4.0 | 石化复杂过程多智能体自适应 PID 工程工作站</title>
+  <title>PetroPID-Agent V4.3 | 石化复杂过程多智能体自适应 PID 工程工作站</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -11,8 +11,8 @@
     <div class="brand">
       <div class="brand-mark">PID</div>
       <div>
-        <h1>PetroPID-Agent V4.0 · 石化装置多智能体自适应 PID 工程工作站</h1>
-        <small>ISA-101 工业 HMI · 独立 FinalDecisionEngine (9态) · MCP JSON-RPC 2.0 · OWL 本体推理</small>
+        <h1>PetroPID-Agent V4.3 · 石化装置多智能体自适应 PID 工程工作站</h1>
+        <small>ISA-101 工业 HMI · 独立 FinalDecisionEngine (9态) · MCP JSON-RPC 2.0 · 隔离仿真专用 (deployment_authorized=false)</small>
       </div>
     </div>
     <nav class="nav-tabs">
@@ -63,6 +63,14 @@
       </aside>
 
       <main class="panel-center">
+        <div class="demo-bar" aria-label="评委快速演示导览">
+          <span class="demo-lbl">评委 5 步导览</span>
+          <button class="demo-btn" data-demo-loop="LOOP-006" data-demo-chart="time">① 安全放行复核 (LOOP-006)</button>
+          <button class="demo-btn" data-demo-loop="LOOP-012" data-demo-chart="ident">② 模型失配拒批 (LOOP-012)</button>
+          <button class="demo-btn" data-demo-loop="LOOP-021" data-demo-chart="phase">③ 阀门粘滞拦截 (LOOP-021)</button>
+          <button class="demo-btn" data-demo-loop="LOOP-029" data-demo-chart="time">④ 外扰性能拒批 (LOOP-029)</button>
+          <button class="demo-btn" data-demo-view="view-sandbox">⑤ 压力沙盒 / CSV</button>
+        </div>
         <div class="stage-bar">
           <div class="st-step" id="st1">① 异常发现</div>
           <div class="st-step" id="st2">② 诊断证据</div>
