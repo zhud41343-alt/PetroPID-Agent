@@ -1,0 +1,213 @@
+{
+  "verified_at_utc": "2026-11-23T14:19:53.220920+00:00",
+  "base_url": "https://petropid-agent.onrender.com",
+  "checks": {
+    "healthz_probe": {
+      "status_code": 200,
+      "latency_ms": 1393.7,
+      "body": {
+        "status": "ok",
+        "version": "4.3.3",
+        "algorithm_version": "petropid-alg-v4.3.3",
+        "dataset_version": "petropid-sim-30loops-v2.0",
+        "code_commit": "d8efc92c3ec7",
+        "code_commit_full": "d8efc92c3ec78a207919a307b23f15b82e01dba6",
+        "code_commit_source": "render_runtime_env",
+        "build_time_utc": "2026-11-23T14:19:29Z",
+        "llm_mode": "live_llm_api",
+        "llm_health": {
+          "configured_mode": "live_llm_api",
+          "connectivity_status": "VERIFIED_LIVE",
+          "model": "deepseek-flash",
+          "latency_ms": 1097.2,
+          "request_id": "3071cb03-afce-4044-9ea4-4c08fb767fd3"
+        },
+        "deployment_authorized": false,
+        "run_store": {
+          "stored_runs": 0,
+          "max_capacity": 200,
+          "evicted_count": 0,
+          "persistence_policy": "in_memory_plus_local_sqlite_ephemeral_on_free_tier"
+        }
+      }
+    },
+    "api_loops": {
+      "status_code": 200,
+      "latency_ms": 296.1,
+      "count": 30
+    },
+    "api_benchmark": {
+      "status_code": 200,
+      "latency_ms": 348.9,
+      "version": "V4.2-independent-audited",
+      "independent_evaluation": {
+        "protocol": "P0-05 independent scenario ground-truth (zero dependence on tested model_valid)",
+        "diagnosis_accuracy_pct": 100.0,
+        "model_validation_success_rate_non_healthy_pct": 76.0,
+        "model_validation_success_rate_tunable_pct": 64.71,
+        "correct_rejection_rate_non_tunable_pct": 100.0,
+        "false_approval_rate_pct": 0.0,
+        "false_approval_count": 0,
+        "effective_parameter_recommendation_rate_tunable_pct": 64.71,
+        "independent_full_task_success_rate_pct": 80.0,
+        "independent_exact_matches": 24,
+        "conservative_safe_decision_rate_pct": 100.0,
+        "note": "6 sluggish loops with low excitation are conservatively rejected as MODEL_VALIDATION_FAILED (counted as misses in independent_full_task_success_rate_pct=80.0%, and 0 dangerous false approvals)."
+      }
+    },
+    "api_openjiuwen": {
+      "status_code": 200,
+      "latency_ms": 281.0,
+      "sdk_version": "not_installed"
+    },
+    "key_loops": {
+      "LOOP-006": {
+        "status_code": 200,
+        "latency_ms": 7858.6,
+        "run_id": "RUN-20261123142015203-199e17d15d",
+        "request_id": "REQ-3fd3b9806385",
+        "code_commit": "d8efc92c3ec7",
+        "input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
+        "output_hash": "e40a1172c68d66f3be962a1138c9f94da650ed9481d163c263229d2e78465085",
+        "record_digest_sha256": "1043a18d5cf54b691635339823af3417a34e50e105fdc48154cca412a0b09612",
+        "llm_mode": "live_llm_api",
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "deployment_authorized": false,
+        "audit_verification": {
+          "audit_status": "PASS",
+          "errors": [],
+          "digest_schema": "petropid.full_record_digest.v4.3.2",
+          "integrity_scope": "canonical_sha256_full_record_integrity_without_external_kms",
+          "non_protected_display_fields": [
+            "identification_plot",
+            "phase_portrait",
+            "nyquist_plot",
+            "knowledge",
+            "anti_bloat_metrics"
+          ]
+        }
+      },
+      "LOOP-012": {
+        "status_code": 200,
+        "latency_ms": 3374.9,
+        "run_id": "RUN-20261123142023062-03a751d641",
+        "request_id": "REQ-5e4afbdc2169",
+        "code_commit": "d8efc92c3ec7",
+        "input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
+        "output_hash": "40870962460c3e3356fac95bbda08c16887290e707ae339e992e84cf1370f6f8",
+        "record_digest_sha256": "f2d78b5c8a30557cbced6557f32d52ed1b00ec0e8be1eb9609dfa9a4e03820d9",
+        "llm_mode": "live_llm_api",
+        "final_status": "MODEL_VALIDATION_FAILED",
+        "deployment_authorized": false,
+        "audit_verification": {
+          "audit_status": "PASS",
+          "errors": [],
+          "digest_schema": "petropid.full_record_digest.v4.3.2",
+          "integrity_scope": "canonical_sha256_full_record_integrity_without_external_kms",
+          "non_protected_display_fields": [
+            "identification_plot",
+            "phase_portrait",
+            "nyquist_plot",
+            "knowledge",
+            "anti_bloat_metrics"
+          ]
+        }
+      },
+      "LOOP-021": {
+        "status_code": 200,
+        "latency_ms": 6518.4,
+        "run_id": "RUN-20261123142026449-488c7d4625",
+        "request_id": "REQ-058ab19525d5",
+        "code_commit": "d8efc92c3ec7",
+        "input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
+        "output_hash": "083a812ed3fa7bb3f72df2dca871c536464098d135abfdd085810ab815bf17b1",
+        "record_digest_sha256": "64e46be61a0b2b358e303d53cd638fe09cdd546dc90bdae6bc51d1f28d8bbf5d",
+        "llm_mode": "live_llm_api",
+        "final_status": "VALVE_MAINTENANCE_REQUIRED",
+        "deployment_authorized": false,
+        "audit_verification": {
+          "audit_status": "PASS",
+          "errors": [],
+          "digest_schema": "petropid.full_record_digest.v4.3.2",
+          "integrity_scope": "canonical_sha256_full_record_integrity_without_external_kms",
+          "non_protected_display_fields": [
+            "identification_plot",
+            "phase_portrait",
+            "nyquist_plot",
+            "knowledge",
+            "anti_bloat_metrics"
+          ]
+        }
+      },
+      "LOOP-029": {
+        "status_code": 200,
+        "latency_ms": 7536.5,
+        "run_id": "RUN-20261123142032974-ce5395cb5f",
+        "request_id": "REQ-b8ad8904faf9",
+        "code_commit": "d8efc92c3ec7",
+        "input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
+        "output_hash": "e4723aa181dd0f4cc37637d24c269627b1ce58efef9428a7238437131bf54326",
+        "record_digest_sha256": "9c48fb248891422de439ddc78a74e3f751836a0796e8f8c92ae46b8af953e85a",
+        "llm_mode": "live_llm_api",
+        "final_status": "PERFORMANCE_NOT_IMPROVED",
+        "deployment_authorized": false,
+        "audit_verification": {
+          "audit_status": "PASS",
+          "errors": [],
+          "digest_schema": "petropid.full_record_digest.v4.3.2",
+          "integrity_scope": "canonical_sha256_full_record_integrity_without_external_kms",
+          "non_protected_display_fields": [
+            "identification_plot",
+            "phase_portrait",
+            "nyquist_plot",
+            "knowledge",
+            "anti_bloat_metrics"
+          ]
+        }
+      }
+    },
+    "p0_02_strict_binding": {
+      "approval_valid_200": 200,
+      "approval_has_5regime_table": true,
+      "approval_cross_loop_409": 409,
+      "approval_missing_404": 404,
+      "export_bundle_200": 200,
+      "bundle_run_id_match": true
+    },
+    "api_sandbox": {
+      "status_code": 200,
+      "latency_ms": 6986.6,
+      "run_id": "RUN-20261123142042028-2f57186546",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
+    },
+    "api_upload_csv": {
+      "status_code": 200,
+      "latency_ms": 2738.0,
+      "data_source_type": "UPLOADED_HISTORICAL_CSV",
+      "has_known_plant_truth": false,
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "candidate_eligible_for_review": false
+    },
+    "api_copilot": {
+      "status_code": 200,
+      "latency_ms": 1768.4,
+      "llm_telemetry": {
+        "mode": "live_llm_api",
+        "model": "deepseek-flash",
+        "latency_ms": 1493.8,
+        "request_id": "1aec0bd6-8331-4fd8-9d3a-0fd7349c8a26",
+        "usage": {
+          "prompt_tokens": 423,
+          "completion_tokens": 104,
+          "total_tokens": 527,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 423
+        }
+      },
+      "reply_preview": "LOOP-012（LIC-103，常减压精馏塔）因过程模型独立验证未通过被拒批：验证 R²=0.605<0.80、拟合度 79.6%<85%，提示存在未测负载偏移或激励不足，模型不可信。故拒绝推荐新参数，保持原 PID（Kc=0.22，Ti=85s，Td=0），且未授权下发 DCS。建议补充激励数据后重新辨识。\n\n`["
+    }
+  }
+}
