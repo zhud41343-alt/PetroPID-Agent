@@ -769,7 +769,7 @@ async function sendCopilot() {
 
 async function runSandbox() {
   const btn = document.getElementById('runSandboxBtn');
-  btn.disabled = true; btn.textContent = '5-Agent 实时仿真与救场中...';
+  btn.disabled = true; btn.textContent = '实时仿真校验中...';
   const payload = {
     K: +document.getElementById('sK').value,
     tau: +document.getElementById('sTau').value,
@@ -786,7 +786,7 @@ async function runSandbox() {
     }).then(r => r.json());
     renderSandboxOutput(data);
   } finally {
-    btn.disabled = false; btn.textContent = '注入自定义工况并启动 5-Agent 现场救场';
+    btn.disabled = false; btn.textContent = '注入自定义工况并执行闭环校验';
   }
 }
 

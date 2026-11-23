@@ -21,9 +21,8 @@
       <button class="nav-tab" data-view="view-plant">全厂 30 回路健康总览</button>
     </nav>
     <div class="top-meta">
-      <span class="meta-pill"><i class="status-dot"></i>MCP 14/14 PASS</span>
-      <span class="meta-pill" id="topMode">Engine: --</span>
-      <span class="meta-pill meta-pill-safe">SIMULATION ONLY · NO DCS WRITE</span>
+      <span class="meta-pill"><i class="status-dot"></i><span id="topMode">Engine: --</span></span>
+      <span class="meta-pill meta-pill-safe">SIMULATION ONLY</span>
     </div>
   </header>
 
@@ -64,14 +63,6 @@
       </aside>
 
       <main class="panel-center">
-        <div class="demo-bar" aria-label="评委快速演示导览">
-          <span class="demo-lbl">评委 5 步导览</span>
-          <button class="demo-btn active" data-demo-loop="LOOP-006" data-demo-chart="time"><i class="d-dot ok"></i>① 安全放行复核 (LOOP-006)</button>
-          <button class="demo-btn" data-demo-loop="LOOP-012" data-demo-chart="ident"><i class="d-dot err"></i>② 模型失配拒批 (LOOP-012)</button>
-          <button class="demo-btn" data-demo-loop="LOOP-021" data-demo-chart="phase"><i class="d-dot purp"></i>③ 阀门粘滞拦截 (LOOP-021)</button>
-          <button class="demo-btn" data-demo-loop="LOOP-029" data-demo-chart="time"><i class="d-dot warn"></i>④ 外扰性能拒批 (LOOP-029)</button>
-          <button class="demo-btn" data-demo-view="view-sandbox"><i class="d-dot blue"></i>⑤ 压力沙盒 / CSV</button>
-        </div>
         <div class="stage-bar">
           <div class="st-step" id="st1">① 异常发现</div>
           <div class="st-step" id="st2">② 诊断证据</div>
@@ -219,7 +210,7 @@
             <div class="slider-row"><label><span>当前初始积分 Ti (s)</span><span id="vTi">8.0</span></label><input type="range" id="sTi" min="3" max="90" step="1" value="8"></div>
             <div class="slider-row"><label><span>调节阀粘滞带 S (%)</span><span id="vS">0.0</span></label><input type="range" id="sS" min="0" max="7" step="0.5" value="0"></div>
             <div class="slider-row"><label><span>自定义标称超调红线 (%)</span><span id="vOs">18</span></label><input type="range" id="sOs" min="5" max="25" step="1" value="18"></div>
-            <button class="btn btn-primary" id="runSandboxBtn" style="width:100%;margin-top:6px">注入自定义工况并启动 5-Agent 现场救场</button>
+            <button class="btn btn-primary" id="runSandboxBtn" style="width:100%;margin-top:6px">注入自定义工况并执行闭环校验</button>
 
             <div class="csv-drop">
               <div style="font-weight:700;color:var(--ink);margin-bottom:6px">或上传自定义 DCS 历史数据 (.csv)</div>
@@ -234,8 +225,8 @@
             <div class="canvas-box"><canvas id="sandboxCanvas"></canvas></div>
             <div class="chart-legend" style="margin-top:10px">
               <span><i style="background:#1d4ed8"></i>设定值 SP (虚线)</span>
-              <span><i style="background:#b91c1c"></i>救场前原参数 PV / OP</span>
-              <span><i style="background:#047857"></i>5-Agent 现场救场后 PV / OP</span>
+              <span><i style="background:#b91c1c"></i>整定前原参数 PV / OP</span>
+              <span><i style="background:#047857"></i>优化校验后 PV / OP</span>
             </div>
             <div id="sbSummary" style="margin-top:10px;font-size:12.5px;color:#334155">点击左侧按钮或上传 CSV 文件，实时运行全套诊断、FOPDT 辨识、自适应整定与 11 项安全约束校验。</div>
             <div style="margin-top:12px;overflow-x:auto">
