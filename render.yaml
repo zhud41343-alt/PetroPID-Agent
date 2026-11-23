@@ -12,4 +12,4 @@ services:
         value: "deepseek-chat"
       - key: PETROPID_LLM_API_KEY
         sync: false
-    healthCheckPath: /api/loops
+    healthCheckPath: /healthz

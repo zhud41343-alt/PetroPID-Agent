@@ -311,6 +311,13 @@ class PetroPIDOrchestrator:
             "latency_ms": round((time.perf_counter() - t1) * 1000.0, 2),
             "status": "DONE",
             "summary": diag_llm["reasoning"],
+            "llm_telemetry": {
+                "mode": diag_llm.get("mode"),
+                "model": diag_llm.get("model"),
+                "request_id": diag_llm.get("request_id", ""),
+                "latency_ms": diag_llm.get("latency_ms"),
+                "total_tokens": (diag_llm.get("usage") or {}).get("total_tokens"),
+            },
             "metrics": {
                 "anomaly_type": diag["anomaly_type"],
                 "severity": diag["severity"],
@@ -379,6 +386,13 @@ class PetroPIDOrchestrator:
             "latency_ms": round((time.perf_counter() - t2) * 1000.0, 2),
             "status": "DONE" if ident["allow_next_stage"] else "REJECTED",
             "summary": id_llm["reasoning"],
+            "llm_telemetry": {
+                "mode": id_llm.get("mode"),
+                "model": id_llm.get("model"),
+                "request_id": id_llm.get("request_id", ""),
+                "latency_ms": id_llm.get("latency_ms"),
+                "total_tokens": (id_llm.get("usage") or {}).get("total_tokens"),
+            },
             "metrics": {
                 "K": ident["K"],
                 "tau": ident["tau"],
@@ -507,6 +521,13 @@ class PetroPIDOrchestrator:
             "latency_ms": round((time.perf_counter() - t3) * 1000.0, 2),
             "status": "DONE",
             "summary": tune_llm["reasoning"],
+            "llm_telemetry": {
+                "mode": tune_llm.get("mode"),
+                "model": tune_llm.get("model"),
+                "request_id": tune_llm.get("request_id", ""),
+                "latency_ms": tune_llm.get("latency_ms"),
+                "total_tokens": (tune_llm.get("usage") or {}).get("total_tokens"),
+            },
             "metrics": {"strategy": chosen_strategy, **rec_pid},
         })
 

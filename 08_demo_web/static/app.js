@@ -379,11 +379,16 @@ function renderResult(data) {
     const item = document.createElement('div');
     item.className = 'trace-item';
     const preId = `mcp-json-${idx}`;
+    const lt = t.llm_telemetry;
+    const llmPill = (lt && lt.mode === 'live_llm_api')
+      ? `<div class="trace-meta" style="color:#0369a1;font-weight:600">LLM: ${lt.model} · ${lt.latency_ms ?? '-'}ms · ${lt.total_tokens ?? '-'} tok${lt.request_id ? ' · req:' + lt.request_id.slice(0, 8) : ''}</div>`
+      : '';
     item.innerHTML = `
       <div class="trace-node ${t.status}"></div>
       <div class="trace-card ${t.status}">
         <div class="trace-top"><span>#${t.step} ${t.agent}</span><span class="chip">${t.status}</span></div>
         <div class="trace-meta">${t.stage || '-'} · ${t.skill} · ${t.latency_ms ?? '-'}ms</div>
+        ${llmPill}
         <div class="trace-txt">${t.summary}</div>
         <button class="trace-json-btn" onclick="const el=document.getElementById('${preId}');el.style.display=el.style.display==='block'?'none':'block'">▸ 查看结构化 MCP 输出</button>
         <pre class="trace-json-pre" id="${preId}">${JSON.stringify(t.metrics || {}, null, 2)}</pre>

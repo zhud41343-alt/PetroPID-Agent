@@ -237,28 +237,86 @@ def copilot_chat(req: CopilotRequest) -> JSONResponse:
     if any(k in msg for k in ("保守", "均衡", "高性能")):
         strat = "conservative" if "保守" in msg else ("performance" if "高性能" in msg else "balanced")
         res = orchestrator.run_loop_workflow(req.current_loop_id, preferred_strategy=strat)
+        _store_run(res)
+        st = res["final_status"]
         reply = (
-            f"已切换为 **{strat}** 策略并完成 10 项安全约束与 5 工况验证：\n"
-            f"- 推荐参数：Kc={res['final_pid']['Kc']}, Ti={res['final_pid']['Ti']}s\n"
-            f"- 校验结论：`{res['final_status']}`"
+            f"已切换为 **{strat}** 策略并完成 11 项安全硬约束（含 C-000）与 5 工况验证（RunID: `{res['audit_meta']['run_id']}`）：\n"
+            f"- 最终状态：`{st}`（`deployment_authorized=false`）\n"
+            f"- 参数动作：Kc={res['final_pid']['Kc']}, Ti={res['final_pid']['Ti']}s\n"
+            f"- 门控依据：{res['decision_reason']}"
         )
         return JSONResponse(content={"reply": reply, "action": {"type": "UPDATE_RESULT", "data": res}})
 
     # Intent 4: Valve stiction explanation / ontology lookup
-    if any(k in msg for k in ("粘滞", "阀门", "PIC-304", "LOOP-020", "本体")):
+    if any(k in msg for k in ("粘滞", "阀门", "PIC-304", "LOOP-021", "LOOP-020", "本体")):
         kg = orchestrator.runner.invoke("petro_knowledge_lookup", {"anomaly_type": "VALVE_STICTION"})
+        target_loop = "LOOP-020" if "LOOP-020" in msg else "LOOP-021"
         reply = (
             f"依据化工自控本体规则（`{kg['ontology_class']}`）：\n"
             f"{kg['engineering_guidance']}\n"
-            f"可在左侧点击 `LOOP-020 (PIC-304)` 并切换至 **「PV-OP 相图」** 查看典型的粘滞滞回环与加速度峰度证据。"
+            f"已为您定位典型阀门粘滞回路 `{target_loop}`，可切换至 **「PV-OP 相图」** 查看滞回环与加速度峰度证据。"
         )
-        return JSONResponse(content={"reply": reply, "action": {"type": "SELECT_LOOP", "loop_id": "LOOP-020"}})
+        return JSONResponse(content={"reply": reply, "action": {"type": "SELECT_LOOP", "loop_id": target_loop}})
 
-    # Default: Run current loop & explain
-    res = orchestrator.run_loop_workflow(req.current_loop_id)
+    # Default: Grounded Engineering Q&A via live DeepSeek LLM (or deterministic fallback)
+    res = _resolve_run(req.current_loop_id)
+    d0 = res["diagnosis"]
+    ident = res.get("identification") or {}
+    safety = res.get("safety") or {}
+    failed_rules = [
+        f"{c['constraint_id']}({c['rule_name']}: {c['measured_value']} vs {c['threshold']})"
+        for c in safety.get("constraint_audit", [])
+        if not c.get("passed")
+    ]
+    grounded_context = {
+        "user_question": msg,
+        "loop_id": res["loop_meta"]["loop_id"],
+        "tag_name": res["loop_meta"]["tag_name"],
+        "unit_name": res["loop_meta"]["unit_name"],
+        "run_id": res["audit_meta"]["run_id"],
+        "final_status": res["final_status"],
+        "decision_reason": res["decision_reason"],
+        "deployment_authorized": False,
+        "anomaly_type": d0.get("anomaly_type"),
+        "harris_index": d0.get("harris_index"),
+        "oscillation_index": d0.get("oscillation_index"),
+        "stiction_index": d0.get("stiction_index"),
+        "initial_pid": res["initial_pid"],
+        "final_pid": res["final_pid"],
+        "fopdt_val_fit_pct": ident.get("val_fit_pct"),
+        "fopdt_val_r2": ident.get("val_r2"),
+        "failed_constraints": failed_rules,
+    }
+    fallback_reply = (
+        f"基于当前回路 `{res['loop_meta']['loop_id']} ({res['loop_meta']['tag_name']})` 的实测审计结果"
+        f"（RunID: `{res['audit_meta']['run_id']}`）：\n"
+        f"- 诊断类别：`{d0.get('anomaly_type')}`（OI={d0.get('oscillation_index')}, SI={d0.get('stiction_index')}）\n"
+        f"- 最终状态：`{res['final_status']}`（`deployment_authorized=false`）\n"
+        f"- 门控结论：{res['decision_reason']}"
+    )
+    llm_ans = orchestrator.llm.synthesize_decision(
+        agent_role="PetroPID-Copilot",
+        system_prompt=(
+            "你是 PetroPID-Agent 资深石油化工过程控制专家副驾驶。请严格基于提供的结构化实测数据回答用户问题，"
+            "绝不编造未出现的数值，绝不宣称可自动下发真实 DCS（deployment_authorized 恒为 false），回答简洁专业。"
+        ),
+        structured_state=grounded_context,
+        fallback_text=fallback_reply,
+    )
+    badge = ""
+    if llm_ans.get("mode") == "live_llm_api":
+        tok = (llm_ans.get("usage") or {}).get("total_tokens", "-")
+        badge = f"\n\n`[{llm_ans.get('model')} · {llm_ans.get('latency_ms')}ms · {tok} tokens · RunID {res['audit_meta']['run_id']}]`"
     return JSONResponse(content={
-        "reply": f"已针对当前回路 {req.current_loop_id} 完成 5-Agent 协同分析：{res['trace'][-1]['summary']}",
-        "action": {"type": "UPDATE_RESULT", "data": res},
+        "reply": f"{llm_ans['reasoning']}{badge}",
+        "llm_telemetry": {
+            "mode": llm_ans.get("mode"),
+            "model": llm_ans.get("model"),
+            "latency_ms": llm_ans.get("latency_ms"),
+            "request_id": llm_ans.get("request_id"),
+            "usage": llm_ans.get("usage"),
+        },
+        "action": {"type": "NONE"},
     })
 
 
@@ -272,9 +330,12 @@ def export_approval_sheet(loop_id: str, run_id: Optional[str] = None) -> HTMLRes
     d1 = res["after_diagnosis"] or d0
     s = res["safety"]
     audit_rows = ""
+    regime_rows = ""
     if s:
         for c in s["constraint_audit"]:
             audit_rows += f"<tr><td>{c['constraint_id']}</td><td>{c['category']}</td><td>{c['rule_name']}</td><td>{c['measured_value']}</td><td>{c['threshold']}</td><td style='color:{'#047857' if c['passed'] else '#b91c1c'};font-weight:700'>{'通过' if c['passed'] else '拦截'}</td></tr>"
+        for r in s.get("operating_point_checks", []):
+            regime_rows += f"<tr><td><b>{r['regime_name']}</b></td><td>K={r['plant_K']} / τ={r['plant_tau']}s / θ={r['plant_theta']}s</td><td>{r['overshoot_pct']}% / ≤{r['overshoot_limit_pct']}%</td><td>{r['oscillation_index']} / ≤{r['oi_limit']}</td><td>{r['iae']}</td><td style='color:{'#047857' if r['passed'] else '#b91c1c'};font-weight:700'>{'通过' if r['passed'] else '拦截'}</td></tr>"
     st = res["final_status"]
     is_valid_rec = st == "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
     banner_bg = "#ecfdf5" if is_valid_rec else "#fef2f2"
@@ -301,6 +362,8 @@ def export_approval_sheet(loop_id: str, run_id: Optional[str] = None) -> HTMLRes
     <tr><th>审批状态</th><td colspan="3"><b>{st}</b> | engineering_approval_status=<code>{res['engineering_approval_status']}</code> | deployment_authorized=<code>false</code></td></tr></table>
     <h3 style="font-size:15px">11 项确定性安全约束审计明细（含 C-000 模型可信度门控）</h3>
     <table><thead><tr><th>编号</th><th>类别</th><th>规则项</th><th>实测值</th><th>安全阈值</th><th>结果</th></tr></thead><tbody>{audit_rows or '<tr><td colspan=6>健康回路，无需参数变更</td></tr>'}</tbody></table>
+    <h3 style="font-size:15px">5 工况鲁棒性跨工况验证明细（标称超调 ≤18%，扰动工况 ≤25%）</h3>
+    <table><thead><tr><th>扰动工况</th><th>机理模型 (K / τ / θ)</th><th>超调 / 阈值</th><th>振荡 OI / 阈值</th><th>IAE</th><th>结果</th></tr></thead><tbody>{regime_rows or '<tr><td colspan=6>未进入跨工况验证阶段</td></tr>'}</tbody></table>
     <div class="sig"><div>自控工程师复核签字：______________</div><div>工艺主任审批签字：______________</div><div>人工现场投运日期：____年__月__日</div></div>
     </body></html>"""
     return HTMLResponse(content=html)
@@ -333,6 +396,16 @@ def export_auditable_bundle(loop_id: str, run_id: Optional[str] = None) -> JSONR
         content=bundle,
         headers={"Content-Disposition": f'attachment; filename="audit_bundle_{loop_id}_{res["audit_meta"]["run_id"]}.json"'},
     )
+
+
+@app.get("/healthz")
+def healthz() -> JSONResponse:
+    return JSONResponse(content={
+        "status": "ok",
+        "version": "V4.0",
+        "llm_mode": orchestrator.llm.mode,
+        "deployment_authorized": False,
+    })
 
 
 @app.get("/api/benchmark")
