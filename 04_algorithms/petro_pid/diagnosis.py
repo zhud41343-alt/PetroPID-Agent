@@ -317,16 +317,23 @@ def diagnose_loop(
     pv_total_std = float(np.std(pv))
     has_excitation = (len(step_idxs) > 0) or (op_total_std >= 0.30) or (pv_total_std >= 0.25)
 
-    if stiction_idx >= 0.35 and oi >= 0.35 and op_travel < 1.2:
+    if (stiction_idx >= 0.35 and oi >= 0.35 and op_travel < 1.2) or (stiction_idx >= 0.45 and op_travel < 1.2 and sluggish_score < 0.24):
         anomaly_type = "VALVE_STICTION"
-        severity = "CRITICAL"
-        confidence = round(min(0.97, 0.78 + 0.20 * stiction_idx), 3)
+        severity = "CRITICAL" if oi >= 0.35 else "WARNING"
+        confidence = round(min(0.97, (0.78 if oi >= 0.35 else 0.70) + 0.20 * stiction_idx), 3)
         needs_retuning = False
         needs_valve_maintenance = True
-        root_cause = (
-            f"检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI={stiction_idx:.2f}，"
-            f"振荡指数 OI={oi:.2f}（主周期 {osc_period:.1f}s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。"
-        )
+        if oi < 0.35:
+            uncertainty_reason = "LOW_OSC_FILTERED_VALVE_STICTION"
+            root_cause = (
+                f"检测到强滤波/弱振荡条件下的调节阀粘滞非线性特征：粘滞指数 SI={stiction_idx:.2f}（>=0.45），"
+                f"虽受高阶过程滤波影响 PV 振荡指数较低（OI={oi:.2f}），但仍存在明显静摩擦突破与 PV-OP 滞回迹象，禁止误判为健康。"
+            )
+        else:
+            root_cause = (
+                f"检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI={stiction_idx:.2f}，"
+                f"振荡指数 OI={oi:.2f}（主周期 {osc_period:.1f}s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。"
+            )
         action = "建议安排仪表检维修（检查阀杆填料、定位器与执行机构）；检修前可临时启用保守降增益缓冲参数以减小阀门磨损。"
     elif oi >= 0.35:
         # Distinguish between EXTERNAL_DISTURBANCE vs AGGRESSIVE_TUNING vs MODEL_MISMATCH
@@ -395,6 +402,18 @@ def diagnose_loop(
                 f"证据不足，不能据此证明回路健康或推荐参数变更。"
             )
             action = "请在工艺允许窗口内施加小幅阶跃/PRBS 激励测试后重新诊断。"
+        elif stiction_idx >= 0.28:
+            severity = "WARNING"
+            evidence_sufficient = False
+            uncertainty_reason = "DIAGNOSIS_CONFLICTING_LOW_OSC_STICTION"
+            confidence = 0.42
+            needs_retuning = False
+            needs_valve_maintenance = True
+            root_cause = (
+                f"检测到冲突证据：PV 振荡较低（OI={oi:.2f}）但粘滞特征偏高（SI={stiction_idx:.2f}），"
+                f"可能存在轻中度调节阀粘滞或定位器死区，禁止直接判定为健康。"
+            )
+            action = "建议调取阀位回讯 (MV) 核查执行机构死区/粘滞，并补充激励数据复测。"
         else:
             severity = "HEALTHY"
             confidence = round(min(0.96, 0.78 + 0.18 * harris), 3)

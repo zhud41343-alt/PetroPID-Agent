@@ -59,6 +59,7 @@ from decision_engine import (
     compute_canonical_hash,
     compute_canonical_input_hash,
     compute_canonical_output_hash,
+    compute_full_record_digest,
     final_decision_aggregation,
     verify_pre_decision_audit_evidence,
     verify_audit_record,
@@ -67,22 +68,30 @@ from decision_engine import (
 VALID_STATUSES = set(FINAL_STATUS_SPECS.keys())
 
 
-def _get_git_commit() -> str:
-    for env_key in ("PETROPID_CODE_COMMIT", "RENDER_GIT_COMMIT", "GIT_COMMIT"):
+def _get_git_commit_info() -> tuple[str, str, str]:
+    """Return (short_sha, full_sha, source). Prioritizes Render runtime RENDER_GIT_COMMIT."""
+    for env_key, src in (
+        ("RENDER_GIT_COMMIT", "render_runtime_env"),
+        ("PETROPID_CODE_COMMIT", "build_arg_env"),
+        ("GIT_COMMIT", "ci_env"),
+    ):
         val = os.getenv(env_key, "").strip()
-        if val and val.lower() != "unknown":
-            return val[:12]
+        if val and val.lower() not in ("unknown", "v4.2-docker"):
+            return val[:12], val, src
     try:
         import subprocess
-        out = subprocess.check_output(
-            ["git", "rev-parse", "--short", "HEAD"], cwd=str(ROOT), text=True, stderr=subprocess.DEVNULL
+        full = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=str(ROOT), text=True, stderr=subprocess.DEVNULL
         ).strip()
-        return out or "unknown"
+        if full:
+            return full[:12], full, "local_git"
     except Exception:
-        return "unknown"
+        pass
+    return "unknown", "unknown", "unavailable"
 
 
-CODE_COMMIT = _get_git_commit()
+CODE_COMMIT, CODE_COMMIT_FULL, CODE_COMMIT_SOURCE = _get_git_commit_info()
+BUILD_TIME = os.getenv("PETROPID_BUILD_TIME", "local-dev")
 
 
 def validate_input_series(
@@ -942,6 +951,7 @@ class PetroPIDOrchestrator:
                 "max_ms": max_ms,
             },
         }
+        packed["audit_meta"]["record_digest_sha256"] = compute_full_record_digest(packed)
         phase2 = verify_audit_record(packed)
         packed["audit_meta"]["audit_verification"] = phase2
         return packed

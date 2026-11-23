@@ -35,12 +35,12 @@ sys.path.insert(0, str(ROOT / "05_skills"))
 sys.path.insert(0, str(ROOT / "06_mcp"))
 sys.path.insert(0, str(ROOT / "07_agents"))
 
-from orchestrator import PetroPIDOrchestrator, CODE_COMMIT
+from orchestrator import PetroPIDOrchestrator, CODE_COMMIT, CODE_COMMIT_FULL, CODE_COMMIT_SOURCE, BUILD_TIME
 from decision_engine import ALGORITHM_VERSION, DATASET_VERSION, verify_audit_record
 from openjiuwen_adapter import export_openjiuwen_manifest
 from mcp_server import PetroPIDMCPServer
 
-app = FastAPI(title="PetroPID-Agent V4.2 | 石化复杂过程多智能体自适应 PID 工程工作站", version="4.2.0")
+app = FastAPI(title="PetroPID-Agent V4.3 | 石化复杂过程多智能体自适应 PID 工程工作站", version="4.3.0")
 static_dir = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
@@ -517,12 +517,17 @@ def healthz(probe_llm: bool = False) -> JSONResponse:
                 "connectivity_status": "DEGRADED_FALLBACK",
                 "fallback_reason": ans.get("fallback_reason", "unknown"),
             })
+    bt_file = ROOT / ".build_time"
+    build_ts = bt_file.read_text(encoding="utf-8").strip() if bt_file.exists() else BUILD_TIME
     return JSONResponse(content={
         "status": "ok",
-        "version": "4.2.0",
+        "version": "4.3.0",
         "algorithm_version": ALGORITHM_VERSION,
         "dataset_version": DATASET_VERSION,
         "code_commit": CODE_COMMIT,
+        "code_commit_full": CODE_COMMIT_FULL,
+        "code_commit_source": CODE_COMMIT_SOURCE,
+        "build_time_utc": build_ts,
         "llm_mode": configured_mode,
         "llm_health": llm_probe,
         "deployment_authorized": False,

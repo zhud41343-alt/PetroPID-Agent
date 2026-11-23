@@ -25,9 +25,10 @@ from dataclasses import dataclass, asdict
 from typing import Any, Dict, Iterable, List, Optional
 
 DATASET_VERSION = "petropid-sim-30loops-v2.0"
-ALGORITHM_VERSION = "petropid-alg-v4.2"
+ALGORITHM_VERSION = "petropid-alg-v4.3"
 INPUT_HASH_SCHEMA = "petropid.input_evidence.v4.2"
 OUTPUT_HASH_SCHEMA = "petropid.output_evidence.v4.2"
+RECORD_DIGEST_SCHEMA = "petropid.full_record_digest.v4.3"
 
 FINAL_STATUS_SPECS: Dict[str, Dict[str, Any]] = {
     "INPUT_DATA_INVALID": {
@@ -218,8 +219,40 @@ def verify_pre_decision_audit_evidence(
     }
 
 
+def compute_full_record_digest(record: Dict[str, Any]) -> str:
+    """P1-1: Canonical SHA-256 digest covering the COMPLETE auditable record content
+    (audit_meta bindings + final_decision + final_pid + diagnosis + identification + safety + trace).
+
+    Note on security boundary: This provides deterministic data-integrity and accidental-tamper
+    detection within isolated simulation; cryptographic non-repudiation requires an external
+    signing key / KMS root not present in this local simulation environment.
+    """
+    am = record.get("audit_meta") or {}
+    return compute_canonical_hash({
+        "schema": RECORD_DIGEST_SCHEMA,
+        "run_id": am.get("run_id"),
+        "request_id": am.get("request_id"),
+        "timestamp": am.get("timestamp"),
+        "input_hash": am.get("input_hash"),
+        "output_hash": am.get("output_hash"),
+        "dataset_version": am.get("dataset_version"),
+        "algorithm_version": am.get("algorithm_version"),
+        "code_commit": am.get("code_commit"),
+        "data_source_type": am.get("data_source_type"),
+        "has_known_plant_truth": am.get("has_known_plant_truth"),
+        "final_status": record.get("final_status"),
+        "deployment_authorized": record.get("deployment_authorized"),
+        "final_pid": record.get("final_pid"),
+        "final_decision": record.get("final_decision"),
+        "diagnosis": record.get("diagnosis"),
+        "identification": record.get("identification"),
+        "safety": record.get("safety"),
+        "trace": record.get("trace"),
+    })
+
+
 def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
-    """Phase-2 independent tamper & completeness verifier for persisted/served run records (P0-04)."""
+    """Phase-2 independent tamper & completeness verifier for persisted/served run records (P0-04 + P1-1)."""
     errors: List[str] = []
     am = record.get("audit_meta")
     fd = record.get("final_decision")
@@ -254,6 +287,14 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
         if recomputed != out_hash:
             errors.append("AUDIT_OUTPUT_HASH_MISMATCH")
 
+    # P1-1: Verify full record digest if present (detects in-place value tampering of trace/model/safety/timestamp)
+    rec_digest = am.get("record_digest_sha256")
+    if rec_digest is not None:
+        if not isinstance(rec_digest, str) or len(rec_digest) != 64:
+            errors.append("AUDIT_INVALID_RECORD_DIGEST")
+        elif compute_full_record_digest(record) != rec_digest:
+            errors.append("AUDIT_FULL_RECORD_DIGEST_MISMATCH")
+
     if record.get("deployment_authorized") is not False:
         errors.append("AUDIT_UNAUTHORIZED_DEPLOYMENT_FLAG")
 
@@ -270,6 +311,7 @@ def verify_audit_record(record: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "audit_status": "PASS" if not errors else "FAIL",
         "errors": errors,
+        "integrity_scope": "canonical_sha256_hash_integrity_without_external_kms",
     }
 
 
