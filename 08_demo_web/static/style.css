@@ -182,7 +182,7 @@ body {
 }
 .fp-cell .lbl { font-size: 10.5px; color: var(--muted); font-weight: 700; }
 .fp-cell .val { font-family: var(--mono); font-size: 13px; font-weight: 800; margin-top: 3px; color: var(--ink); }
-.fp-delta { font-size: 10px; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-left: 4px; }
+.fp-delta { font-size: 10px; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-left: 4px; white-space: nowrap; display: inline-block; }
 .fp-delta.good { background: var(--green-soft); color: var(--green); border: 1px solid #a7f3d0; }
 .fp-delta.hold { background: #e2e8f0; color: #475569; }
 .mg-bars { display: flex; flex-direction: column; gap: 3px; margin-top: 3px; }
