@@ -593,7 +593,9 @@ function drawIdentChart(canvasId, ip, metaId, cursorIdx = null) {
   ctx.setLineDash([]);
   ctx.fillStyle = metaId.allow_next_stage ? '#b45309' : '#b91c1c';
   ctx.font = 'bold 11px sans-serif';
-  ctx.fillText(`独立验证时段 (35%) · Fit ${metaId.val_fit_pct}% | R²=${metaId.val_r2}`, sx + 8, padT + 14);
+  ctx.textAlign = 'right';
+  ctx.fillText(`验证段(35%) · Fit ${metaId.val_fit_pct}% | R²=${metaId.val_r2}`, W - padR - 6, padT + 14);
+  ctx.textAlign = 'left';
 
   const plot = (arr, color, w) => {
     ctx.strokeStyle = color; ctx.lineWidth = w; ctx.beginPath();

@@ -348,8 +348,10 @@ def copilot_chat(req: CopilotRequest) -> JSONResponse:
         )
         return JSONResponse(content={"reply": reply, "action": {"type": "SELECT_LOOP", "loop_id": target_loop}})
 
-    # Default: Grounded Engineering Q&A via live DeepSeek LLM (or deterministic fallback)
-    res = _resolve_for_copilot(req.current_loop_id)
+    # Default: Grounded Engineering Q&A via live DeepSeek LLM (resolves explicit LOOP-xxx mention in question)
+    m_lid = re.search(r"LOOP-\d{3}", msg.upper())
+    target_lid = m_lid.group(0) if m_lid else req.current_loop_id
+    res = _resolve_for_copilot(target_lid)
     d0 = res["diagnosis"]
     ident = res.get("identification") or {}
     safety = res.get("safety") or {}
