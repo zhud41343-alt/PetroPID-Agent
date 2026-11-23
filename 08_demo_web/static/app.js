@@ -256,74 +256,84 @@ function selectLoop(loop) {
 }
 
 function renderUnitSVG(unitName) {
+  // ISA-101 High-Performance HMI: Muted industrial slate-gray equipment; color reserved strictly for abnormal/alarm states!
   if (unitName.includes('精馏') || unitName.includes('CDU')) {
     return `
-      <rect x="24" y="10" width="38" height="72" rx="16" fill="#dbeafe" stroke="#1e3a8a" stroke-width="1.8"/>
+      <rect x="24" y="10" width="38" height="72" rx="14" fill="#dde4ed" stroke="#334155" stroke-width="1.8"/>
       <line x1="26" y1="28" x2="60" y2="28" stroke="#64748b" stroke-dasharray="3,2"/>
       <line x1="26" y1="44" x2="60" y2="44" stroke="#64748b" stroke-dasharray="3,2"/>
       <line x1="26" y1="60" x2="60" y2="60" stroke="#64748b" stroke-dasharray="3,2"/>
-      <text x="43" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">常减压精馏塔</text>`;
+      <text x="43" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">常减压精馏塔</text>`;
   }
   if (unitName.includes('催化') || unitName.includes('FCC')) {
     return `
-      <rect x="16" y="16" width="24" height="62" rx="8" fill="#fef3c7" stroke="#92400e" stroke-width="1.6"/>
-      <rect x="48" y="12" width="30" height="66" rx="10" fill="#fee2e2" stroke="#991b1b" stroke-width="1.6"/>
+      <rect x="16" y="16" width="24" height="62" rx="5" fill="#dde4ed" stroke="#334155" stroke-width="1.6"/>
+      <rect x="48" y="12" width="30" height="66" rx="6" fill="#cbd5e1" stroke="#334155" stroke-width="1.6"/>
       <line x1="40" y1="44" x2="48" y2="44" stroke="#334155" stroke-width="2"/>
-      <text x="47" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">FCC 反应-再生</text>`;
+      <text x="47" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">FCC 反应-再生</text>`;
   }
   if (unitName.includes('裂解') || unitName.includes('Cracker')) {
     return `
-      <polygon points="18,78 18,30 46,12 74,30 74,78" fill="#ffedd5" stroke="#9a3412" stroke-width="1.7"/>
-      <path d="M28,68 L28,38 L46,26 L64,38 L64,68" fill="none" stroke="#ea580c" stroke-width="2"/>
-      <text x="46" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">乙烯裂解炉</text>`;
+      <polygon points="18,78 18,30 46,12 74,30 74,78" fill="#dde4ed" stroke="#334155" stroke-width="1.7"/>
+      <path d="M28,68 L28,38 L46,26 L64,38 L64,68" fill="none" stroke="#475569" stroke-width="2"/>
+      <text x="46" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">乙烯裂解炉</text>`;
   }
   if (unitName.includes('反应釜') || unitName.includes('CSTR')) {
     return `
-      <rect x="20" y="18" width="48" height="60" rx="12" fill="#e0e7ff" stroke="#3730a3" stroke-width="1.7"/>
+      <rect x="20" y="18" width="48" height="60" rx="8" fill="#dde4ed" stroke="#334155" stroke-width="1.7"/>
       <line x1="44" y1="10" x2="44" y2="62" stroke="#1e293b" stroke-width="1.8"/>
       <line x1="30" y1="62" x2="58" y2="62" stroke="#1e293b" stroke-width="2.2"/>
-      <text x="44" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">连续搅拌釜 CSTR</text>`;
+      <text x="44" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">连续搅拌釜 CSTR</text>`;
   }
   return `
-    <rect x="22" y="12" width="42" height="68" rx="14" fill="#d1fae5" stroke="#065f46" stroke-width="1.7"/>
-    <rect x="27" y="26" width="32" height="14" fill="#6ee7b7" opacity="0.7"/>
-    <rect x="27" y="48" width="32" height="14" fill="#6ee7b7" opacity="0.7"/>
-    <text x="43" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">加氢精制床层</text>`;
+    <rect x="22" y="12" width="42" height="68" rx="10" fill="#dde4ed" stroke="#334155" stroke-width="1.7"/>
+    <rect x="27" y="26" width="32" height="14" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8"/>
+    <rect x="27" y="48" width="32" height="14" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8"/>
+    <text x="43" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">加氢精制床层</text>`;
 }
 
 function renderPIDSchematic(data) {
   const meta = data.loop_meta;
   const d = data.diagnosis;
   const isStic = d.anomaly_type === 'VALVE_STICTION';
-  const valveColor = isStic ? '#b91c1c' : '#047857';
-  const pipeColor = isStic ? '#b91c1c' : '#1d4ed8';
+  const valveColor = isStic ? '#b91c1c' : '#334155';
+  const pipeColor = isStic ? '#b91c1c' : '#475569';
+  const opPct = Math.max(0, Math.min(100, Number(meta.op_bias) || 50));
+  const opW = Math.round((opPct / 100) * 56);
   document.getElementById('pidSchematic').innerHTML = `
-    <svg viewBox="0 0 410 100" width="100%" height="100">
+    <svg viewBox="0 0 430 102" width="100%" height="102">
       ${renderUnitSVG(meta.unit_name)}
-      <!-- Animated process pipe -->
-      <line x1="80" y1="45" x2="255" y2="45" stroke="#cbd5e1" stroke-width="5"/>
-      <line x1="80" y1="45" x2="255" y2="45" stroke="${pipeColor}" stroke-width="2" class="flow-pipe"/>
-      <!-- Transmitter tap & ISA Controller Bubble -->
-      <line x1="170" y1="45" x2="170" y2="28" stroke="#475569" stroke-width="1.4"/>
-      <circle cx="170" cy="24" r="20" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
-      <line x1="151" y1="24" x2="189" y2="24" stroke="#bfdbfe" stroke-width="1"/>
-      <text x="170" y="21" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1d4ed8">${meta.tag_name}</text>
-      <text x="170" y="34" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569">DCS PID</text>
-      <!-- Signal line to pneumatic control valve -->
-      <path d="M190,24 L278,24 L278,34" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="3,2"/>
-      <!-- Pneumatic Globe Valve -->
-      <rect x="266" y="16" width="24" height="10" rx="3" fill="#e2e8f0" stroke="#334155" stroke-width="1.3"/>
-      <line x1="278" y1="26" x2="278" y2="45" stroke="#334155" stroke-width="1.6"/>
-      <polygon points="256,34 278,45 256,56" fill="${valveColor}" opacity="0.9"/>
-      <polygon points="300,34 278,45 300,56" fill="${valveColor}" opacity="0.9"/>
-      <line x1="300" y1="45" x2="338" y2="45" stroke="#cbd5e1" stroke-width="5"/>
-      <line x1="300" y1="45" x2="338" y2="45" stroke="${valveColor}" stroke-width="2" class="flow-pipe"/>
-      <text x="278" y="72" text-anchor="middle" font-size="9.5" font-weight="800" fill="${valveColor}">${isStic ? '⚠ 调节阀粘滞告警' : '● 调节阀动作正常'}</text>
-      <!-- Right Live Tag Box -->
-      <rect x="342" y="16" width="64" height="56" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
-      <text x="374" y="32" text-anchor="middle" font-size="8.5" fill="#64748b">SP 设定</text>
-      <text x="374" y="45" text-anchor="middle" font-size="10" font-weight="800" fill="#1d4ed8">${meta.pv_bias}${meta.pv_unit}</text>
-      <text x="374" y="62" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">OP ${meta.op_bias}%</text>
+      <!-- Process line -->
+      <line x1="80" y1="48" x2="245" y2="48" stroke="#cbd5e1" stroke-width="5"/>
+      <line x1="80" y1="48" x2="245" y2="48" stroke="${pipeColor}" stroke-width="1.8" class="flow-pipe"/>
+      <!-- ISA-5.1 Standard DCS Controller Symbol (Circle inside Square = Shared Display/DCS) -->
+      <line x1="166" y1="48" x2="166" y2="38" stroke="#475569" stroke-width="1.4"/>
+      <rect x="145" y="4" width="42" height="36" rx="2" fill="#ffffff" stroke="#1e293b" stroke-width="1.5"/>
+      <circle cx="166" cy="22" r="16" fill="#f8fafc" stroke="#1e40af" stroke-width="1.6"/>
+      <line x1="150" y1="22" x2="182" y2="22" stroke="#94a3b8" stroke-width="0.9"/>
+      <text x="166" y="19" text-anchor="middle" font-size="7.8" font-weight="800" font-family="Consolas,monospace" fill="#0f172a">${meta.tag_name}</text>
+      <text x="166" y="31" text-anchor="middle" font-size="6.8" font-weight="700" fill="#1e40af">DCS</text>
+      <!-- Electronic signal line to control valve -->
+      <path d="M187,22 L268,22 L268,34" fill="none" stroke="#334155" stroke-width="1.3" stroke-dasharray="3,2"/>
+      <!-- Pneumatic Diaphragm Globe Valve (ISA-5.1) -->
+      <path d="M256,28 A12,10 0 0,1 280,28 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.3"/>
+      <line x1="268" y1="28" x2="268" y2="48" stroke="#334155" stroke-width="1.6"/>
+      <polygon points="246,38 268,48 246,58" fill="${valveColor}"/>
+      <polygon points="290,38 268,48 290,58" fill="${valveColor}"/>
+      <line x1="290" y1="48" x2="328" y2="48" stroke="#cbd5e1" stroke-width="5"/>
+      <line x1="290" y1="48" x2="328" y2="48" stroke="${valveColor}" stroke-width="1.8" class="flow-pipe"/>
+      <text x="268" y="75" text-anchor="middle" font-size="9" font-weight="800" fill="${isStic ? '#b91c1c' : '#334155'}">${isStic ? '■ 阀杆粘滞告警' : '● 调节阀正常'}</text>
+      <!-- Right DCS Mini Faceplate (SP / OP Bar Gauge) -->
+      <rect x="334" y="6" width="90" height="84" rx="2" fill="#ffffff" stroke="#64748b" stroke-width="1.2"/>
+      <rect x="334" y="6" width="90" height="17" fill="#1e293b"/>
+      <text x="340" y="18" font-size="8.2" font-weight="700" font-family="Consolas,monospace" fill="#f8fafc">${meta.tag_name} · AUTO</text>
+      <text x="340" y="36" font-size="8" fill="#64748b" font-family="Consolas,monospace">SP</text>
+      <text x="418" y="36" text-anchor="end" font-size="9.5" font-weight="800" font-family="Consolas,monospace" fill="#1e40af">${meta.pv_bias}${meta.pv_unit}</text>
+      <text x="340" y="53" font-size="8" fill="#64748b" font-family="Consolas,monospace">OP</text>
+      <text x="418" y="53" text-anchor="end" font-size="9.5" font-weight="800" font-family="Consolas,monospace" fill="#0f172a">${opPct.toFixed(1)}%</text>
+      <rect x="340" y="59" width="78" height="8" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.7"/>
+      <rect x="340" y="59" width="${Math.round((opPct / 100) * 78)}" height="8" fill="${isStic ? '#b91c1c' : '#334155'}"/>
+      <text x="379" y="81" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Consolas,monospace" fill="#475569">SIM · NO WRITE</text>
     </svg>
   `;
 }
@@ -367,16 +377,38 @@ function renderResult(data) {
 
   const ip = data.initial_pid, fp = data.final_pid;
   const d0 = data.diagnosis, d1 = data.after_diagnosis || d0;
-  document.getElementById('mPid').innerHTML = `<span style="color:#b45309">(${ip.Kc}, ${ip.Ti})</span> → <span style="color:#047857">(${fp.Kc}, ${fp.Ti})</span>`;
-  document.getElementById('mOi').innerHTML = `${d0.oscillation_index.toFixed(2)} → <span style="color:#047857">${d1.oscillation_index.toFixed(2)}</span>`;
-  document.getElementById('mIae').innerHTML = `${d0.iae.toFixed(2)} → <span style="color:#047857">${d1.iae.toFixed(2)}</span>`;
-  document.getElementById('mOp').innerHTML = `${d0.op_travel.toFixed(2)} → <span style="color:#047857">${d1.op_travel.toFixed(2)}</span>`;
-  document.getElementById('mIdAcc').textContent = data.identification ? `${data.identification.val_fit_pct}% / R²=${data.identification.val_r2}` : '健康跳过';
-  document.getElementById('mMargin').textContent = data.safety ? `${data.safety.gain_margin}/${data.safety.phase_margin_deg}°/${data.safety.max_sensitivity_ms}` : '安全保持';
+  const isApprovedCand = data.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW';
+  const pctBadge = (a, b) => {
+    if (!isApprovedCand || a < 0.05) return '<span class="fp-delta hold">保持</span>';
+    const pct = Math.round(((b - a) / a) * 100);
+    return `<span class="fp-delta good">${pct}%</span>`;
+  };
+  document.getElementById('mPid').innerHTML = isApprovedCand
+    ? `<span style="color:#64748b">(${ip.Kc},${ip.Ti})</span> → <span style="color:#046c4e">(${fp.Kc},${fp.Ti})</span>`
+    : `<span style="color:#0f172a">(${ip.Kc}, ${ip.Ti})</span> <span class="fp-delta hold">不变</span>`;
+  document.getElementById('mOi').innerHTML = `${d0.oscillation_index.toFixed(2)} → ${d1.oscillation_index.toFixed(2)}${pctBadge(d0.oscillation_index, d1.oscillation_index)}`;
+  document.getElementById('mIae').innerHTML = `${d0.iae.toFixed(2)} → ${d1.iae.toFixed(2)}${pctBadge(d0.iae, d1.iae)}`;
+  document.getElementById('mOp').innerHTML = `${d0.op_travel.toFixed(2)} → ${d1.op_travel.toFixed(2)}${pctBadge(d0.op_travel, d1.op_travel)}`;
+  document.getElementById('mIdAcc').innerHTML = data.identification
+    ? `<span style="color:${data.identification.allow_next_stage ? '#046c4e' : '#b91c1c'}">${data.identification.val_fit_pct}% / R²=${data.identification.val_r2}</span>`
+    : '<span style="color:#5b6b7f">健康跳过</span>';
+  if (data.safety) {
+    const s = data.safety;
+    const gmW = Math.min(100, Math.round((s.gain_margin / 4.0) * 100));
+    const pmW = Math.min(100, Math.round((s.phase_margin_deg / 80.0) * 100));
+    const msW = Math.min(100, Math.round((s.max_sensitivity_ms / 3.0) * 100));
+    document.getElementById('mMargin').innerHTML = `<div class="mg-bars">
+      <div class="mg-row"><span>GM ${s.gain_margin}</span><div class="mg-track"><div class="mg-fill ${s.gain_margin < 1.8 ? 'bad' : ''}" style="width:${gmW}%"></div></div></div>
+      <div class="mg-row"><span>PM ${s.phase_margin_deg}°</span><div class="mg-track"><div class="mg-fill ${s.phase_margin_deg < 35 ? 'bad' : ''}" style="width:${pmW}%"></div></div></div>
+      <div class="mg-row"><span>Ms ${s.max_sensitivity_ms}</span><div class="mg-track"><div class="mg-fill ${s.max_sensitivity_ms > 2.2 ? 'bad' : ''}" style="width:${msW}%"></div></div></div>
+    </div>`;
+  } else {
+    document.getElementById('mMargin').textContent = '安全保持';
+  }
 
   const sb = document.getElementById('statusBadge');
   sb.textContent = data.final_status;
-  const isRejected = ['MODEL_VALIDATION_FAILED', 'SAFETY_CONSTRAINT_FAILED', 'REJECTED_WITH_REASON'].includes(data.final_status);
+  const isRejected = ['MODEL_VALIDATION_FAILED', 'SAFETY_REJECTED', 'INPUT_DATA_INVALID', 'SIMULATION_TIMEOUT', 'AUDIT_INCOMPLETE'].includes(data.final_status);
   const isWarn = ['VALVE_MAINTENANCE_REQUIRED', 'PERFORMANCE_NOT_IMPROVED'].includes(data.final_status);
   sb.className = 'chip ' + (isRejected ? 'chip-AGGRESSIVE_TUNING' : (isWarn ? 'chip-VALVE_STICTION' : 'chip-NORMAL'));
   document.getElementById('elapsedTag').textContent = `闭环耗时 ${data.elapsed_s}s`;
@@ -390,7 +422,7 @@ function renderResult(data) {
 
   const banner = document.getElementById('riskBanner');
   banner.style.display = 'block';
-  const prefix = isRejected ? '【拒绝推荐 · 保持原参数】' : (isWarn ? '【工程警示 · 非纯 PID 整定场景】' : '【仿真校验通过 · 待人工工程复核】');
+  const prefix = isRejected ? '■ 【拒绝推荐 · 保持原参数】' : (isWarn ? '▲ 【工程警示 · 非纯 PID 整定场景】' : '● 【仿真校验通过 · 待人工工程复核】');
   banner.className = 'risk-banner ' + (isRejected ? 'danger' : (isWarn ? '' : 'ok'));
   banner.textContent = `${prefix} ${data.decision_reason}`;
 
