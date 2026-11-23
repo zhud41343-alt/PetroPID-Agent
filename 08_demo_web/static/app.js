@@ -41,7 +41,10 @@ const SEV_CLASS = {
 };
 
 function zhAnomaly(code) { return ANOMALY_ZH[code] || code; }
-function zhStatus(code) { return STATUS_ZH[code] || code; }
+function zhStatus(code) { return STATUS_ZH[code] || `未验证状态 (${code || 'UNKNOWN'})`; }
+function escHtml(v) {
+  return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 async function init() {
   const [benchRes, loopsRes] = await Promise.all([
@@ -393,18 +396,40 @@ function renderPIDSchematic(data) {
 async function runWorkflow(loopId, opts = {}) {
   const seq = ++latestRequestSeq;
   const btn = document.getElementById('runBtn');
-  btn.disabled = true; btn.textContent = '5-Agent 协同推理中...';
+  btn.disabled = true; btn.textContent = '诊断与安全校验中...';
   try {
     const res = await fetch(`/api/run/${loopId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(opts),
     });
+    if (!res.ok) {
+      let detail = `HTTP ${res.status}`;
+      try { const errObj = await res.json(); if (errObj.detail) detail += ` · ${errObj.detail}`; } catch (_) {}
+      throw new Error(detail);
+    }
     const data = await res.json();
     // Stale-response guard: discard out-of-order response if user already switched loops!
     if (seq !== latestRequestSeq) return;
     replayProgress = 1.0;
     renderResult(data);
+  } catch (err) {
+    if (seq !== latestRequestSeq) return;
+    const banner = document.getElementById('riskBanner');
+    if (banner) {
+      banner.style.display = 'block';
+      banner.className = 'risk-banner danger';
+      banner.textContent = `■ 请求失败（${err.message || '网络异常'}）｜Fail-Closed 保护已生效，未更新参数结论`;
+    }
+    const sb = document.getElementById('statusBadge');
+    if (sb) {
+      sb.textContent = '请求异常 · 未验证';
+      sb.className = 'chip chip-AGGRESSIVE_TUNING';
+    }
+    const strip = document.getElementById('auditStrip');
+    if (strip) {
+      strip.innerHTML = `<span><b>审计:</b> UNVERIFIED · 请求未完成</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    }
   } finally {
     if (seq === latestRequestSeq) {
       btn.disabled = false; btn.textContent = '执行诊断整定';
@@ -420,9 +445,10 @@ function renderResult(data) {
   const strip = document.getElementById('auditStrip');
   if (strip) {
     const rawDig = am0.record_digest_sha256 || am0.output_sha256 || '';
-    const dig = rawDig ? `${rawDig.slice(0, 12)}…` : '--';
-    const av = (am0.audit_verification && am0.audit_verification.audit_status) || 'PASS';
-    strip.innerHTML = `<span><b>工单:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>状态码:</b> ${data.final_status} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    const dig = rawDig ? `${escHtml(rawDig.slice(0, 12))}…` : '--';
+    // Fail-Closed: NEVER default missing audit_status to PASS
+    const av = (am0.audit_verification && am0.audit_verification.audit_status) || 'UNVERIFIED';
+    strip.innerHTML = `<span><b>工单:</b> ${escHtml(am0.run_id || '--')} &nbsp;|&nbsp; <b>状态码:</b> ${escHtml(data.final_status || 'UNKNOWN')} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${escHtml(av)}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
   }
   if (data.audit_meta) {
     document.getElementById('rRunMeta').textContent = `当前工单: ${data.audit_meta.run_id} | 哈希:${data.audit_meta.output_sha256.slice(0,8)}`;
@@ -462,9 +488,12 @@ function renderResult(data) {
 
   const sb = document.getElementById('statusBadge');
   sb.textContent = zhStatus(data.final_status);
-  sb.title = data.final_status;
-  const isRejected = ['MODEL_VALIDATION_FAILED', 'SAFETY_REJECTED', 'INPUT_DATA_INVALID', 'SIMULATION_TIMEOUT', 'AUDIT_INCOMPLETE'].includes(data.final_status);
+  sb.title = data.final_status || 'UNKNOWN';
+  const isHealthyStatus = ['HEALTHY_NO_CHANGE', 'NO_CHANGE_HEALTHY'].includes(data.final_status);
+  const isOkKnown = isApprovedCand || isHealthyStatus;
   const isWarn = ['VALVE_MAINTENANCE_REQUIRED', 'PERFORMANCE_NOT_IMPROVED'].includes(data.final_status);
+  // Fail-Closed: any unknown or rejected status renders danger style (never green!)
+  const isRejected = !isOkKnown && !isWarn;
   sb.className = 'chip ' + (isRejected ? 'chip-AGGRESSIVE_TUNING' : (isWarn ? 'chip-VALVE_STICTION' : 'chip-NORMAL'));
   document.getElementById('elapsedTag').textContent = `闭环耗时 ${data.elapsed_s}s`;
 
@@ -532,13 +561,13 @@ function renderResult(data) {
     const agentLabel = AGENT_ZH[t.agent] || t.agent;
     const stLabel = TRACE_ST_ZH[t.status] || t.status;
     item.innerHTML = `
-      <div class="trace-node ${t.status}"></div>
-      <div class="trace-card ${t.status}">
-        <div class="trace-top"><span title="${t.agent}">#${t.step} ${agentLabel}</span><span class="chip">${stLabel}</span></div>
-        <div class="trace-meta">${t.stage || '-'} · ${t.latency_ms ?? '-'}ms</div>
-        <div class="trace-txt">${t.summary}</div>
+      <div class="trace-node ${escHtml(t.status)}"></div>
+      <div class="trace-card ${escHtml(t.status)}">
+        <div class="trace-top"><span title="${escHtml(t.agent)}">#${escHtml(t.step)} ${escHtml(agentLabel)}</span><span class="chip">${escHtml(stLabel)}</span></div>
+        <div class="trace-meta">${escHtml(t.stage || '-')} · ${escHtml(t.latency_ms ?? '-')}ms</div>
+        <div class="trace-txt">${escHtml(t.summary)}</div>
         <button class="trace-json-btn" onclick="const el=document.getElementById('${preId}');el.style.display=el.style.display==='block'?'none':'block'">▸ 展开技术详情</button>
-        <pre class="trace-json-pre" id="${preId}">${JSON.stringify(techMeta, null, 2)}</pre>
+        <pre class="trace-json-pre" id="${preId}">${escHtml(JSON.stringify(techMeta, null, 2))}</pre>
       </div>`;
     traceEl.appendChild(item);
   });
@@ -650,11 +679,12 @@ function drawTimeChart(canvasId, w, cursorIdx = null, progress = 1.0) {
     ctx.fillStyle = '#334155'; ctx.font = 'bold 11px sans-serif';
     ctx.fillText(labelY, padL + 6, yTop + 12);
 
-    // ISA-101 ±2% SP steady-state tolerance band (only on PV subplot when SP is 3rd series)
+    // ±2% ΔSP settling reference band (derived strictly from SP step span, not chart viewport)
     if (fillAfter && seriesList[2]) {
       const spArr = seriesList[2].arr;
-      const band = Math.max(0.25, (hi - lo) * 0.04);
-      ctx.fillStyle = 'rgba(29, 78, 216, 0.06)';
+      const spStep = Math.max(...spArr) - Math.min(...spArr);
+      const band = spStep > 1e-6 ? 0.02 * spStep : 0.02 * Math.max(1, Math.abs(spArr[0]));
+      ctx.fillStyle = 'rgba(29, 78, 216, 0.07)';
       ctx.beginPath();
       for (let i = 0; i <= maxIdx; i++) {
         const x = mapX(i), y = mapY(spArr[i] + band);

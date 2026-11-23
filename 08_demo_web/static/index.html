@@ -12,7 +12,7 @@
       <div class="brand-mark">PID</div>
       <div>
         <h1>PetroPID-Agent · 石化控制回路性能监测与整定工作站</h1>
-        <small>ISA-101 工业 HMI · 离线机理仿真与安全校验</small>
+        <small>参考 ISA-101 高性能 HMI 设计原则 · 离线机理仿真与安全校验</small>
       </div>
     </div>
     <nav class="nav-tabs">
@@ -26,10 +26,10 @@
     </div>
   </header>
 
-  <!-- ISA-101 Plant Control Health Bar -->
+  <!-- Offline Benchmark Plant Control Health Bar -->
   <div class="telemetry-ribbon">
     <div class="ribbon-group">
-      <span class="r-stat">全厂监控:<b id="rTotal">30 回路</b></span>
+      <span class="r-stat">离线仿真基准:<b id="rTotal">30 回路</b></span>
       <span class="ribbon-sep"></span>
       <span class="r-stat">平稳健康:<b class="ok" id="rHealthy">--</b></span>
       <span class="ribbon-sep"></span>
@@ -259,8 +259,8 @@
 
       <div class="card" style="margin-bottom:14px">
         <div class="card-head">
-          <h2>全厂 5 大石化装置控制回路健康热图 (按装置分区)</h2>
-          <span style="font-size:11.5px;color:var(--muted)">ISA-101 异常高亮 · 点击任意位号砖块直接进入单回路诊断工作台</span>
+          <h2>30 回路离线仿真基准健康热图（按 5 大石化装置分区）</h2>
+          <span style="font-size:11.5px;color:var(--muted)">参考 ISA-101 异常高亮 · 点击任意位号砖块进入单回路诊断工作台</span>
         </div>
         <div class="card-body">
           <div class="unit-heatmap" id="unitHeatmap"></div>

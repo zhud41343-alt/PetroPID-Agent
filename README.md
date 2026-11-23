@@ -1,7 +1,7 @@
 # PetroPID-Agent V4.3.3 · 面向复杂化工过程的多智能体自适应 PID 控制回路诊断与智能整定
 
 > **第二届石油和化工行业人工智能创新大赛 · 智能体赛道（赛题 5）V4.3.3 Final Freeze 正式提交候选仓库**  
-> **正式公网 Demo**：https://petropid-agent.onrender.com （Render Docker Free + 在线 DeepSeek `VERIFIED_LIVE`，已通过真实浏览器 5 步导览全流程 0 报错实测）  
+> **正式公网 Demo**：https://petropid-agent.onrender.com （Render Docker 自动部署 + 在线 DeepSeek `VERIFIED_LIVE`，已通过新版工业 HMI 真实浏览器端到端 0 报错实测）  
 > **第三方离线 CI 门禁**：GitHub Actions [Run #45192957510](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45192957510)（Ubuntu + Python 3.11 全绿通过）  
 > **安全边界声明**：本系统仅运行于隔离机理仿真与脱敏离线历史数据，未连接或写入真实 DCS/PLC，`deployment_authorized` 恒为 `false`；外部未知上传 CSV 缺乏独立过程物理真值，严禁输出安全验证通过结论；全记录 SHA-256 摘要 `record_digest_sha256` 为强制必填项（缺失/旧版/篡改一律返回 `FAIL` 与 `HTTP 422`）。
 
@@ -39,5 +39,5 @@
 - `05_skills/`：5 大标准化 Skill（SHA-256 幂等防重缓存）+ 3 项单元测试（含原生 `openjiuwen` 调用）
 - `06_mcp/`：JSON-RPC 2.0 MCP 服务端/客户端（stdio + HTTP `/mcp/rpc`）+ 14/14 联调报告
 - `07_agents/`：5-Agent 编排 + 独立 `FinalDecisionEngine` + `benchmark_runner.py` + `v43_studies.py`
-- `08_demo_web/`：ISA-101 工业 HMI 工作站（严格 `run_id` 跨回路绑定、DeepSeek 锚定副驾驶、5 工况复核单）
+- `08_demo_web/`：参考 ISA-101 高性能 HMI 设计原则与 ISA-5.1 仪表标识规范的工业控制回路工作站（5 大装置回路树、离线仿真基准热图、严格 `run_id` 跨回路绑定、DeepSeek 锚定工程指令助手、5 工况复核单）
 - `competition_v4/final_audit_v43/`：**13 份 V4.3 终审实证报告 + 原始实验 JSON**
