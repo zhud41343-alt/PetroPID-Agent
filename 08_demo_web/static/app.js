@@ -167,34 +167,16 @@ function setupEvents() {
 
   document.getElementById('copilotSend').onclick = sendCopilot;
   document.getElementById('copilotInput').onkeydown = e => { if (e.key === 'Enter') sendCopilot(); };
-  document.querySelectorAll('.q-chip').forEach(c => {
+  document.querySelectorAll('.quick-prompts .q-chip').forEach(c => {
     c.onclick = () => {
       document.getElementById('copilotInput').value = c.dataset.q;
       sendCopilot();
     };
   });
 
-  document.querySelectorAll('.demo-btn').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (btn.dataset.demoView) {
-        document.querySelector(`.nav-tab[data-view="${btn.dataset.demoView}"]`)?.click();
-        return;
-      }
-      if (btn.dataset.demoChart) {
-        activeChart = btn.dataset.demoChart;
-        document.querySelectorAll('.c-tab').forEach(x => x.classList.toggle('active', x.dataset.chart === activeChart));
-      }
-      if (btn.dataset.demoLoop) {
-        const target = allLoops.find(x => x.loop_id === btn.dataset.demoLoop);
-        if (target) {
-          selectLoop(target);
-          runWorkflow(target.loop_id, { preferred_strategy: null });
-        }
-      }
-    };
-  });
+  document.getElementById('csvSampleOsc')?.addEventListener('click', () => submitCsvText('sample_fcc_oscillation.csv', buildSampleCsv('osc')));
+  document.getElementById('csvSampleStic')?.addEventListener('click', () => submitCsvText('sample_cdu_stiction.csv', buildSampleCsv('stic')));
+  document.getElementById('csvSampleBad')?.addEventListener('click', () => submitCsvText('sample_malformed_missing_op.csv', 't,sp,pv\n0,500,499\n1,500,501\n'));
 
   [['sK','vK'],['sTau','vTau'],['sTheta','vTheta'],['sKc','vKc'],['sTi','vTi'],['sS','vS'],['sOs','vOs']].forEach(([s,v]) => {
     const el = document.getElementById(s);
@@ -999,16 +981,40 @@ async function runSandbox() {
   }
 }
 
-async function handleCSVUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const text = await file.text();
-  document.getElementById('sbStatus').textContent = 'CSV 解析与 5-Agent 诊断中...';
+function buildSampleCsv(kind) {
+  const rows = ['t,sp,pv,op'];
+  let pv = 500.0, op = 50.0, integ = 0.0, vpos = 50.0;
+  const delayBuf = new Array(6).fill(50.0);
+  for (let i = 0; i < 300; i++) {
+    const t = i * 2;
+    const sp = i < 40 ? 500.0 : (i < 170 ? 506.0 : 502.0);
+    const err = sp - pv;
+    if (kind === 'stic') {
+      integ += err * 2.0 / 12.0;
+      op = Math.max(5, Math.min(95, 50.0 + 0.9 * err + 0.9 * integ));
+      if (Math.abs(op - vpos) >= 4.2) vpos = op;
+      delayBuf.push(vpos);
+    } else {
+      integ += err * 2.0 / 8.5;
+      op = Math.max(5, Math.min(95, 50.0 + 2.15 * err + 2.15 * integ));
+      delayBuf.push(op);
+    }
+    const uDel = delayBuf.shift();
+    pv += ((1.4 * (uDel - 50.0) - (pv - 500.0)) / 15.0) * 2.0;
+    rows.push(`${t},${sp.toFixed(2)},${pv.toFixed(3)},${op.toFixed(3)}`);
+  }
+  return rows.join('\n');
+}
+
+async function submitCsvText(filename, text) {
+  const sbEl = document.getElementById('sbStatus');
+  sbEl.textContent = 'CSV 解析与诊断中...';
+  sbEl.className = 'chip chip-SLUGGISH_TUNING';
   const res = await fetch('/api/upload_csv', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      filename: file.name,
+      filename,
       csv_text: text,
       init_Kc: +document.getElementById('sKc').value,
       init_Ti: +document.getElementById('sTi').value,
@@ -1016,11 +1022,21 @@ async function handleCSVUpload(e) {
   });
   const data = await res.json();
   if (!res.ok) {
-    document.getElementById('sbStatus').textContent = 'CSV 错误';
-    document.getElementById('sbSummary').textContent = data.detail || 'CSV 解析失败';
+    sbEl.textContent = `CSV 拦截 (HTTP ${res.status})`;
+    sbEl.className = 'chip chip-AGGRESSIVE_TUNING';
+    document.getElementById('sbSummary').innerHTML = `<b style="color:#b91c1c">■ Fail-Closed 输入校验拦截 (${escHtml(filename)})：</b>${escHtml(data.detail || 'CSV 解析失败')}`;
+    document.getElementById('sbAuditBody').innerHTML = '<tr><td colspan="6" class="st-fail">输入数据格式不合格，已触发 Fail-Closed 拦截，未进入参数辨识与整定阶段。</td></tr>';
     return;
   }
+  sbEl.className = 'chip chip-NORMAL';
   renderSandboxOutput(data);
+}
+
+async function handleCSVUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const text = await file.text();
+  await submitCsvText(file.name, text);
 }
 
 function renderSandboxOutput(data) {

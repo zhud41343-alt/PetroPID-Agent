@@ -25,8 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run full pytest safety, audit, and algorithm suite
+      - name: Run full pytest safety, audit, algorithm & Web/HMI E2E suite
         run: pytest 04_algorithms/tests/ 05_skills/tests/ -v
+
+      - name: Verify frontend JavaScript syntax (Node check)
+        run: node --check 08_demo_web/static/app.js
 
       - name: Run MCP protocol integration tests (14/14)
         run: python 06_mcp/mcp_client.py

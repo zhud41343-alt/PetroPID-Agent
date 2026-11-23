@@ -219,7 +219,12 @@
             <div class="csv-drop">
               <div style="font-weight:700;color:var(--ink);margin-bottom:6px">或上传自定义 DCS 历史数据 (.csv)</div>
               <input type="file" id="csvFileInput" accept=".csv" style="font-size:11.5px;max-width:100%" />
-              <div style="margin-top:4px;font-size:11px">必需列：<code>sp, pv, op</code></div>
+              <div style="margin-top:4px;font-size:11px">必需列：<code>sp, pv, op</code>（支持 100~3000 行）</div>
+              <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap;justify-content:center">
+                <button type="button" class="q-chip" id="csvSampleOsc">示例1：振荡回路CSV</button>
+                <button type="button" class="q-chip" id="csvSampleStic">示例2：粘滞阀CSV</button>
+                <button type="button" class="q-chip" id="csvSampleBad" style="border-color:#fecaca;background:#fef2f2;color:#b91c1c">示例3：缺列CSV(测拦截)</button>
+              </div>
             </div>
           </div>
         </div>
