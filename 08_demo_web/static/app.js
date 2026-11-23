@@ -139,6 +139,8 @@ function setupEvents() {
 
   document.querySelectorAll('.demo-btn').forEach(btn => {
     btn.onclick = () => {
+      document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       if (btn.dataset.demoView) {
         document.querySelector(`.nav-tab[data-view="${btn.dataset.demoView}"]`)?.click();
         return;
@@ -351,6 +353,13 @@ async function runWorkflow(loopId, opts = {}) {
 function renderResult(data) {
   currentData = data;
   document.getElementById('topMode').textContent = `Engine: ${data.llm_mode}`;
+  const am0 = data.audit_meta || {};
+  const strip = document.getElementById('auditStrip');
+  if (strip) {
+    const dig = am0.record_digest_sha256 ? am0.record_digest_sha256.slice(0, 12) : '--';
+    const av = (am0.audit_verification && am0.audit_verification.audit_status) || '--';
+    strip.innerHTML = `<span><b>RunID:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>RecordDigest:</b> ${dig}… &nbsp;|&nbsp; <b>Audit:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+  }
   if (data.audit_meta) {
     document.getElementById('rRunMeta').textContent = `${data.audit_meta.run_id} | in:${data.audit_meta.input_sha256.slice(0,8)} out:${data.audit_meta.output_sha256.slice(0,8)}`;
   }
