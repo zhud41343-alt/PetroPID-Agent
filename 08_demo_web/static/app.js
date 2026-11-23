@@ -149,7 +149,10 @@ function setupEvents() {
       }
       if (btn.dataset.demoLoop) {
         const target = allLoops.find(x => x.loop_id === btn.dataset.demoLoop);
-        if (target) { selectLoop(target); runCurrentLoop(); }
+        if (target) {
+          selectLoop(target);
+          runWorkflow(target.loop_id, { preferred_strategy: null });
+        }
       }
     };
   });
