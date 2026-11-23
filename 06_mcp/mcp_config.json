@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "petropid-control-server": {
+      "command": "python",
+      "args": ["06_mcp/mcp_server.py"],
+      "transport": "stdio",
+      "httpFallbackUrl": "http://127.0.0.1:8000/mcp/rpc",
+      "protocolVersion": "2024-11-05",
+      "description": "PetroPID 化工 PID 控制回路诊断、辨识、整定与安全校验 MCP 服务"
+    }
+  }
+}

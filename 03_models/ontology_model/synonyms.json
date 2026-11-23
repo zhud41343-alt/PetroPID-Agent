@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "synonyms": [
+    {"canonical": "VALVE_STICTION", "aliases": ["阀门粘滞", "调节阀卡涩", "阀杆粘滞", "stick-slip", "填料过紧"]},
+    {"canonical": "AGGRESSIVE_TUNING", "aliases": ["参数激进", "增益过高", "高频振荡", "欠阻尼振荡", "aggressive PID"]},
+    {"canonical": "SLUGGISH_TUNING", "aliases": ["参数保守", "响应迟缓", "过阻尼", "积分过慢", "sluggish loop"]},
+    {"canonical": "MODEL_MISMATCH", "aliases": ["工况失配", "参数失配", "负荷漂移", "换炼工况变化", "plant-model mismatch"]},
+    {"canonical": "EXTERNAL_DISTURBANCE", "aliases": ["外部扰动", "上游脉动", "周期干扰", "coupled oscillation"]},
+    {"canonical": "HarrisIndex", "aliases": ["Harris 指数", "最小方差指标", "MVC 指数", "控制性能指数"]},
+    {"canonical": "OscillationIndex", "aliases": ["振荡指数", "OI 指标", "回路振荡度"]},
+    {"canonical": "FOPDT", "aliases": ["一阶加纯滞后模型", "一阶惯性滞后对象", "First-Order Plus Dead Time"]}
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "registry_version": "1.0.0",
+  "domain": "petrochemical_pid_control",
+  "compatible_frameworks": ["openJiuwen", "MCP-1.0", "OpenAI-Tools"],
+  "skills": [
+    {
+      "skill_id": "skill.pid.diagnose",
+      "name": "pid_loop_diagnosis",
+      "version": "1.0.0",
+      "owner_agent": "DiagnosisAgent",
+      "description": "对化工控制回路历史时序数据(SP/PV/OP)进行 Harris 最小方差性能评估、振荡指数 OI 计算、Choudhury 调节阀粘滞检测与异常根因诊断。",
+      "input_schema": {
+        "type": "object",
+        "required": ["loop_id"],
+        "properties": {
+          "loop_id": {"type": "string", "description": "控制回路唯一编号，如 LOOP-006"},
+          "dt": {"type": "number", "default": 1.0, "description": "采样周期(秒)"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": ["anomaly_type", "severity", "harris_index", "oscillation_index", "stiction_index", "needs_retuning"],
+        "properties": {
+          "anomaly_type": {"type": "string"},
+          "severity": {"type": "string"},
+          "confidence": {"type": "number"},
+          "harris_index": {"type": "number"},
+          "oscillation_index": {"type": "number"},
+          "stiction_index": {"type": "number"},
+          "needs_retuning": {"type": "boolean"},
+          "needs_valve_maintenance": {"type": "boolean"}
+        }
+      }
+    },
+    {
+      "skill_id": "skill.pid.identify",
+      "name": "fopdt_system_identification",
+      "version": "1.0.0",
+      "owner_agent": "IdentificationAgent",
+      "description": "基于闭环/阶跃历史数据辨识 FOPDT 过程模型(K, tau, theta)，并在后 35% 独立验证时段计算 R² 与预测准确率。",
+      "input_schema": {
+        "type": "object",
+        "required": ["loop_id"],
+        "properties": {
+          "loop_id": {"type": "string"},
+          "train_ratio": {"type": "number", "default": 0.65}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": ["success", "K", "tau", "theta", "val_r2", "val_accuracy_pct"]
+      }
+    },
+    {
+      "skill_id": "skill.pid.tune",
+      "name": "adaptive_pid_tuning",
+      "version": "1.0.0",
+      "owner_agent": "TuningAgent",
+      "description": "基于辨识模型与诊断结论执行 SIMC + 多目标约束优化，生成保守/均衡/高性能三组候选 PID 参数并量化指标改善幅度。",
+      "input_schema": {
+        "type": "object",
+        "required": ["loop_id", "plant_K", "plant_tau", "plant_theta", "current_Kc", "current_Ti"],
+        "properties": {
+          "loop_id": {"type": "string"},
+          "plant_K": {"type": "number"},
+          "plant_tau": {"type": "number"},
+          "plant_theta": {"type": "number"},
+          "current_Kc": {"type": "number"},
+          "current_Ti": {"type": "number"},
+          "current_Td": {"type": "number", "default": 0.0},
+          "anomaly_type": {"type": "string", "default": "AGGRESSIVE_TUNING"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": ["success", "recommended_strategy", "recommended_pid", "candidates"]
+      }
+    },
+    {
+      "skill_id": "skill.pid.verify_safety",
+      "name": "safety_constraint_verification",
+      "version": "1.0.0",
+      "owner_agent": "SafetyVerificationAgent",
+      "description": "对候选 PID 参数执行 100% 确定性安全约束校验（参数边界、幅值/相位裕度、灵敏度 Ms、超调、阀门饱和与速率、5 工况跨边界鲁棒性验证）并 100% 标记未通过项。",
+      "input_schema": {
+        "type": "object",
+        "required": ["plant_K", "plant_tau", "plant_theta", "Kc", "Ti"],
+        "properties": {
+          "plant_K": {"type": "number"},
+          "plant_tau": {"type": "number"},
+          "plant_theta": {"type": "number"},
+          "Kc": {"type": "number"},
+          "Ti": {"type": "number"},
+          "Td": {"type": "number", "default": 0.0}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": ["approved", "constraint_coverage_pct", "violation_tags", "multi_regime_pass_rate_pct"]
+      }
+    },
+    {
+      "skill_id": "skill.pid.query_knowledge",
+      "name": "petro_knowledge_lookup",
+      "version": "1.0.0",
+      "owner_agent": "OrchestratorAgent",
+      "description": "检索化工 PID 控制本体知识库与故障处置三元组，为根因解释、约束溯源与运维建议提供结构化领域知识依据。",
+      "input_schema": {
+        "type": "object",
+        "required": ["anomaly_type"],
+        "properties": {
+          "anomaly_type": {"type": "string"},
+          "loop_type": {"type": "string", "default": "Temperature"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": ["anomaly_type", "matched_triples", "ontology_class", "engineering_guidance"]
+      }
+    }
+  ]
+}

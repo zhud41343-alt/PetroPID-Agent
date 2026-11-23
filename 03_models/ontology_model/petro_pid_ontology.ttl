@@ -1,0 +1,59 @@
+@prefix : <http://petropid.ai/ontology/pid#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://petropid.ai/ontology/pid> a owl:Ontology ;
+    rdfs:label "Petrochemical PID Control Loop Ontology"@en , "石油化工 PID 控制回路诊断与整定领域本体"@zh ;
+    owl:versionInfo "1.0.0" .
+
+### Core Classes
+:ChemicalUnit a owl:Class ; rdfs:label "化工装置"@zh .
+:ControlLoop a owl:Class ; rdfs:label "PID 控制回路"@zh .
+:TemperatureLoop a owl:Class ; rdfs:subClassOf :ControlLoop ; rdfs:label "温度控制回路"@zh .
+:PressureLoop a owl:Class ; rdfs:subClassOf :ControlLoop ; rdfs:label "压力控制回路"@zh .
+:FlowLoop a owl:Class ; rdfs:subClassOf :ControlLoop ; rdfs:label "流量控制回路"@zh .
+:LevelLoop a owl:Class ; rdfs:subClassOf :ControlLoop ; rdfs:label "液位控制回路"@zh .
+
+:ControlValve a owl:Class ; rdfs:label "气动/电动调节阀"@zh .
+:PIDController a owl:Class ; rdfs:label "DCS PID 控制器"@zh .
+:ProcessModel a owl:Class ; rdfs:label "过程机理辨识模型 (FOPDT)"@zh .
+
+:AnomalyType a owl:Class ; rdfs:label "回路异常类型"@zh .
+:NORMAL a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "健康运行"@zh .
+:AGGRESSIVE_TUNING a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "参数激进振荡"@zh .
+:SLUGGISH_TUNING a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "参数保守迟缓"@zh .
+:VALVE_STICTION a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "调节阀粘滞"@zh .
+:MODEL_MISMATCH a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "工况漂移参数失配"@zh .
+:EXTERNAL_DISTURBANCE a owl:Class ; rdfs:subClassOf :AnomalyType ; rdfs:label "上游周期性外部扰动"@zh .
+
+:TuningStrategy a owl:Class ; rdfs:label "PID 整定策略"@zh .
+:ConservativeStrategy a owl:Class ; rdfs:subClassOf :TuningStrategy ; rdfs:label "保守稳健策略"@zh .
+:BalancedSIMCStrategy a owl:Class ; rdfs:subClassOf :TuningStrategy ; rdfs:label "SIMC 均衡优化策略"@zh .
+:PerformanceStrategy a owl:Class ; rdfs:subClassOf :TuningStrategy ; rdfs:label "高性能快速跟踪策略"@zh .
+
+:SafetyConstraint a owl:Class ; rdfs:label "DCS 下发安全约束"@zh .
+:FrequencyMarginConstraint a owl:Class ; rdfs:subClassOf :SafetyConstraint ; rdfs:label "频域稳定裕度约束 (GM/PM/Ms)"@zh .
+:TimeDomainConstraint a owl:Class ; rdfs:subClassOf :SafetyConstraint ; rdfs:label "时域超调与阀门保护约束"@zh .
+:MultiRegimeConstraint a owl:Class ; rdfs:subClassOf :SafetyConstraint ; rdfs:label "多工况鲁棒性验证约束"@zh .
+
+### Object Properties
+:belongsToUnit a owl:ObjectProperty ; rdfs:domain :ControlLoop ; rdfs:range :ChemicalUnit .
+:controlledBy a owl:ObjectProperty ; rdfs:domain :ControlLoop ; rdfs:range :PIDController .
+:actuatedBy a owl:ObjectProperty ; rdfs:domain :ControlLoop ; rdfs:range :ControlValve .
+:modeledBy a owl:ObjectProperty ; rdfs:domain :ControlLoop ; rdfs:range :ProcessModel .
+:hasAnomaly a owl:ObjectProperty ; rdfs:domain :ControlLoop ; rdfs:range :AnomalyType .
+:recommendsStrategy a owl:ObjectProperty ; rdfs:domain :AnomalyType ; rdfs:range :TuningStrategy .
+:verifiedAgainst a owl:ObjectProperty ; rdfs:domain :PIDController ; rdfs:range :SafetyConstraint .
+
+### Datatype Properties
+:hasTagName a owl:DatatypeProperty ; rdfs:domain :ControlLoop ; rdfs:range xsd:string .
+:hasHarrisIndex a owl:DatatypeProperty ; rdfs:domain :ControlLoop ; rdfs:range xsd:double .
+:hasOscillationIndex a owl:DatatypeProperty ; rdfs:domain :ControlLoop ; rdfs:range xsd:double .
+:hasStictionIndex a owl:DatatypeProperty ; rdfs:domain :ControlLoop ; rdfs:range xsd:double .
+:hasKc a owl:DatatypeProperty ; rdfs:domain :PIDController ; rdfs:range xsd:double .
+:hasTi a owl:DatatypeProperty ; rdfs:domain :PIDController ; rdfs:range xsd:double .
+:hasTd a owl:DatatypeProperty ; rdfs:domain :PIDController ; rdfs:range xsd:double .
+:hasGainMargin a owl:DatatypeProperty ; rdfs:domain :SafetyConstraint ; rdfs:range xsd:double .
+:hasPhaseMarginDeg a owl:DatatypeProperty ; rdfs:domain :SafetyConstraint ; rdfs:range xsd:double .

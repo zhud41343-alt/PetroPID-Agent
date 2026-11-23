@@ -1,0 +1,45 @@
+{
+  "model_name": "PetroPID-Industrial-Information-Model",
+  "version": "1.0.0",
+  "standards_aligned": ["ISA-5.1 Instrumentation Tagging", "ISA-95 Enterprise-Control Integration", "OPC-UA Node Mapping"],
+  "coding_rules": {
+    "loop_id": "^LOOP-[0-9]{3}$",
+    "tag_name": "^(TIC|FIC|PIC|LIC)-[0-9]{3}$",
+    "constraint_id": "^C-[0-9]{3}$",
+    "tag_prefix_mapping": {
+      "TIC": "Temperature Indicating Controller (温度指示控制)",
+      "FIC": "Flow Indicating Controller (流量指示控制)",
+      "PIC": "Pressure Indicating Controller (压力指示控制)",
+      "LIC": "Level Indicating Controller (液位指示控制)"
+    }
+  },
+  "entities": [
+    {
+      "entity": "ControlLoopAsset",
+      "attributes": ["loop_id", "tag_name", "unit_name", "loop_type", "pv_unit", "op_min", "op_max"],
+      "opc_ua_mapping": "ns=2;s=Plant.{unit_name}.{tag_name}"
+    },
+    {
+      "entity": "LoopDiagnosticSnapshot",
+      "attributes": ["anomaly_type", "severity", "harris_index", "oscillation_index", "stiction_index", "iae", "overshoot_pct"],
+      "constraints": {"harris_index": "[0, 1]", "oscillation_index": "[0, 1]", "stiction_index": "[0, 1]"}
+    },
+    {
+      "entity": "ProcessDynamicsModel",
+      "attributes": ["model_type", "K", "tau", "theta", "val_r2", "val_accuracy_pct"],
+      "constraints": {"tau": "> 0", "theta": ">= 0", "val_accuracy_pct": ">= 90 for approved deployment"}
+    },
+    {
+      "entity": "PIDParameterRecommendation",
+      "attributes": ["strategy", "Kc", "Ti", "Td", "approved", "violation_tags", "multi_regime_pass_rate_pct"],
+      "interface_contract": "必须经过 SafetyVerificationAgent 签发 approved=true 后方可进入 DCS 人工确认下发队列"
+    }
+  ],
+  "information_flow": [
+    "DCS/OPC-UA 时序采集 -> 数据清洗脱敏 -> ControlLoopAsset & Telemetry",
+    "Telemetry -> DiagnosisAgent -> LoopDiagnosticSnapshot (压缩摘要 <= 1KB)",
+    "Telemetry -> IdentificationAgent -> ProcessDynamicsModel (含独立验证准确率)",
+    "ProcessDynamicsModel + LoopDiagnosticSnapshot -> TuningAgent -> 3组候选 PIDParameterRecommendation",
+    "PIDParameterRecommendation -> SafetyVerificationAgent -> 10项约束审计 + 5工况验证 -> DCS下发审批单"
+  ]
+}

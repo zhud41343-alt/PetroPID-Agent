@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: petropid-agent
+    runtime: docker
+    plan: free
+    envVars:
+      - key: PORT
+        value: "7860"
+      - key: PETROPID_LLM_BASE_URL
+        value: "https://api.deepseek.com/v1"
+      - key: PETROPID_LLM_MODEL
+        value: "deepseek-chat"
+      - key: PETROPID_LLM_API_KEY
+        sync: false
+    healthCheckPath: /api/loops

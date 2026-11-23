@@ -1,0 +1,17 @@
+# Secrets & local environment
+.env
+.env.*
+!.env.example
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Logs & temporary files
+logs/
+*.log
+08_demo_web/cloudflared.exe
+.DS_Store
+Thumbs.db

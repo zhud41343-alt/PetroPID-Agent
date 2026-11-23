@@ -1,0 +1,108 @@
+{
+  "verified_at_utc": "2026-11-23T11:16:11.595088+00:00",
+  "provider": "DeepSeek OpenAI-Compatible API",
+  "base_url": "https://api.deepseek.com/v1",
+  "configured_model": "deepseek-chat",
+  "gateway_mode": "live_llm_api",
+  "direct_gateway_probe": {
+    "mode": "live_llm_api",
+    "model": "deepseek-flash",
+    "request_id": "c00418e1-d4c6-4f12-a318-377229e19212",
+    "latency_ms": 1472.5,
+    "usage": {
+      "prompt_tokens": 79,
+      "completion_tokens": 46,
+      "total_tokens": 125,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 79
+    },
+    "reasoning": "LOOP-006 存在激进整定（AGGRESSIVE_TUNING），振荡指数0.89，属显著振荡。建议降低控制器增益、增大积分时间，重新整定后复测振荡指数。"
+  },
+  "e2e_workflow_runs": [
+    {
+      "loop_id": "LOOP-006",
+      "run_id": "RUN-20261123191603-c8181263",
+      "llm_mode": "live_llm_api",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "deployment_authorized": false,
+      "trace_summaries": [
+        {
+          "agent": "DiagnosisAgent",
+          "status": "DONE",
+          "summary": "结论：Harris指数0.05、超调409.7%、OI 0.9969，判定为参数激进导致振荡，SI 0.268未达粘滞阈值，可排除阀门粘滞。建议降低比例增益、增大积分时间，重新整定后复评。"
+        },
+        {
+          "agent": "IdentificationAgent",
+          "status": "DONE",
+          "summary": "辨识通过：FOPDT模型 K=1.3884，tau=16.023s，theta=7.0s；独立验证R²=0.9984、拟合度98.64%，激励充分，无失效原因。可进入下一阶段。"
+        },
+        {
+          "agent": "TuningAgent",
+          "status": "DONE",
+          "summary": "采用均衡整定策略：Kc=0.8456，Ti=20.504s，Td=0（纯PI）。该组参数兼顾跟踪速度与振荡抑制，适用于FOPDT模型下常规工况；建议投用后监测IAE与OP Travel，若安全校验不通过则切换保守候选。"
+        },
+        {
+          "agent": "SafetyVerificationAgent",
+          "status": "CONSTRAINTS_PASS",
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）"
+        },
+        {
+          "agent": "FinalDecisionEngine",
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
+        }
+      ]
+    },
+    {
+      "loop_id": "LOOP-012",
+      "run_id": "RUN-20261123191606-44de59c2",
+      "llm_mode": "live_llm_api",
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "deployment_authorized": false,
+      "trace_summaries": [
+        {
+          "agent": "DiagnosisAgent",
+          "status": "DONE",
+          "summary": "诊断结论：参数迟缓（SLUGGISH_TUNING）。Harris指数0.0766偏低、OI 0.0705，回路波动抑制能力不足；SI=0、超调0%，可排除阀门粘滞与参数激进。建议适度增强PID增益、缩短积分时间以提升响应速度，并复评。"
+        },
+        {
+          "agent": "IdentificationAgent",
+          "status": "REJECTED",
+          "summary": "辨识结果：K=1.045，τ=16.12，θ=6.0。留出验证R²=0.605、拟合度79.6%，均未达标，模型不可靠。建议不进入下一阶段；需补充激励充分数据或排查强非线性/未测扰动后重新辨识。"
+        },
+        {
+          "agent": "FinalDecisionEngine",
+          "status": "REJECTED",
+          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
+        }
+      ]
+    },
+    {
+      "loop_id": "LOOP-021",
+      "run_id": "RUN-20261123191610-482e91a2",
+      "llm_mode": "live_llm_api",
+      "final_status": "VALVE_MAINTENANCE_REQUIRED",
+      "deployment_authorized": false,
+      "trace_summaries": [
+        {
+          "agent": "DiagnosisAgent",
+          "status": "DONE",
+          "summary": "结论：回路呈典型阀门粘滞特征（SI=0.456，OI=0.990，Harris=0.090），超调76.5%显著。非参数整定问题，禁止以调参掩盖。建议立即安排仪表检维修：检查阀门填料、执行机构与定位器，消除摩擦死区后复测。"
+        },
+        {
+          "agent": "IdentificationAgent",
+          "status": "DONE",
+          "summary": "辨识结果有效：FOPDT模型 K=1.28、τ=7.19、θ=8.0，独立验证段 R²=0.916、拟合度92.1%，激励充分，精度满足要求。建议进入下一阶段，可用于控制器设计与整定。"
+        },
+        {
+          "agent": "FinalDecisionEngine",
+          "status": "WARNING",
+          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
+        }
+      ]
+    }
+  ]
+}

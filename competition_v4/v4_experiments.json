@@ -1,0 +1,649 @@
+{
+  "simc_comparative_study": {
+    "n_loops": 11,
+    "original": {
+      "iae": 11.443,
+      "oi": 0.981,
+      "overshoot_pct": 491.545,
+      "op_travel": 4.346,
+      "gm": 0.921,
+      "pm": 0.499,
+      "ms": 14.971
+    },
+    "traditional_simc": {
+      "iae": 0.444,
+      "oi": 0.047,
+      "overshoot_pct": 9.823,
+      "op_travel": 0.072,
+      "gm": 3.131,
+      "pm": 61.435,
+      "ms": 1.59
+    },
+    "petropid_v4": {
+      "iae": 0.458,
+      "oi": 0.039,
+      "overshoot_pct": 2.871,
+      "op_travel": 0.075,
+      "gm": 3.146,
+      "pm": 71.093,
+      "ms": 1.557
+    },
+    "per_loop": [
+      {
+        "loop_id": "LOOP-006",
+        "tag_name": "TIC-201",
+        "original": {
+          "Kc": 2.15,
+          "Ti": 8.5,
+          "iae": 10.8311,
+          "oi": 0.9969,
+          "harris": 0.05,
+          "overshoot_pct": 409.7,
+          "op_travel": 4.8304,
+          "gm": 0.914,
+          "pm": 0.0,
+          "ms": 15.548
+        },
+        "simc": {
+          "Kc": 0.8243,
+          "Ti": 16.023,
+          "iae": 0.4478,
+          "oi": 0.0482,
+          "harris": 0.5775,
+          "overshoot_pct": 9.05,
+          "op_travel": 0.0866,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.8456,
+          "Ti": 20.504,
+          "iae": 0.465,
+          "oi": 0.0416,
+          "harris": 0.574,
+          "overshoot_pct": 2.87,
+          "op_travel": 0.0871,
+          "gm": 3.206,
+          "pm": 70.38,
+          "ms": 1.546
+        }
+      },
+      {
+        "loop_id": "LOOP-007",
+        "tag_name": "TIC-301",
+        "original": {
+          "Kc": 1.95,
+          "Ti": 9.5,
+          "iae": 10.8232,
+          "oi": 0.9898,
+          "harris": 0.05,
+          "overshoot_pct": 450.75,
+          "op_travel": 3.8102,
+          "gm": 0.911,
+          "pm": 0.0,
+          "ms": 15.382
+        },
+        "simc": {
+          "Kc": 0.7816,
+          "Ti": 19.877,
+          "iae": 0.5016,
+          "oi": 0.0655,
+          "harris": 0.5815,
+          "overshoot_pct": 8.31,
+          "op_travel": 0.081,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.8306,
+          "Ti": 25.732,
+          "iae": 0.5117,
+          "oi": 0.0267,
+          "harris": 0.5871,
+          "overshoot_pct": 2.32,
+          "op_travel": 0.0857,
+          "gm": 3.09,
+          "pm": 69.22,
+          "ms": 1.577
+        }
+      },
+      {
+        "loop_id": "LOOP-008",
+        "tag_name": "PIC-104",
+        "original": {
+          "Kc": 2.1,
+          "Ti": 6.5,
+          "iae": 12.0312,
+          "oi": 0.9706,
+          "harris": 0.05,
+          "overshoot_pct": 589.69,
+          "op_travel": 5.7217,
+          "gm": 0.855,
+          "pm": 0.0,
+          "ms": 8.915
+        },
+        "simc": {
+          "Kc": 0.785,
+          "Ti": 12.248,
+          "iae": 0.3928,
+          "oi": 0.0269,
+          "harris": 0.5728,
+          "overshoot_pct": 10.46,
+          "op_travel": 0.0827,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.8158,
+          "Ti": 16.364,
+          "iae": 0.4199,
+          "oi": 0.0416,
+          "harris": 0.5683,
+          "overshoot_pct": 3.09,
+          "op_travel": 0.0833,
+          "gm": 3.204,
+          "pm": 72.36,
+          "ms": 1.539
+        }
+      },
+      {
+        "loop_id": "LOOP-009",
+        "tag_name": "TIC-401",
+        "original": {
+          "Kc": 1.85,
+          "Ti": 8.5,
+          "iae": 12.7414,
+          "oi": 0.9976,
+          "harris": 0.05,
+          "overshoot_pct": 541.94,
+          "op_travel": 4.7635,
+          "gm": 0.899,
+          "pm": 0.0,
+          "ms": 13.174
+        },
+        "simc": {
+          "Kc": 0.724,
+          "Ti": 17.741,
+          "iae": 0.4491,
+          "oi": 0.0488,
+          "harris": 0.579,
+          "overshoot_pct": 9.93,
+          "op_travel": 0.0764,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.7365,
+          "Ti": 22.71,
+          "iae": 0.4597,
+          "oi": 0.0391,
+          "harris": 0.5756,
+          "overshoot_pct": 2.81,
+          "op_travel": 0.0763,
+          "gm": 3.211,
+          "pm": 70.23,
+          "ms": 1.545
+        }
+      },
+      {
+        "loop_id": "LOOP-010",
+        "tag_name": "TIC-501",
+        "original": {
+          "Kc": 2.25,
+          "Ti": 7.8,
+          "iae": 10.4896,
+          "oi": 0.9976,
+          "harris": 0.05,
+          "overshoot_pct": 427.42,
+          "op_travel": 4.9335,
+          "gm": 0.882,
+          "pm": 0.0,
+          "ms": 11.088
+        },
+        "simc": {
+          "Kc": 0.8621,
+          "Ti": 14.91,
+          "iae": 0.45,
+          "oi": 0.0496,
+          "harris": 0.5763,
+          "overshoot_pct": 9.21,
+          "op_travel": 0.0905,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.895,
+          "Ti": 19.331,
+          "iae": 0.4646,
+          "oi": 0.0425,
+          "harris": 0.5748,
+          "overshoot_pct": 2.94,
+          "op_travel": 0.0921,
+          "gm": 3.191,
+          "pm": 70.94,
+          "ms": 1.547
+        }
+      },
+      {
+        "loop_id": "LOOP-011",
+        "tag_name": "PIC-503",
+        "original": {
+          "Kc": 2.2,
+          "Ti": 5.5,
+          "iae": 11.6741,
+          "oi": 0.9415,
+          "harris": 0.05,
+          "overshoot_pct": 472.14,
+          "op_travel": 6.0023,
+          "gm": 0.776,
+          "pm": 0.0,
+          "ms": 5.234
+        },
+        "simc": {
+          "Kc": 0.774,
+          "Ti": 9.936,
+          "iae": 0.3985,
+          "oi": 0.0294,
+          "harris": 0.5716,
+          "overshoot_pct": 12.14,
+          "op_travel": 0.0826,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.591
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.8446,
+          "Ti": 13.805,
+          "iae": 0.4075,
+          "oi": 0.0419,
+          "harris": 0.5775,
+          "overshoot_pct": 3.51,
+          "op_travel": 0.0864,
+          "gm": 3.127,
+          "pm": 73.41,
+          "ms": 1.55
+        }
+      },
+      {
+        "loop_id": "LOOP-023",
+        "tag_name": "TIC-107",
+        "original": {
+          "Kc": 1.42,
+          "Ti": 9.5,
+          "iae": 14.5047,
+          "oi": 0.9906,
+          "harris": 0.05,
+          "overshoot_pct": 617.25,
+          "op_travel": 4.2223,
+          "gm": 0.956,
+          "pm": 0.0,
+          "ms": 20.0
+        },
+        "simc": {
+          "Kc": 0.5135,
+          "Ti": 14.79,
+          "iae": 0.4513,
+          "oi": 0.0502,
+          "harris": 0.5765,
+          "overshoot_pct": 9.65,
+          "op_travel": 0.054,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.5429,
+          "Ti": 19.403,
+          "iae": 0.4583,
+          "oi": 0.0423,
+          "harris": 0.5799,
+          "overshoot_pct": 2.96,
+          "op_travel": 0.0561,
+          "gm": 3.135,
+          "pm": 70.89,
+          "ms": 1.559
+        }
+      },
+      {
+        "loop_id": "LOOP-024",
+        "tag_name": "TIC-205",
+        "original": {
+          "Kc": 1.52,
+          "Ti": 10.5,
+          "iae": 9.5993,
+          "oi": 0.9983,
+          "harris": 0.05,
+          "overshoot_pct": 539.41,
+          "op_travel": 2.6921,
+          "gm": 0.986,
+          "pm": 0.0,
+          "ms": 20.0
+        },
+        "simc": {
+          "Kc": 0.5928,
+          "Ti": 17.916,
+          "iae": 0.5021,
+          "oi": 0.0658,
+          "harris": 0.5812,
+          "overshoot_pct": 8.35,
+          "op_travel": 0.0614,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.6528,
+          "Ti": 23.998,
+          "iae": 0.5115,
+          "oi": 0.027,
+          "harris": 0.5933,
+          "overshoot_pct": 2.32,
+          "op_travel": 0.0676,
+          "gm": 3.007,
+          "pm": 69.91,
+          "ms": 1.593
+        }
+      },
+      {
+        "loop_id": "LOOP-025",
+        "tag_name": "PIC-405",
+        "original": {
+          "Kc": 1.45,
+          "Ti": 8.0,
+          "iae": 16.0286,
+          "oi": 0.9298,
+          "harris": 0.05,
+          "overshoot_pct": 607.89,
+          "op_travel": 5.54,
+          "gm": 0.941,
+          "pm": 0.0,
+          "ms": 20.0
+        },
+        "simc": {
+          "Kc": 0.5113,
+          "Ti": 12.009,
+          "iae": 0.3955,
+          "oi": 0.028,
+          "harris": 0.5732,
+          "overshoot_pct": 11.51,
+          "op_travel": 0.0541,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.59
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.5324,
+          "Ti": 16.069,
+          "iae": 0.4121,
+          "oi": 0.0417,
+          "harris": 0.571,
+          "overshoot_pct": 3.27,
+          "op_travel": 0.0545,
+          "gm": 3.214,
+          "pm": 72.41,
+          "ms": 1.539
+        }
+      },
+      {
+        "loop_id": "LOOP-026",
+        "tag_name": "TIC-305",
+        "original": {
+          "Kc": 1.58,
+          "Ti": 9.5,
+          "iae": 13.2719,
+          "oi": 0.9968,
+          "harris": 0.05,
+          "overshoot_pct": 564.17,
+          "op_travel": 3.9089,
+          "gm": 0.929,
+          "pm": 0.0,
+          "ms": 19.315
+        },
+        "simc": {
+          "Kc": 0.5947,
+          "Ti": 16.061,
+          "iae": 0.5005,
+          "oi": 0.0644,
+          "harris": 0.5826,
+          "overshoot_pct": 8.47,
+          "op_travel": 0.0617,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.591
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.6663,
+          "Ti": 21.698,
+          "iae": 0.508,
+          "oi": 0.0401,
+          "harris": 0.5976,
+          "overshoot_pct": 2.48,
+          "op_travel": 0.0691,
+          "gm": 2.981,
+          "pm": 70.45,
+          "ms": 1.597
+        }
+      },
+      {
+        "loop_id": "LOOP-027",
+        "tag_name": "LIC-505",
+        "original": {
+          "Kc": 1.52,
+          "Ti": 8.5,
+          "iae": 3.8755,
+          "oi": 0.9806,
+          "harris": 0.05,
+          "overshoot_pct": 186.63,
+          "op_travel": 1.3827,
+          "gm": 1.084,
+          "pm": 5.49,
+          "ms": 16.021
+        },
+        "simc": {
+          "Kc": 0.6311,
+          "Ti": 13.892,
+          "iae": 0.3973,
+          "oi": 0.0356,
+          "harris": 0.5699,
+          "overshoot_pct": 10.97,
+          "op_travel": 0.0664,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.591
+        },
+        "petropid": {
+          "strategy": "balanced",
+          "Kc": 0.6431,
+          "Ti": 18.365,
+          "iae": 0.4194,
+          "oi": 0.0411,
+          "harris": 0.5633,
+          "overshoot_pct": 3.01,
+          "op_travel": 0.0658,
+          "gm": 3.239,
+          "pm": 71.82,
+          "ms": 1.535
+        }
+      }
+    ]
+  },
+  "ablation_study": [
+    {
+      "stage": "1. SIMC Only (无安全与拒绝门控)",
+      "false_approvals_on_25_abnormal": 14,
+      "safety_rejected_correctly": 0,
+      "mean_iae_11_retunable": 0.444,
+      "mean_op_travel_11": 0.072,
+      "mean_ms_11": 1.59
+    },
+    {
+      "stage": "2. SIMC + 多目标优化 (无拒绝门控)",
+      "false_approvals_on_25_abnormal": 14,
+      "safety_rejected_correctly": 0,
+      "mean_iae_11_retunable": 0.458,
+      "mean_op_travel_11": 0.075,
+      "mean_ms_11": 1.557
+    },
+    {
+      "stage": "3. + 频域/5工况安全校验 (C-001~C-010)",
+      "false_approvals_on_25_abnormal": 9,
+      "safety_rejected_correctly": 5,
+      "mean_iae_11_retunable": 0.458,
+      "mean_op_travel_11": 0.075,
+      "mean_ms_11": 1.557
+    },
+    {
+      "stage": "4. + 独立模型/粘滞/性能净改善拒绝门控",
+      "false_approvals_on_25_abnormal": 0,
+      "safety_rejected_correctly": 14,
+      "mean_iae_11_retunable": 0.458,
+      "mean_op_travel_11": 0.075,
+      "mean_ms_11": 1.557
+    },
+    {
+      "stage": "5. 完整 PetroPID V4.0 (5-Agent+MCP+OWL+审计)",
+      "false_approvals_on_25_abnormal": 0,
+      "safety_rejected_correctly": 14,
+      "mean_iae_11_retunable": 0.458,
+      "mean_op_travel_11": 0.075,
+      "mean_ms_11": 1.557
+    }
+  ],
+  "independent_sopdt_generalization": [
+    {
+      "case_id": "OOD-01",
+      "true_category": "AGGRESSIVE_SOPDT",
+      "pred_anomaly": "AGGRESSIVE_TUNING",
+      "val_fit_pct": 98.6,
+      "val_r2": 0.9982,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 12.2369,
+      "iae_after": 0.5234
+    },
+    {
+      "case_id": "OOD-02",
+      "true_category": "AGGRESSIVE_SOPDT",
+      "pred_anomaly": "AGGRESSIVE_TUNING",
+      "val_fit_pct": 99.28,
+      "val_r2": 0.9995,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 10.9245,
+      "iae_after": 0.5481
+    },
+    {
+      "case_id": "OOD-03",
+      "true_category": "DRIFT_SOPDT",
+      "pred_anomaly": "MODEL_MISMATCH",
+      "val_fit_pct": 99.26,
+      "val_r2": 0.9995,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 15.6986,
+      "iae_after": 0.5313
+    },
+    {
+      "case_id": "OOD-04",
+      "true_category": "DRIFT_SOPDT",
+      "pred_anomaly": "MODEL_MISMATCH",
+      "val_fit_pct": 99.58,
+      "val_r2": 0.9998,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 12.9042,
+      "iae_after": 0.5102
+    },
+    {
+      "case_id": "OOD-05",
+      "true_category": "SLUGGISH_SOPDT",
+      "pred_anomaly": "SLUGGISH_TUNING",
+      "val_fit_pct": 95.74,
+      "val_r2": 0.9808,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 2.4598,
+      "iae_after": 0.4307
+    },
+    {
+      "case_id": "OOD-06",
+      "true_category": "SLUGGISH_SOPDT",
+      "pred_anomaly": "SLUGGISH_TUNING",
+      "val_fit_pct": 95.09,
+      "val_r2": 0.9746,
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "iae_before": 2.5068,
+      "iae_after": 0.4856
+    },
+    {
+      "case_id": "OOD-07",
+      "true_category": "STICTION_SOPDT",
+      "pred_anomaly": "EXTERNAL_DISTURBANCE",
+      "val_fit_pct": 85.57,
+      "val_r2": 0.73,
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "iae_before": 1.6324,
+      "iae_after": 1.6324
+    },
+    {
+      "case_id": "OOD-08",
+      "true_category": "STICTION_SOPDT",
+      "pred_anomaly": "VALVE_STICTION",
+      "val_fit_pct": 86.28,
+      "val_r2": 0.7586,
+      "final_status": "VALVE_MAINTENANCE_REQUIRED",
+      "iae_before": 1.6603,
+      "iae_after": 1.6603
+    },
+    {
+      "case_id": "OOD-09",
+      "true_category": "EXT_DIST_SOPDT",
+      "pred_anomaly": "EXTERNAL_DISTURBANCE",
+      "val_fit_pct": 91.42,
+      "val_r2": 0.8984,
+      "final_status": "PERFORMANCE_NOT_IMPROVED",
+      "iae_before": 1.589,
+      "iae_after": 1.589
+    },
+    {
+      "case_id": "OOD-10",
+      "true_category": "EXT_DIST_SOPDT",
+      "pred_anomaly": "EXTERNAL_DISTURBANCE",
+      "val_fit_pct": 91.93,
+      "val_r2": 0.9096,
+      "final_status": "PERFORMANCE_NOT_IMPROVED",
+      "iae_before": 1.652,
+      "iae_after": 1.652
+    },
+    {
+      "case_id": "OOD-11",
+      "true_category": "NORMAL_SOPDT",
+      "pred_anomaly": "NORMAL",
+      "val_fit_pct": null,
+      "val_r2": null,
+      "final_status": "HEALTHY_NO_CHANGE",
+      "iae_before": 0.4155,
+      "iae_after": 0.4155
+    },
+    {
+      "case_id": "OOD-12",
+      "true_category": "LOW_EXCIT_SOPDT",
+      "pred_anomaly": "NORMAL",
+      "val_fit_pct": null,
+      "val_r2": null,
+      "final_status": "HEALTHY_NO_CHANGE",
+      "iae_before": 0.0327,
+      "iae_after": 0.0327
+    }
+  ]
+}

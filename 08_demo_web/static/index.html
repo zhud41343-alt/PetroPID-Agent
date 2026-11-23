@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetroPID-Agent V4.0 | 石化复杂过程多智能体自适应 PID 工程工作站</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">PID</div>
+      <div>
+        <h1>PetroPID-Agent V4.0 · 石化装置多智能体自适应 PID 工程工作站</h1>
+        <small>ISA-101 工业 HMI · 独立 FinalDecisionEngine (9态) · MCP JSON-RPC 2.0 · OWL 本体推理</small>
+      </div>
+    </div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-view="view-workbench">单回路工程工作台</button>
+      <button class="nav-tab" data-view="view-sandbox">实时压力沙盒 & CSV 诊断</button>
+      <button class="nav-tab" data-view="view-plant">全厂 30 回路健康总览</button>
+    </nav>
+    <div class="top-meta">
+      <span><i class="status-dot"></i>MCP 14/14 PASS</span>
+      <span id="topMode">Engine: --</span>
+    </div>
+  </header>
+
+  <!-- Sleek 34px Transparent Telemetry Ribbon -->
+  <div class="telemetry-ribbon">
+    <div class="ribbon-group">
+      <span class="r-stat">30回路分布:<b id="rDist">--</b></span>
+      <span class="ribbon-sep"></span>
+      <span class="r-stat">诊断:<b class="ok" id="rDiag">--</b></span>
+      <span class="ribbon-sep"></span>
+      <span class="r-stat">辨识Fit(有效19/全25):<b class="ok" id="rId">--</b></span>
+      <span class="ribbon-sep"></span>
+      <span class="r-stat">5工况(放行11/全25):<b class="ok" id="rMulti">--</b></span>
+      <span class="ribbon-sep"></span>
+      <span class="r-stat">openJiuwen:<b id="rOjw">兼容运行时(native=false)</b></span>
+    </div>
+    <span id="rRunMeta" style="font-size:11px;font-family:var(--mono);color:#475569">RunID: --</span>
+  </div>
+
+  <!-- VIEW 1: MAIN WORKBENCH -->
+  <div id="view-workbench" class="view active">
+    <div class="workbench">
+      <aside class="panel-left">
+        <div class="panel-head"><span>石化装置控制回路目录</span><span id="loopCountTag">30/30</span></div>
+        <div class="filter-box">
+          <input id="loopSearch" type="text" placeholder="搜索位号/编号/装置 (如 TIC-201)..." />
+          <select id="anomalyFilter">
+            <option value="ALL">全部 6 类工况 (30 回路)</option>
+            <option value="AGGRESSIVE_TUNING">激进振荡 (AGGRESSIVE · 6)</option>
+            <option value="MODEL_MISMATCH">工况漂移失配 (MISMATCH · 5)</option>
+            <option value="SLUGGISH_TUNING">保守迟缓 (SLUGGISH · 6)</option>
+            <option value="VALVE_STICTION">调节阀粘滞 (STICTION · 5)</option>
+            <option value="EXTERNAL_DISTURBANCE">外部周期扰动 (DISTURB · 3)</option>
+            <option value="NORMAL">健康运行 (NORMAL · 5)</option>
+          </select>
+        </div>
+        <div class="loop-list" id="loopList"></div>
+      </aside>
+
+      <main class="panel-center">
+        <div class="stage-bar">
+          <div class="st-step" id="st1">① 异常发现</div>
+          <div class="st-step" id="st2">② 诊断证据</div>
+          <div class="st-step" id="st3">③ 模型辨识</div>
+          <div class="st-step" id="st4">④ 整定候选</div>
+          <div class="st-step" id="st5">⑤ 安全验证与审批</div>
+        </div>
+        <div class="risk-banner" id="riskBanner" style="display:none"></div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2 id="selectedTitle">正在加载控制回路...</h2>
+            <div class="toolbar">
+              <select id="strategySelect" class="btn">
+                <option value="">策略：智能体自动选择</option>
+                <option value="conservative">强制：保守稳健 (Conservative)</option>
+                <option value="balanced">强制：SIMC 均衡 (Balanced)</option>
+                <option value="performance">强制：高性能快速 (Performance)</option>
+              </select>
+              <button class="btn btn-primary" id="runBtn">执行 5-Agent 闭环</button>
+              <button class="btn btn-green" id="approvalBtn">导出 DCS 复核单</button>
+              <button class="btn btn-ghost" id="bundleBtn" title="导出含输入输出哈希、时间戳与11项约束的可审计测试包">导出审计包 JSON</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="pid-strip">
+              <div class="schematic-box" id="pidSchematic"></div>
+              <div class="faceplate">
+                <div class="fp-cell"><div class="lbl">原 PID → 建议 PID</div><div class="val" id="mPid">--</div></div>
+                <div class="fp-cell"><div class="lbl">振荡指数 OI (前→后)</div><div class="val" id="mOi">--</div></div>
+                <div class="fp-cell"><div class="lbl">跟踪误差 IAE (前→后)</div><div class="val" id="mIae">--</div></div>
+                <div class="fp-cell"><div class="lbl">阀门磨损 OP (前→后)</div><div class="val" id="mOp">--</div></div>
+                <div class="fp-cell"><div class="lbl">独立验证 Fit / R²</div><div class="val" id="mIdAcc">--</div></div>
+                <div class="fp-cell"><div class="lbl">稳定裕度 GM/PM/Ms</div><div class="val" id="mMargin">--</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="sub-tabs" id="chartTabs">
+              <button class="c-tab active" data-chart="time">1. 时域响应与阀位磨损</button>
+              <button class="c-tab" data-chart="ident">2. FOPDT 独立验证 (65/35)</button>
+              <button class="c-tab" data-chart="phase">3. PV-OP 粘滞相图</button>
+              <button class="c-tab" data-chart="nyquist">4. 频域 Nyquist 与 Ms 圆</button>
+            </div>
+            <div class="toolbar">
+              <button class="btn btn-ghost" id="replayBtn" title="动画演示整定前后 600s 响应过程">▶ 动态回放</button>
+              <span id="statusBadge" class="chip chip-NORMAL">--</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="canvas-box">
+              <canvas id="mainCanvas"></canvas>
+              <div class="float-tip" id="floatTip"></div>
+            </div>
+            <div class="chart-footer">
+              <div class="chart-legend" id="chartLegend"></div>
+              <span id="elapsedTag" style="font-family:var(--mono);font-size:11px;color:var(--muted)">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="sub-tabs" id="detailTabs">
+              <button class="d-tab active" data-detail="pane-audit">11 项安全硬约束审计 (含 C-000)</button>
+              <button class="d-tab" data-detail="pane-regime">5 工况跨边界鲁棒验证 (含专用红线)</button>
+              <button class="d-tab" data-detail="pane-baseline">公平算法基线对照 (原PID / SIMC / 本系统)</button>
+            </div>
+          </div>
+          <div class="card-body" style="padding:0">
+            <div id="pane-audit" class="detail-pane active">
+              <table>
+                <thead><tr><th>编号</th><th>类别</th><th>规则项</th><th>实测值</th><th>安全阈值</th><th>结果</th></tr></thead>
+                <tbody id="auditBody"></tbody>
+              </table>
+            </div>
+            <div id="pane-regime" class="detail-pane">
+              <table>
+                <thead><tr><th>扰动工况</th><th>K / τ / θ</th><th>超调 / 专用红线</th><th>OI / 红线</th><th>IAE</th><th>结果</th></tr></thead>
+                <tbody id="regimeBody"></tbody>
+              </table>
+            </div>
+            <div id="pane-baseline" class="detail-pane">
+              <table>
+                <thead><tr><th>控制方案</th><th>Kc</th><th>Ti (s)</th><th>IAE</th><th>振荡 OI</th><th>Harris</th><th>超调 %</th><th>阀门磨损</th></tr></thead>
+                <tbody id="baselineBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel-right">
+        <div class="right-tabs">
+          <button class="r-tab active" data-right="right-trace">5-Agent 协作时间线</button>
+          <button class="r-tab" data-right="right-copilot">AI 自控工程副驾驶</button>
+        </div>
+
+        <div id="right-trace" class="right-pane active">
+          <div class="comp-box">
+            <div class="comp-head"><span>防上下文膨胀 · 状态黑板压缩</span><span id="abComp" style="color:var(--green)">--</span></div>
+            <div class="comp-track"><div class="comp-fill" id="compFill" style="width:0%"></div></div>
+            <div class="comp-sub"><span id="abBytes">--</span><span id="abCalls">--</span></div>
+          </div>
+          <div class="trace-section" id="traceList"></div>
+        </div>
+
+        <div id="right-copilot" class="right-pane">
+          <div class="copilot-log" id="copilotLog">
+            <div class="msg msg-bot">你好！我是 PetroPID 自控工程副驾驶。点击下方快捷按钮将<strong>自动立即发送</strong>执行（无需再点发送），也可自由输入工程指令。</div>
+          </div>
+          <div class="quick-prompts">
+            <button class="q-chip" data-q="巡检全厂30个回路，列出最危险的Top5">全厂风险 Top5</button>
+            <button class="q-chip" data-q="把当前回路超调红线收紧到8%，Ms降到1.6，用高性能策略测试安全拦截回退">收紧红线触发回退</button>
+            <button class="q-chip" data-q="解释为什么阀门粘滞不能直接增大Kc">粘滞本体规则</button>
+          </div>
+          <div class="copilot-input">
+            <input id="copilotInput" placeholder="输入自然语言工程指令..." />
+            <button class="btn btn-primary" id="copilotSend">发送</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- VIEW 2: LIVE STRESS-TEST SANDBOX & CSV UPLOAD -->
+  <div id="view-sandbox" class="view">
+    <div class="page-pad">
+      <div class="sandbox-grid">
+        <div class="card">
+          <div class="card-head"><h2>实时工况压力测试 & 自定义 CSV 诊断</h2></div>
+          <div class="card-body">
+            <p style="font-size:12px;color:var(--muted);margin-bottom:10px">拖动物理参数构造未知化工工况，或直接上传任意包含 <code>sp, pv, op</code> 列的 DCS CSV 文件：</p>
+            <div class="slider-row"><label><span>过程稳态增益 K</span><span id="vK">1.6</span></label><input type="range" id="sK" min="0.5" max="3.0" step="0.1" value="1.6"></div>
+            <div class="slider-row"><label><span>时间常数 τ (s)</span><span id="vTau">16</span></label><input type="range" id="sTau" min="5" max="30" step="1" value="16"></div>
+            <div class="slider-row"><label><span>纯滞后时间 θ (s)</span><span id="vTheta">5.5</span></label><input type="range" id="sTheta" min="1" max="10" step="0.5" value="5.5"></div>
+            <div class="slider-row"><label><span>当前初始增益 Kc</span><span id="vKc">2.1</span></label><input type="range" id="sKc" min="0.2" max="3.0" step="0.1" value="2.1"></div>
+            <div class="slider-row"><label><span>当前初始积分 Ti (s)</span><span id="vTi">8.0</span></label><input type="range" id="sTi" min="3" max="90" step="1" value="8"></div>
+            <div class="slider-row"><label><span>调节阀粘滞带 S (%)</span><span id="vS">0.0</span></label><input type="range" id="sS" min="0" max="7" step="0.5" value="0"></div>
+            <div class="slider-row"><label><span>自定义标称超调红线 (%)</span><span id="vOs">18</span></label><input type="range" id="sOs" min="5" max="25" step="1" value="18"></div>
+            <button class="btn btn-primary" id="runSandboxBtn" style="width:100%;margin-top:6px">注入自定义工况并启动 5-Agent 现场救场</button>
+
+            <div class="csv-drop">
+              <div style="font-weight:700;color:var(--ink);margin-bottom:6px">或上传自定义 DCS 历史数据 (.csv)</div>
+              <input type="file" id="csvFileInput" accept=".csv" style="font-size:11.5px;max-width:100%" />
+              <div style="margin-top:4px;font-size:11px">必需列：<code>sp, pv, op</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>沙盒实时响应与 11 项约束可审计结果</h2><span id="sbStatus" class="chip chip-NORMAL">待运行</span></div>
+          <div class="card-body">
+            <div class="canvas-box"><canvas id="sandboxCanvas"></canvas></div>
+            <div class="chart-legend" style="margin-top:10px">
+              <span><i style="background:#1d4ed8"></i>设定值 SP (虚线)</span>
+              <span><i style="background:#b91c1c"></i>救场前原参数 PV / OP</span>
+              <span><i style="background:#047857"></i>5-Agent 现场救场后 PV / OP</span>
+            </div>
+            <div id="sbSummary" style="margin-top:10px;font-size:12.5px;color:#334155">点击左侧按钮或上传 CSV 文件，实时运行全套诊断、FOPDT 辨识、自适应整定与 11 项安全约束校验。</div>
+            <div style="margin-top:12px;overflow-x:auto">
+              <table>
+                <thead><tr><th>编号</th><th>类别</th><th>规则项</th><th>实测值</th><th>自定义/标准阈值</th><th>结果</th></tr></thead>
+                <tbody id="sbAuditBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW 3: PLANT-WIDE 30-LOOP HEALTH MATRIX -->
+  <div id="view-plant" class="view">
+    <div class="page-pad">
+      <div class="plant-kpis">
+        <div class="plant-kpi-card"><div class="k">端到端正确决策率</div><div class="v" id="pkSuccess">--</div><div class="s">5健康/11复核/6模型拒/5阀检/3外扰拒</div></div>
+        <div class="plant-kpi-card"><div class="k">异常诊断准确率</div><div class="v" id="pkDiag">--</div><div class="s">30/30 零误判</div></div>
+        <div class="plant-kpi-card"><div class="k">有效辨识验证 Fit</div><div class="v" id="pkId">--</div><div class="s" id="pkIdSub">有效 n=19</div></div>
+        <div class="plant-kpi-card"><div class="k">安全校验 / 违规标记</div><div class="v" id="pkSafe">--</div><div class="s">11 项硬约束含 C-000</div></div>
+        <div class="plant-kpi-card"><div class="k">放行回路 5 工况通过</div><div class="v" id="pkMulti">--</div><div class="s">全25非健康平均 78.4%</div></div>
+        <div class="plant-kpi-card"><div class="k">放行回路 OI / IAE 降幅</div><div class="v" id="pkImp">--</div><div class="s">11 个待复核回路</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>全厂 5 大石化装置 30 个控制回路健康度与 V4.0 审批状态总览</h2>
+          <span style="font-size:12px;color:var(--muted)">点击任意行可直接跳转至单回路工程工作台查看详图与审批证据</span>
+        </div>
+        <div class="card-body" style="padding:0">
+          <table>
+            <thead>
+              <tr><th>编号</th><th>位号</th><th>所属装置</th><th>真实工况</th><th>AI 诊断</th><th>辨识 Fit / R²</th><th>OI (前→后)</th><th>IAE (前→后)</th><th>5工况通过</th><th>最终审批状态</th></tr>
+            </thead>
+            <tbody id="plantTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

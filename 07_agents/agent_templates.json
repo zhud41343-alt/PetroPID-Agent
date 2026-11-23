@@ -1,0 +1,77 @@
+{
+  "swarm_name": "PetroPID-MultiAgent-Swarm",
+  "version": "1.0.0",
+  "framework_compatibility": ["openJiuwen-Core", "openJiuwen-Swarm", "MCP-2024-11-05"],
+  "anti_bloat_policy": {
+    "max_handoff_payload_bytes": 4096,
+    "strip_raw_timeseries_in_llm_context": true,
+    "idempotent_tool_dedup_cache": true
+  },
+  "agents": [
+    {
+      "agent_id": "OrchestratorAgent",
+      "role": "化工控制回路多智能体总控调度器",
+      "prompt_file": "prompts/orchestrator.md",
+      "bound_skills": ["petro_knowledge_lookup"],
+      "responsibilities": [
+        "接收 DCS 控制回路任务并执行任务编排",
+        "维护紧凑结构化共享状态黑板，防止上下文膨胀",
+        "执行幂等工具调用去重，杜绝工具重复调用",
+        "安全校验不通过时触发回退策略并汇总完整溯源报告"
+      ]
+    },
+    {
+      "agent_id": "DiagnosisAgent",
+      "role": "控制回路性能评估与异常诊断专家",
+      "prompt_file": "prompts/diagnosis.md",
+      "bound_skills": ["pid_loop_diagnosis"],
+      "responsibilities": [
+        "计算 Harris 指数、振荡指数 OI、粘滞指数 SI 与 IAE/超调",
+        "精准区分激进整定、保守整定、阀门粘滞、工况失配与外部扰动",
+        "决定是否进入辨识整定分支或直接派发阀门检维修工单"
+      ]
+    },
+    {
+      "agent_id": "IdentificationAgent",
+      "role": "化工过程模型在线辨识专家",
+      "prompt_file": "prompts/identification.md",
+      "bound_skills": ["fopdt_system_identification"],
+      "responsibilities": [
+        "检测历史时序激励充分性",
+        "辨识 FOPDT 机理模型参数 (K, tau, theta)",
+        "在后 35% 独立验证时段验证模型预测准确率 (>= 90%)"
+      ]
+    },
+    {
+      "agent_id": "TuningAgent",
+      "role": "自适应 PID 参数整定优化专家",
+      "prompt_file": "prompts/tuning.md",
+      "bound_skills": ["adaptive_pid_tuning"],
+      "responsibilities": [
+        "基于辨识模型与诊断根因生成保守/均衡/高性能三组候选参数",
+        "量化预测整定前后 Harris、OI、IAE 与阀门磨损改善幅度",
+        "响应安全校验回退请求，切换更稳健的保守参数策略"
+      ]
+    },
+    {
+      "agent_id": "SafetyVerificationAgent",
+      "role": "DCS 下发安全约束与多工况鲁棒性校验专家",
+      "prompt_file": "prompts/safety_verifier.md",
+      "bound_skills": ["safety_constraint_verification"],
+      "responsibilities": [
+        "执行 10 项硬约束 100% 确定性校验（参数边界、GM/PM/Ms、超调、阀门保护）",
+        "执行 5 组跨工况扰动鲁棒性仿真验证",
+        "对任何不满足约束的参数 100% 标记违规标签并阻断下发"
+      ]
+    }
+  ],
+  "workflow_edges": [
+    {"from": "OrchestratorAgent", "to": "DiagnosisAgent", "condition": "always"},
+    {"from": "DiagnosisAgent", "to": "OrchestratorAgent", "condition": "anomaly == NORMAL"},
+    {"from": "DiagnosisAgent", "to": "IdentificationAgent", "condition": "anomaly != NORMAL"},
+    {"from": "IdentificationAgent", "to": "TuningAgent", "condition": "id_success == true"},
+    {"from": "TuningAgent", "to": "SafetyVerificationAgent", "condition": "tuning_success == true"},
+    {"from": "SafetyVerificationAgent", "to": "TuningAgent", "condition": "approved == false && retry < 1", "action": "fallback_conservative"},
+    {"from": "SafetyVerificationAgent", "to": "OrchestratorAgent", "condition": "approved == true || retry >= 1"}
+  ]
+}

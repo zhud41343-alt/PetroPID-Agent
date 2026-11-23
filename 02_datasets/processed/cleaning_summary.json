@@ -1,0 +1,272 @@
+[
+  {
+    "loop_id": "LOOP-001",
+    "tag_name": "TIC-101",
+    "split": "train",
+    "anomaly_type": "NORMAL",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-002",
+    "tag_name": "FIC-102",
+    "split": "train",
+    "anomaly_type": "NORMAL",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-003",
+    "tag_name": "PIC-202",
+    "split": "train",
+    "anomaly_type": "NORMAL",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-004",
+    "tag_name": "FIC-302",
+    "split": "val",
+    "anomaly_type": "NORMAL",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-005",
+    "tag_name": "LIC-403",
+    "split": "test",
+    "anomaly_type": "NORMAL",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-006",
+    "tag_name": "TIC-201",
+    "split": "train",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 39
+  },
+  {
+    "loop_id": "LOOP-007",
+    "tag_name": "TIC-301",
+    "split": "train",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 6
+  },
+  {
+    "loop_id": "LOOP-008",
+    "tag_name": "PIC-104",
+    "split": "train",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 77
+  },
+  {
+    "loop_id": "LOOP-009",
+    "tag_name": "TIC-401",
+    "split": "val",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 60
+  },
+  {
+    "loop_id": "LOOP-010",
+    "tag_name": "TIC-501",
+    "split": "test",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 35
+  },
+  {
+    "loop_id": "LOOP-011",
+    "tag_name": "PIC-503",
+    "split": "train",
+    "anomaly_type": "AGGRESSIVE_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 87
+  },
+  {
+    "loop_id": "LOOP-012",
+    "tag_name": "LIC-103",
+    "split": "train",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-013",
+    "tag_name": "FIC-203",
+    "split": "train",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-014",
+    "tag_name": "TIC-105",
+    "split": "val",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-015",
+    "tag_name": "FIC-402",
+    "split": "test",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-016",
+    "tag_name": "FIC-502",
+    "split": "train",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-017",
+    "tag_name": "TIC-303",
+    "split": "train",
+    "anomaly_type": "SLUGGISH_TUNING",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-018",
+    "tag_name": "FIC-106",
+    "split": "train",
+    "anomaly_type": "VALVE_STICTION",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-019",
+    "tag_name": "LIC-204",
+    "split": "val",
+    "anomaly_type": "VALVE_STICTION",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-020",
+    "tag_name": "PIC-304",
+    "split": "test",
+    "anomaly_type": "VALVE_STICTION",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-021",
+    "tag_name": "FIC-404",
+    "split": "train",
+    "anomaly_type": "VALVE_STICTION",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-022",
+    "tag_name": "TIC-504",
+    "split": "train",
+    "anomaly_type": "VALVE_STICTION",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-023",
+    "tag_name": "TIC-107",
+    "split": "train",
+    "anomaly_type": "MODEL_MISMATCH",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 55
+  },
+  {
+    "loop_id": "LOOP-024",
+    "tag_name": "TIC-205",
+    "split": "val",
+    "anomaly_type": "MODEL_MISMATCH",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 24
+  },
+  {
+    "loop_id": "LOOP-025",
+    "tag_name": "PIC-405",
+    "split": "test",
+    "anomaly_type": "MODEL_MISMATCH",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 90
+  },
+  {
+    "loop_id": "LOOP-026",
+    "tag_name": "TIC-305",
+    "split": "train",
+    "anomaly_type": "MODEL_MISMATCH",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 43
+  },
+  {
+    "loop_id": "LOOP-027",
+    "tag_name": "LIC-505",
+    "split": "train",
+    "anomaly_type": "MODEL_MISMATCH",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-028",
+    "tag_name": "PIC-108",
+    "split": "train",
+    "anomaly_type": "EXTERNAL_DISTURBANCE",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-029",
+    "tag_name": "TIC-206",
+    "split": "val",
+    "anomaly_type": "EXTERNAL_DISTURBANCE",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  },
+  {
+    "loop_id": "LOOP-030",
+    "tag_name": "FIC-306",
+    "split": "test",
+    "anomaly_type": "EXTERNAL_DISTURBANCE",
+    "n_samples": 600,
+    "n_nans_repaired": 2,
+    "n_spikes_removed": 2
+  }
+]

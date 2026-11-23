@@ -1,0 +1,23 @@
+﻿id,subject,subject_code,predicate,object,confidence,rule_id
+KG-001,阀门粘滞,VALVE_STICTION,表现为特征,PV平台阶跃与OP锯齿滞回振荡(SI>=0.42),0.96,R-01
+KG-002,阀门粘滞,VALVE_STICTION,根因属于,执行器机械摩擦/填料过紧/阀芯结焦,0.95,R-01
+KG-003,阀门粘滞,VALVE_STICTION,推荐处置,派发仪表检维修工单，过渡期采用保守降增益缓冲参数,0.97,R-01
+KG-004,阀门粘滞,VALVE_STICTION,禁止操作,严禁盲目增大比例增益Kc或缩短积分时间Ti,0.99,R-01
+KG-005,激进整定,AGGRESSIVE_TUNING,表现为特征,高振荡指数(OI>=0.35)、OP高频大幅动作、低Harris指数,0.95,R-02
+KG-006,激进整定,AGGRESSIVE_TUNING,根因属于,比例增益Kc过高或积分时间Ti过短导致相位裕度不足,0.94,R-02
+KG-007,激进整定,AGGRESSIVE_TUNING,推荐处置,执行FOPDT模型辨识并采用SIMC均衡策略降低Kc、拉长Ti,0.96,R-02
+KG-008,保守整定,SLUGGISH_TUNING,表现为特征,设定值阶跃后残余偏差大、超调接近0%、高IAE,0.95,R-03
+KG-009,保守整定,SLUGGISH_TUNING,根因属于,比例增益Kc偏低或积分时间Ti过长,0.94,R-03
+KG-010,保守整定,SLUGGISH_TUNING,推荐处置,在满足GM>=1.8与PM>=35度前提下提升Kc并缩短Ti,0.95,R-03
+KG-011,工况失配,MODEL_MISMATCH,表现为特征,负荷切换或原料换炼后突发强振荡与大超调,0.94,R-04
+KG-012,工况失配,MODEL_MISMATCH,根因属于,过程增益K或纯滞后theta发生显著漂移导致原参数失配,0.95,R-04
+KG-013,工况失配,MODEL_MISMATCH,推荐处置,在线重辨识FOPDT模型并通过5工况±20%鲁棒性校验,0.97,R-04
+KG-014,外部周期扰动,EXTERNAL_DISTURBANCE,表现为特征,长周期正弦波振荡(T>=40s)、无粘滞滞回、OP变化平稳,0.93,R-05
+KG-015,外部周期扰动,EXTERNAL_DISTURBANCE,根因属于,上游压机/泵组脉动或关联塔器耦合扰动,0.92,R-05
+KG-016,外部周期扰动,EXTERNAL_DISTURBANCE,推荐处置,排查上游脉动源并增加前馈补偿，同步优化PID抗扰动裕度,0.94,R-05
+KG-017,健康回路,NORMAL,表现为特征,低振荡(OI<0.25)、低IAE、无粘滞,0.96,R-06
+KG-018,健康回路,NORMAL,推荐处置,维持当前PID参数，避免非必要扰动并归档巡检报告,0.98,R-06
+KG-019,温度控制回路,Temperature,典型动态特性,"大时间常数与显著纯滞后(tau=15-25s, theta=4-6s)",0.95,R-07
+KG-020,流量控制回路,Flow,典型动态特性,"快响应小滞后(tau=6-12s, theta=2-3s)，通常采用PI控制(Td=0)",0.96,R-08
+KG-021,压力控制回路,Pressure,安全约束要求,严控超调量<=18%与灵敏度峰Ms<=2.2以防超压联锁,0.98,R-09
+KG-022,液位控制回路,Level,控制策略偏好,优先平滑缓冲与减少下游流量扰动，避免剧烈OP动作,0.95,R-10
