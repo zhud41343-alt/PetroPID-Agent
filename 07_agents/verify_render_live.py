@@ -9,7 +9,7 @@ from pathlib import Path
 import httpx
 
 BASE = "https://petropid-agent.onrender.com"
-OUT = Path(__file__).resolve().parents[1] / "competition_v4" / "render_live_http_verification.json"
+OUT = Path(__file__).resolve().parents[1] / "competition_v4" / "final_audit_v43" / "render_v43_live_verification.json"
 
 
 def _timed(fn):
@@ -19,16 +19,17 @@ def _timed(fn):
 
 
 def main() -> None:
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     report = {
         "verified_at_utc": datetime.now(timezone.utc).isoformat(),
         "base_url": BASE,
         "checks": {},
     }
     with httpx.Client(timeout=45.0) as client:
-        # Wait up to 90s for Render to finish rolling over to 4.2.0
-        for _ in range(12):
+        # Wait up to 120s for Render to finish rolling over to 4.3.0
+        for _ in range(15):
             r, ms = _timed(lambda: client.get(f"{BASE}/healthz"))
-            if r.status_code == 200 and r.json().get("version") == "4.2.0":
+            if r.status_code == 200 and r.json().get("version") == "4.3.0":
                 break
             time.sleep(8.0)
 
@@ -66,6 +67,7 @@ def main() -> None:
                 "code_commit": d["audit_meta"]["code_commit"],
                 "input_hash": d["audit_meta"]["input_hash"],
                 "output_hash": d["audit_meta"]["output_hash"],
+                "record_digest_sha256": d["audit_meta"].get("record_digest_sha256"),
                 "llm_mode": d["llm_mode"],
                 "final_status": d["final_status"],
                 "deployment_authorized": d["deployment_authorized"],
