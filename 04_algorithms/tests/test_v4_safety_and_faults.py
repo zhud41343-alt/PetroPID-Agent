@@ -17,6 +17,7 @@ from decision_engine import (
     DecisionEvidence,
     FINAL_STATUS_SPECS,
     compute_canonical_hash,
+    compute_canonical_output_hash,
     final_decision_aggregation,
 )
 from orchestrator import PetroPIDOrchestrator
@@ -25,15 +26,15 @@ from app import app
 
 def test_all_9_states_never_authorize_real_dcs_deployment():
     cases = [
-        DecisionEvidence(input_valid=False, input_errors=["INPUT_NON_FINITE_PV"]),
-        DecisionEvidence(input_valid=True, input_errors=[], timed_out=True),
-        DecisionEvidence(input_valid=True, input_errors=[], audit_hash_verified=False),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="NORMAL"),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="VALVE_STICTION"),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="SLUGGISH_TUNING", model_evaluated=True, model_valid=False),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=False),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="EXTERNAL_DISTURBANCE", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=True, multi_regime_passed=True, performance_evaluated=True, performance_improved=False, performance_worsened=True),
-        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=True, multi_regime_passed=True, performance_evaluated=True, performance_improved=True, performance_worsened=False),
+        DecisionEvidence(input_valid=False, input_errors=["INPUT_NON_FINITE_PV"], audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], timed_out=True, audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], audit_status="FAIL", audit_hash_verified=False),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="NORMAL", audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="VALVE_STICTION", audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="SLUGGISH_TUNING", model_evaluated=True, model_valid=False, audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=False, audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="EXTERNAL_DISTURBANCE", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=True, multi_regime_passed=True, performance_evaluated=True, performance_improved=False, performance_worsened=True, audit_status="PASS"),
+        DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=True, multi_regime_passed=True, performance_evaluated=True, performance_improved=True, performance_worsened=False, audit_status="PASS"),
     ]
     seen = set()
     for ev in cases:
@@ -45,19 +46,24 @@ def test_all_9_states_never_authorize_real_dcs_deployment():
 
 
 def test_missing_evidence_never_defaults_to_pass():
+    # Audit not evaluated -> MUST fail-closed as AUDIT_INCOMPLETE (P0-04)
+    fd0 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="NORMAL"))
+    assert fd0.final_status == "AUDIT_INCOMPLETE"
+    assert fd0.gate_matrix["audit_integrity_gate"] == "NOT_EVALUATED"
+
     # Model not evaluated -> MUST fail-closed as MODEL_VALIDATION_FAILED
-    fd1 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=False))
+    fd1 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=False, audit_status="PASS"))
     assert fd1.final_status == "MODEL_VALIDATION_FAILED"
     assert fd1.gate_matrix["model_validity_gate"] == "NOT_EVALUATED"
     assert fd1.candidate_eligible_for_review is False
 
     # Safety not evaluated -> MUST fail-closed as SAFETY_REJECTED
-    fd2 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=False))
+    fd2 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=False, audit_status="PASS"))
     assert fd2.final_status == "SAFETY_REJECTED"
     assert fd2.gate_matrix["safety_constraints_gate"] == "NOT_EVALUATED"
 
     # Multi-regime not evaluated -> MUST fail-closed as SAFETY_REJECTED
-    fd3 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=False))
+    fd3 = final_decision_aggregation(DecisionEvidence(input_valid=True, input_errors=[], anomaly_type="AGGRESSIVE_TUNING", model_evaluated=True, model_valid=True, safety_evaluated=True, safety_approved=True, multi_regime_evaluated=False, audit_status="PASS"))
     assert fd3.final_status == "SAFETY_REJECTED"
     assert fd3.gate_matrix["multi_regime_gate"] == "NOT_EVALUATED"
 
@@ -68,6 +74,7 @@ def test_concurrent_multiple_failures_preserve_all_reason_codes():
         model_evaluated=True, model_valid=False, model_failure_reason="LOW_VAL_R2",
         safety_evaluated=True, safety_approved=False, safety_violations=["VIOLATION_LOW_GAIN_MARGIN"],
         multi_regime_evaluated=True, multi_regime_passed=False,
+        audit_status="PASS",
     ))
     assert fd.final_status == "VALVE_MAINTENANCE_REQUIRED"
     assert "VALVE_STICTION_MECHANICAL_FAULT" in fd.reason_codes
@@ -124,12 +131,12 @@ def test_run_id_single_source_of_truth_and_csv_security():
     assert bundle["deployment_authorized"] is False
 
     # Recompute canonical output hash to prove tamper-evidence
-    recomputed = compute_canonical_hash({
-        "final_status": bundle["final_status"],
-        "final_pid": bundle["final_pid"],
-        "reason_codes": bundle["final_decision"]["reason_codes"],
-        "gate_matrix": bundle["final_decision"]["gate_matrix"],
-    })
+    recomputed = compute_canonical_output_hash(
+        final_status=bundle["final_status"],
+        final_pid=bundle["final_pid"],
+        reason_codes=bundle["final_decision"]["reason_codes"],
+        gate_matrix=bundle["final_decision"]["gate_matrix"],
+    )
     assert recomputed == bundle["audit_meta"]["output_hash"]
 
     # CSV upload guardrails: missing column -> 400; NaN values -> INPUT_DATA_INVALID; >512KB -> 413

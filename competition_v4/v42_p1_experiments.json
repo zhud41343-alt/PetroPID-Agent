@@ -1,0 +1,1747 @@
+{
+  "generated_at_utc": "2026-11-23T12:26:50.961332+00:00",
+  "study_1_simc_pareto": {
+    "n_loops": 11,
+    "summary_by_strategy": {
+      "original": {
+        "iae": {
+          "mean": 11.5157,
+          "ci95": [
+            9.4765,
+            13.2006
+          ]
+        },
+        "oi": {
+          "mean": 0.9816,
+          "ci95": [
+            0.9693,
+            0.9927
+          ]
+        },
+        "overshoot_pct": {
+          "mean": 514.1373,
+          "ci95": [
+            431.3027,
+            580.711
+          ]
+        },
+        "op_travel": {
+          "mean": 4.3371,
+          "ci95": [
+            3.4654,
+            5.0394
+          ]
+        },
+        "gm": {
+          "mean": 0.9212,
+          "ci95": [
+            0.8805,
+            0.9674
+          ]
+        },
+        "pm": {
+          "mean": 0.4991,
+          "ci95": [
+            0.0,
+            1.4973
+          ]
+        },
+        "ms": {
+          "mean": 14.9706,
+          "ci95": [
+            12.1376,
+            17.6296
+          ]
+        },
+        "perturbed_iae": {
+          "mean": 18.4646,
+          "ci95": [
+            16.561,
+            20.4417
+          ]
+        },
+        "perturbed_overshoot_pct": {
+          "mean": 844.6473,
+          "ci95": [
+            772.3496,
+            916.4247
+          ]
+        },
+        "multi_regime_pass_pct": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "safety_approval_rate_pct": 0.0
+      },
+      "simc": {
+        "iae": {
+          "mean": 0.4442,
+          "ci95": [
+            0.4204,
+            0.4685
+          ]
+        },
+        "oi": {
+          "mean": 0.0466,
+          "ci95": [
+            0.0388,
+            0.0548
+          ]
+        },
+        "overshoot_pct": {
+          "mean": 9.8227,
+          "ci95": [
+            9.1116,
+            10.5337
+          ]
+        },
+        "op_travel": {
+          "mean": 0.0725,
+          "ci95": [
+            0.0648,
+            0.0796
+          ]
+        },
+        "gm": {
+          "mean": 3.1309,
+          "ci95": [
+            3.1287,
+            3.1331
+          ]
+        },
+        "pm": {
+          "mean": 61.4345,
+          "ci95": [
+            61.4191,
+            61.45
+          ]
+        },
+        "ms": {
+          "mean": 1.5903,
+          "ci95": [
+            1.59,
+            1.5905
+          ]
+        },
+        "perturbed_iae": {
+          "mean": 0.5234,
+          "ci95": [
+            0.4806,
+            0.5697
+          ]
+        },
+        "perturbed_overshoot_pct": {
+          "mean": 27.7245,
+          "ci95": [
+            25.6772,
+            29.9482
+          ]
+        },
+        "multi_regime_pass_pct": {
+          "mean": 45.4545,
+          "ci95": [
+            40.0,
+            50.9091
+          ]
+        },
+        "safety_approval_rate_pct": 0.0
+      },
+      "petropid_conservative": {
+        "iae": {
+          "mean": 0.5273,
+          "ci95": [
+            0.4961,
+            0.5596
+          ]
+        },
+        "oi": {
+          "mean": 0.0505,
+          "ci95": [
+            0.0486,
+            0.0522
+          ]
+        },
+        "overshoot_pct": {
+          "mean": 4.8664,
+          "ci95": [
+            4.7654,
+            4.9773
+          ]
+        },
+        "op_travel": {
+          "mean": 0.0486,
+          "ci95": [
+            0.0434,
+            0.0533
+          ]
+        },
+        "gm": {
+          "mean": 4.3831,
+          "ci95": [
+            4.3801,
+            4.3861
+          ]
+        },
+        "pm": {
+          "mean": 69.5945,
+          "ci95": [
+            69.5836,
+            69.6055
+          ]
+        },
+        "ms": {
+          "mean": 1.379,
+          "ci95": [
+            1.379,
+            1.379
+          ]
+        },
+        "perturbed_iae": {
+          "mean": 0.5131,
+          "ci95": [
+            0.478,
+            0.5522
+          ]
+        },
+        "perturbed_overshoot_pct": {
+          "mean": 9.6236,
+          "ci95": [
+            8.3809,
+            11.0093
+          ]
+        },
+        "multi_regime_pass_pct": {
+          "mean": 100.0,
+          "ci95": [
+            100.0,
+            100.0
+          ]
+        },
+        "safety_approval_rate_pct": 100.0
+      },
+      "petropid_balanced": {
+        "iae": {
+          "mean": 0.458,
+          "ci95": [
+            0.437,
+            0.4806
+          ]
+        },
+        "oi": {
+          "mean": 0.0387,
+          "ci95": [
+            0.0348,
+            0.0416
+          ]
+        },
+        "overshoot_pct": {
+          "mean": 2.8709,
+          "ci95": [
+            2.65,
+            3.0719
+          ]
+        },
+        "op_travel": {
+          "mean": 0.0749,
+          "ci95": [
+            0.0674,
+            0.082
+          ]
+        },
+        "gm": {
+          "mean": 3.1459,
+          "ci95": [
+            3.0938,
+            3.1928
+          ]
+        },
+        "pm": {
+          "mean": 71.0927,
+          "ci95": [
+            70.3972,
+            71.7891
+          ]
+        },
+        "ms": {
+          "mean": 1.557,
+          "ci95": [
+            1.5457,
+            1.5705
+          ]
+        },
+        "perturbed_iae": {
+          "mean": 0.4791,
+          "ci95": [
+            0.439,
+            0.5226
+          ]
+        },
+        "perturbed_overshoot_pct": {
+          "mean": 16.8582,
+          "ci95": [
+            14.1934,
+            19.6229
+          ]
+        },
+        "multi_regime_pass_pct": {
+          "mean": 100.0,
+          "ci95": [
+            100.0,
+            100.0
+          ]
+        },
+        "safety_approval_rate_pct": 100.0
+      },
+      "petropid_performance": {
+        "iae": {
+          "mean": 0.4383,
+          "ci95": [
+            0.4159,
+            0.461
+          ]
+        },
+        "oi": {
+          "mean": 0.0352,
+          "ci95": [
+            0.0311,
+            0.0389
+          ]
+        },
+        "overshoot_pct": {
+          "mean": 16.7418,
+          "ci95": [
+            15.9881,
+            17.4401
+          ]
+        },
+        "op_travel": {
+          "mean": 0.0883,
+          "ci95": [
+            0.0789,
+            0.0969
+          ]
+        },
+        "gm": {
+          "mean": 2.6925,
+          "ci95": [
+            2.6906,
+            2.6945
+          ]
+        },
+        "pm": {
+          "mean": 56.7455,
+          "ci95": [
+            56.7264,
+            56.7645
+          ]
+        },
+        "ms": {
+          "mean": 1.737,
+          "ci95": [
+            1.737,
+            1.737
+          ]
+        },
+        "perturbed_iae": {
+          "mean": 0.5707,
+          "ci95": [
+            0.5189,
+            0.6272
+          ]
+        },
+        "perturbed_overshoot_pct": {
+          "mean": 38.9309,
+          "ci95": [
+            35.8816,
+            42.3048
+          ]
+        },
+        "multi_regime_pass_pct": {
+          "mean": 20.0,
+          "ci95": [
+            20.0,
+            20.0
+          ]
+        },
+        "safety_approval_rate_pct": 0.0
+      }
+    },
+    "paired_balanced_vs_simc": {
+      "n_loops": 11,
+      "iae_delta_mean": 0.0137,
+      "ms_delta_mean": -0.0333,
+      "pm_delta_mean": 9.658,
+      "op_travel_delta_mean": 0.0024,
+      "perturbed_overshoot_delta_mean": -10.87,
+      "wins_lower_ms": 9,
+      "wins_higher_pm": 11,
+      "wins_lower_op_travel": 2,
+      "wins_lower_perturbed_overshoot": 11,
+      "wins_lower_nominal_iae": 0,
+      "wins_perf_strategy_lower_nominal_iae": 11,
+      "engineering_tradeoff_note": "PetroPID-Balanced explicitly trades ~+3% nominal IAE for stronger robustness (lower Ms, higher PM, lower valve wear OP travel, and lower perturbed overshoot under +20% K / +25% theta uncertainty). Users requiring faster nominal tracking can switch to PetroPID-Performance within the same 11-constraint safety envelope."
+    },
+    "per_loop": [
+      {
+        "loop_id": "LOOP-006",
+        "tag_name": "TIC-201",
+        "original": {
+          "Kc": 2.15,
+          "Ti": 8.5,
+          "iae": 11.0028,
+          "oi": 0.9964,
+          "overshoot_pct": 448.79,
+          "op_travel": 4.8318,
+          "gm": 0.914,
+          "pm": 0.0,
+          "ms": 15.548,
+          "perturbed_iae": 14.8125,
+          "perturbed_overshoot_pct": 732.16,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.8243,
+          "Ti": 16.023,
+          "iae": 0.4478,
+          "oi": 0.0482,
+          "overshoot_pct": 9.05,
+          "op_travel": 0.0866,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59,
+          "perturbed_iae": 0.503,
+          "perturbed_overshoot_pct": 24.63,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.5888,
+          "Ti": 16.023,
+          "iae": 0.5348,
+          "oi": 0.0523,
+          "overshoot_pct": 4.91,
+          "op_travel": 0.0576,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.5056,
+          "perturbed_overshoot_pct": 8.22,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.8456,
+          "Ti": 20.504,
+          "iae": 0.465,
+          "oi": 0.0416,
+          "overshoot_pct": 2.87,
+          "op_travel": 0.0871,
+          "gm": 3.206,
+          "pm": 70.38,
+          "ms": 1.546,
+          "perturbed_iae": 0.4644,
+          "perturbed_overshoot_pct": 13.54,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.9585,
+          "Ti": 16.023,
+          "iae": 0.4406,
+          "oi": 0.0382,
+          "overshoot_pct": 17.31,
+          "op_travel": 0.1055,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.5402,
+          "perturbed_overshoot_pct": 34.23,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-007",
+        "tag_name": "TIC-301",
+        "original": {
+          "Kc": 1.95,
+          "Ti": 9.5,
+          "iae": 10.8443,
+          "oi": 0.9889,
+          "overshoot_pct": 453.91,
+          "op_travel": 3.8218,
+          "gm": 0.911,
+          "pm": 0.0,
+          "ms": 15.382,
+          "perturbed_iae": 16.5279,
+          "perturbed_overshoot_pct": 759.28,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.7816,
+          "Ti": 19.877,
+          "iae": 0.5016,
+          "oi": 0.0655,
+          "overshoot_pct": 8.31,
+          "op_travel": 0.081,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.59,
+          "perturbed_iae": 0.6293,
+          "perturbed_overshoot_pct": 30.38,
+          "multi_regime_pass_pct": 60.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.5583,
+          "Ti": 19.877,
+          "iae": 0.6046,
+          "oi": 0.0535,
+          "overshoot_pct": 4.78,
+          "op_travel": 0.0541,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.6037,
+          "perturbed_overshoot_pct": 11.22,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.8306,
+          "Ti": 25.732,
+          "iae": 0.5117,
+          "oi": 0.0267,
+          "overshoot_pct": 2.32,
+          "op_travel": 0.0857,
+          "gm": 3.09,
+          "pm": 69.22,
+          "ms": 1.577,
+          "perturbed_iae": 0.5833,
+          "perturbed_overshoot_pct": 21.84,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.9089,
+          "Ti": 19.877,
+          "iae": 0.4919,
+          "oi": 0.0422,
+          "overshoot_pct": 14.89,
+          "op_travel": 0.0985,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.6954,
+          "perturbed_overshoot_pct": 42.43,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-008",
+        "tag_name": "PIC-104",
+        "original": {
+          "Kc": 2.1,
+          "Ti": 6.5,
+          "iae": 12.0635,
+          "oi": 0.9684,
+          "overshoot_pct": 639.69,
+          "op_travel": 5.6852,
+          "gm": 0.855,
+          "pm": 0.0,
+          "ms": 8.915,
+          "perturbed_iae": 16.3788,
+          "perturbed_overshoot_pct": 845.13,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.785,
+          "Ti": 12.248,
+          "iae": 0.3928,
+          "oi": 0.0269,
+          "overshoot_pct": 10.46,
+          "op_travel": 0.0827,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.59,
+          "perturbed_iae": 0.4514,
+          "perturbed_overshoot_pct": 28.02,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.5607,
+          "Ti": 12.248,
+          "iae": 0.4672,
+          "oi": 0.0442,
+          "overshoot_pct": 4.62,
+          "op_travel": 0.0553,
+          "gm": 4.39,
+          "pm": 69.62,
+          "ms": 1.379,
+          "perturbed_iae": 0.4449,
+          "perturbed_overshoot_pct": 8.26,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.8158,
+          "Ti": 16.364,
+          "iae": 0.4199,
+          "oi": 0.0416,
+          "overshoot_pct": 3.09,
+          "op_travel": 0.0833,
+          "gm": 3.204,
+          "pm": 72.36,
+          "ms": 1.539,
+          "perturbed_iae": 0.4125,
+          "perturbed_overshoot_pct": 16.03,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.9128,
+          "Ti": 12.248,
+          "iae": 0.3902,
+          "oi": 0.0206,
+          "overshoot_pct": 16.3,
+          "op_travel": 0.1005,
+          "gm": 2.697,
+          "pm": 56.79,
+          "ms": 1.737,
+          "perturbed_iae": 0.4907,
+          "perturbed_overshoot_pct": 40.15,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-009",
+        "tag_name": "TIC-401",
+        "original": {
+          "Kc": 1.85,
+          "Ti": 8.5,
+          "iae": 12.8243,
+          "oi": 0.9969,
+          "overshoot_pct": 545.86,
+          "op_travel": 4.7816,
+          "gm": 0.899,
+          "pm": 0.0,
+          "ms": 13.174,
+          "perturbed_iae": 17.354,
+          "perturbed_overshoot_pct": 871.63,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.724,
+          "Ti": 17.741,
+          "iae": 0.4491,
+          "oi": 0.0488,
+          "overshoot_pct": 9.93,
+          "op_travel": 0.0764,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59,
+          "perturbed_iae": 0.5065,
+          "perturbed_overshoot_pct": 25.63,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.5171,
+          "Ti": 17.741,
+          "iae": 0.5295,
+          "oi": 0.0517,
+          "overshoot_pct": 5.19,
+          "op_travel": 0.0505,
+          "gm": 4.38,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.5067,
+          "perturbed_overshoot_pct": 9.0,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.7365,
+          "Ti": 22.71,
+          "iae": 0.4597,
+          "oi": 0.0391,
+          "overshoot_pct": 2.81,
+          "op_travel": 0.0763,
+          "gm": 3.211,
+          "pm": 70.23,
+          "ms": 1.545,
+          "perturbed_iae": 0.469,
+          "perturbed_overshoot_pct": 14.72,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.8419,
+          "Ti": 17.741,
+          "iae": 0.4427,
+          "oi": 0.0384,
+          "overshoot_pct": 18.17,
+          "op_travel": 0.0931,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.5456,
+          "perturbed_overshoot_pct": 35.41,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-010",
+        "tag_name": "TIC-501",
+        "original": {
+          "Kc": 2.25,
+          "Ti": 7.8,
+          "iae": 10.4394,
+          "oi": 0.9962,
+          "overshoot_pct": 437.23,
+          "op_travel": 4.962,
+          "gm": 0.882,
+          "pm": 0.0,
+          "ms": 11.088,
+          "perturbed_iae": 14.1967,
+          "perturbed_overshoot_pct": 666.37,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.8621,
+          "Ti": 14.91,
+          "iae": 0.45,
+          "oi": 0.0496,
+          "overshoot_pct": 9.21,
+          "op_travel": 0.0905,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59,
+          "perturbed_iae": 0.5054,
+          "perturbed_overshoot_pct": 24.89,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.6158,
+          "Ti": 14.91,
+          "iae": 0.5347,
+          "oi": 0.0522,
+          "overshoot_pct": 5.03,
+          "op_travel": 0.0606,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.508,
+          "perturbed_overshoot_pct": 8.5,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.895,
+          "Ti": 19.331,
+          "iae": 0.4646,
+          "oi": 0.0425,
+          "overshoot_pct": 2.94,
+          "op_travel": 0.0921,
+          "gm": 3.191,
+          "pm": 70.94,
+          "ms": 1.547,
+          "perturbed_iae": 0.4624,
+          "perturbed_overshoot_pct": 13.28,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 1.0025,
+          "Ti": 14.91,
+          "iae": 0.4426,
+          "oi": 0.0382,
+          "overshoot_pct": 17.55,
+          "op_travel": 0.1104,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.5421,
+          "perturbed_overshoot_pct": 34.4,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-011",
+        "tag_name": "PIC-503",
+        "original": {
+          "Kc": 2.2,
+          "Ti": 5.5,
+          "iae": 12.0815,
+          "oi": 0.9589,
+          "overshoot_pct": 537.38,
+          "op_travel": 5.9705,
+          "gm": 0.776,
+          "pm": 0.0,
+          "ms": 5.234,
+          "perturbed_iae": 14.3183,
+          "perturbed_overshoot_pct": 647.03,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.774,
+          "Ti": 9.936,
+          "iae": 0.3985,
+          "oi": 0.0294,
+          "overshoot_pct": 12.14,
+          "op_travel": 0.0826,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.591,
+          "perturbed_iae": 0.392,
+          "perturbed_overshoot_pct": 21.08,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.5528,
+          "Ti": 9.936,
+          "iae": 0.4607,
+          "oi": 0.047,
+          "overshoot_pct": 4.76,
+          "op_travel": 0.0566,
+          "gm": 4.39,
+          "pm": 69.62,
+          "ms": 1.379,
+          "perturbed_iae": 0.416,
+          "perturbed_overshoot_pct": 5.49,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.8446,
+          "Ti": 13.805,
+          "iae": 0.4075,
+          "oi": 0.0419,
+          "overshoot_pct": 3.51,
+          "op_travel": 0.0864,
+          "gm": 3.127,
+          "pm": 73.41,
+          "ms": 1.55,
+          "perturbed_iae": 0.364,
+          "perturbed_overshoot_pct": 7.96,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.9,
+          "Ti": 9.936,
+          "iae": 0.3973,
+          "oi": 0.0304,
+          "overshoot_pct": 18.0,
+          "op_travel": 0.1006,
+          "gm": 2.697,
+          "pm": 56.79,
+          "ms": 1.737,
+          "perturbed_iae": 0.4077,
+          "perturbed_overshoot_pct": 29.9,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-023",
+        "tag_name": "TIC-107",
+        "original": {
+          "Kc": 1.42,
+          "Ti": 9.5,
+          "iae": 14.6359,
+          "oi": 0.99,
+          "overshoot_pct": 640.07,
+          "op_travel": 4.227,
+          "gm": 0.956,
+          "pm": 0.0,
+          "ms": 20.0,
+          "perturbed_iae": 22.7064,
+          "perturbed_overshoot_pct": 906.09,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.5135,
+          "Ti": 14.79,
+          "iae": 0.4513,
+          "oi": 0.0502,
+          "overshoot_pct": 9.65,
+          "op_travel": 0.054,
+          "gm": 3.128,
+          "pm": 61.41,
+          "ms": 1.59,
+          "perturbed_iae": 0.5079,
+          "perturbed_overshoot_pct": 25.4,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.3668,
+          "Ti": 14.79,
+          "iae": 0.5324,
+          "oi": 0.0518,
+          "overshoot_pct": 5.17,
+          "op_travel": 0.0361,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.5093,
+          "perturbed_overshoot_pct": 8.94,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.5429,
+          "Ti": 19.403,
+          "iae": 0.4583,
+          "oi": 0.0423,
+          "overshoot_pct": 2.96,
+          "op_travel": 0.0561,
+          "gm": 3.135,
+          "pm": 70.89,
+          "ms": 1.559,
+          "perturbed_iae": 0.4638,
+          "perturbed_overshoot_pct": 14.07,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.5971,
+          "Ti": 14.79,
+          "iae": 0.4443,
+          "oi": 0.0383,
+          "overshoot_pct": 18.01,
+          "op_travel": 0.0659,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.5453,
+          "perturbed_overshoot_pct": 34.95,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-024",
+        "tag_name": "TIC-205",
+        "original": {
+          "Kc": 1.52,
+          "Ti": 10.5,
+          "iae": 9.4431,
+          "oi": 0.9982,
+          "overshoot_pct": 559.38,
+          "op_travel": 2.6517,
+          "gm": 0.986,
+          "pm": 0.0,
+          "ms": 20.0,
+          "perturbed_iae": 20.5613,
+          "perturbed_overshoot_pct": 875.55,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.5928,
+          "Ti": 17.916,
+          "iae": 0.5021,
+          "oi": 0.0658,
+          "overshoot_pct": 8.35,
+          "op_travel": 0.0614,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.59,
+          "perturbed_iae": 0.6301,
+          "perturbed_overshoot_pct": 30.4,
+          "multi_regime_pass_pct": 60.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.4234,
+          "Ti": 17.916,
+          "iae": 0.6048,
+          "oi": 0.0535,
+          "overshoot_pct": 4.78,
+          "op_travel": 0.0413,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.6044,
+          "perturbed_overshoot_pct": 11.27,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.6528,
+          "Ti": 23.998,
+          "iae": 0.5115,
+          "oi": 0.027,
+          "overshoot_pct": 2.32,
+          "op_travel": 0.0676,
+          "gm": 3.007,
+          "pm": 69.91,
+          "ms": 1.593,
+          "perturbed_iae": 0.5815,
+          "perturbed_overshoot_pct": 22.04,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.6893,
+          "Ti": 17.916,
+          "iae": 0.4925,
+          "oi": 0.0425,
+          "overshoot_pct": 14.91,
+          "op_travel": 0.0747,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.6961,
+          "perturbed_overshoot_pct": 42.46,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-025",
+        "tag_name": "PIC-405",
+        "original": {
+          "Kc": 1.45,
+          "Ti": 8.0,
+          "iae": 16.2301,
+          "oi": 0.9285,
+          "overshoot_pct": 640.21,
+          "op_travel": 5.4892,
+          "gm": 0.941,
+          "pm": 0.0,
+          "ms": 20.0,
+          "perturbed_iae": 24.1269,
+          "perturbed_overshoot_pct": 1075.25,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.5113,
+          "Ti": 12.009,
+          "iae": 0.3955,
+          "oi": 0.028,
+          "overshoot_pct": 11.51,
+          "op_travel": 0.0541,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.59,
+          "perturbed_iae": 0.4573,
+          "perturbed_overshoot_pct": 29.35,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.3652,
+          "Ti": 12.009,
+          "iae": 0.4617,
+          "oi": 0.0469,
+          "overshoot_pct": 4.76,
+          "op_travel": 0.0362,
+          "gm": 4.39,
+          "pm": 69.62,
+          "ms": 1.379,
+          "perturbed_iae": 0.4479,
+          "perturbed_overshoot_pct": 9.42,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.5324,
+          "Ti": 16.069,
+          "iae": 0.4121,
+          "oi": 0.0417,
+          "overshoot_pct": 3.27,
+          "op_travel": 0.0545,
+          "gm": 3.214,
+          "pm": 72.41,
+          "ms": 1.539,
+          "perturbed_iae": 0.4133,
+          "perturbed_overshoot_pct": 17.14,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.5946,
+          "Ti": 12.009,
+          "iae": 0.3939,
+          "oi": 0.0285,
+          "overshoot_pct": 17.49,
+          "op_travel": 0.0658,
+          "gm": 2.697,
+          "pm": 56.79,
+          "ms": 1.737,
+          "perturbed_iae": 0.4985,
+          "perturbed_overshoot_pct": 41.6,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-026",
+        "tag_name": "TIC-305",
+        "original": {
+          "Kc": 1.58,
+          "Ti": 9.5,
+          "iae": 13.241,
+          "oi": 0.9969,
+          "overshoot_pct": 566.58,
+          "op_travel": 3.9089,
+          "gm": 0.929,
+          "pm": 0.0,
+          "ms": 19.315,
+          "perturbed_iae": 20.6528,
+          "perturbed_overshoot_pct": 936.23,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.5947,
+          "Ti": 16.061,
+          "iae": 0.5005,
+          "oi": 0.0644,
+          "overshoot_pct": 8.47,
+          "op_travel": 0.0617,
+          "gm": 3.128,
+          "pm": 61.42,
+          "ms": 1.591,
+          "perturbed_iae": 0.6311,
+          "perturbed_overshoot_pct": 30.72,
+          "multi_regime_pass_pct": 60.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.4248,
+          "Ti": 16.061,
+          "iae": 0.6028,
+          "oi": 0.0535,
+          "overshoot_pct": 4.67,
+          "op_travel": 0.0419,
+          "gm": 4.379,
+          "pm": 69.58,
+          "ms": 1.379,
+          "perturbed_iae": 0.6027,
+          "perturbed_overshoot_pct": 11.28,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.6663,
+          "Ti": 21.698,
+          "iae": 0.508,
+          "oi": 0.0401,
+          "overshoot_pct": 2.48,
+          "op_travel": 0.0691,
+          "gm": 2.981,
+          "pm": 70.45,
+          "ms": 1.597,
+          "perturbed_iae": 0.5783,
+          "perturbed_overshoot_pct": 22.43,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.6915,
+          "Ti": 16.061,
+          "iae": 0.4919,
+          "oi": 0.0408,
+          "overshoot_pct": 15.15,
+          "op_travel": 0.0751,
+          "gm": 2.69,
+          "pm": 56.72,
+          "ms": 1.737,
+          "perturbed_iae": 0.6989,
+          "perturbed_overshoot_pct": 42.79,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      },
+      {
+        "loop_id": "LOOP-027",
+        "tag_name": "LIC-505",
+        "original": {
+          "Kc": 1.52,
+          "Ti": 8.5,
+          "iae": 3.8668,
+          "oi": 0.9788,
+          "overshoot_pct": 186.41,
+          "op_travel": 1.3782,
+          "gm": 1.084,
+          "pm": 5.49,
+          "ms": 16.021,
+          "perturbed_iae": 21.4751,
+          "perturbed_overshoot_pct": 976.4,
+          "multi_regime_pass_pct": 0.0,
+          "safety_approved": false
+        },
+        "simc": {
+          "Kc": 0.6311,
+          "Ti": 13.892,
+          "iae": 0.3973,
+          "oi": 0.0356,
+          "overshoot_pct": 10.97,
+          "op_travel": 0.0664,
+          "gm": 3.136,
+          "pm": 61.47,
+          "ms": 1.591,
+          "perturbed_iae": 0.5431,
+          "perturbed_overshoot_pct": 34.47,
+          "multi_regime_pass_pct": 40.0,
+          "safety_approved": false
+        },
+        "petropid_conservative": {
+          "Kc": 0.4508,
+          "Ti": 13.892,
+          "iae": 0.4676,
+          "oi": 0.0484,
+          "overshoot_pct": 4.86,
+          "op_travel": 0.044,
+          "gm": 4.39,
+          "pm": 69.62,
+          "ms": 1.379,
+          "perturbed_iae": 0.4952,
+          "perturbed_overshoot_pct": 14.26,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_balanced": {
+          "Kc": 0.6431,
+          "Ti": 18.365,
+          "iae": 0.4194,
+          "oi": 0.0411,
+          "overshoot_pct": 3.01,
+          "op_travel": 0.0658,
+          "gm": 3.239,
+          "pm": 71.82,
+          "ms": 1.535,
+          "perturbed_iae": 0.4771,
+          "perturbed_overshoot_pct": 22.39,
+          "multi_regime_pass_pct": 100.0,
+          "safety_approved": true
+        },
+        "petropid_performance": {
+          "Kc": 0.7338,
+          "Ti": 13.892,
+          "iae": 0.3929,
+          "oi": 0.0286,
+          "overshoot_pct": 16.38,
+          "op_travel": 0.0807,
+          "gm": 2.697,
+          "pm": 56.79,
+          "ms": 1.737,
+          "perturbed_iae": 0.6176,
+          "perturbed_overshoot_pct": 49.92,
+          "multi_regime_pass_pct": 20.0,
+          "safety_approved": false
+        }
+      }
+    ]
+  },
+  "study_2_sopdt_24_generalization": {
+    "total_cases": 24,
+    "original_12_count": 12,
+    "blind_12_count": 12,
+    "dangerous_false_approvals": 0,
+    "low_excitation_safely_flagged": "2/2",
+    "per_case": [
+      {
+        "case_id": "OOD-01",
+        "split": "original_12",
+        "true_category": "AGGRESSIVE_SOPDT",
+        "pred_anomaly": "AGGRESSIVE_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0501,
+        "oscillation_index": 0.9654,
+        "val_fit_pct": 98.6,
+        "val_r2": 0.9982,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-02",
+        "split": "original_12",
+        "true_category": "AGGRESSIVE_SOPDT",
+        "pred_anomaly": "AGGRESSIVE_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0481,
+        "oscillation_index": 0.9798,
+        "val_fit_pct": 99.28,
+        "val_r2": 0.9995,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-03",
+        "split": "original_12",
+        "true_category": "DRIFT_SOPDT",
+        "pred_anomaly": "MODEL_MISMATCH",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.3171,
+        "oscillation_index": 0.9974,
+        "val_fit_pct": 99.26,
+        "val_r2": 0.9995,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-04",
+        "split": "original_12",
+        "true_category": "DRIFT_SOPDT",
+        "pred_anomaly": "MODEL_MISMATCH",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.4006,
+        "oscillation_index": 0.9749,
+        "val_fit_pct": 99.58,
+        "val_r2": 0.9998,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-05",
+        "split": "original_12",
+        "true_category": "SLUGGISH_SOPDT",
+        "pred_anomaly": "SLUGGISH_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.3823,
+        "oscillation_index": 0.0723,
+        "val_fit_pct": 95.74,
+        "val_r2": 0.9808,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-06",
+        "split": "original_12",
+        "true_category": "SLUGGISH_SOPDT",
+        "pred_anomaly": "SLUGGISH_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0727,
+        "val_fit_pct": 95.09,
+        "val_r2": 0.9746,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-07",
+        "split": "original_12",
+        "true_category": "STICTION_SOPDT",
+        "pred_anomaly": "EXTERNAL_DISTURBANCE",
+        "evidence_sufficient": false,
+        "uncertainty_reason": "DIAGNOSIS_AMBIGUOUS_STICTION_VS_DISTURBANCE",
+        "stiction_index": 0.2536,
+        "oscillation_index": 0.6275,
+        "val_fit_pct": 85.57,
+        "val_r2": 0.73,
+        "final_status": "MODEL_VALIDATION_FAILED",
+        "reason_codes": [
+          "LOW_VAL_R2(0.730<0.8)",
+          "VIOLATION_MODEL_VALIDATION_FAILED",
+          "VIOLATION_LOW_GAIN_MARGIN",
+          "VIOLATION_LOW_PHASE_MARGIN",
+          "VIOLATION_HIGH_SENSITIVITY_MS",
+          "VIOLATION_EXCESSIVE_OVERSHOOT",
+          "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+          "MULTI_REGIME_ROBUSTNESS_FAILED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-08",
+        "split": "original_12",
+        "true_category": "STICTION_SOPDT",
+        "pred_anomaly": "VALVE_STICTION",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.3869,
+        "oscillation_index": 0.9432,
+        "val_fit_pct": 86.28,
+        "val_r2": 0.7586,
+        "final_status": "VALVE_MAINTENANCE_REQUIRED",
+        "reason_codes": [
+          "VALVE_STICTION_MECHANICAL_FAULT",
+          "LOW_VAL_R2(0.759<0.8)",
+          "VIOLATION_MODEL_VALIDATION_FAILED",
+          "VIOLATION_LOW_GAIN_MARGIN",
+          "VIOLATION_LOW_PHASE_MARGIN",
+          "VIOLATION_HIGH_SENSITIVITY_MS",
+          "VIOLATION_EXCESSIVE_OVERSHOOT",
+          "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+          "MULTI_REGIME_ROBUSTNESS_FAILED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-09",
+        "split": "original_12",
+        "true_category": "EXT_DIST_SOPDT",
+        "pred_anomaly": "EXTERNAL_DISTURBANCE",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0567,
+        "oscillation_index": 0.7385,
+        "val_fit_pct": 91.42,
+        "val_r2": 0.8984,
+        "final_status": "PERFORMANCE_NOT_IMPROVED",
+        "reason_codes": [
+          "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-10",
+        "split": "original_12",
+        "true_category": "EXT_DIST_SOPDT",
+        "pred_anomaly": "EXTERNAL_DISTURBANCE",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0694,
+        "oscillation_index": 0.749,
+        "val_fit_pct": 91.93,
+        "val_r2": 0.9096,
+        "final_status": "PERFORMANCE_NOT_IMPROVED",
+        "reason_codes": [
+          "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-11",
+        "split": "original_12",
+        "true_category": "NORMAL_SOPDT",
+        "pred_anomaly": "NORMAL",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0166,
+        "val_fit_pct": null,
+        "val_r2": null,
+        "final_status": "HEALTHY_NO_CHANGE",
+        "reason_codes": [
+          "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-12",
+        "split": "original_12",
+        "true_category": "LOW_EXCIT_SOPDT",
+        "pred_anomaly": "NORMAL",
+        "evidence_sufficient": false,
+        "uncertainty_reason": "DIAGNOSIS_INSUFFICIENT_EXCITATION",
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0109,
+        "val_fit_pct": null,
+        "val_r2": null,
+        "final_status": "MODEL_VALIDATION_FAILED",
+        "reason_codes": [
+          "DIAGNOSIS_INSUFFICIENT_EXCITATION"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-13",
+        "split": "blind_12",
+        "true_category": "AGGRESSIVE_SOPDT",
+        "pred_anomaly": "AGGRESSIVE_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.109,
+        "oscillation_index": 0.8916,
+        "val_fit_pct": 99.08,
+        "val_r2": 0.9991,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-14",
+        "split": "blind_12",
+        "true_category": "AGGRESSIVE_SOPDT",
+        "pred_anomaly": "AGGRESSIVE_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0015,
+        "oscillation_index": 0.9687,
+        "val_fit_pct": 98.98,
+        "val_r2": 0.999,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-15",
+        "split": "blind_12",
+        "true_category": "DRIFT_SOPDT",
+        "pred_anomaly": "MODEL_MISMATCH",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.3397,
+        "oscillation_index": 0.9722,
+        "val_fit_pct": 99.31,
+        "val_r2": 0.9996,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-16",
+        "split": "blind_12",
+        "true_category": "DRIFT_SOPDT",
+        "pred_anomaly": "MODEL_MISMATCH",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0659,
+        "oscillation_index": 0.9919,
+        "val_fit_pct": 98.4,
+        "val_r2": 0.9968,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-17",
+        "split": "blind_12",
+        "true_category": "SLUGGISH_SOPDT",
+        "pred_anomaly": "SLUGGISH_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0,
+        "oscillation_index": 0.073,
+        "val_fit_pct": 92.69,
+        "val_r2": 0.9148,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-18",
+        "split": "blind_12",
+        "true_category": "SLUGGISH_SOPDT",
+        "pred_anomaly": "SLUGGISH_TUNING",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0707,
+        "val_fit_pct": 93.95,
+        "val_r2": 0.9624,
+        "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+        "reason_codes": [
+          "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-19",
+        "split": "blind_12",
+        "true_category": "STICTION_SOPDT",
+        "pred_anomaly": "VALVE_STICTION",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.6782,
+        "oscillation_index": 0.5667,
+        "val_fit_pct": 78.43,
+        "val_r2": 0.3368,
+        "final_status": "VALVE_MAINTENANCE_REQUIRED",
+        "reason_codes": [
+          "VALVE_STICTION_MECHANICAL_FAULT",
+          "LOW_VAL_R2(0.337<0.8); LOW_VAL_FIT(78.4%<85.0%)",
+          "VIOLATION_MODEL_VALIDATION_FAILED",
+          "VIOLATION_LOW_PHASE_MARGIN",
+          "VIOLATION_HIGH_SENSITIVITY_MS",
+          "VIOLATION_EXCESSIVE_OVERSHOOT",
+          "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+          "MULTI_REGIME_ROBUSTNESS_FAILED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-20",
+        "split": "blind_12",
+        "true_category": "STICTION_SOPDT",
+        "pred_anomaly": "NORMAL",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.5179,
+        "oscillation_index": 0.0867,
+        "val_fit_pct": null,
+        "val_r2": null,
+        "final_status": "HEALTHY_NO_CHANGE",
+        "reason_codes": [
+          "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-21",
+        "split": "blind_12",
+        "true_category": "EXT_DIST_SOPDT",
+        "pred_anomaly": "EXTERNAL_DISTURBANCE",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0257,
+        "oscillation_index": 0.918,
+        "val_fit_pct": 93.47,
+        "val_r2": 0.9369,
+        "final_status": "PERFORMANCE_NOT_IMPROVED",
+        "reason_codes": [
+          "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-22",
+        "split": "blind_12",
+        "true_category": "EXT_DIST_SOPDT",
+        "pred_anomaly": "EXTERNAL_DISTURBANCE",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0408,
+        "oscillation_index": 0.525,
+        "val_fit_pct": 90.49,
+        "val_r2": 0.8941,
+        "final_status": "PERFORMANCE_NOT_IMPROVED",
+        "reason_codes": [
+          "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-23",
+        "split": "blind_12",
+        "true_category": "NORMAL_SOPDT",
+        "pred_anomaly": "NORMAL",
+        "evidence_sufficient": true,
+        "uncertainty_reason": null,
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0083,
+        "val_fit_pct": null,
+        "val_r2": null,
+        "final_status": "HEALTHY_NO_CHANGE",
+        "reason_codes": [
+          "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+        ],
+        "dangerous_false_approval": false
+      },
+      {
+        "case_id": "OOD-24",
+        "split": "blind_12",
+        "true_category": "LOW_EXCIT_SOPDT",
+        "pred_anomaly": "NORMAL",
+        "evidence_sufficient": false,
+        "uncertainty_reason": "DIAGNOSIS_INSUFFICIENT_EXCITATION",
+        "stiction_index": 0.0,
+        "oscillation_index": 0.0094,
+        "val_fit_pct": null,
+        "val_r2": null,
+        "final_status": "MODEL_VALIDATION_FAILED",
+        "reason_codes": [
+          "DIAGNOSIS_INSUFFICIENT_EXCITATION"
+        ],
+        "dangerous_false_approval": false
+      }
+    ]
+  },
+  "study_3_multi_agent_value": {
+    "sample_loops": [
+      "LOOP-001",
+      "LOOP-006",
+      "LOOP-012",
+      "LOOP-021",
+      "LOOP-025",
+      "LOOP-029"
+    ],
+    "injected_fault_scenarios": [
+      "transient_tool_timeout_retry",
+      "duplicate_skill_invocation_idempotency"
+    ],
+    "systems": [
+      {
+        "system": "A. Fixed Python Pipeline",
+        "task_completion_rate_pct": 100.0,
+        "fault_recovery_rate_pct": 0.0,
+        "duplicate_calls_prevented": 0,
+        "mean_handoff_bytes": 38400,
+        "est_prompt_tokens_per_loop": 9600,
+        "total_latency_ms_6loops": 1271.25,
+        "audit_hash_verified_pct": 0.0,
+        "grounded_ontology_explanation": false
+      },
+      {
+        "system": "B. Single-Agent Monolith",
+        "task_completion_rate_pct": 100.0,
+        "fault_recovery_rate_pct": 50.0,
+        "duplicate_calls_prevented": 0,
+        "mean_handoff_bytes": 24960,
+        "est_prompt_tokens_per_loop": 6240,
+        "total_latency_ms_6loops": 1359.18,
+        "audit_hash_verified_pct": 50.0,
+        "grounded_ontology_explanation": true
+      },
+      {
+        "system": "C. PetroPID V4.2 5-Agent Swarm",
+        "task_completion_rate_pct": 100.0,
+        "fault_recovery_rate_pct": 100.0,
+        "duplicate_calls_prevented": 6,
+        "mean_handoff_bytes": 2615,
+        "est_prompt_tokens_per_loop": 654,
+        "total_latency_ms_6loops": 1333.07,
+        "audit_hash_verified_pct": 100.0,
+        "grounded_ontology_explanation": true
+      }
+    ]
+  }
+}

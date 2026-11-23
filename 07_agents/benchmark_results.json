@@ -1,16 +1,32 @@
 {
-  "version": "V3.0-audited",
-  "evaluated_at": "2026-11-23 16:24:53",
+  "version": "V4.2-independent-audited",
+  "evaluated_at": "2026-11-23 20:23:10",
   "total_loops": 30,
   "denominators": {
     "total_loops": 30,
     "non_healthy_loops": 25,
+    "tunable_loops": 17,
+    "non_tunable_abnormal_loops": 8,
     "valid_identified_models": 19,
     "simulation_validated_retuned_loops": 11,
     "model_validation_failed_loops": 6,
     "valve_maintenance_required_loops": 5,
     "performance_not_improved_loops": 3,
     "healthy_no_change_loops": 5
+  },
+  "independent_evaluation": {
+    "protocol": "P0-05 independent scenario ground-truth (zero dependence on tested model_valid)",
+    "diagnosis_accuracy_pct": 100.0,
+    "model_validation_success_rate_non_healthy_pct": 76.0,
+    "model_validation_success_rate_tunable_pct": 64.71,
+    "correct_rejection_rate_non_tunable_pct": 100.0,
+    "false_approval_rate_pct": 0.0,
+    "false_approval_count": 0,
+    "effective_parameter_recommendation_rate_tunable_pct": 64.71,
+    "independent_full_task_success_rate_pct": 80.0,
+    "independent_exact_matches": 24,
+    "conservative_safe_decision_rate_pct": 100.0,
+    "note": "6 sluggish loops with low excitation are conservatively rejected as MODEL_VALIDATION_FAILED (counted as misses in independent_full_task_success_rate_pct=80.0%, and 0 dangerous false approvals)."
   },
   "status_distribution": {
     "HEALTHY_NO_CHANGE": 5,
@@ -19,7 +35,8 @@
     "VALVE_MAINTENANCE_REQUIRED": 5,
     "PERFORMANCE_NOT_IMPROVED": 3
   },
-  "task_success_rate_pct": 100.0,
+  "task_success_rate_pct": 80.0,
+  "conservative_safe_decision_rate_pct": 100.0,
   "diagnosis_accuracy_pct": 100.0,
   "avg_id_val_accuracy_pct": 95.35,
   "avg_id_val_r2_valid_models": 0.9539,
@@ -33,14 +50,14 @@
   "avg_iae_reduction_pct": 95.48,
   "avg_harris_improvement_pct": 1056.8,
   "latency_s": {
-    "mean": 0.147,
-    "p50": 0.14,
-    "p95": 0.294,
-    "p99": 0.331,
-    "max": 0.338
+    "mean": 0.177,
+    "p50": 0.18,
+    "p95": 0.392,
+    "p99": 0.408,
+    "max": 0.412
   },
-  "avg_loop_time_s": 0.147,
-  "max_loop_time_s": 0.338,
+  "avg_loop_time_s": 0.177,
+  "max_loop_time_s": 0.412,
   "fair_baseline_comparison": {
     "sample_count": 11,
     "original_pid_mean_iae": 11.443,
@@ -105,6 +122,8 @@
       "true_anomaly": "NORMAL",
       "pred_anomaly": "NORMAL",
       "diag_correct": true,
+      "expected_independent_status": "HEALTHY_NO_CHANGE",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": null,
       "val_r2": null,
@@ -120,9 +139,9 @@
       "iae_after": 0.3895,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.003,
+      "elapsed_s": 0.013,
       "final_status": "HEALTHY_NO_CHANGE",
-      "decision_reason": "回路健康运行，无需执行侵入式辨识或参数修改。"
+      "decision_reason": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
     },
     {
       "loop_id": "LOOP-002",
@@ -131,6 +150,8 @@
       "true_anomaly": "NORMAL",
       "pred_anomaly": "NORMAL",
       "diag_correct": true,
+      "expected_independent_status": "HEALTHY_NO_CHANGE",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": null,
       "val_r2": null,
@@ -146,9 +167,9 @@
       "iae_after": 0.3013,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.003,
+      "elapsed_s": 0.013,
       "final_status": "HEALTHY_NO_CHANGE",
-      "decision_reason": "回路健康运行，无需执行侵入式辨识或参数修改。"
+      "decision_reason": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
     },
     {
       "loop_id": "LOOP-003",
@@ -157,6 +178,8 @@
       "true_anomaly": "NORMAL",
       "pred_anomaly": "NORMAL",
       "diag_correct": true,
+      "expected_independent_status": "HEALTHY_NO_CHANGE",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": null,
       "val_r2": null,
@@ -172,9 +195,9 @@
       "iae_after": 0.3441,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.003,
+      "elapsed_s": 0.012,
       "final_status": "HEALTHY_NO_CHANGE",
-      "decision_reason": "回路健康运行，无需执行侵入式辨识或参数修改。"
+      "decision_reason": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
     },
     {
       "loop_id": "LOOP-004",
@@ -183,6 +206,8 @@
       "true_anomaly": "NORMAL",
       "pred_anomaly": "NORMAL",
       "diag_correct": true,
+      "expected_independent_status": "HEALTHY_NO_CHANGE",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": null,
       "val_r2": null,
@@ -198,9 +223,9 @@
       "iae_after": 0.3118,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.003,
+      "elapsed_s": 0.013,
       "final_status": "HEALTHY_NO_CHANGE",
-      "decision_reason": "回路健康运行，无需执行侵入式辨识或参数修改。"
+      "decision_reason": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
     },
     {
       "loop_id": "LOOP-005",
@@ -209,6 +234,8 @@
       "true_anomaly": "NORMAL",
       "pred_anomaly": "NORMAL",
       "diag_correct": true,
+      "expected_independent_status": "HEALTHY_NO_CHANGE",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": null,
       "val_r2": null,
@@ -224,9 +251,9 @@
       "iae_after": 0.3442,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.002,
+      "elapsed_s": 0.012,
       "final_status": "HEALTHY_NO_CHANGE",
-      "decision_reason": "回路健康运行，无需执行侵入式辨识或参数修改。"
+      "decision_reason": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
     },
     {
       "loop_id": "LOOP-006",
@@ -235,6 +262,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9984,
@@ -250,9 +279,9 @@
       "iae_after": 0.465,
       "oi_reduction_pct": 95.83,
       "iae_reduction_pct": 95.71,
-      "elapsed_s": 0.204,
+      "elapsed_s": 0.215,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-007",
@@ -261,6 +290,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9995,
@@ -276,9 +307,9 @@
       "iae_after": 0.5117,
       "oi_reduction_pct": 97.3,
       "iae_reduction_pct": 95.27,
-      "elapsed_s": 0.207,
+      "elapsed_s": 0.209,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.82 → 0.51，OI 0.99 → 0.03，阀位磨损 3.81 → 0.09%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.82 → 0.51，OI 0.99 → 0.03，阀位磨损 3.81 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-008",
@@ -287,6 +318,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9987,
@@ -302,9 +335,9 @@
       "iae_after": 0.4199,
       "oi_reduction_pct": 95.71,
       "iae_reduction_pct": 96.51,
-      "elapsed_s": 0.205,
+      "elapsed_s": 0.211,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 12.03 → 0.42，OI 0.97 → 0.04，阀位磨损 5.72 → 0.08%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 12.03 → 0.42，OI 0.97 → 0.04，阀位磨损 5.72 → 0.08%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-009",
@@ -313,6 +346,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.999,
@@ -328,9 +363,9 @@
       "iae_after": 0.4597,
       "oi_reduction_pct": 96.08,
       "iae_reduction_pct": 96.39,
-      "elapsed_s": 0.208,
+      "elapsed_s": 0.215,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 12.74 → 0.46，OI 1.00 → 0.04，阀位磨损 4.76 → 0.08%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 12.74 → 0.46，OI 1.00 → 0.04，阀位磨损 4.76 → 0.08%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-010",
@@ -339,6 +374,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9975,
@@ -354,9 +391,9 @@
       "iae_after": 0.4646,
       "oi_reduction_pct": 95.74,
       "iae_reduction_pct": 95.57,
-      "elapsed_s": 0.202,
+      "elapsed_s": 0.213,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.49 → 0.46，OI 1.00 → 0.04，阀位磨损 4.93 → 0.09%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.49 → 0.46，OI 1.00 → 0.04，阀位磨损 4.93 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-011",
@@ -365,6 +402,8 @@
       "true_anomaly": "AGGRESSIVE_TUNING",
       "pred_anomaly": "AGGRESSIVE_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9978,
@@ -380,9 +419,9 @@
       "iae_after": 0.4075,
       "oi_reduction_pct": 95.55,
       "iae_reduction_pct": 96.51,
-      "elapsed_s": 0.187,
+      "elapsed_s": 0.194,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 11.67 → 0.41，OI 0.94 → 0.04，阀位磨损 6.00 → 0.09%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 11.67 → 0.41，OI 0.94 → 0.04，阀位磨损 6.00 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-012",
@@ -391,6 +430,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.6047,
@@ -406,9 +447,9 @@
       "iae_after": 2.144,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.061,
+      "elapsed_s": 0.069,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-013",
@@ -417,6 +458,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.5104,
@@ -432,9 +475,9 @@
       "iae_after": 2.1593,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.067,
+      "elapsed_s": 0.076,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.510<0.8); LOW_VAL_FIT(78.1%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.510<0.8); LOW_VAL_FIT(78.1%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-014",
@@ -443,6 +486,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.5424,
@@ -458,9 +503,9 @@
       "iae_after": 2.1912,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.065,
+      "elapsed_s": 0.075,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.542<0.8); LOW_VAL_FIT(78.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.542<0.8); LOW_VAL_FIT(78.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-015",
@@ -469,6 +514,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.5806,
@@ -484,9 +531,9 @@
       "iae_after": 2.1249,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.073,
+      "elapsed_s": 0.079,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.581<0.8); LOW_VAL_FIT(80.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.581<0.8); LOW_VAL_FIT(80.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-016",
@@ -495,6 +542,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.5262,
@@ -510,9 +559,9 @@
       "iae_after": 2.1722,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.061,
+      "elapsed_s": 0.068,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.526<0.8); LOW_VAL_FIT(78.1%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.526<0.8); LOW_VAL_FIT(78.1%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-017",
@@ -521,6 +570,8 @@
       "true_anomaly": "SLUGGISH_TUNING",
       "pred_anomaly": "SLUGGISH_TUNING",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": false,
       "decision_correct": true,
       "model_valid": false,
       "val_r2": 0.572,
@@ -536,9 +587,9 @@
       "iae_after": 2.1959,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.067,
+      "elapsed_s": 0.077,
       "final_status": "MODEL_VALIDATION_FAILED",
-      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.572<0.8); LOW_VAL_FIT(80.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数。"
+      "decision_reason": "过程模型独立验证未通过 (LOW_VAL_R2(0.572<0.8); LOW_VAL_FIT(80.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
     },
     {
       "loop_id": "LOOP-018",
@@ -547,6 +598,8 @@
       "true_anomaly": "VALVE_STICTION",
       "pred_anomaly": "VALVE_STICTION",
       "diag_correct": true,
+      "expected_independent_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.861,
@@ -562,9 +615,9 @@
       "iae_after": 1.4053,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.087,
+      "elapsed_s": 0.096,
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修。"
+      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
     },
     {
       "loop_id": "LOOP-019",
@@ -573,6 +626,8 @@
       "true_anomaly": "VALVE_STICTION",
       "pred_anomaly": "VALVE_STICTION",
       "diag_correct": true,
+      "expected_independent_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9142,
@@ -588,9 +643,9 @@
       "iae_after": 1.5376,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.123,
+      "elapsed_s": 0.166,
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修。"
+      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
     },
     {
       "loop_id": "LOOP-020",
@@ -599,6 +654,8 @@
       "true_anomaly": "VALVE_STICTION",
       "pred_anomaly": "VALVE_STICTION",
       "diag_correct": true,
+      "expected_independent_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.8491,
@@ -614,9 +671,9 @@
       "iae_after": 1.2374,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.079,
+      "elapsed_s": 0.092,
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修。"
+      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
     },
     {
       "loop_id": "LOOP-021",
@@ -625,6 +682,8 @@
       "true_anomaly": "VALVE_STICTION",
       "pred_anomaly": "VALVE_STICTION",
       "diag_correct": true,
+      "expected_independent_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9155,
@@ -640,9 +699,9 @@
       "iae_after": 1.6254,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.139,
+      "elapsed_s": 0.149,
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修。"
+      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
     },
     {
       "loop_id": "LOOP-022",
@@ -651,6 +710,8 @@
       "true_anomaly": "VALVE_STICTION",
       "pred_anomaly": "VALVE_STICTION",
       "diag_correct": true,
+      "expected_independent_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9273,
@@ -666,9 +727,9 @@
       "iae_after": 1.4679,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.14,
+      "elapsed_s": 0.222,
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修。"
+      "decision_reason": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。"
     },
     {
       "loop_id": "LOOP-023",
@@ -677,6 +738,8 @@
       "true_anomaly": "MODEL_MISMATCH",
       "pred_anomaly": "MODEL_MISMATCH",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9985,
@@ -692,9 +755,9 @@
       "iae_after": 0.4583,
       "oi_reduction_pct": 95.73,
       "iae_reduction_pct": 96.84,
-      "elapsed_s": 0.268,
+      "elapsed_s": 0.308,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 14.50 → 0.46，OI 0.99 → 0.04，阀位磨损 4.22 → 0.06%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 14.50 → 0.46，OI 0.99 → 0.04，阀位磨损 4.22 → 0.06%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-024",
@@ -703,6 +766,8 @@
       "true_anomaly": "MODEL_MISMATCH",
       "pred_anomaly": "MODEL_MISMATCH",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9983,
@@ -718,9 +783,9 @@
       "iae_after": 0.5115,
       "oi_reduction_pct": 97.3,
       "iae_reduction_pct": 94.67,
-      "elapsed_s": 0.256,
+      "elapsed_s": 0.298,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 9.60 → 0.51，OI 1.00 → 0.03，阀位磨损 2.69 → 0.07%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 9.60 → 0.51，OI 1.00 → 0.03，阀位磨损 2.69 → 0.07%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-025",
@@ -729,6 +794,8 @@
       "true_anomaly": "MODEL_MISMATCH",
       "pred_anomaly": "MODEL_MISMATCH",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9973,
@@ -744,9 +811,9 @@
       "iae_after": 0.4121,
       "oi_reduction_pct": 95.52,
       "iae_reduction_pct": 97.43,
-      "elapsed_s": 0.258,
+      "elapsed_s": 0.326,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-026",
@@ -755,6 +822,8 @@
       "true_anomaly": "MODEL_MISMATCH",
       "pred_anomaly": "MODEL_MISMATCH",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9996,
@@ -770,9 +839,9 @@
       "iae_after": 0.508,
       "oi_reduction_pct": 95.98,
       "iae_reduction_pct": 96.17,
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.397,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 13.27 → 0.51，OI 1.00 → 0.04，阀位磨损 3.91 → 0.07%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 13.27 → 0.51，OI 1.00 → 0.04，阀位磨损 3.91 → 0.07%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-027",
@@ -781,6 +850,8 @@
       "true_anomaly": "MODEL_MISMATCH",
       "pred_anomaly": "MODEL_MISMATCH",
       "diag_correct": true,
+      "expected_independent_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.9967,
@@ -796,9 +867,9 @@
       "iae_after": 0.4194,
       "oi_reduction_pct": 95.81,
       "iae_reduction_pct": 89.18,
-      "elapsed_s": 0.251,
+      "elapsed_s": 0.356,
       "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 3.88 → 0.42，OI 0.98 → 0.04，阀位磨损 1.38 → 0.07%/s。建议提交自控工程师人工复核审批（严禁未审批直接写入真实 DCS）。"
+      "decision_reason": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 3.88 → 0.42，OI 0.98 → 0.04，阀位磨损 1.38 → 0.07%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。"
     },
     {
       "loop_id": "LOOP-028",
@@ -807,6 +878,8 @@
       "true_anomaly": "EXTERNAL_DISTURBANCE",
       "pred_anomaly": "EXTERNAL_DISTURBANCE",
       "diag_correct": true,
+      "expected_independent_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.8837,
@@ -822,9 +895,9 @@
       "iae_after": 1.5143,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.338,
+      "elapsed_s": 0.412,
       "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_reason": "整定候选参数未带来净性能改善（IAE: 1.51 → 1.55，OI: 0.75 → 0.75）。当前异常属 EXTERNAL_DISTURBANCE，反馈 PID 整定并非最优解，建议保持原参数并排查上游周期扰动源/增加前馈补偿。"
+      "decision_reason": "候选参数未带来净性能改善（IAE: 1.51 → 1.55），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。"
     },
     {
       "loop_id": "LOOP-029",
@@ -833,6 +906,8 @@
       "true_anomaly": "EXTERNAL_DISTURBANCE",
       "pred_anomaly": "EXTERNAL_DISTURBANCE",
       "diag_correct": true,
+      "expected_independent_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.87,
@@ -848,9 +923,9 @@
       "iae_after": 1.3658,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.313,
+      "elapsed_s": 0.387,
       "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_reason": "整定候选参数未带来净性能改善（IAE: 1.37 → 1.51，OI: 0.48 → 0.47）。当前异常属 EXTERNAL_DISTURBANCE，反馈 PID 整定并非最优解，建议保持原参数并排查上游周期扰动源/增加前馈补偿。"
+      "decision_reason": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。"
     },
     {
       "loop_id": "LOOP-030",
@@ -859,6 +934,8 @@
       "true_anomaly": "EXTERNAL_DISTURBANCE",
       "pred_anomaly": "EXTERNAL_DISTURBANCE",
       "diag_correct": true,
+      "expected_independent_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_exact_match": true,
       "decision_correct": true,
       "model_valid": true,
       "val_r2": 0.922,
@@ -874,9 +951,9 @@
       "iae_after": 1.4791,
       "oi_reduction_pct": null,
       "iae_reduction_pct": null,
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.351,
       "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_reason": "整定候选参数未带来净性能改善（IAE: 1.48 → 1.54，OI: 0.92 → 0.89）。当前异常属 EXTERNAL_DISTURBANCE，反馈 PID 整定并非最优解，建议保持原参数并排查上游周期扰动源/增加前馈补偿。"
+      "decision_reason": "候选参数未带来净性能改善（IAE: 1.48 → 1.54），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。"
     }
   ]
 }

@@ -33,6 +33,8 @@ class DiagnosisResult:
     root_cause_summary: str
     recommended_action: str
     evidence: Dict[str, float]
+    evidence_sufficient: bool = True
+    uncertainty_reason: Optional[str] = None
 
     def to_dict(self) -> Dict:
         return asdict(self)
@@ -308,7 +310,13 @@ def diagnose_loop(
     else:
         op_err_corr = 0.0
 
-    # --- Diagnostic decision logic ---
+    # --- Diagnostic decision logic (with V4.2 excitation & ambiguity confidence guards) ---
+    evidence_sufficient = True
+    uncertainty_reason: Optional[str] = None
+    op_total_std = float(np.std(op))
+    pv_total_std = float(np.std(pv))
+    has_excitation = (len(step_idxs) > 0) or (op_total_std >= 0.30) or (pv_total_std >= 0.25)
+
     if stiction_idx >= 0.35 and oi >= 0.35 and op_travel < 1.2:
         anomaly_type = "VALVE_STICTION"
         severity = "CRITICAL"
@@ -325,15 +333,21 @@ def diagnose_loop(
         if op_travel < 0.75 and osc_period >= 42.0 and stiction_idx < 0.35:
             anomaly_type = "EXTERNAL_DISTURBANCE"
             severity = "WARNING"
-            confidence = round(min(0.94, 0.75 + 0.20 * oi), 3)
+            if stiction_idx >= 0.20:
+                # Borderline stiction vs sinusoidal disturbance (e.g., heavily filtered SOPDT plant)
+                evidence_sufficient = False
+                uncertainty_reason = "DIAGNOSIS_AMBIGUOUS_STICTION_VS_DISTURBANCE"
+                confidence = round(max(0.45, 0.65 - 0.5 * stiction_idx), 3)
+            else:
+                confidence = round(min(0.94, 0.75 + 0.20 * oi), 3)
             needs_retuning = True
             needs_valve_maintenance = False
             root_cause = (
-                f"回路存在周期性外部扰动（主周期 {osc_period:.1f}s，OI={oi:.2f}），"
-                f"PV 呈平滑正弦波动且无阀门粘滞（SI={stiction_idx:.2f}），OP 动作平稳（平均步幅 {op_travel:.2f}%），"
-                f"表明振荡主要源于上游工艺脉动耦合。"
+                f"回路存在周期性振荡（主周期 {osc_period:.1f}s，OI={oi:.2f}，SI={stiction_idx:.2f}），"
+                f"OP 动作平稳（平均步幅 {op_travel:.2f}%）。"
+                + ("注意：粘滞指数处于临界模糊带（0.20–0.35），在二阶强滤波对象下需结合阀位回讯排查是否存在轻中度粘滞。" if not evidence_sufficient else "主要源于上游工艺脉动耦合。")
             )
-            action = "建议排查上游压机/泵组周期脉动源并增加前馈补偿，同时适度优化 PID 抗扰动参数。"
+            action = "建议排查上游压机/泵组周期脉动源并核查调节阀定位器回讯，禁止直接激进调参。"
         elif pid_kc is not None and pid_kc < 1.75:
             anomaly_type = "MODEL_MISMATCH"
             severity = "CRITICAL"
@@ -369,15 +383,28 @@ def diagnose_loop(
         action = "建议重新辨识过程模型并执行自适应 PID 整定，适度提高比例增益、缩短积分时间以提升跟踪速度。"
     else:
         anomaly_type = "NORMAL"
-        severity = "HEALTHY"
-        confidence = round(min(0.96, 0.78 + 0.18 * harris), 3)
-        needs_retuning = False
-        needs_valve_maintenance = False
-        root_cause = (
-            f"控制回路运行健康：Harris 指数={harris:.2f}，振荡指数 OI={oi:.2f}，"
-            f"阶跃超调={overshoot:.1f}%，未检测到调节阀粘滞或显著参数失配。"
-        )
-        action = "维持当前 PID 参数运行，纳入常规周期巡检。"
+        if not has_excitation:
+            severity = "WARNING"
+            evidence_sufficient = False
+            uncertainty_reason = "DIAGNOSIS_INSUFFICIENT_EXCITATION"
+            confidence = 0.35
+            needs_retuning = False
+            needs_valve_maintenance = False
+            root_cause = (
+                f"历史数据缺乏有效激励（无设定值阶跃，OP 标准差={op_total_std:.3f}，PV 标准差={pv_total_std:.3f}），"
+                f"证据不足，不能据此证明回路健康或推荐参数变更。"
+            )
+            action = "请在工艺允许窗口内施加小幅阶跃/PRBS 激励测试后重新诊断。"
+        else:
+            severity = "HEALTHY"
+            confidence = round(min(0.96, 0.78 + 0.18 * harris), 3)
+            needs_retuning = False
+            needs_valve_maintenance = False
+            root_cause = (
+                f"控制回路运行健康：Harris 指数={harris:.2f}，振荡指数 OI={oi:.2f}，"
+                f"阶跃超调={overshoot:.1f}%，未检测到调节阀粘滞或显著参数失配。"
+            )
+            action = "维持当前 PID 参数运行，纳入常规周期巡检。"
 
     return DiagnosisResult(
         anomaly_type=anomaly_type,
@@ -400,5 +427,10 @@ def diagnose_loop(
             "op_err_corr": round(op_err_corr, 4),
             "op_std_steady": round(op_std_steady, 4),
             "pv_std_steady": round(pv_std_steady, 4),
+            "op_total_std": round(op_total_std, 4),
+            "pv_total_std": round(pv_total_std, 4),
+            "n_sp_steps": float(len(step_idxs)),
         },
+        evidence_sufficient=evidence_sufficient,
+        uncertainty_reason=uncertainty_reason,
     )

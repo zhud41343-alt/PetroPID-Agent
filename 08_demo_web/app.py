@@ -15,9 +15,12 @@ Endpoints:
 from __future__ import annotations
 
 import json
+import os
 import re
+import sqlite3
 import sys
-from datetime import datetime
+import threading
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -32,40 +35,125 @@ sys.path.insert(0, str(ROOT / "05_skills"))
 sys.path.insert(0, str(ROOT / "06_mcp"))
 sys.path.insert(0, str(ROOT / "07_agents"))
 
-from orchestrator import PetroPIDOrchestrator
+from orchestrator import PetroPIDOrchestrator, CODE_COMMIT
+from decision_engine import ALGORITHM_VERSION, DATASET_VERSION, verify_audit_record
 from openjiuwen_adapter import export_openjiuwen_manifest
 from mcp_server import PetroPIDMCPServer
 
-app = FastAPI(title="PetroPID-Agent | 石化复杂过程多智能体自适应 PID 工程工作站", version="2.0.0")
+app = FastAPI(title="PetroPID-Agent V4.2 | 石化复杂过程多智能体自适应 PID 工程工作站", version="4.2.0")
 static_dir = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
 orchestrator = PetroPIDOrchestrator()
 mcp_server = PetroPIDMCPServer()
 
-# Single-Source-of-Truth Immutable Run Registry (V4.0 P0 Consistency)
+# Single-Source-of-Truth Immutable Run Registry (V4.2 P0-02 Strict Binding + Ephemeral SQLite)
+_STORE_LOCK = threading.Lock()
 RUN_STORE: Dict[str, Dict[str, Any]] = {}
 LATEST_LOOP_RUN: Dict[str, str] = {}
+EVICTED_RUN_IDS: set[str] = set()
 MAX_RUN_STORE = 200
+AUDIT_DB_PATH = Path(__file__).resolve().parent / "run_audit_cache.sqlite"
+
+
+def _init_audit_db() -> None:
+    try:
+        with sqlite3.connect(str(AUDIT_DB_PATH)) as conn:
+            conn.execute(
+                "CREATE TABLE IF NOT EXISTS audit_runs ("
+                "run_id TEXT PRIMARY KEY, loop_id TEXT NOT NULL, created_at TEXT NOT NULL, payload_json TEXT NOT NULL)"
+            )
+            conn.commit()
+    except Exception:
+        pass
+
+
+_init_audit_db()
 
 
 def _store_run(res: Dict[str, Any]) -> Dict[str, Any]:
     rid = res["audit_meta"]["run_id"]
     lid = res["loop_meta"]["loop_id"]
-    RUN_STORE[rid] = res
-    LATEST_LOOP_RUN[lid] = rid
-    if len(RUN_STORE) > MAX_RUN_STORE:
-        oldest = next(iter(RUN_STORE))
-        RUN_STORE.pop(oldest, None)
+    ts = res["audit_meta"].get("timestamp", datetime.now(timezone.utc).isoformat())
+    with _STORE_LOCK:
+        RUN_STORE[rid] = res
+        LATEST_LOOP_RUN[lid] = rid
+        if len(RUN_STORE) > MAX_RUN_STORE:
+            oldest = next(iter(RUN_STORE))
+            RUN_STORE.pop(oldest, None)
+            EVICTED_RUN_IDS.add(oldest)
+    try:
+        with sqlite3.connect(str(AUDIT_DB_PATH)) as conn:
+            conn.execute(
+                "INSERT OR REPLACE INTO audit_runs (run_id, loop_id, created_at, payload_json) VALUES (?, ?, ?, ?)",
+                (rid, lid, ts, json.dumps(res, ensure_ascii=False)),
+            )
+            conn.commit()
+    except Exception:
+        pass
     return res
 
 
-def _resolve_run(loop_id: str, run_id: Optional[str] = None) -> Dict[str, Any]:
-    if run_id and run_id in RUN_STORE:
-        return RUN_STORE[run_id]
-    latest_rid = LATEST_LOOP_RUN.get(loop_id)
-    if latest_rid and latest_rid in RUN_STORE:
-        return RUN_STORE[latest_rid]
+def _load_from_sqlite(run_id: str) -> Optional[Dict[str, Any]]:
+    try:
+        with sqlite3.connect(str(AUDIT_DB_PATH)) as conn:
+            row = conn.execute("SELECT payload_json FROM audit_runs WHERE run_id = ?", (run_id,)).fetchone()
+            if row:
+                return json.loads(row[0])
+    except Exception:
+        pass
+    return None
+
+
+def _resolve_run_strict(loop_id: str, run_id: Optional[str] = None) -> Dict[str, Any]:
+    """P0-02 Strict audit record resolution: NEVER cross-bind, NEVER silently fallback, NEVER auto-rerun."""
+    with _STORE_LOCK:
+        if run_id is not None:
+            if run_id in EVICTED_RUN_IDS:
+                raise HTTPException(
+                    status_code=410,
+                    detail=f"run_id `{run_id}` 已因内存容量上限淘汰，禁止使用其他运行结果替代或伪造历史审批单。",
+                )
+            rec = RUN_STORE.get(run_id)
+        else:
+            latest_rid = LATEST_LOOP_RUN.get(loop_id)
+            rec = RUN_STORE.get(latest_rid) if latest_rid else None
+
+    if rec is None and run_id is not None:
+        rec = _load_from_sqlite(run_id)
+
+    if rec is None:
+        if run_id is not None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"指定的 run_id `{run_id}` 不存在或已随容器重启失效，禁止静默回退或自动重跑。",
+            )
+        raise HTTPException(
+            status_code=404,
+            detail=f"回路 `{loop_id}` 尚无已执行的审计记录，请先运行分析；禁止为生成审批单自动重跑。",
+        )
+
+    actual_loop_id = rec.get("loop_meta", {}).get("loop_id")
+    if actual_loop_id != loop_id:
+        raise HTTPException(
+            status_code=409,
+            detail=f"跨回路绑定冲突：run_id `{rec.get('audit_meta', {}).get('run_id')}` 归属 `{actual_loop_id}`，与请求的 `{loop_id}` 不匹配。",
+        )
+
+    chk = verify_audit_record(rec)
+    if chk["audit_status"] != "PASS":
+        raise HTTPException(
+            status_code=422,
+            detail=f"审计记录完整性校验失败（{', '.join(chk['errors'])}），拒绝输出不可信审批单或审计包。",
+        )
+    return rec
+
+
+def _resolve_for_copilot(loop_id: str) -> Dict[str, Any]:
+    with _STORE_LOCK:
+        latest_rid = LATEST_LOOP_RUN.get(loop_id)
+        if latest_rid and latest_rid in RUN_STORE:
+            return RUN_STORE[latest_rid]
     return _store_run(orchestrator.run_loop_workflow(loop_id))
 
 
@@ -167,10 +255,12 @@ def run_uploaded_csv(req: CSVUploadRequest) -> JSONResponse:
             "tag_name": req.filename.replace(".csv", "")[:12].upper(),
             "unit_name": "用户上传历史数据(CSV)",
             "loop_type": "Temperature",
-            "description": f"上传文件：{req.filename} ({len(pv)} 点)",
+            "description": f"上传文件：{req.filename} ({len(pv)} 点，无独立物理真值)",
             "pv_unit": "",
             "anomaly_type": "CUSTOM_CSV",
-            "true_K": 1.2, "true_tau": 12.0, "true_theta": 3.0,
+            "data_source_type": "UPLOADED_HISTORICAL_CSV",
+            "has_known_plant_truth": False,
+            "true_K": None, "true_tau": None, "true_theta": None,
             "pv_bias": safe_pv_bias, "op_bias": safe_op_bias,
             "init_Kc": req.init_Kc, "init_Ti": req.init_Ti, "init_Td": 0.0,
             "disturbance_amp": 0.0, "disturbance_period": 0.0, "dt": req.dt, "seed": 42,
@@ -259,7 +349,7 @@ def copilot_chat(req: CopilotRequest) -> JSONResponse:
         return JSONResponse(content={"reply": reply, "action": {"type": "SELECT_LOOP", "loop_id": target_loop}})
 
     # Default: Grounded Engineering Q&A via live DeepSeek LLM (or deterministic fallback)
-    res = _resolve_run(req.current_loop_id)
+    res = _resolve_for_copilot(req.current_loop_id)
     d0 = res["diagnosis"]
     ident = res.get("identification") or {}
     safety = res.get("safety") or {}
@@ -322,8 +412,8 @@ def copilot_chat(req: CopilotRequest) -> JSONResponse:
 
 @app.get("/api/approval/{loop_id}", response_class=HTMLResponse)
 def export_approval_sheet(loop_id: str, run_id: Optional[str] = None) -> HTMLResponse:
-    """Generate official printable DCS PID Parameter Change Safety Approval Form bound to run_id."""
-    res = _resolve_run(loop_id, run_id)
+    """Generate official printable DCS PID Parameter Change Safety Approval Form bound strictly to run_id."""
+    res = _resolve_run_strict(loop_id, run_id)
     meta = res["loop_meta"]
     am = res["audit_meta"]
     d0 = res["diagnosis"]
@@ -371,8 +461,8 @@ def export_approval_sheet(loop_id: str, run_id: Optional[str] = None) -> HTMLRes
 
 @app.get("/api/export_bundle/{loop_id}")
 def export_auditable_bundle(loop_id: str, run_id: Optional[str] = None) -> JSONResponse:
-    """Export self-contained auditable JSON test bundle bound to the EXACT run_id."""
-    res = _resolve_run(loop_id, run_id)
+    """Export self-contained auditable JSON test bundle bound strictly to run_id."""
+    res = _resolve_run_strict(loop_id, run_id)
     bundle = {
         "bundle_schema": "petropid.audit_bundle.v4.0",
         "audit_meta": res["audit_meta"],
@@ -399,12 +489,47 @@ def export_auditable_bundle(loop_id: str, run_id: Optional[str] = None) -> JSONR
 
 
 @app.get("/healthz")
-def healthz() -> JSONResponse:
+def healthz(probe_llm: bool = False) -> JSONResponse:
+    """Honest runtime health check: separates LLM config vs actual live connectivity probe."""
+    configured_mode = orchestrator.llm.mode
+    llm_probe: Dict[str, Any] = {
+        "configured_mode": configured_mode,
+        "connectivity_status": "OFFLINE_DETERMINISTIC" if configured_mode != "live_llm_api" else "CONFIGURED_UNPROBED",
+    }
+    if probe_llm and configured_mode == "live_llm_api":
+        ans = orchestrator.llm.synthesize_decision(
+            agent_role="HealthProbe",
+            system_prompt="Reply OK.",
+            structured_state={"ping": True},
+            fallback_text="fallback",
+        )
+        if ans.get("mode") == "live_llm_api":
+            llm_probe.update({
+                "connectivity_status": "VERIFIED_LIVE",
+                "model": ans.get("model"),
+                "latency_ms": ans.get("latency_ms"),
+                "request_id": ans.get("request_id"),
+            })
+        else:
+            llm_probe.update({
+                "connectivity_status": "DEGRADED_FALLBACK",
+                "fallback_reason": ans.get("fallback_reason", "unknown"),
+            })
     return JSONResponse(content={
         "status": "ok",
-        "version": "V4.0",
-        "llm_mode": orchestrator.llm.mode,
+        "version": "4.2.0",
+        "algorithm_version": ALGORITHM_VERSION,
+        "dataset_version": DATASET_VERSION,
+        "code_commit": CODE_COMMIT,
+        "llm_mode": configured_mode,
+        "llm_health": llm_probe,
         "deployment_authorized": False,
+        "run_store": {
+            "stored_runs": len(RUN_STORE),
+            "max_capacity": MAX_RUN_STORE,
+            "evicted_count": len(EVICTED_RUN_IDS),
+            "persistence_policy": "in_memory_plus_local_sqlite_ephemeral_on_free_tier",
+        },
     })
 
 

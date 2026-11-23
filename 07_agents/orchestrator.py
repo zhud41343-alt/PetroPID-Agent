@@ -23,9 +23,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 import time
-from datetime import datetime
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import numpy as np
@@ -55,13 +57,21 @@ from decision_engine import (
     FINAL_STATUS_SPECS,
     DecisionEvidence,
     compute_canonical_hash,
+    compute_canonical_input_hash,
+    compute_canonical_output_hash,
     final_decision_aggregation,
+    verify_pre_decision_audit_evidence,
+    verify_audit_record,
 )
 
 VALID_STATUSES = set(FINAL_STATUS_SPECS.keys())
 
 
 def _get_git_commit() -> str:
+    for env_key in ("PETROPID_CODE_COMMIT", "RENDER_GIT_COMMIT", "GIT_COMMIT"):
+        val = os.getenv(env_key, "").strip()
+        if val and val.lower() != "unknown":
+            return val[:12]
     try:
         import subprocess
         out = subprocess.check_output(
@@ -237,20 +247,90 @@ class PetroPIDOrchestrator:
         min_pm_deg: float,
         preferred_strategy: Optional[str],
         is_sandbox: bool,
+        request_id: Optional[str] = None,
     ) -> Dict[str, Any]:
         t_start = time.perf_counter()
         self.runner.reset_session()
         trace: List[Dict[str, Any]] = []
         raw_bytes = int(len(t) * 4 * 16)
 
+        # P0-01: Globally unique run_id + distinct request_id / input_hash / cache_key
+        now_utc = datetime.now(timezone.utc)
+        now_str = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+        run_id = f"RUN-{now_utc.strftime('%Y%m%d%H%M%S%f')[:-3]}-{uuid.uuid4().hex[:10]}"
+        req_id = request_id or f"REQ-{uuid.uuid4().hex[:12]}"
+
+        # P0-06: Distinguish known simulator plant truth vs unknown uploaded CSV
+        data_source_type = meta.get("data_source_type") or (
+            "UPLOADED_HISTORICAL_CSV"
+            if meta.get("anomaly_type") == "CUSTOM_CSV"
+            else ("SANDBOX_SIMULATION" if is_sandbox else "SIMULATOR_BENCHMARK_30LOOPS")
+        )
+        has_known_plant_truth = bool(
+            meta.get("has_known_plant_truth", data_source_type != "UPLOADED_HISTORICAL_CSV")
+        )
+
         init_pid_dict = {"Kc": meta["init_Kc"], "Ti": meta["init_Ti"], "Td": meta["init_Td"]}
         init_pid_obj = PIDParams(Kc=meta["init_Kc"], Ti=meta["init_Ti"], Td=meta["init_Td"])
+
+        # P0-03: Full canonical input evidence hash covering t/sp/pv/op + all control & safety configs
+        plant_ctx = {
+            "dt": meta.get("dt", 1.0),
+            "true_K": meta.get("true_K"),
+            "true_tau": meta.get("true_tau"),
+            "true_theta": meta.get("true_theta"),
+            "disturbance_amp": meta.get("disturbance_amp", 0.0),
+        } if has_known_plant_truth else {"dt": meta.get("dt", 1.0), "plant_truth": "UNKNOWN_EXTERNAL_CSV"}
+        in_hash = compute_canonical_input_hash(
+            loop_id=meta["loop_id"],
+            t=t, sp=sp, pv=pv, op=op,
+            init_pid=init_pid_dict,
+            safety_config={
+                "max_overshoot_pct": max_overshoot_pct,
+                "max_ms": max_ms,
+                "min_gm": min_gm,
+                "min_pm_deg": min_pm_deg,
+            },
+            preferred_strategy=preferred_strategy,
+            data_source_type=data_source_type,
+            plant_context=plant_ctx,
+            dataset_version=DATASET_VERSION,
+            algorithm_version=ALGORITHM_VERSION,
+        )
+        cache_key = f"CACHE-{in_hash[:16]}"
+        audit_ctx = {
+            "run_id": run_id,
+            "request_id": req_id,
+            "cache_key": cache_key,
+            "cache_hit": False,
+            "input_hash": in_hash,
+            "timestamp": now_str,
+            "data_source_type": data_source_type,
+            "has_known_plant_truth": has_known_plant_truth,
+        }
+
+        def _pre_audit(require_trace: bool = True) -> tuple[str, List[str]]:
+            chk = verify_pre_decision_audit_evidence(
+                run_id=run_id,
+                request_id=req_id,
+                input_hash=in_hash,
+                dataset_version=DATASET_VERSION,
+                algorithm_version=ALGORITHM_VERSION,
+                code_commit=CODE_COMMIT,
+                timestamp=now_str,
+                trace=trace,
+                require_trace=require_trace,
+            )
+            return chk["audit_status"], chk["errors"]
 
         # Gate 0: Strict Input Data Validation (Fail-Closed!)
         input_errors = validate_input_series(t, sp, pv, op)
         if input_errors:
+            a_stat, a_errs = _pre_audit(require_trace=False)
             fd = final_decision_aggregation(DecisionEvidence(
                 input_valid=False, input_errors=input_errors,
+                has_known_plant_truth=has_known_plant_truth,
+                audit_status=a_stat, audit_errors=a_errs,
                 decision_detail=f"输入时序校验失败（{', '.join(input_errors)}），拒绝执行辨识与参数推荐。",
             ))
             trace.append({
@@ -268,21 +348,25 @@ class PetroPIDOrchestrator:
                 final_decision=fd.to_dict(), trace=trace, elapsed_s=round(time.perf_counter() - t_start, 3),
                 raw_bytes=raw_bytes, after_sim=None, kg={"ontology_class": "N/A"}, ident_pred=None,
                 nyquist_before=[], nyquist_after=[], max_ms=max_ms, baseline_comparison=None,
+                audit_ctx=audit_ctx,
             )
-        # Ground-truth plant is used ONLY for closed-loop post-simulation evaluation (environment oracle),
-        # NEVER exposed to Identification/Tuning/SafetyVerification!
-        env_oracle_plant = PlantParams(
-            K=meta["true_K"], tau=meta["true_tau"], theta=meta["true_theta"],
-            pv_bias=meta["pv_bias"], op_bias=meta["op_bias"],
-        )
+        # Ground-truth plant is used ONLY for closed-loop post-simulation evaluation when known
+        # (NEVER fabricated for unknown uploaded historical CSVs — P0-06!).
+        env_oracle_plant: Optional[PlantParams] = None
+        if has_known_plant_truth and meta.get("true_K") is not None:
+            env_oracle_plant = PlantParams(
+                K=meta["true_K"], tau=meta["true_tau"], theta=meta["true_theta"],
+                pv_bias=meta["pv_bias"], op_bias=meta["op_bias"],
+            )
 
         # --- Stage 1: DiagnosisAgent ---
         t1 = time.perf_counter()
         if not is_sandbox:
             diag = self.runner.invoke("pid_loop_diagnosis", {"loop_id": meta["loop_id"]})
         else:
+            est_delay = float(meta["true_theta"]) if (has_known_plant_truth and meta.get("true_theta") is not None) else float(meta.get("dt", 1.0) * 2.0)
             diag = diagnose_loop(
-                sp, pv, op, dt=meta["dt"], estimated_delay_s=meta["true_theta"],
+                sp, pv, op, dt=meta["dt"], estimated_delay_s=est_delay,
                 pid_kc=meta["init_Kc"], pid_ti=meta["init_Ti"],
             ).to_dict()
             diag["loop_id"] = meta["loop_id"]
@@ -331,9 +415,18 @@ class PetroPIDOrchestrator:
 
         # Gate 1: Healthy Loop Early Exit (via FinalDecisionEngine)
         if diag["anomaly_type"] == "NORMAL" and preferred_strategy is None:
+            a_stat, a_errs = _pre_audit(require_trace=True)
             fd = final_decision_aggregation(DecisionEvidence(
                 input_valid=True, input_errors=[], anomaly_type="NORMAL",
-                decision_detail="回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
+                diagnosis_evidence_sufficient=bool(diag.get("evidence_sufficient", True)),
+                diagnosis_uncertainty_reason=diag.get("uncertainty_reason"),
+                has_known_plant_truth=has_known_plant_truth,
+                audit_status=a_stat, audit_errors=a_errs,
+                decision_detail=(
+                    "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。"
+                    if diag.get("evidence_sufficient", True)
+                    else f"数据激励或诊断证据不足（{diag.get('uncertainty_reason', 'LOW_EXCITATION')}），无法确认回路健康，拒绝未经验证的结论。"
+                ),
             ))
             elapsed_s = round(time.perf_counter() - t_start, 3)
             trace.append({
@@ -342,18 +435,20 @@ class PetroPIDOrchestrator:
                 "agent": "FinalDecisionEngine",
                 "skill": "final_decision_aggregation",
                 "latency_ms": 0.1,
-                "status": "DONE",
+                "status": "DONE" if fd.final_status == "HEALTHY_NO_CHANGE" else "REJECTED",
                 "summary": fd.decision_summary,
                 "metrics": {"final_status": fd.final_status, "reason_codes": fd.reason_codes},
             })
+            nq_healthy = _compute_nyquist_locus(env_oracle_plant, init_pid_obj) if env_oracle_plant is not None else []
             return self._pack_result(
                 meta=meta, t=t, sp=sp, pv=pv, op=op, diag=diag, ident=None, tuning=None, safety=None,
                 final_pid=init_pid_dict, final_decision=fd.to_dict(),
                 trace=trace, elapsed_s=elapsed_s, raw_bytes=raw_bytes,
                 after_sim=None, kg=kg, ident_pred=None,
-                nyquist_before=_compute_nyquist_locus(env_oracle_plant, init_pid_obj),
-                nyquist_after=_compute_nyquist_locus(env_oracle_plant, init_pid_obj),
+                nyquist_before=nq_healthy,
+                nyquist_after=nq_healthy,
                 max_ms=max_ms, baseline_comparison=None,
+                audit_ctx=audit_ctx,
             )
 
         # --- Stage 2: IdentificationAgent ---
@@ -425,13 +520,16 @@ class PetroPIDOrchestrator:
                 model_val_fit_pct=ident["val_fit_pct"],
                 min_gm=min_gm, min_pm_deg=min_pm_deg, max_ms=max_ms, max_overshoot_pct=max_overshoot_pct,
             ).to_dict()
+            a_stat, a_errs = _pre_audit(require_trace=True)
             fd = final_decision_aggregation(DecisionEvidence(
                 input_valid=True, input_errors=[], anomaly_type="VALVE_STICTION",
+                has_known_plant_truth=has_known_plant_truth,
                 model_evaluated=True, model_valid=ident["allow_next_stage"],
                 model_failure_reason=ident["failure_reason"] if not ident["allow_next_stage"] else None,
                 safety_evaluated=True, safety_approved=safety_stiction["approved"],
                 safety_violations=safety_stiction["violation_tags"],
                 multi_regime_evaluated=True, multi_regime_passed=safety_stiction["multi_regime_pass_rate_pct"] >= 80.0,
+                audit_status=a_stat, audit_errors=a_errs,
                 decision_detail="调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
             ))
             trace.append({
@@ -452,26 +550,41 @@ class PetroPIDOrchestrator:
                 nyquist_before=_compute_nyquist_locus(ident_plant, init_pid_obj),
                 nyquist_after=_compute_nyquist_locus(ident_plant, init_pid_obj),
                 max_ms=max_ms, baseline_comparison=None,
+                audit_ctx=audit_ctx,
             )
 
-        # Gate 3: Model Validation Failed -> FinalDecisionEngine (ZERO Ground-Truth Fallback!)
-        if not ident["allow_next_stage"]:
+        # Gate 3: Model Validation Failed OR Unknown External CSV Without Independent Plant Truth (P0-06)
+        if (not ident["allow_next_stage"]) or (not has_known_plant_truth):
             t3 = time.perf_counter()
+            model_ok = bool(ident["allow_next_stage"]) and has_known_plant_truth
             safety_fail = verify_pid_safety(
                 plant=ident_plant,
                 candidate_pid=init_pid_obj,
                 dt=meta["dt"],
-                model_valid=False,
+                model_valid=model_ok,
                 model_val_r2=ident["val_r2"],
                 model_val_fit_pct=ident["val_fit_pct"],
                 min_gm=min_gm, min_pm_deg=min_pm_deg, max_ms=max_ms, max_overshoot_pct=max_overshoot_pct,
             ).to_dict()
+            a_stat, a_errs = _pre_audit(require_trace=True)
+            fail_reason = (
+                "UNVERIFIED_EXTERNAL_CSV_NO_PLANT_TRUTH"
+                if (ident["allow_next_stage"] and not has_known_plant_truth)
+                else ident["failure_reason"]
+            )
+            detail_g3 = (
+                f"外部上传历史 CSV 已完成研究性诊断（{diag['anomaly_type']}）与 FOPDT 辨识（Fit={ident['val_fit_pct']}%, R²={ident['val_r2']}），但缺乏独立过程物理真值与闭环现场验证环境，禁止输出安全验证通过的参数变更结论，保持原参数。"
+                if (ident["allow_next_stage"] and not has_known_plant_truth)
+                else f"过程模型独立验证未通过 ({ident['failure_reason']})，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。"
+            )
             fd = final_decision_aggregation(DecisionEvidence(
                 input_valid=True, input_errors=[], anomaly_type=diag["anomaly_type"],
-                model_evaluated=True, model_valid=False, model_failure_reason=ident["failure_reason"],
+                has_known_plant_truth=has_known_plant_truth,
+                model_evaluated=True, model_valid=ident["allow_next_stage"], model_failure_reason=fail_reason,
                 safety_evaluated=True, safety_approved=False, safety_violations=safety_fail["violation_tags"],
                 multi_regime_evaluated=True, multi_regime_passed=safety_fail["multi_regime_pass_rate_pct"] >= 80.0,
-                decision_detail=f"过程模型独立验证未通过 ({ident['failure_reason']})，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
+                audit_status=a_stat, audit_errors=a_errs,
+                decision_detail=detail_g3,
             ))
             trace.append({
                 "step": 3,
@@ -492,6 +605,7 @@ class PetroPIDOrchestrator:
                 nyquist_before=_compute_nyquist_locus(ident_plant, init_pid_obj),
                 nyquist_after=_compute_nyquist_locus(ident_plant, init_pid_obj),
                 max_ms=max_ms, baseline_comparison=None,
+                audit_ctx=audit_ctx,
             )
 
         # --- Stage 3: TuningAgent (strictly using identified model, NEVER ground truth!) ---
@@ -658,12 +772,17 @@ class PetroPIDOrchestrator:
                 else f"候选参数未带来净性能改善（IAE: {diag['iae']:.2f} → {after_diag['iae']:.2f}），属 {diag['anomaly_type']}，保持原参数并建议排查上游扰动源/前馈补偿。"
             )
         )
+        a_stat, a_errs = _pre_audit(require_trace=True)
         fd = final_decision_aggregation(DecisionEvidence(
             input_valid=True, input_errors=[], anomaly_type=diag["anomaly_type"],
+            diagnosis_evidence_sufficient=bool(diag.get("evidence_sufficient", True)),
+            diagnosis_uncertainty_reason=diag.get("uncertainty_reason"),
+            has_known_plant_truth=has_known_plant_truth,
             model_evaluated=True, model_valid=True,
             safety_evaluated=True, safety_approved=safety["approved"], safety_violations=safety["violation_tags"],
             multi_regime_evaluated=True, multi_regime_passed=safety["multi_regime_pass_rate_pct"] >= 80.0,
             performance_evaluated=True, performance_improved=(iae_improved or oi_improved), performance_worsened=iae_worsened,
+            audit_status=a_stat, audit_errors=a_errs,
             decision_detail=detail_msg,
         ))
         final_status = fd.final_status
@@ -695,6 +814,7 @@ class PetroPIDOrchestrator:
             nyquist_after=_compute_nyquist_locus(ident_plant, PIDParams(Kc=final_pid_out["Kc"], Ti=final_pid_out["Ti"], Td=final_pid_out["Td"])),
             max_ms=max_ms, after_diag=after_diag if use_after_sim is not None else diag,
             baseline_comparison=baseline_comparison,
+            audit_ctx=audit_ctx,
         )
 
     def _pack_result(
@@ -721,6 +841,7 @@ class PetroPIDOrchestrator:
         max_ms: float,
         after_diag: Dict[str, Any] | None = None,
         baseline_comparison: Dict[str, Any] | None = None,
+        audit_ctx: Dict[str, Any] | None = None,
     ) -> Dict[str, Any]:
         final_status = final_decision["final_status"]
         decision_reason = final_decision["decision_summary"]
@@ -745,21 +866,31 @@ class PetroPIDOrchestrator:
                 "split_t": float(t[split_idx]),
             }
 
-        now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        in_hash = compute_canonical_hash({
-            "loop_id": meta["loop_id"], "init_pid": {"Kc": meta["init_Kc"], "Ti": meta["init_Ti"], "Td": meta["init_Td"]},
-            "max_ms": max_ms, "n_samples": len(t),
-        })
-        out_hash = compute_canonical_hash({
-            "final_status": final_status, "final_pid": final_pid,
-            "reason_codes": final_decision["reason_codes"],
-            "gate_matrix": final_decision["gate_matrix"],
-        })
-        run_id = f"RUN-{datetime.now().strftime('%Y%m%d%H%M%S')}-{out_hash[:8]}"
+        ctx = audit_ctx or {}
+        now_str = ctx.get("timestamp") or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        in_hash = ctx.get("input_hash") or compute_canonical_input_hash(
+            loop_id=meta["loop_id"], t=t, sp=sp, pv=pv, op=op,
+            init_pid={"Kc": meta["init_Kc"], "Ti": meta["init_Ti"], "Td": meta["init_Td"]},
+            safety_config={"max_overshoot_pct": 18.0, "max_ms": max_ms, "min_gm": 1.8, "min_pm_deg": 35.0},
+            preferred_strategy=None,
+            data_source_type=ctx.get("data_source_type", "SIMULATOR_BENCHMARK_30LOOPS"),
+        )
+        out_hash = compute_canonical_output_hash(
+            final_status=final_status,
+            final_pid=final_pid,
+            reason_codes=final_decision["reason_codes"],
+            gate_matrix=final_decision["gate_matrix"],
+        )
+        run_id = ctx.get("run_id") or f"RUN-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')[:-3]}-{uuid.uuid4().hex[:10]}"
+        req_id = ctx.get("request_id") or f"REQ-{uuid.uuid4().hex[:12]}"
+        cache_key = ctx.get("cache_key") or f"CACHE-{in_hash[:16]}"
 
-        return {
+        packed = {
             "audit_meta": {
                 "run_id": run_id,
+                "request_id": req_id,
+                "cache_key": cache_key,
+                "cache_hit": bool(ctx.get("cache_hit", False)),
                 "timestamp": now_str,
                 "input_hash": in_hash,
                 "output_hash": out_hash,
@@ -768,6 +899,8 @@ class PetroPIDOrchestrator:
                 "dataset_version": DATASET_VERSION,
                 "algorithm_version": ALGORITHM_VERSION,
                 "code_commit": CODE_COMMIT,
+                "data_source_type": ctx.get("data_source_type", "SIMULATOR_BENCHMARK_30LOOPS"),
+                "has_known_plant_truth": bool(ctx.get("has_known_plant_truth", True)),
                 "runtime_mode": self.llm.mode,
                 "final_status": final_status,
                 "reason_codes": final_decision["reason_codes"],
@@ -809,3 +942,6 @@ class PetroPIDOrchestrator:
                 "max_ms": max_ms,
             },
         }
+        phase2 = verify_audit_record(packed)
+        packed["audit_meta"]["audit_verification"] = phase2
+        return packed
