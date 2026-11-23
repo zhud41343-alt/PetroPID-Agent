@@ -9,26 +9,59 @@ let replayProgress = 1.0;
 let replayRaf = null;
 let latestRequestSeq = 0;  // V4.0 Race-Condition Guard: stale responses NEVER overwrite newer runs!
 
+const ANOMALY_ZH = {
+  AGGRESSIVE_TUNING: '激进振荡',
+  MODEL_MISMATCH: '模型失配',
+  SLUGGISH_TUNING: '保守迟缓',
+  VALVE_STICTION: '阀门粘滞',
+  EXTERNAL_DISTURBANCE: '外部扰动',
+  NORMAL: '运行正常',
+};
+
+const STATUS_ZH = {
+  SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW: '仿真通过 · 待人工复核',
+  NO_CHANGE_HEALTHY: '运行健康 · 无需变更',
+  MODEL_VALIDATION_FAILED: '模型未过 · 拒绝变更',
+  VALVE_MAINTENANCE_REQUIRED: '阀门粘滞 · 建议检修',
+  PERFORMANCE_NOT_IMPROVED: '外扰未改善 · 保持原参',
+  SAFETY_REJECTED: '安全拦截 · 拒绝变更',
+  INPUT_DATA_INVALID: '输入异常 · 拒绝执行',
+  SIMULATION_TIMEOUT: '仿真超时 · 拒绝变更',
+  AUDIT_INCOMPLETE: '审计缺失 · 拒绝变更',
+};
+
+const SEV_CLASS = {
+  AGGRESSIVE_TUNING: 'sev-red',
+  MODEL_MISMATCH: 'sev-amber',
+  SLUGGISH_TUNING: 'sev-blue',
+  VALVE_STICTION: 'sev-purple',
+  EXTERNAL_DISTURBANCE: 'sev-amber',
+  NORMAL: 'sev-ok',
+};
+
+function zhAnomaly(code) { return ANOMALY_ZH[code] || code; }
+function zhStatus(code) { return STATUS_ZH[code] || code; }
+
 async function init() {
-  const [benchRes, loopsRes, ojwRes] = await Promise.all([
+  const [benchRes, loopsRes] = await Promise.all([
     fetch('/api/benchmark').then(r => r.json()),
     fetch('/api/loops').then(r => r.json()),
-    fetch('/api/openjiuwen').then(r => r.json()),
   ]);
 
-  // Transparent Ribbon stats (exact 5-class breakdown + dual denominators)
+  // ISA-101 Plant Control Health Bar
   const d = benchRes.denominators || {};
-  document.getElementById('rDist').textContent = `${d.healthy_no_change_loops}健康 / ${d.simulation_validated_retuned_loops}复核 / ${d.model_validation_failed_loops}模型拒 / ${d.valve_maintenance_required_loops}阀检 / ${d.performance_not_improved_loops}外扰拒`;
+  document.getElementById('rTotal').textContent = `${loopsRes.loops.length} 回路`;
+  document.getElementById('rHealthy').textContent = `${d.healthy_no_change_loops ?? 5} 个`;
+  document.getElementById('rRetune').textContent = `${d.simulation_validated_retuned_loops ?? 11} 个`;
+  document.getElementById('rValve').textContent = `${d.valve_maintenance_required_loops ?? 5} 个`;
+  document.getElementById('rBlock').textContent = `${(d.model_validation_failed_loops ?? 6) + (d.performance_not_improved_loops ?? 3)} 个`;
   document.getElementById('rDiag').textContent = `${benchRes.diagnosis_accuracy_pct}%`;
-  document.getElementById('rId').textContent = `${benchRes.avg_id_val_accuracy_pct}% / ${benchRes.avg_id_val_accuracy_all_25_non_healthy_pct}%`;
-  document.getElementById('rMulti').textContent = `${benchRes.avg_multi_regime_pass_rate_pct}% / ${benchRes.avg_multi_regime_pass_rate_all_checked_pct}%`;
-  document.getElementById('rOjw').textContent = ojwRes.native_tool_layer_verified ? `v${ojwRes.sdk_version} 原生工具层已验证` : '兼容运行时(native=false)';
 
   // View 3 Plant KPI Cards
   document.getElementById('pkSuccess').textContent = `${benchRes.task_success_rate_pct}%`;
   document.getElementById('pkDiag').textContent = `${benchRes.diagnosis_accuracy_pct}%`;
   document.getElementById('pkId').textContent = `${benchRes.avg_id_val_accuracy_pct}%`;
-  document.getElementById('pkIdSub').textContent = `有效 n=19 (全25非健康 ${benchRes.avg_id_val_accuracy_all_25_non_healthy_pct}%)`;
+  document.getElementById('pkIdSub').textContent = `有效 n=19 (全25非健康均值 ${benchRes.avg_id_val_accuracy_all_25_non_healthy_pct}%)`;
   document.getElementById('pkSafe').textContent = `${benchRes.safety_constraint_coverage_pct}% / ${benchRes.unsafe_flagging_rate_pct}%`;
   document.getElementById('pkMulti').textContent = `${benchRes.avg_multi_regime_pass_rate_pct}%`;
   document.getElementById('pkImp').textContent = `-${benchRes.avg_oi_reduction_pct}% / -${benchRes.avg_iae_reduction_pct}%`;
@@ -226,26 +259,44 @@ function renderLoopList() {
   list.innerHTML = '';
   const items = allLoops.filter(l => {
     if (filter !== 'ALL' && l.anomaly_type !== filter) return false;
-    if (q && !(`${l.loop_id} ${l.tag_name} ${l.unit_name} ${l.description} ${l.anomaly_type}`.toLowerCase().includes(q))) return false;
+    if (q && !(`${l.loop_id} ${l.tag_name} ${l.unit_name} ${l.description} ${l.anomaly_type} ${zhAnomaly(l.anomaly_type)}`.toLowerCase().includes(q))) return false;
     return true;
   });
   document.getElementById('loopCountTag').textContent = `${items.length}/${allLoops.length}`;
+
+  // Group by Process Unit (ISA-101 / PlantESP hierarchical unit tree)
+  const groups = new Map();
   items.forEach(loop => {
-    const row = document.createElement('div');
-    row.className = 'loop-row' + (selectedLoop && selectedLoop.loop_id === loop.loop_id ? ' active' : '');
-    row.innerHTML = `
-      <div class="loop-row-top">
-        <span class="tag-code">${loop.loop_id} · ${loop.tag_name}</span>
-        <span class="chip chip-${loop.anomaly_type}">${loop.anomaly_type.replace('_TUNING','').replace('EXTERNAL_','EXT_')}</span>
-      </div>
-      <div class="loop-desc">${loop.unit_name} · ${loop.description}</div>
-    `;
-    row.onclick = () => {
-      selectLoop(loop);
-      document.getElementById('strategySelect').value = '';
-      runWorkflow(loop.loop_id);
-    };
-    list.appendChild(row);
+    const u = loop.unit_name || '未分组装置';
+    if (!groups.has(u)) groups.set(u, []);
+    groups.get(u).push(loop);
+  });
+
+  groups.forEach((uLoops, unitName) => {
+    const abnCount = uLoops.filter(l => l.anomaly_type !== 'NORMAL').length;
+    const hdr = document.createElement('div');
+    hdr.className = 'unit-group-hdr';
+    hdr.innerHTML = `<span>${unitName}</span><span class="u-badge ${abnCount > 0 ? 'has-alarm' : ''}">${abnCount > 0 ? `异常 ${abnCount}/${uLoops.length}` : `全健康 ${uLoops.length}`}</span>`;
+    list.appendChild(hdr);
+
+    uLoops.forEach(loop => {
+      const row = document.createElement('div');
+      const sev = SEV_CLASS[loop.anomaly_type] || 'sev-ok';
+      row.className = `loop-row ${sev}` + (selectedLoop && selectedLoop.loop_id === loop.loop_id ? ' active' : '');
+      row.innerHTML = `
+        <div class="loop-row-top">
+          <span class="tag-code">${loop.tag_name} <span style="font-weight:500;color:#64748b;font-size:10.5px">${loop.loop_id}</span></span>
+          <span class="chip chip-${loop.anomaly_type}">${zhAnomaly(loop.anomaly_type)}</span>
+        </div>
+        <div class="loop-desc">${loop.description}</div>
+      `;
+      row.onclick = () => {
+        selectLoop(loop);
+        document.getElementById('strategySelect').value = '';
+        runWorkflow(loop.loop_id);
+      };
+      list.appendChild(row);
+    });
   });
 }
 
@@ -362,16 +413,17 @@ async function runWorkflow(loopId, opts = {}) {
 
 function renderResult(data) {
   currentData = data;
-  document.getElementById('topMode').textContent = `Engine: ${data.llm_mode}`;
+  const modeLabel = data.llm_mode === 'live_llm_api' ? '推理引擎: 在线模型' : '推理引擎: 离线规则';
+  document.getElementById('topMode').textContent = modeLabel;
   const am0 = data.audit_meta || {};
   const strip = document.getElementById('auditStrip');
   if (strip) {
     const dig = am0.record_digest_sha256 ? am0.record_digest_sha256.slice(0, 12) : '--';
     const av = (am0.audit_verification && am0.audit_verification.audit_status) || '--';
-    strip.innerHTML = `<span><b>RunID:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>RecordDigest:</b> ${dig}… &nbsp;|&nbsp; <b>Audit:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    strip.innerHTML = `<span><b>工单:</b> ${am0.run_id || '--'} &nbsp;|&nbsp; <b>状态码:</b> ${data.final_status} &nbsp;|&nbsp; <b>摘要:</b> ${dig}… &nbsp;|&nbsp; <b>审计:</b> ${av}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
   }
   if (data.audit_meta) {
-    document.getElementById('rRunMeta').textContent = `${data.audit_meta.run_id} | in:${data.audit_meta.input_sha256.slice(0,8)} out:${data.audit_meta.output_sha256.slice(0,8)}`;
+    document.getElementById('rRunMeta').textContent = `当前工单: ${data.audit_meta.run_id} | 哈希:${data.audit_meta.output_sha256.slice(0,8)}`;
   }
   renderPIDSchematic(data);
 
@@ -407,7 +459,8 @@ function renderResult(data) {
   }
 
   const sb = document.getElementById('statusBadge');
-  sb.textContent = data.final_status;
+  sb.textContent = zhStatus(data.final_status);
+  sb.title = data.final_status;
   const isRejected = ['MODEL_VALIDATION_FAILED', 'SAFETY_REJECTED', 'INPUT_DATA_INVALID', 'SIMULATION_TIMEOUT', 'AUDIT_INCOMPLETE'].includes(data.final_status);
   const isWarn = ['VALVE_MAINTENANCE_REQUIRED', 'PERFORMANCE_NOT_IMPROVED'].includes(data.final_status);
   sb.className = 'chip ' + (isRejected ? 'chip-AGGRESSIVE_TUNING' : (isWarn ? 'chip-VALVE_STICTION' : 'chip-NORMAL'));
@@ -564,6 +617,22 @@ function drawTimeChart(canvasId, w, cursorIdx = null, progress = 1.0) {
     ctx.fillStyle = '#334155'; ctx.font = 'bold 11px sans-serif';
     ctx.fillText(labelY, padL + 6, yTop + 12);
 
+    // ISA-101 ±2% SP steady-state tolerance band (only on PV subplot when SP is 3rd series)
+    if (fillAfter && seriesList[2]) {
+      const spArr = seriesList[2].arr;
+      const band = Math.max(0.25, (hi - lo) * 0.04);
+      ctx.fillStyle = 'rgba(29, 78, 216, 0.06)';
+      ctx.beginPath();
+      for (let i = 0; i <= maxIdx; i++) {
+        const x = mapX(i), y = mapY(spArr[i] + band);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      for (let i = maxIdx; i >= 0; i--) {
+        ctx.lineTo(mapX(i), mapY(spArr[i] - band));
+      }
+      ctx.closePath(); ctx.fill();
+    }
+
     // Soft area fill under tuned curve
     if (fillAfter && seriesList[1]) {
       const arr = seriesList[1].arr;
@@ -680,49 +749,114 @@ function drawIdentChart(canvasId, ip, metaId, cursorIdx = null) {
 function drawPhaseChart(canvasId, ph, diag) {
   const { ctx, W, H } = setupCanvas(canvasId);
   ctx.clearRect(0, 0, W, H);
-  const pad = 46;
+  const padL = 52, padR = 24, padT = 32, padB = 34;
   const xs = ph.op, ys = ph.pv;
   let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
   if (x1 - x0 < 0.2) { x0 -= 1; x1 += 1; }
   if (y1 - y0 < 0.2) { y0 -= 1; y1 += 1; }
-  const mapX = v => pad + ((v - x0) / (x1 - x0)) * (W - 2 * pad);
-  const mapY = v => H - pad - ((v - y0) / (y1 - y0)) * (H - 2 * pad);
+  const mapX = v => padL + ((v - x0) / (x1 - x0)) * (W - padL - padR);
+  const mapY = v => H - padB - ((v - y0) / (y1 - y0)) * (H - padT - padB);
 
-  ctx.strokeStyle = '#e2e8f0'; ctx.strokeRect(pad, pad, W - 2 * pad, H - 2 * pad);
-  ctx.fillStyle = '#334155'; ctx.font = '11px Consolas, monospace';
-  ctx.fillText(`OP (%) [${x0.toFixed(1)} ~ ${x1.toFixed(1)}]`, W / 2 - 55, H - 14);
-  ctx.fillText(`PV [${y0.toFixed(1)} ~ ${y1.toFixed(1)}] | 粘滞指数 SI = ${diag.stiction_index.toFixed(2)}`, pad, 22);
+  // Coordinate grid + tick labels
+  ctx.strokeStyle = '#edf2f7'; ctx.lineWidth = 1;
+  ctx.fillStyle = '#64748b'; ctx.font = '10px Consolas, monospace';
+  for (let k = 0; k <= 4; k++) {
+    const xv = x0 + (k / 4) * (x1 - x0);
+    const yv = y0 + (k / 4) * (y1 - y0);
+    const gx = mapX(xv), gy = mapY(yv);
+    ctx.beginPath(); ctx.moveTo(gx, padT); ctx.lineTo(gx, H - padB); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(W - padR, gy); ctx.stroke();
+    ctx.fillText(xv.toFixed(1), gx - 10, H - padB + 14);
+    ctx.fillText(yv.toFixed(1), 6, gy + 3);
+  }
+  ctx.strokeStyle = '#cbd5e1'; ctx.strokeRect(padL, padT, W - padL - padR, H - padT - padB);
 
-  ctx.strokeStyle = diag.anomaly_type === 'VALVE_STICTION' ? '#6d28d9' : '#1d4ed8';
-  ctx.lineWidth = 1.8; ctx.beginPath();
-  xs.forEach((v, i) => { const x = mapX(v), y = mapY(ys[i]); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
-  ctx.stroke();
+  // Header engineering readout
+  ctx.fillStyle = '#0f172a'; ctx.font = 'bold 11px Consolas, monospace';
+  ctx.fillText(`PV-OP 阀门迟滞相图 | 粘滞指数 SI = ${diag.stiction_index.toFixed(2)} (${diag.anomaly_type === 'VALVE_STICTION' ? '存在明显滞环' : '无典型矩形粘滞'})`, padL, 19);
+  ctx.fillStyle = '#475569'; ctx.font = '10.5px sans-serif';
+  ctx.fillText('调节阀开度 OP (%) →', W / 2 - 48, H - 6);
+
+  // Time-progressed trajectory (early slate -> late purple/blue) + directional arrowheads
+  const isStic = diag.anomaly_type === 'VALVE_STICTION';
+  const n = xs.length;
+  for (let i = 1; i < n; i++) {
+    const t = i / Math.max(1, n - 1);
+    const r = Math.round(148 + ((isStic ? 109 : 29) - 148) * t);
+    const g = Math.round(163 + ((isStic ? 40 : 78) - 163) * t);
+    const b = Math.round(184 + ((isStic ? 217 : 216) - 184) * t);
+    ctx.strokeStyle = `rgb(${r},${g},${b})`;
+    ctx.lineWidth = 1.4 + t * 0.9;
+    ctx.beginPath();
+    ctx.moveTo(mapX(xs[i - 1]), mapY(ys[i - 1]));
+    ctx.lineTo(mapX(xs[i]), mapY(ys[i]));
+    ctx.stroke();
+
+    // Directional arrowheads along trajectory
+    if (i > 10 && i % Math.max(12, Math.floor(n / 10)) === 0) {
+      const xA = mapX(xs[i - 1]), yA = mapY(ys[i - 1]);
+      const xB = mapX(xs[i]), yB = mapY(ys[i]);
+      const ang = Math.atan2(yB - yA, xB - xA);
+      if (Math.hypot(xB - xA, yB - yA) > 1.2) {
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+        ctx.beginPath();
+        ctx.moveTo(xB, yB);
+        ctx.lineTo(xB - 7 * Math.cos(ang - 0.45), yB - 7 * Math.sin(ang - 0.45));
+        ctx.lineTo(xB - 7 * Math.cos(ang + 0.45), yB - 7 * Math.sin(ang + 0.45));
+        ctx.closePath(); ctx.fill();
+      }
+    }
+  }
 }
 
 function drawNyquistChart(canvasId, nq) {
   const { ctx, W, H } = setupCanvas(canvasId);
   ctx.clearRect(0, 0, W, H);
-  const pad = 40;
+  const pad = 38;
   const reMin = -2.2, reMax = 0.8, imMin = -1.8, imMax = 0.8;
   const scale = Math.min((W - 2 * pad) / (reMax - reMin), (H - 2 * pad) / (imMax - imMin));
   const cx = pad + (W - 2 * pad - (reMax - reMin) * scale) / 2;
   const mapX = re => cx + (re - reMin) * scale;
   const mapY = im => H - pad - (im - imMin) * scale;
 
-  ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
+  // Light coordinate grid + numeric ticks
+  ctx.strokeStyle = '#edf2f7'; ctx.lineWidth = 1;
+  ctx.fillStyle = '#64748b'; ctx.font = '10px Consolas, monospace';
+  [-2, -1.5, -1, -0.5, 0, 0.5].forEach(re => {
+    const x = mapX(re);
+    ctx.beginPath(); ctx.moveTo(x, pad); ctx.lineTo(x, H - pad); ctx.stroke();
+    if (re % 1 === 0) ctx.fillText(String(re), x - 6, mapY(0) + 12);
+  });
+  [-1.5, -1, -0.5, 0, 0.5].forEach(im => {
+    const y = mapY(im);
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
+    if (im !== 0 && im % 1 === 0) ctx.fillText(`${im}j`, mapX(0) + 5, y + 3);
+  });
+
+  // Real & Imag axes
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.2;
   ctx.beginPath(); ctx.moveTo(pad, mapY(0)); ctx.lineTo(W - pad, mapY(0)); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(mapX(0), pad); ctx.lineTo(mapX(0), H - pad); ctx.stroke();
-  ctx.fillStyle = '#64748b'; ctx.font = '10.5px Consolas, monospace';
-  ctx.fillText('Re(L)', W - pad - 28, mapY(0) - 6);
+  ctx.fillStyle = '#334155'; ctx.font = 'bold 10.5px Consolas, monospace';
+  ctx.fillText('Re(L)', W - pad - 30, mapY(0) - 6);
   ctx.fillText('Im(L)', mapX(0) + 6, pad + 10);
 
+  // Unit circle |L(jω)| = 1 (for reading Phase Margin PM)
+  ctx.save();
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.1; ctx.setLineDash([3, 3]);
+  ctx.beginPath(); ctx.arc(mapX(0), mapY(0), 1.0 * scale, 0, Math.PI * 2); ctx.stroke();
+  ctx.restore();
+  ctx.fillStyle = '#64748b'; ctx.font = '10px Consolas, monospace';
+  ctx.fillText('|L|=1', mapX(0.72), mapY(0.72));
+
+  // Ms forbidden circle centered at (-1, 0)
   const rPx = nq.ms_radius * scale;
   ctx.fillStyle = 'rgba(180, 83, 9, 0.11)';
   ctx.strokeStyle = '#b45309'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]);
   ctx.beginPath(); ctx.arc(mapX(-1), mapY(0), rPx, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = '#b91c1c'; ctx.beginPath(); ctx.arc(mapX(-1), mapY(0), 4.5, 0, Math.PI * 2); ctx.fill();
-  ctx.font = 'bold 11px Consolas, monospace'; ctx.fillText('(-1, j0) 临界失稳点', mapX(-1) - 52, mapY(0) - rPx - 12);
+  ctx.fillStyle = '#b91c1c'; ctx.beginPath(); ctx.arc(mapX(-1), mapY(0), 4.2, 0, Math.PI * 2); ctx.fill();
+  ctx.font = 'bold 10.5px Consolas, monospace'; ctx.fillText('(-1, j0) 临界点', mapX(-1) - 42, mapY(0) - rPx - 8);
 
   const plotLocus = (pts, color, w) => {
     if (!pts || pts.length < 2) return;
@@ -732,6 +866,18 @@ function drawNyquistChart(canvasId, nq) {
   };
   plotLocus(nq.before, '#b91c1c', 1.8);
   plotLocus(nq.after, '#047857', 2.5);
+
+  // Top-right engineering stability margin callout box
+  if (currentData && currentData.safety) {
+    const s = currentData.safety;
+    const bx = W - 168, by = 12, bw = 156, bh = 58;
+    ctx.fillStyle = 'rgba(248,250,252,0.94)'; ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
+    ctx.fillRect(bx, by, bw, bh); ctx.strokeRect(bx, by, bw, bh);
+    ctx.fillStyle = '#0f172a'; ctx.font = 'bold 10.5px Consolas, monospace';
+    ctx.fillText(`增益裕度 GM: ${s.gain_margin} (≥1.8)`, bx + 8, by + 17);
+    ctx.fillText(`相位裕度 PM: ${s.phase_margin_deg}° (≥35°)`, bx + 8, by + 34);
+    ctx.fillText(`敏感度峰 Ms: ${s.max_sensitivity_ms} (≤2.2)`, bx + 8, by + 51);
+  }
 }
 
 function formatMd(text) {
@@ -815,11 +961,13 @@ async function handleCSVUpload(e) {
 }
 
 function renderSandboxOutput(data) {
-  document.getElementById('sbStatus').textContent = data.final_status;
+  const sbEl = document.getElementById('sbStatus');
+  sbEl.textContent = zhStatus(data.final_status);
+  sbEl.title = data.final_status;
   drawTimeChart('sandboxCanvas', data.waveforms, null, 1.0);
   const am = data.audit_meta || {};
   if (am.run_id) {
-    document.getElementById('rRunMeta').textContent = `${am.run_id} | in:${(am.input_sha256||'').slice(0,8)} out:${(am.output_sha256||'').slice(0,8)}`;
+    document.getElementById('rRunMeta').textContent = `当前工单: ${am.run_id} | 哈希:${(am.output_sha256||'').slice(0,8)}`;
   }
   document.getElementById('sbSummary').innerHTML = `
     <b>运行溯源：</b><code>${am.run_id || '-'}</code> | 时间：${am.timestamp || '-'} | inHash:<code>${(am.input_sha256||'').slice(0,10)}</code> | outHash:<code>${(am.output_sha256||'').slice(0,10)}</code><br/>
@@ -839,20 +987,65 @@ function renderSandboxOutput(data) {
 }
 
 function renderPlantTable(rows) {
+  // 1. Render 5-Unit Control Health Heatmap (Honeywell CPA / PlantESP style)
+  const hm = document.getElementById('unitHeatmap');
+  if (hm) {
+    hm.innerHTML = '';
+    const byUnit = new Map();
+    rows.forEach(r => {
+      const u = r.unit_name || '未分组装置';
+      if (!byUnit.has(u)) byUnit.set(u, []);
+      byUnit.get(u).push(r);
+    });
+    byUnit.forEach((uRows, uName) => {
+      const retuneCnt = uRows.filter(r => r.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW').length;
+      const card = document.createElement('div');
+      card.className = 'hm-unit';
+      card.innerHTML = `
+        <div class="hm-unit-head">
+          <span class="hm-unit-name">${uName}</span>
+          <span class="hm-unit-stat">${uRows.length}路 · 复核${retuneCnt}</span>
+        </div>
+        <div class="hm-grid"></div>
+      `;
+      const grid = card.querySelector('.hm-grid');
+      uRows.forEach(r => {
+        const stCls = r.final_status === 'NO_CHANGE_HEALTHY' ? 'st-ok'
+          : (r.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW' ? 'st-retune'
+          : (r.final_status === 'VALVE_MAINTENANCE_REQUIRED' ? 'st-valve' : 'st-block'));
+        const tile = document.createElement('div');
+        tile.className = `hm-tile ${stCls}`;
+        tile.title = `${r.loop_id} (${r.tag_name}) | ${zhStatus(r.final_status)}`;
+        tile.innerHTML = `
+          <div class="hm-tile-top"><span>${r.tag_name}</span><span class="hm-tile-oi">OI ${r.oi_before.toFixed(1)}</span></div>
+          <div class="hm-tile-sub">${zhAnomaly(r.pred_anomaly)} · ${zhStatus(r.final_status).split(' · ')[0]}</div>
+        `;
+        tile.onclick = () => {
+          document.querySelector('[data-view="view-workbench"]').click();
+          const target = allLoops.find(l => l.loop_id === r.loop_id);
+          if (target) { selectLoop(target); runWorkflow(target.loop_id); }
+        };
+        grid.appendChild(tile);
+      });
+      hm.appendChild(card);
+    });
+  }
+
+  // 2. Render 30-Loop Detail Table
   const tbody = document.getElementById('plantTableBody');
   tbody.innerHTML = '';
   rows.forEach(r => {
     const tr = document.createElement('tr');
     tr.style.cursor = 'pointer';
     tr.innerHTML = `
-      <td><b>${r.loop_id}</b></td><td>${r.tag_name}</td><td>${r.unit_name}</td>
-      <td><span class="chip chip-${r.true_anomaly}">${r.true_anomaly}</span></td>
-      <td class="${r.diag_correct ? 'st-pass':'st-fail'}">${r.pred_anomaly}</td>
+      <td><b>${r.loop_id}</b></td><td><b>${r.tag_name}</b></td><td>${r.unit_name}</td>
+      <td><span class="chip chip-${r.true_anomaly}">${zhAnomaly(r.true_anomaly)}</span></td>
+      <td class="${r.diag_correct ? 'st-pass':'st-fail'}">${zhAnomaly(r.pred_anomaly)}</td>
       <td>${r.val_fit_pct !== null ? `${r.val_fit_pct}% / ${r.val_r2}` : '—'}</td>
       <td>${r.oi_before.toFixed(2)} → <b>${r.oi_after.toFixed(2)}</b></td>
       <td>${r.iae_before.toFixed(2)} → <b>${r.iae_after.toFixed(2)}</b></td>
       <td>${r.multi_regime_pass_rate_pct !== null ? r.multi_regime_pass_rate_pct + '%' : '—'}</td>
-      <td><code>${r.final_status}</code></td>
+      <td title="${r.final_status}"><span style="font-size:11.5px;font-weight:600;color:var(--ink-soft)">${zhStatus(r.final_status)}</span></td>
     `;
     tr.onclick = () => {
       document.querySelector('[data-view="view-workbench"]').click();

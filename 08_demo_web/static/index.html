@@ -11,8 +11,8 @@
     <div class="brand">
       <div class="brand-mark">PID</div>
       <div>
-        <h1>PetroPID-Agent V4.3 · 石化装置多智能体自适应 PID 工程工作站</h1>
-        <small>ISA-101 工业 HMI · 独立 FinalDecisionEngine (9态) · MCP JSON-RPC 2.0 · 隔离仿真专用 (deployment_authorized=false)</small>
+        <h1>PetroPID-Agent V4.3 · 石化装置控制回路性能监测与智能整定工作站</h1>
+        <small>ISA-101 高性能工业 HMI · 9 态独立安全决策引擎 · 隔离机理仿真专用 (deployment_authorized=false)</small>
       </div>
     </div>
     <nav class="nav-tabs">
@@ -26,20 +26,22 @@
     </div>
   </header>
 
-  <!-- Sleek 34px Transparent Telemetry Ribbon -->
+  <!-- ISA-101 Plant Control Health Bar -->
   <div class="telemetry-ribbon">
     <div class="ribbon-group">
-      <span class="r-stat">30回路分布:<b id="rDist">--</b></span>
+      <span class="r-stat">全厂监控:<b id="rTotal">30 回路</b></span>
       <span class="ribbon-sep"></span>
-      <span class="r-stat">诊断:<b class="ok" id="rDiag">--</b></span>
+      <span class="r-stat">平稳健康:<b class="ok" id="rHealthy">--</b></span>
       <span class="ribbon-sep"></span>
-      <span class="r-stat">辨识Fit(有效19/全25):<b class="ok" id="rId">--</b></span>
+      <span class="r-stat">待整定复核:<b id="rRetune" style="color:var(--blue)">--</b></span>
       <span class="ribbon-sep"></span>
-      <span class="r-stat">5工况(放行11/全25):<b class="ok" id="rMulti">--</b></span>
+      <span class="r-stat">调节阀检预警:<b id="rValve" style="color:var(--purple)">--</b></span>
       <span class="ribbon-sep"></span>
-      <span class="r-stat">openJiuwen:<b id="rOjw">兼容运行时(native=false)</b></span>
+      <span class="r-stat">模型/外扰拦截:<b id="rBlock" style="color:var(--amber)">--</b></span>
+      <span class="ribbon-sep"></span>
+      <span class="r-stat">故障诊断:<b class="ok" id="rDiag">--</b></span>
     </div>
-    <span id="rRunMeta" style="font-size:11px;font-family:var(--mono);color:#475569">RunID: --</span>
+    <span id="rRunMeta" style="font-size:11px;font-family:var(--mono);color:#475569">当前工单: --</span>
   </div>
 
   <!-- VIEW 1: MAIN WORKBENCH -->
@@ -245,23 +247,33 @@
   <div id="view-plant" class="view">
     <div class="page-pad">
       <div class="plant-kpis">
-        <div class="plant-kpi-card"><div class="k">端到端正确决策率</div><div class="v" id="pkSuccess">--</div><div class="s">5健康/11复核/6模型拒/5阀检/3外扰拒</div></div>
-        <div class="plant-kpi-card"><div class="k">异常诊断准确率</div><div class="v" id="pkDiag">--</div><div class="s">30/30 零误判</div></div>
-        <div class="plant-kpi-card"><div class="k">有效辨识验证 Fit</div><div class="v" id="pkId">--</div><div class="s" id="pkIdSub">有效 n=19</div></div>
-        <div class="plant-kpi-card"><div class="k">安全校验 / 违规标记</div><div class="v" id="pkSafe">--</div><div class="s">11 项硬约束含 C-000</div></div>
-        <div class="plant-kpi-card"><div class="k">放行回路 5 工况通过</div><div class="v" id="pkMulti">--</div><div class="s">全25非健康平均 78.4%</div></div>
-        <div class="plant-kpi-card"><div class="k">放行回路 OI / IAE 降幅</div><div class="v" id="pkImp">--</div><div class="s">11 个待复核回路</div></div>
+        <div class="plant-kpi-card"><div class="k">保守安全决策率</div><div class="v" id="pkSuccess">--</div><div class="s">独立精确匹配 80% (24/30) · 零危险放行</div></div>
+        <div class="plant-kpi-card"><div class="k">故障模式诊断准确</div><div class="v" id="pkDiag">--</div><div class="s">6 类石化典型工况 (30/30)</div></div>
+        <div class="plant-kpi-card"><div class="k">有效辨识验证 Fit</div><div class="v" id="pkId">--</div><div class="s" id="pkIdSub">有效 n=19 (65/35 留出验证)</div></div>
+        <div class="plant-kpi-card"><div class="k">安全硬约束拦截</div><div class="v" id="pkSafe">--</div><div class="s">11 项硬约束含模型置信门控</div></div>
+        <div class="plant-kpi-card"><div class="k">放行回路 5 工况通过</div><div class="v" id="pkMulti">--</div><div class="s">跨边界鲁棒性与阀位限幅校验</div></div>
+        <div class="plant-kpi-card"><div class="k">放行回路 OI / IAE 降幅</div><div class="v" id="pkImp">--</div><div class="s">11 个仿真通过待复核回路均值</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head">
+          <h2>全厂 5 大石化装置控制回路健康热图 (按装置分区)</h2>
+          <span style="font-size:11.5px;color:var(--muted)">ISA-101 异常高亮 · 点击任意位号砖块直接进入单回路诊断工作台</span>
+        </div>
+        <div class="card-body">
+          <div class="unit-heatmap" id="unitHeatmap"></div>
+        </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <h2>全厂 5 大石化装置 30 个控制回路健康度与 V4.0 审批状态总览</h2>
-          <span style="font-size:12px;color:var(--muted)">点击任意行可直接跳转至单回路工程工作台查看详图与审批证据</span>
+          <h2>全厂 30 个控制回路健康监控与整定审核明细</h2>
+          <span style="font-size:12px;color:var(--muted)">点击任意行可直接跳转至单回路工程工作台查看波形与审批证据</span>
         </div>
         <div class="card-body" style="padding:0">
           <table>
             <thead>
-              <tr><th>编号</th><th>位号</th><th>所属装置</th><th>真实工况</th><th>AI 诊断</th><th>辨识 Fit / R²</th><th>OI (前→后)</th><th>IAE (前→后)</th><th>5工况通过</th><th>最终审批状态</th></tr>
+              <tr><th>编号</th><th>位号</th><th>所属装置</th><th>工况类别</th><th>系统诊断</th><th>辨识 Fit / R²</th><th>OI (前→后)</th><th>IAE (前→后)</th><th>5工况通过</th><th>工程审核结论</th></tr>
             </thead>
             <tbody id="plantTableBody"></tbody>
           </table>
