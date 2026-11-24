@@ -2,7 +2,7 @@
 
 > **第二届石油和化工行业人工智能创新大赛 · 智能体赛道（赛题 5）V4.3.3 Final Freeze 正式提交候选仓库**  
 > **正式公网 Demo**：https://petropid-agent.onrender.com （Render Docker 自动部署 + 在线 DeepSeek `VERIFIED_LIVE`，已通过新版工业 HMI 真实浏览器端到端 0 报错实测）  
-> **第三方离线 CI 门禁**：GitHub Actions [Run #45367547675](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45367547675)（Ubuntu + Python 3.11 + 无头 Chromium Playwright 8 项回归全绿通过）  
+> **第三方离线 CI 门禁**：GitHub Actions [Run #45407211036](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45407211036)（Ubuntu + Python 3.11 + 无头 Chromium Playwright 8 项回归全绿通过）  
 > **安全边界声明**：本系统仅运行于隔离机理仿真与脱敏离线历史数据，未连接或写入真实 DCS/PLC，`deployment_authorized` 恒为 `false`；外部未知上传 CSV 缺乏独立过程物理真值，严禁输出安全验证通过结论；全记录 SHA-256 摘要 `record_digest_sha256` 为强制必填项（缺失/旧版/篡改一律返回 `FAIL` 与 `HTTP 422`）。
 
 ---
