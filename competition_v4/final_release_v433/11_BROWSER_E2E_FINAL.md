@@ -2,7 +2,7 @@
 
 - **浏览器实测源**：`https://petropid-agent.onrender.com`（`1440×900` 桌面视口，`BROWSER_HOST_FACTS`: `visited_origins: https://petropid-agent.onrender.com`, `blocked_origins: none`）
 - **线上部署版本与探针核验**（`GET /healthz?probe_llm=true`, HTTP 200）：
-  - `code_commit_full`: `3b3a683b5e542dad1ae3fddbcc2d36f7041be85c`（与 GitHub `main` 应用及前端最新提交完全一致）
+  - `code_commit_full`: `3b3a683b5e542dad1ae3fddbcc2d36f7041be85c`（对应历史公网部署实测版本；后续最新代码冻结基线为 `07534e3b`，已在 GitHub Actions CI Run `45367547675` 通过无头 Chromium Playwright 8 项自动化回归）
   - `version`: `4.3.3` | `algorithm_version`: `petropid-alg-v4.3.3` | `dataset_version`: `petropid-sim-30loops-v2.0`
   - `deployment_authorized`: `false`
   - `llm_health`: `configured_mode=live_llm_api`, `connectivity_status=VERIFIED_LIVE`, `model=deepseek-flash`, `latency_ms=1009.8`, `request_id=420bddd8-3709-4505-8b34-b5b346290546`

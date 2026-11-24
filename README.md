@@ -2,7 +2,7 @@
 
 > **第二届石油和化工行业人工智能创新大赛 · 智能体赛道（赛题 5）V4.3.3 Final Freeze 正式提交候选仓库**  
 > **正式公网 Demo**：https://petropid-agent.onrender.com （Render Docker 自动部署 + 在线 DeepSeek `VERIFIED_LIVE`，已通过新版工业 HMI 真实浏览器端到端 0 报错实测）  
-> **第三方离线 CI 门禁**：GitHub Actions [Run #45192957510](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45192957510)（Ubuntu + Python 3.11 全绿通过）  
+> **第三方离线 CI 门禁**：GitHub Actions [Run #45367547675](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45367547675)（Ubuntu + Python 3.11 + 无头 Chromium Playwright 8 项回归全绿通过）  
 > **安全边界声明**：本系统仅运行于隔离机理仿真与脱敏离线历史数据，未连接或写入真实 DCS/PLC，`deployment_authorized` 恒为 `false`；外部未知上传 CSV 缺乏独立过程物理真值，严禁输出安全验证通过结论；全记录 SHA-256 摘要 `record_digest_sha256` 为强制必填项（缺失/旧版/篡改一律返回 `FAIL` 与 `HTTP 422`）。
 
 ---
@@ -20,7 +20,7 @@
 | 公平 SIMC Pareto 对照 (`n=11`) | 标称 IAE + 5 工况安全审批率 | **Balanced 100% 安全通过（IAE 0.458）** | SIMC (`0%` 安全通过 / `45.45%` 多工况) 与 Performance (`0%` 安全通过 / `20%` 多工况) **均未通过鲁棒安全门控并被拒批**；Balanced 换取 PM `+9.66°`、扰动超调 `-10.87%` |
 | 40 样本二阶 SOPDT 泛化与严格留出集 | 32 回归集 + 8 严格留出集 (`OOD-33..40`) | **留出 87.5% · 总 95.0% · 漏检 0 · 误放行 0** | Clopper-Pearson 95% 误放行上界 `11.73%` (`n=24`) |
 | 公平模块因素消融（144 原始试验） | A0→A1(重试)→A2(缓存)→B1(单体等价审计)→B2(单体紧凑)→C(5Agent) | **B1/B2/C 同用 `verify_audit_record()` 100%；C 决策 100% vs B1/B2 95.83%** | C 相对 B1 交接 -77.0% (`2632B` vs `11463B`)，诚实披露 B2 紧凑序列化仅 `201B` 及 C P50 开销 `+29.50ms` (vs B1) / `+35.57ms` (vs B2) |
-| 自动化测试 & CI / 协议验证 | `pytest` + GitHub Actions CI + `MCP` + `OWL/SQL` | **37/37 pytest · CI PASS · 14/14 MCP · OWL 116 三元组** | 含 B1/C 同等 8 项篡改等价测试与 12 项强制摘要负向测试 |
+| 自动化测试 & CI / 协议验证 | `pytest` + Playwright CI + `MCP` + `OWL/SQL` | **Linux CI 40 passed, 1 skipped（本地 41 passed）· Playwright 8/8 PASS · 14/14 MCP · OWL 116 三元组** | 含 B1/C 同等 8 项篡改等价测试、12 项强制摘要负向测试及无头 Chromium HTTP 500/篡改响应负向测试 |
 
 ---
 
