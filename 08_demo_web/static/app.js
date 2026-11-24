@@ -397,11 +397,19 @@ async function runWorkflow(loopId, opts = {}) {
     renderResult(data);
   } catch (err) {
     if (seq !== latestRequestSeq) return;
+    // Fail-Closed P1-B: clear stale currentData and disable export buttons immediately
+    currentData = null;
+    const apBtn = document.getElementById('approvalBtn');
+    const bdBtn = document.getElementById('bundleBtn');
+    if (apBtn) apBtn.disabled = true;
+    if (bdBtn) bdBtn.disabled = true;
+    const rm = document.getElementById('rRunMeta');
+    if (rm) rm.textContent = '当前工单: -- (请求失败，已清除旧状态)';
     const banner = document.getElementById('riskBanner');
     if (banner) {
       banner.style.display = 'block';
       banner.className = 'risk-banner danger';
-      banner.textContent = `■ 请求失败（${err.message || '网络异常'}）｜Fail-Closed 保护已生效，未更新参数结论`;
+      banner.textContent = `■ 请求失败（${err.message || '网络异常'}）｜Fail-Closed 保护已生效，已清除旧工单并禁用导出`;
     }
     const sb = document.getElementById('statusBadge');
     if (sb) {
@@ -424,22 +432,34 @@ function renderResult(data) {
   const modeLabel = data.llm_mode === 'live_llm_api' ? '推理引擎: 在线模型' : '推理引擎: 离线规则';
   document.getElementById('topMode').textContent = modeLabel;
   const am0 = data.audit_meta || {};
+  // Fail-Closed P1-A: cross-check audit_status, run_id, and complete constraint_audit
+  const auditStatus = (am0.audit_verification && am0.audit_verification.audit_status) || 'UNVERIFIED';
+  const hasValidRunId = Boolean(am0.run_id);
+  const auditList = (data.safety && Array.isArray(data.safety.constraint_audit)) ? data.safety.constraint_audit : [];
+  const allConstraintsPass = auditList.length >= 11 && auditList.every(c => c && c.passed === true);
+
+  const apBtn = document.getElementById('approvalBtn');
+  const bdBtn = document.getElementById('bundleBtn');
+  if (apBtn) apBtn.disabled = !hasValidRunId;
+  if (bdBtn) bdBtn.disabled = !hasValidRunId;
+
   const strip = document.getElementById('auditStrip');
   if (strip) {
     const rawDig = am0.record_digest_sha256 || am0.output_sha256 || '';
     const dig = rawDig ? `${escHtml(rawDig.slice(0, 12))}…` : '--';
-    // Fail-Closed: NEVER default missing audit_status to PASS
-    const av = (am0.audit_verification && am0.audit_verification.audit_status) || 'UNVERIFIED';
-    strip.innerHTML = `<span><b>工单:</b> ${escHtml(am0.run_id || '--')} &nbsp;|&nbsp; <b>状态码:</b> ${escHtml(data.final_status || 'UNKNOWN')} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${escHtml(av)}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    strip.innerHTML = `<span><b>工单:</b> ${escHtml(am0.run_id || '--')} &nbsp;|&nbsp; <b>状态码:</b> ${escHtml(data.final_status || 'UNKNOWN')} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${escHtml(auditStatus)}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
   }
-  if (data.audit_meta) {
-    document.getElementById('rRunMeta').textContent = `当前工单: ${data.audit_meta.run_id} | 哈希:${data.audit_meta.output_sha256.slice(0,8)}`;
+  if (hasValidRunId) {
+    document.getElementById('rRunMeta').textContent = `当前工单: ${am0.run_id} | 哈希:${(am0.output_sha256 || '').slice(0, 8)}`;
+  } else {
+    document.getElementById('rRunMeta').textContent = '当前工单: -- (缺失工单号)';
   }
   renderPIDSchematic(data);
 
   const ip = data.initial_pid, fp = data.final_pid;
   const d0 = data.diagnosis, d1 = data.after_diagnosis || d0;
-  const isApprovedCand = data.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW';
+  const rawApprovedEnum = data.final_status === 'SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW';
+  const isApprovedCand = rawApprovedEnum && (auditStatus === 'PASS') && hasValidRunId && allConstraintsPass;
   const pctBadge = (a, b) => {
     if (!isApprovedCand || a < 0.05) return '<span class="fp-delta hold">保持</span>';
     const pct = Math.round(((b - a) / a) * 100);
@@ -469,13 +489,13 @@ function renderResult(data) {
   }
 
   const sb = document.getElementById('statusBadge');
-  sb.textContent = zhStatus(data.final_status);
-  sb.title = data.final_status || 'UNKNOWN';
-  const isHealthyStatus = ['HEALTHY_NO_CHANGE', 'NO_CHANGE_HEALTHY'].includes(data.final_status);
+  const isHealthyStatus = ['HEALTHY_NO_CHANGE', 'NO_CHANGE_HEALTHY'].includes(data.final_status) && auditStatus === 'PASS' && hasValidRunId;
   const isOkKnown = isApprovedCand || isHealthyStatus;
   const isWarn = ['VALVE_MAINTENANCE_REQUIRED', 'PERFORMANCE_NOT_IMPROVED'].includes(data.final_status);
-  // Fail-Closed: any unknown or rejected status renders danger style (never green!)
+  // Fail-Closed: any unknown, rejected, or unverified-audit status renders danger style (never green!)
   const isRejected = !isOkKnown && !isWarn;
+  sb.textContent = (rawApprovedEnum && !isApprovedCand) ? '审计未验 · 拒绝展示' : zhStatus(data.final_status);
+  sb.title = `${data.final_status || 'UNKNOWN'} (audit=${auditStatus})`;
   sb.className = 'chip ' + (isRejected ? 'chip-AGGRESSIVE_TUNING' : (isWarn ? 'chip-VALVE_STICTION' : 'chip-NORMAL'));
   document.getElementById('elapsedTag').textContent = `闭环耗时 ${data.elapsed_s}s`;
 
@@ -488,21 +508,22 @@ function renderResult(data) {
 
   const banner = document.getElementById('riskBanner');
   banner.style.display = 'block';
-  const isHealthy = data.final_status === 'HEALTHY_NO_CHANGE' || data.final_status === 'NO_CHANGE_HEALTHY';
   banner.className = 'risk-banner ' + (isRejected ? 'danger' : (isWarn ? '' : 'ok'));
   if (isApprovedCand) {
     const strat = (data.tuning && data.tuning.strategy) ? data.tuning.strategy : 'balanced';
-    const passCnt = data.safety && data.safety.constraint_audit ? data.safety.constraint_audit.filter(c => c.passed).length : 11;
-    const totalCnt = data.safety && data.safety.constraint_audit ? data.safety.constraint_audit.length : 11;
+    const passCnt = auditList.filter(c => c && c.passed === true).length;
+    const totalCnt = auditList.length;
     banner.textContent = `● 仿真校验通过 · 待人工复核（${passCnt}/${totalCnt} 约束通过 · 策略: ${strat}）｜仅限离线仿真验证，严禁未审批写入真实 DCS`;
-  } else if (isHealthy) {
+  } else if (rawApprovedEnum && !isApprovedCand) {
+    banner.textContent = `■ 审批证据不完整（审计=${auditStatus}，工单=${hasValidRunId ? '有效' : '缺失'}，约束=${auditList.length}项）｜Fail-Closed 拦截，禁止作为仿真通过展示`;
+  } else if (isHealthyStatus) {
     banner.textContent = '● 回路运行平稳健康 · 无需整定变更｜保持当前 DCS 参数';
   } else if (data.final_status === 'VALVE_MAINTENANCE_REQUIRED') {
     banner.textContent = '▲ 调节阀机械粘滞 · 建议仪表检修｜PID 整定无法根除阀杆摩擦，保持原 DCS 参数';
   } else if (data.final_status === 'PERFORMANCE_NOT_IMPROVED') {
     banner.textContent = '▲ 外部周期扰动 · 整定未改善｜保持原 DCS 参数，建议排查上游工艺扰动源';
   } else {
-    banner.textContent = `■ 拒绝参数变更 · 保持原 DCS 参数｜${(data.decision_reason || '模型验证或安全约束未通过').split('。')[0]}`;
+    banner.textContent = `■ 拒绝参数变更 · 保持原 DCS 参数｜${(data.decision_reason || '模型验证、审计或安全约束未通过').split('。')[0]}`;
   }
 
   // Compact bottom telemetry strip (no bulky progress bar)
@@ -1063,16 +1084,16 @@ function renderSandboxOutput(data) {
     document.getElementById('rRunMeta').textContent = `当前工单: ${am.run_id} | 哈希:${(am.output_sha256||'').slice(0,8)}`;
   }
   document.getElementById('sbSummary').innerHTML = `
-    <b>运行溯源：</b><code>${am.run_id || '-'}</code> | 时间：${am.timestamp || '-'} | inHash:<code>${(am.input_sha256||'').slice(0,10)}</code> | outHash:<code>${(am.output_sha256||'').slice(0,10)}</code><br/>
-    <b>现场诊断：</b>${data.diagnosis.anomaly_type} (OI=${data.diagnosis.oscillation_index}, SI=${data.diagnosis.stiction_index})<br/>
-    <b>实时辨识：</b>K=${data.identification ? data.identification.K : '-'}, τ=${data.identification ? data.identification.tau : '-'}s, θ=${data.identification ? data.identification.theta : '-'}s (Fit ${data.identification ? data.identification.val_fit_pct : '-'}%, R²=${data.identification ? data.identification.val_r2 : '-'})<br/>
-    <b>最终结论：</b>${data.decision_reason}
+    <b>运行溯源：</b><code>${escHtml(am.run_id || '-')}</code> | 时间：${escHtml(am.timestamp || '-')} | inHash:<code>${escHtml((am.input_sha256||'').slice(0,10))}</code> | outHash:<code>${escHtml((am.output_sha256||'').slice(0,10))}</code><br/>
+    <b>现场诊断：</b>${escHtml(zhAnomaly(data.diagnosis.anomaly_type))} (OI=${escHtml(data.diagnosis.oscillation_index)}, SI=${escHtml(data.diagnosis.stiction_index)})<br/>
+    <b>实时辨识：</b>K=${escHtml(data.identification ? data.identification.K : '-')}, τ=${escHtml(data.identification ? data.identification.tau : '-')}s, θ=${escHtml(data.identification ? data.identification.theta : '-')}s (Fit ${escHtml(data.identification ? data.identification.val_fit_pct : '-')}%, R²=${escHtml(data.identification ? data.identification.val_r2 : '-')})<br/>
+    <b>最终结论：</b>${escHtml(data.decision_reason)}
   `;
   const sbAudit = document.getElementById('sbAuditBody');
   sbAudit.innerHTML = '';
   if (data.safety && data.safety.constraint_audit) {
     data.safety.constraint_audit.forEach(c => {
-      sbAudit.innerHTML += `<tr><td><b>${c.constraint_id}</b></td><td>${c.category}</td><td>${c.rule_name}</td><td>${c.measured_value}</td><td>${c.threshold}</td><td class="${c.passed ? 'st-pass':'st-fail'}">${c.passed ? 'PASS':'FAIL'}</td></tr>`;
+      sbAudit.innerHTML += `<tr><td><b>${escHtml(c.constraint_id)}</b></td><td>${escHtml(c.category)}</td><td>${escHtml(c.rule_name)}</td><td>${escHtml(c.measured_value)}</td><td>${escHtml(c.threshold)}</td><td class="${c.passed ? 'st-pass':'st-fail'}">${c.passed ? 'PASS':'FAIL'}</td></tr>`;
     });
   } else {
     sbAudit.innerHTML = '<tr><td colspan="6" style="color:var(--muted)">健康工况跳过安全变更审计。</td></tr>';

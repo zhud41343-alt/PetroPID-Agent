@@ -31,6 +31,12 @@ jobs:
       - name: Verify frontend JavaScript syntax (Node check)
         run: node --check 08_demo_web/static/app.js
 
+      - name: Run real headless Chromium Playwright E2E regression
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+          python 08_demo_web/tests/test_playwright_e2e.py
+
       - name: Run MCP protocol integration tests (14/14)
         run: python 06_mcp/mcp_client.py
 
