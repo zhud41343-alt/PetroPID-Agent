@@ -3,7 +3,7 @@
 > **参赛赛道**：第二届石油和化工行业人工智能创新大赛 · 智能体赛道 · 赛题 5（面向复杂化工过程的多智能体协作自适应 PID 控制回路诊断与智能整定）  
 > **源码仓库**：https://github.com/zhud41343-alt/PetroPID-Agent  
 > **公网实测**：https://petropid-agent.onrender.com  
-> **版本基线**：后端算法/安全/审计冻结基线 `d8efc92c3ec78a207919a307b23f15b82e01dba6`；前端 HMI 与 Playwright CI 加固基线 `a5867d22ecac6f808d9322cd0a3dee6f9341a5a8`（CI Run `45359152526` 全绿）  
+> **版本基线**：后端算法/安全/审计冻结基线 `d8efc92c3ec78a207919a307b23f15b82e01dba6`；代码最终冻结基线 `07534e3bb217340124ff73d4d7e29233e238dc7b`（GitHub Actions CI Run `45362645906` 全绿）  
 > **安全边界声明**：**本项目所有控制实验均在隔离机理仿真环境、脱敏离线数据与测试沙盒中完成，绝不连接、操作或修改真实 DCS/PLC 及生产设备；所有仿真通过的候选参数均锁定 `deployment_authorized=false`，仅进入“待自控工程师人工复核”状态。**
 
 ---
@@ -103,7 +103,12 @@ B1 与 C 均通过同一套 `verify_audit_record()` 验证（并通过 8 类相�
 
 - **界面设计原则**：参考 ISA-101 高性能 HMI 设计原则与 ISA-5.1 仪表标识规范，采用哑光灰蓝工业配色，颜色严格保留给异常与告警态；提供 5 大装置回路树、30 回路离线仿真基准热图、ISA-5.1 P&ID 迷你面板、时域 `±2% ΔSP` 参考带、带滞环方向箭头的 PV-OP 相图、带 `|L|=1` 单位圆与 `GM/PM/Ms` 读数框的 Nyquist 图，以及压力沙盒一键 CSV（含缺列 400 拦截示例）。
 - **前端 Fail-Closed 双重保护**：仅当 `final_status`、有效 `run_id`、`audit_status === 'PASS'` 且真实存在 `≥11` 项全部通过的约束记录时才允许展示绿色复核横幅；HTTP 请求失败立即清空旧 `currentData` 并禁用导出按钮。
-- **自动化 CI 门禁（Run `45359152526` 全绿）**：GitHub Actions 在每次提交自动执行 `pytest`（Linux CI `40 passed, 1 skipped`；本地 `41 passed`）、`node --check`、**真实无头 Chromium Playwright E2E 回归（含 HTTP 500 清除旧态与篡改审计响应拦截负向测试、1440×900 与 1366×768 双视口校验）**、`14/14 MCP`、OWL/SQL/KG 校验、30 回路基准与 144 次消融复算。
+- **自动化 CI 门禁（Run `45362645906` 全绿）**：GitHub Actions 在每次提交自动执行 `pytest`（Linux CI `40 passed, 1 skipped`；本地 `41 passed`）、`node --check`、**真实无头 Chromium Playwright E2E 回归（含 HTTP 500 清除旧态与篡改审计响应拦截负向测试、1440×900 与 1366×768 双视口校验）**、`14/14 MCP`、OWL/SQL/KG 校验、30 回路基准与 144 次消融复算。
+
+### 5.4 外部公开真实工业控制回路只读评估（ISDB · 76 化工/炼油回路，零调参）
+- 使用阿尔伯塔大学公开 `isdb10.mat`（SHA-256: `4dd329b5af3f9bd6e9070bce3fd46e001bb763a21c9fb8be026571b9d364e7df`，单回路最多截取前 1500 点，不修改任何冻结阈值）开展只读探索性评估（详见 [04_ISDB_EXTERNAL_INDUSTRIAL_EVAL.md](./04_ISDB_EXTERNAL_INDUSTRIAL_EVAL.md)）：
+  - **未知过程真值门禁一致性**：全部 76 条外部输入（`has_known_plant_truth=False`）均未输出参数变更放行结论（`0/76`），`deployment_authorized=true` 为 `0/76`，流水线返回 `audit_status = PASS` 为 `76/76`（验证预设门禁执行一致性，不作为真实闭环安全性的统计证明）；
+  - **零调参粘滞诊断域迁移表现**：10 条明确粘滞回路异常检出 `9/10 (90.0%)`；二分类粘滞敏感性对照在 16 回路严格子集（6 条明确 `no stiction`）上为 Recall `50.0%` / Precision `55.56%` / F1 `52.63%`，在 28 回路启发式分组上为 Recall `50.0%` / Precision `33.33%` / F1 `40.0%`，如实界定了当前轻量时域诊断器在恒定设定值真实炼厂数据上的适用边界。
 
 ---
 
