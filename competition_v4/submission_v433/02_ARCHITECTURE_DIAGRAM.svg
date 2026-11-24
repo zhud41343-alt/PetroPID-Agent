@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 680" width="1280" height="680" font-family="'Microsoft YaHei UI', 'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#b91c1c"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#046c4e"/>
+    </marker>
+  </defs>
+
+  <!-- ISA-101 Matte Slate Background -->
+  <rect width="1280" height="680" fill="#f1f5f9"/>
+
+  <!-- Top Header Banner -->
+  <rect x="0" y="0" width="1280" height="68" fill="#111827"/>
+  <rect x="24" y="16" width="44" height="36" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+  <text x="46" y="40" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="800" font-family="Consolas, monospace">PID</text>
+  <text x="84" y="34" fill="#f8fafc" font-size="19" font-weight="700">PetroPID-Agent V4.3.3 · 石化控制回路多智能体诊断与安全整定工程架构</text>
+  <text x="84" y="54" fill="#94a3b8" font-size="12">参考 ISA-101 高性能 HMI 设计原则 · 确定性数学/安全内核 + 紧凑状态黑板 + 独立 9 态 Fail-Closed 审批引擎</text>
+  <rect x="1030" y="19" width="226" height="30" rx="4" fill="#451a03" stroke="#d97706" stroke-width="1.2"/>
+  <text x="1143" y="39" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="700" font-family="Consolas, monospace">SIMULATION ONLY · NO DCS WRITE</text>
+
+  <!-- Layer 1: Input Sources -->
+  <rect x="28" y="96" width="192" height="236" rx="5" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="28" y="96" width="192" height="32" rx="5" fill="#e2e8f0"/>
+  <text x="124" y="117" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="700">离线输入与隔离沙盒</text>
+  <rect x="42" y="142" width="164" height="48" rx="3" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="124" y="162" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">30 回路石化基准</text>
+  <text x="124" y="180" text-anchor="middle" fill="#64748b" font-size="10.5">5 大装置 × 6 类典型工况</text>
+  <rect x="42" y="202" width="164" height="48" rx="3" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="124" y="222" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">40 样本 SOPDT 泛化集</text>
+  <text x="124" y="240" text-anchor="middle" fill="#64748b" font-size="10.5">含 8 例零调参严格留出集</text>
+  <rect x="42" y="262" width="164" height="54" rx="3" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="124" y="282" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">压力沙盒 &amp; CSV 上传</text>
+  <text x="124" y="300" text-anchor="middle" fill="#64748b" font-size="10.5">sp/pv/op 脱敏离线时序</text>
+
+  <!-- Main 5-Stage Pipeline Container -->
+  <rect x="248" y="96" width="760" height="236" rx="5" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+  <rect x="248" y="96" width="760" height="32" rx="5" fill="#1e293b"/>
+  <text x="628" y="117" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="700">五阶段多智能体确定性协作流水线（LLM 仅做语义解释，严禁绕过数学与安全门控）</text>
+
+  <!-- Stage 1 -->
+  <rect x="264" y="144" width="132" height="114" rx="4" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="330" y="165" text-anchor="middle" fill="#1d4ed8" font-size="12" font-weight="700">① 异常诊断</text>
+  <text x="330" y="182" text-anchor="middle" fill="#64748b" font-size="10" font-family="Consolas, monospace">DiagnosisAgent</text>
+  <text x="330" y="204" text-anchor="middle" fill="#334155" font-size="10.5">OI / IAE / Harris</text>
+  <text x="330" y="221" text-anchor="middle" fill="#334155" font-size="10.5">PV-OP 粘滞 SI</text>
+  <text x="330" y="238" text-anchor="middle" fill="#334155" font-size="10.5">OWL 规则溯源</text>
+
+  <!-- Stage 2 -->
+  <rect x="414" y="144" width="132" height="114" rx="4" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="480" y="165" text-anchor="middle" fill="#1d4ed8" font-size="12" font-weight="700">② 模型辨识</text>
+  <text x="480" y="182" text-anchor="middle" fill="#64748b" font-size="10" font-family="Consolas, monospace">IdentAgent</text>
+  <text x="480" y="204" text-anchor="middle" fill="#334155" font-size="10.5">FOPDT (K, τ, θ)</text>
+  <text x="480" y="221" text-anchor="middle" fill="#334155" font-size="10.5">65% 训练 / 35% 留出</text>
+  <text x="480" y="238" text-anchor="middle" fill="#b45309" font-size="10.5" font-weight="700">C-000 置信门控</text>
+
+  <!-- Stage 3 -->
+  <rect x="564" y="144" width="132" height="114" rx="4" fill="#f8fafc" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="630" y="165" text-anchor="middle" fill="#1d4ed8" font-size="12" font-weight="700">③ 整定优化</text>
+  <text x="630" y="182" text-anchor="middle" fill="#64748b" font-size="10" font-family="Consolas, monospace">TuningAgent</text>
+  <text x="630" y="204" text-anchor="middle" fill="#334155" font-size="10.5">SIMC 解析基线</text>
+  <text x="630" y="221" text-anchor="middle" fill="#334155" font-size="10.5">保守 / 均衡 / 快速</text>
+  <text x="630" y="238" text-anchor="middle" fill="#334155" font-size="10.5">多策略安全回退</text>
+
+  <!-- Stage 4 -->
+  <rect x="714" y="144" width="132" height="114" rx="4" fill="#f8fafc" stroke="#046c4e" stroke-width="1.5"/>
+  <text x="780" y="165" text-anchor="middle" fill="#046c4e" font-size="12" font-weight="700">④ 安全校验</text>
+  <text x="780" y="182" text-anchor="middle" fill="#64748b" font-size="10" font-family="Consolas, monospace">SafetyAgent</text>
+  <text x="780" y="204" text-anchor="middle" fill="#334155" font-size="10.5">11 项安全硬约束</text>
+  <text x="780" y="221" text-anchor="middle" fill="#334155" font-size="10.5">GM / PM / Ms 裕度</text>
+  <text x="780" y="238" text-anchor="middle" fill="#334155" font-size="10.5">5 工况跨边界仿真</text>
+
+  <!-- Stage 5 -->
+  <rect x="864" y="144" width="130" height="114" rx="4" fill="#ecfdf5" stroke="#046c4e" stroke-width="2"/>
+  <text x="929" y="165" text-anchor="middle" fill="#046c4e" font-size="12" font-weight="700">⑤ 独立审批</text>
+  <text x="929" y="182" text-anchor="middle" fill="#065f46" font-size="10" font-family="Consolas, monospace">FinalDecision</text>
+  <text x="929" y="204" text-anchor="middle" fill="#065f46" font-size="10.5">确定性 9 态状态机</text>
+  <text x="929" y="221" text-anchor="middle" fill="#065f46" font-size="10.5">SHA-256 全记录摘要</text>
+  <text x="929" y="238" text-anchor="middle" fill="#065f46" font-size="10.5">verify_audit_record</text>
+
+  <!-- Pipeline Arrows -->
+  <line x1="220" y1="201" x2="260" y2="201" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="396" y1="201" x2="410" y2="201" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="546" y1="201" x2="560" y2="201" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="696" y1="201" x2="710" y2="201" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="846" y1="201" x2="860" y2="201" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Fail-Closed Intercept Bar inside Pipeline -->
+  <rect x="264" y="274" width="730" height="42" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2"/>
+  <text x="629" y="292" text-anchor="middle" fill="#991b1b" font-size="11.5" font-weight="700">Fail-Closed 安全拦截通道：模型验证未过 (R²&lt;0.80 / Fit&lt;85%) · 调节阀粘滞 · 外扰未改善 · 约束超限 · 审计缺失</text>
+  <text x="629" y="309" text-anchor="middle" fill="#b91c1c" font-size="10.5">一律阻断参数推荐并保持原 DCS 参数，绝不降级放行危险参数（30 回路保守安全决策 100% · 危险误放行 0%）</text>
+
+  <!-- Layer 3: Output / Human-in-the-loop -->
+  <rect x="1036" y="96" width="216" height="236" rx="5" fill="#ffffff" stroke="#046c4e" stroke-width="1.8"/>
+  <rect x="1036" y="96" width="216" height="32" rx="5" fill="#046c4e"/>
+  <text x="1144" y="117" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">人工复核与审计交付</text>
+  <rect x="1050" y="142" width="188" height="52" rx="3" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="1144" y="163" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">工业 HMI 工作站</text>
+  <text x="1144" y="182" text-anchor="middle" fill="#047857" font-size="10.5">双校验防伪通过 · 4 工程图</text>
+  <rect x="1050" y="206" width="188" height="50" rx="3" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="1144" y="227" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">DCS 参数变更复核单</text>
+  <text x="1144" y="245" text-anchor="middle" fill="#64748b" font-size="10.5">严格 run_id 绑定 (越权 409)</text>
+  <rect x="1050" y="268" width="188" height="48" rx="3" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="1144" y="288" text-anchor="middle" fill="#92400e" font-size="11.5" font-weight="700">自控工程师人工审批</text>
+  <text x="1144" y="305" text-anchor="middle" fill="#b45309" font-size="10" font-family="Consolas, monospace">deployment_authorized=false</text>
+
+  <line x1="1008" y1="201" x2="1032" y2="201" stroke="#046c4e" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Bottom Infrastructure Row (3 Pillars) -->
+  <!-- Pillar 1: Shared Blackboard & Telemetry -->
+  <rect x="28" y="362" width="388" height="148" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="28" y="362" width="388" height="30" rx="5" fill="#e2e8f0"/>
+  <text x="222" y="382" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="700">紧凑共享状态黑板与容错基础设施</text>
+  <text x="44" y="414" fill="#334155" font-size="11.5">• 紧凑结构化交接：15,023 B → 2,632 B（防上下文膨胀）</text>
+  <text x="44" y="438" fill="#334155" font-size="11.5">• 自动重试 + 幂等工具缓存：故障恢复 100%，零重复执行</text>
+  <text x="44" y="462" fill="#334155" font-size="11.5">• DeepSeek 实时推理 + 离线规则无缝降级，零单点卡死</text>
+  <text x="44" y="486" fill="#64748b" font-size="11">• 144 次原始消融记录独立复算（recompute_ablation.py）</text>
+
+  <!-- Pillar 2: Knowledge & Protocol -->
+  <rect x="446" y="362" width="388" height="148" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="446" y="362" width="388" height="30" rx="5" fill="#e2e8f0"/>
+  <text x="640" y="382" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="700">石化领域知识库与标准协议层</text>
+  <text x="462" y="414" fill="#334155" font-size="11.5">• OWL 故障与约束本体：116 条 RDF 三元组自动校验</text>
+  <text x="462" y="438" fill="#334155" font-size="11.5">• SQL 审计存证模型：7 张核心表 + 22 条领域知识三元组</text>
+  <text x="462" y="462" fill="#334155" font-size="11.5">• MCP JSON-RPC 2.0 协议服务：14/14 集成测试全通过</text>
+  <text x="462" y="486" fill="#64748b" font-size="11">• openJiuwen 适配层：本地原生 SDK / 轻量化 CI 兼容运行时</text>
+
+  <!-- Pillar 3: CI/CD & Verification -->
+  <rect x="864" y="362" width="388" height="148" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="864" y="362" width="388" height="30" rx="5" fill="#e2e8f0"/>
+  <text x="1058" y="382" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="700">全链路自动化验证与持续集成门禁 (CI)</text>
+  <text x="880" y="414" fill="#334155" font-size="11.5">• Pytest 全量安全/审计/Web 契约：CI 40 passed, 1 skipped</text>
+  <text x="880" y="438" fill="#334155" font-size="11.5">• 真实无头 Chromium Playwright E2E（含 500/篡改负向测试）</text>
+  <text x="880" y="462" fill="#334155" font-size="11.5">• Node.js 前端语法检查 + 8 类 B1/C 等价篡改故障注入</text>
+  <text x="880" y="486" fill="#046c4e" font-size="11" font-weight="700">• GitHub Actions Run #45359152526 全绿 + Render 自动部署</text>
+
+  <!-- Footer Evidence Bar -->
+  <rect x="28" y="536" width="1224" height="116" rx="5" fill="#1e293b"/>
+  <text x="52" y="566" fill="#f8fafc" font-size="13.5" font-weight="700">核心可复现量化基线（全部原始数据与复算脚本归档于仓库）</text>
+  <text x="52" y="594" fill="#cbd5e1" font-size="12" font-family="Consolas, monospace">30 回路基准: 诊断 30/30 (100%) | 保守安全 30/30 (100%) | 独立精确匹配 24/30 (80.0%) | 危险误放行 0/19 (0.0%)</text>
+  <text x="52" y="618" fill="#cbd5e1" font-size="12" font-family="Consolas, monospace">40 SOPDT 泛化: 全量 38/40 (95.0%) | 严格留出集 OOD-33..40 7/8 (87.5%) | 错误推荐 0/24 (95%单侧上界 ≤11.73%)</text>
+  <text x="52" y="641" fill="#94a3b8" font-size="11" font-family="Consolas, monospace">Backend Frozen SHA: d8efc92c3ec78a207919a307b23f15b82e01dba6 | Latest HMI+Playwright CI SHA: a5867d22ecac6f808d9322cd0a3dee6f9341a5a8</text>
+</svg>
