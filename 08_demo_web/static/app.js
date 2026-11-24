@@ -474,7 +474,7 @@ function renderResult(data) {
   document.getElementById('mIdAcc').innerHTML = data.identification
     ? `<span style="color:${data.identification.allow_next_stage ? '#046c4e' : '#b91c1c'}">${data.identification.val_fit_pct}% / R²=${data.identification.val_r2}</span>`
     : '<span style="color:#5b6b7f">健康跳过</span>';
-  if (data.safety) {
+  if (data.safety && typeof data.safety.gain_margin === 'number') {
     const s = data.safety;
     const gmW = Math.min(100, Math.round((s.gain_margin / 4.0) * 100));
     const pmW = Math.min(100, Math.round((s.phase_margin_deg / 80.0) * 100));
@@ -578,23 +578,23 @@ function renderResult(data) {
   // 11-Item Safety Audit
   const auditBody = document.getElementById('auditBody');
   auditBody.innerHTML = '';
-  if (data.safety) {
+  if (data.safety && Array.isArray(data.safety.constraint_audit) && data.safety.constraint_audit.length > 0) {
     data.safety.constraint_audit.forEach(c => {
-      auditBody.innerHTML += `<tr><td><b>${c.constraint_id}</b></td><td>${c.category}</td><td>${c.rule_name}</td><td>${c.measured_value}</td><td>${c.threshold}</td><td class="${c.passed ? 'st-pass':'st-fail'}">${c.passed ? 'PASS':'FAIL'}</td></tr>`;
+      auditBody.innerHTML += `<tr><td><b>${escHtml(c.constraint_id)}</b></td><td>${escHtml(c.category)}</td><td>${escHtml(c.rule_name)}</td><td>${escHtml(c.measured_value)}</td><td>${escHtml(c.threshold)}</td><td class="${c.passed ? 'st-pass':'st-fail'}">${c.passed ? 'PASS':'FAIL'}</td></tr>`;
     });
   } else {
-    auditBody.innerHTML = '<tr><td colspan="6" style="color:var(--muted)">健康回路，保持原 DCS 参数</td></tr>';
+    auditBody.innerHTML = '<tr><td colspan="6" style="color:var(--muted)">无完整安全约束记录（健康回路或审计未通过），保持原 DCS 参数</td></tr>';
   }
 
   // 5-Regime Table
   const regimeBody = document.getElementById('regimeBody');
   regimeBody.innerHTML = '';
-  if (data.safety) {
+  if (data.safety && Array.isArray(data.safety.operating_point_checks) && data.safety.operating_point_checks.length > 0) {
     data.safety.operating_point_checks.forEach(r => {
-      regimeBody.innerHTML += `<tr><td><b>${r.regime_name}</b></td><td>${r.plant_K} / ${r.plant_tau} / ${r.plant_theta}</td><td>${r.overshoot_pct}% / ≤${r.overshoot_limit_pct}%</td><td>${r.oscillation_index} / ≤${r.oi_limit}</td><td>${r.iae}</td><td class="${r.passed ? 'st-pass':'st-fail'}">${r.passed ? 'PASS':'FAIL'}</td></tr>`;
+      regimeBody.innerHTML += `<tr><td><b>${escHtml(r.regime_name)}</b></td><td>${escHtml(r.plant_K)} / ${escHtml(r.plant_tau)} / ${escHtml(r.plant_theta)}</td><td>${escHtml(r.overshoot_pct)}% / ≤${escHtml(r.overshoot_limit_pct)}%</td><td>${escHtml(r.oscillation_index)} / ≤${escHtml(r.oi_limit)}</td><td>${escHtml(r.iae)}</td><td class="${r.passed ? 'st-pass':'st-fail'}">${r.passed ? 'PASS':'FAIL'}</td></tr>`;
     });
   } else {
-    regimeBody.innerHTML = '<tr><td colspan="6" style="color:var(--muted)">健康回路，无需跨工况验证</td></tr>';
+    regimeBody.innerHTML = '<tr><td colspan="6" style="color:var(--muted)">无跨工况鲁棒验证记录，保持原 DCS 参数</td></tr>';
   }
 
   // Fair Baseline Comparison Table
