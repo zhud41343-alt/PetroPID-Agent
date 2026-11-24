@@ -166,6 +166,7 @@ def run_e2e() -> None:
             assert "danger" in tampered_cls and "ok" not in tampered_cls, f"Tampered payload showed green: {tampered_cls}"
             assert "审批证据不完整" in tampered_txt
             assert "审计: UNVERIFIED" in page.locator("#auditStrip").inner_text()
+            assert page.locator("#approvalBtn").is_disabled(), "approvalBtn MUST be disabled when audit_status != PASS"
             page.unroute("**/api/run/LOOP-006", _tampered_response)
 
             # 7. View 2 Sandbox 1-click CSV samples (valid 200 + malformed 400)

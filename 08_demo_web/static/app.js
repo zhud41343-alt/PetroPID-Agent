@@ -440,8 +440,15 @@ function renderResult(data) {
 
   const apBtn = document.getElementById('approvalBtn');
   const bdBtn = document.getElementById('bundleBtn');
-  if (apBtn) apBtn.disabled = !hasValidRunId;
-  if (bdBtn) bdBtn.disabled = !hasValidRunId;
+  if (apBtn) {
+    // Fail-Closed P2: NEVER enable printable MOC approval sheet when auditStatus !== 'PASS'
+    apBtn.disabled = !(hasValidRunId && auditStatus === 'PASS');
+    apBtn.title = auditStatus === 'PASS' ? '导出绑定当前工单的 DCS 复核单' : `审计状态为 ${auditStatus}，已禁止导出复核单`;
+  }
+  if (bdBtn) {
+    bdBtn.disabled = !hasValidRunId;
+    bdBtn.textContent = auditStatus === 'PASS' ? '审计包' : '调试包(未验)';
+  }
 
   const strip = document.getElementById('auditStrip');
   if (strip) {
