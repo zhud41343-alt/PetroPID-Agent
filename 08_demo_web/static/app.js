@@ -941,20 +941,27 @@ async function sendCopilot() {
   log.innerHTML += `<div class="msg msg-user">${formatMd(msg)}</div>`;
   log.scrollTop = log.scrollHeight;
 
-  const res = await fetch('/api/copilot', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: msg, current_loop_id: selectedLoop ? selectedLoop.loop_id : 'LOOP-006' }),
-  }).then(r => r.json());
+  try {
+    const resp = await fetch('/api/copilot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg, current_loop_id: selectedLoop ? selectedLoop.loop_id : 'LOOP-006' }),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const res = await resp.json();
 
-  log.innerHTML += `<div class="msg msg-bot">${formatMd(res.reply)}</div>`;
-  log.scrollTop = log.scrollHeight;
+    log.innerHTML += `<div class="msg msg-bot">${formatMd(res.reply || '无返回内容')}</div>`;
+    log.scrollTop = log.scrollHeight;
 
-  if (res.action && res.action.type === 'UPDATE_RESULT') {
-    renderResult(res.action.data);
-  } else if (res.action && (res.action.type === 'SELECT_LOOP' || res.action.type === 'HIGHLIGHT_LOOP')) {
-    const target = allLoops.find(l => l.loop_id === res.action.loop_id);
-    if (target) { selectLoop(target); runWorkflow(target.loop_id); }
+    if (res.action && res.action.type === 'UPDATE_RESULT') {
+      renderResult(res.action.data);
+    } else if (res.action && (res.action.type === 'SELECT_LOOP' || res.action.type === 'HIGHLIGHT_LOOP')) {
+      const target = allLoops.find(l => l.loop_id === res.action.loop_id);
+      if (target) { selectLoop(target); runWorkflow(target.loop_id); }
+    }
+  } catch (err) {
+    log.innerHTML += `<div class="msg msg-bot" style="color:#b91c1c;border-color:#fecaca;background:#fef2f2">■ 指令请求失败（${escHtml(err.message || '网络异常')}），请稍后重试。</div>`;
+    log.scrollTop = log.scrollHeight;
   }
 }
 
@@ -972,10 +979,17 @@ async function runSandbox() {
     max_overshoot_pct: +document.getElementById('sOs').value,
   };
   try {
-    const data = await fetch('/api/sandbox', {
+    const resp = await fetch('/api/sandbox', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
-    }).then(r => r.json());
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
     renderSandboxOutput(data);
+  } catch (err) {
+    const sbEl = document.getElementById('sbStatus');
+    sbEl.textContent = '沙盒请求异常';
+    sbEl.className = 'chip chip-AGGRESSIVE_TUNING';
+    document.getElementById('sbSummary').innerHTML = `<b style="color:#b91c1c">■ 沙盒仿真请求失败（${escHtml(err.message || '网络异常')}）</b>，未更新参数结论。`;
   } finally {
     btn.disabled = false; btn.textContent = '注入自定义工况并执行闭环校验';
   }
