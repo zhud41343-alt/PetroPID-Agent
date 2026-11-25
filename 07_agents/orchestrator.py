@@ -49,7 +49,7 @@ from petro_pid import (
     verify_pid_safety,
 )
 from petro_pid.identification import simulate_fopdt_open_loop
-from petro_pid.tuning import _simc_pid
+from petro_pid.tuning import _simc_pid, refine_pid_from_safety_feedback
 from skill_runner import SkillRunner, _load_loop_metadata, _load_loop_dataframe
 from llm_gateway import LLMGateway
 from decision_engine import (
@@ -722,6 +722,46 @@ class PetroPIDOrchestrator:
                 ).to_dict()
                 t4 = t4b
 
+        # V4.3.4 Live Multi-Agent Critic-Refiner Closed-Loop Feedback (SafetyVerificationAgent <-> TuningAgent)
+        critic_refiner_rounds = 0
+        if validation_profile == "v4.3.4" and not safety["approved"]:
+            while not safety["approved"] and critic_refiner_rounds < 3:
+                refined_pid, refine_reason = refine_pid_from_safety_feedback(
+                    ident_plant,
+                    PIDParams(Kc=rec_pid["Kc"], Ti=rec_pid["Ti"], Td=rec_pid["Td"]),
+                    safety,
+                    min_gm=min_gm,
+                    min_pm_deg=min_pm_deg,
+                    max_ms=max_ms,
+                )
+                if refined_pid is None:
+                    break
+                critic_refiner_rounds += 1
+                trace.append({
+                    "step": len(trace) + 1,
+                    "stage": "安全反馈重整定",
+                    "agent": "TuningAgent",
+                    "skill": "refine_pid_from_safety_feedback",
+                    "latency_ms": 0.5,
+                    "status": "REFINING",
+                    "critic_refiner_round": critic_refiner_rounds,
+                    "summary": f"【Critic-Refiner 第 {critic_refiner_rounds} 轮】收到 SafetyVerificationAgent 违规反馈（{', '.join(safety['violation_tags'])}），自适应重调至 Kc={refined_pid.Kc}, Ti={refined_pid.Ti}s（{refine_reason}）。",
+                    "metrics": {"round": critic_refiner_rounds, "Kc": refined_pid.Kc, "Ti": refined_pid.Ti, "Td": refined_pid.Td},
+                })
+                chosen_strategy = f"critic_refiner_r{critic_refiner_rounds}"
+                rec_pid = {"Kc": refined_pid.Kc, "Ti": refined_pid.Ti, "Td": refined_pid.Td}
+                t4r = time.perf_counter()
+                safety = verify_pid_safety(
+                    plant=ident_plant,
+                    candidate_pid=refined_pid,
+                    dt=meta["dt"],
+                    model_valid=True,
+                    model_val_r2=ident["val_r2"],
+                    model_val_fit_pct=ident["val_fit_pct"],
+                    min_gm=min_gm, min_pm_deg=min_pm_deg, max_ms=max_ms, max_overshoot_pct=max_overshoot_pct,
+                ).to_dict()
+                t4 = t4r
+
         trace.append({
             "step": len(trace) + 1,
             "stage": "安全验证",
@@ -730,7 +770,8 @@ class PetroPIDOrchestrator:
             "latency_ms": round((time.perf_counter() - t4) * 1000.0, 2),
             "status": "CONSTRAINTS_PASS" if safety["approved"] else "REJECTED",
             "fallback_triggered": fallback_triggered,
-            "summary": ("【回退二次校验】" if fallback_triggered else "") + safety["summary"] + ("（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）" if safety["approved"] else ""),
+            "critic_refiner_rounds": critic_refiner_rounds,
+            "summary": (f"【Critic-Refiner {critic_refiner_rounds} 轮反馈过审】" if critic_refiner_rounds > 0 and safety["approved"] else ("【回退二次校验】" if fallback_triggered else "")) + safety["summary"] + ("（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）" if safety["approved"] else ""),
             "metrics": {
                 "approved": safety["approved"],
                 "constraint_coverage_pct": safety["constraint_coverage_pct"],

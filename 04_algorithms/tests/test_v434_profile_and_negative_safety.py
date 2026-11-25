@@ -170,3 +170,22 @@ def test_v434_critic_refiner_converges_on_tight_margin_plant():
         if sv.approved:
             break
     assert sv.approved is True
+
+
+def test_v434_orchestrator_live_critic_refiner_trace_and_audit():
+    orch = PetroPIDOrchestrator()
+    res = orch.run_loop_workflow(
+        "LOOP-006",
+        min_gm=3.5,
+        min_pm_deg=60.0,
+        max_ms=1.25,
+        max_overshoot_pct=5.0,
+        validation_profile="v4.3.4",
+    )
+    assert res["deployment_authorized"] is False
+    assert res["audit_meta"]["audit_verification"]["audit_status"] == "PASS"
+    assert verify_audit_record(res)["audit_status"] == "PASS"
+    trace = res.get("trace", [])
+    assert any(step.get("skill") == "refine_pid_from_safety_feedback" for step in trace)
+    assert res["final_status"] == "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
+    assert "scale_invariant_stiction_score" in res["diagnosis"]["evidence"]

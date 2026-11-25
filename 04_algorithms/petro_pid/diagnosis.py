@@ -495,6 +495,8 @@ def diagnose_loop(
             )
             action = "维持当前 PID 参数运行，纳入常规周期巡检。"
 
+    si_flag, si_score, _ = compute_scale_invariant_stiction_score(pv, op)
+
     return DiagnosisResult(
         anomaly_type=anomaly_type,
         severity=severity,
@@ -519,6 +521,8 @@ def diagnose_loop(
             "op_total_std": round(op_total_std, 4),
             "pv_total_std": round(pv_total_std, 4),
             "n_sp_steps": float(len(step_idxs)),
+            "scale_invariant_stiction_score": round(si_score, 4),
+            "scale_invariant_stiction_flag": 1.0 if si_flag else 0.0,
         },
         evidence_sufficient=evidence_sufficient,
         uncertainty_reason=uncertainty_reason,
