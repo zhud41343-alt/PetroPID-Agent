@@ -1,4 +1,7 @@
-# 09 · 竞赛交付物核对矩阵（V4.2 统一版本）
+> [!NOTE]
+> **历史归档提示**：本文件为 V4.2 阶段交付核对快照，最新 V4.3.3/V4.3.4 统一提交口径与 14 项交付索引请以 [JUDGE_PORTAL.md](../JUDGE_PORTAL.md) 与 [00_MASTER_SCORECARD.md](submission_v433/00_MASTER_SCORECARD.md) 为准。
+
+# 09 · 竞赛交付物核对矩阵（V4.2 历史快照）
 
 > 本文件与 `competition_v4/final_audit/COMPETITION_DELIVERABLE_CHECKLIST.md` 保持唯一版本同步。
 

@@ -18,7 +18,7 @@
 | **正式技术方案 & 矢量架构图** | [01_TECHNICAL_SPECIFICATION.md](competition_v4/submission_v433/01_TECHNICAL_SPECIFICATION.md) · [02_ARCHITECTURE_DIAGRAM.svg](competition_v4/submission_v433/02_ARCHITECTURE_DIAGRAM.svg) | 含 12 项证据溯源总表 [03_EVIDENCE_TRACEABILITY_MATRIX.md](competition_v4/submission_v433/03_EVIDENCE_TRACEABILITY_MATRIX.md) |
 | **ISDB 76 回路真实工业数据外部评估** | [04_ISDB_EXTERNAL_INDUSTRIAL_EVAL.md](competition_v4/submission_v433/04_ISDB_EXTERNAL_INDUSTRIAL_EVAL.md) | 未知真值门禁 `0/76` 放行、`76/76` 二次完整性核验、严格子集三方法横向对照（`52.63%` vs `58.82%`） |
 | **openJiuwen 原生 Workflow 实测记录** | [openjiuwen_native_workflow_run.json](competition_v4/submission_v433/openjiuwen_native_workflow_run.json) | 本地 `openjiuwen==0.1.21` Pregel `Workflow` 在 `LOOP-006/012/021` 全部 `COMPLETED` |
-| **终审答辩 PPT 大纲与 10 问应答** | [06_DEFENSE_PPT_OUTLINE.md](competition_v4/submission_v433/06_DEFENSE_PPT_OUTLINE.md) | 直接覆盖三大必问核心质疑 |
+| **终审答辩成品 PPT（12 页）与 10 问应答** | [PetroPID-Agent_V4.3.4_终审答辩.pptx](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_终审答辩.pptx) · [06_DEFENSE_PPT_OUTLINE.md](competition_v4/submission_v433/06_DEFENSE_PPT_OUTLINE.md) | 12 页 16:9 工业风答辩稿（含图表、架构图与逐页演讲备注） |
 | **GitHub Actions 全绿 CI** | https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45407805806 | Linux CI `40 passed, 1 skipped` + Playwright 无头 Chromium `8/8 PASS` + `14/14 MCP` |
 
 ---
