@@ -3,7 +3,7 @@
 > **第二届石油和化工行业人工智能创新大赛 · 智能体赛道（赛题 5）正式参赛仓库**
 > **评委一键评审入口**：[JUDGE_PORTAL.md](JUDGE_PORTAL.md) · **全口径主成绩单**：[00_MASTER_SCORECARD.md](competition_v4/submission_v433/00_MASTER_SCORECARD.md)
 > **正式公网 Demo**：https://petropid-agent.onrender.com （当前线上 `/healthz` 实测为 `4.3.3` 冻结基线；V4.3.4 候选已在本地离线全链路复现，待审核后再决定是否部署）
-> **第三方离线 CI 门禁**：GitHub Actions [Run #45407211036](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45407211036)（Ubuntu + Python 3.11 + 无头 Chromium Playwright 回归全绿；本地离线 `pytest` **58 passed**）
+> **第三方离线 CI 门禁**：GitHub Actions [Run #45407211036](https://github.com/zhud41343-alt/PetroPID-Agent/actions/runs/45407211036)（Ubuntu + Python 3.11 + 无头 Chromium Playwright 回归全绿；本地离线 `pytest` **59 passed**，由根目录 `conftest.py` 自动隔离 `.env`）
 > **安全边界声明**：本系统仅运行于隔离机理仿真与脱敏离线历史数据，未连接或写入真实 DCS/PLC，`deployment_authorized` 恒为 `false`；外部未知上传 CSV 缺乏独立过程物理真值，严禁输出安全验证通过结论；全记录 SHA-256 摘要 `record_digest_sha256` 为强制必填项（缺失/旧版/篡改一律返回 `FAIL` 与 `HTTP 422`）。
 
 ---
@@ -20,9 +20,9 @@
 | **放行回路 5 工况通过率 & 收益** | 仿真通过组 / 全 25 非健康已检平均 | **100.0%** (`n=11`) / `78.4%` | **100.0%** (`n=17`) / `78.4%` | 目标 ≥ 85%，OI `-96.05%` / IAE `-95.48%` |
 | **公平 SIMC Pareto 对照 (`n=11`)** | 标称 IAE + 5 工况安全审批率 | **Balanced 100% 安全通过（IAE 0.458）** | 同左 | SIMC 与 Performance 均未通过鲁棒安全门控被拒批；Balanced 换取 PM `+9.66°`、扰动超调 `-10.87%` |
 | **40 样本二阶 SOPDT 跨模型泛化** | 32 回归集 + 8 严格留出集 (`OOD-33..40`) | **留出 87.5% · 总 95.0% · 误放行 0** | 同左 | Clopper-Pearson 95% 误放行单侧上界 `11.73%` (`n=24`) |
-| **ISDB 76 真实工业化工/炼油回路** | 外部只读探索（不宣称真实闭环收益） | **未知真值门禁 0/76 放行 · 76/76 审计 PASS** | **量纲无关物理融合严格 16 回路 F1 `80.00%`（LOOCV & 固定先验，反超 Horch `58.82%` +21.18pp）** | 探索 28 回路 LOOCV F1 `66.67%`（冻结 V4.3.3 `52.63%` vs Horch `58.82%` vs 滞环 `46.15%`） |
-| **强单体（B3）vs 五阶段（C）公平对照** | 标准 48 次配对 + 高危严苛红线 12 难例 + 6 条预置诊断阻断路径 | 标准口径决策打平 `24/24` · 失败定位 `100% vs 0%` | **高危严苛红线 Critic-Refiner 闭环反馈 `12/12 (100%)` vs 单次单体 `0/12`**；6 条预置阻断路径两侧均为 `0` 放行 | 严苛红线为确定性安全反馈压力测试，预置阻断路径不作为独立诊断准确率证据 |
-| **自动化测试 & 协议验证** | `pytest` + Playwright + `MCP` + `OWL/SQL` | **CI 40 passed, 1 skipped · Playwright 8/8** | **本地离线 58 passed · openJiuwen Workflow PASS · 14/14 MCP · Render 定时保活** | 含 12 项强制摘要负向测试、10 项 V4.3.4 负向/量纲无关/Critic-Refiner 安全测试 |
+| **ISDB 76 真实工业化工/炼油回路** | 外部只读探索（不宣称真实闭环收益） | **未知真值门禁 0/76 放行 · 76/76 审计 PASS** | **量纲无关物理融合严格 16 回路 F1 `80.00%`（探索性评测：固定先验 & LOOCV，反超 Horch `58.82%` +21.18pp）** | 探索 28 回路 LOOCV F1 `66.67%`（LOOCV 阈值计算未用当折测试标签，仍需全新独立工业数据集验证） |
+| **强单体（B3）vs 五阶段（C）公平对照** | 标准 48 次配对 + 组件级严苛红线 12 难例 + 6 条预置阻断路径 | 标准口径决策打平 `24/24` · 失败定位 `100% vs 0%` | **安全反馈协作 Critic-Refiner `12/12 (100%)` vs 无迭代固定候选 B3 `0/12`**；6 条预置阻断路径两侧均为 `0` 放行 | 严谨归因：验证反馈协作相对无迭代固定候选的组件级恢复增益，不替代同等迭代预算单体或独立诊断准确率证据 |
+| **自动化测试 & 协议验证** | `pytest` + Playwright + `MCP` + `OWL/SQL` | **CI 40 passed, 1 skipped · Playwright 8/8** | **本地离线 59 passed · 主编排 Critic-Refiner 端到端 PASS · 14/14 MCP · Render 定时保活** | 含 12 项强制摘要负向测试、11 项 V4.3.4 负向/量纲无关/生产编排 Critic-Refiner 测试 |
 
 ---
 
@@ -47,6 +47,7 @@
 | **L4：公网 Render 512MB Free 容器生产环境** | **轻量兼容适配层** | 防 512MB 容器 OOM，未部署全量原生 SDK 与 Milvus 向量库（Milvus 保持 **`UNVERIFIED`**） |
 
 - **审计完整性边界**：提供全记录规范化 SHA-256 哈希完整性校验（可检出字段篡改与意外修改），不含外部 KMS/PKI 签名根，不宣称密码学不可抵赖。
+- **版本与运行态溯源说明**：本仓库 `main` 为最新封版源码（默认 Profile 保留 `V4.3.3` 冻结基线，前端与 API 支持切换 `V4.3.4` 正式编排候选）；Render 公网 `/healthz` 返回实际部署的 `code_commit` 与默认 `version` 字段，最终视频与演示均严格标注对应版本号与离线/在线运行模式。
 - **配套视频（10 分）与答辩 PPT**：主演示脚本 [05_DEMO_VIDEO_SCRIPT.md](competition_v4/submission_v433/05_DEMO_VIDEO_SCRIPT.md)、3 份分镜脚本（`01_docs/`）与 12 页成品答辩 PPT（[PetroPID-Agent_V4.3.4_终审答辩.pptx](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_终审答辩.pptx)）已就绪；正式 MP4 录屏视频待最终录制上传。
 
 ---
@@ -56,7 +57,7 @@
 - `01_docs/`：Story / Toolkit / Reference (4 篇) / Roadmap + 3 份视频分镜脚本
 - `02_datasets/`：5 大石化装置 30 回路原始/清洗/标注/划分数据集与脱敏声明
 - `03_models/`：SQL 数据模型 (7 表) / ISA-5.1 信息模型 / 22 知识三元组 / OWL 本体 (116 三元组)
-- `04_algorithms/`：核心工业控制算子 + 51 项单元/回归/安全/审计/Web 契约测试
+- `04_algorithms/`：核心工业控制算子 + 55 项单元/回归/安全/审计/Web 契约测试
 - `05_skills/`：5 大标准化 Skill（SHA-256 幂等防重缓存）+ 4 项单元测试（含原生 `openjiuwen` SDK 与 Workflow）
 - `06_mcp/`：JSON-RPC 2.0 MCP 服务端/客户端（stdio + HTTP `/mcp/rpc`）+ 14/14 联调报告
 - `07_agents/`：5-Agent 编排 + 独立 9 态 `FinalDecisionEngine` + `openjiuwen_native_workflow.py` + 全套基准/消融评测脚本
