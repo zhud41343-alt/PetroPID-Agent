@@ -11,8 +11,8 @@
       "paired_input_hash_match_rate_pct": 100.0,
       "independent_stage_separation_rate_pct": 0.0,
       "mean_handoff_bytes": 171.5,
-      "latency_ms_p50": 151.13,
-      "latency_ms_p95": 246.68
+      "latency_ms_p50": 159.82,
+      "latency_ms_p95": 318.56
     },
     "C_petropid_5agent_blackboard": {
       "total_trials": 24,
@@ -24,16 +24,16 @@
       "audit_verified_rate_pct": 100.0,
       "paired_input_hash_match_rate_pct": 100.0,
       "independent_stage_separation_rate_pct": 100.0,
-      "mean_handoff_bytes": 2683.2,
-      "latency_ms_p50": 182.92,
-      "latency_ms_p95": 261.78
+      "mean_handoff_bytes": 2683.5,
+      "latency_ms_p50": 223.51,
+      "latency_ms_p95": 334.9
     },
     "head_to_head_decision_tie": true
   },
   "b3_trials": [
     {
       "experiment_id": "PAIR-normal-LOOP-001",
-      "run_id": "RUN-20261125044308426-c5a95da02a",
+      "run_id": "RUN-20261125092038497-c8db7a78dd",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-001",
       "scenario": "normal",
@@ -49,18 +49,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 91,
-      "latency_ms": 32.27,
+      "latency_ms": 30.12,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-006",
-      "run_id": "RUN-20261125044308682-b117c263ac",
+      "run_id": "RUN-20261125092038773-100c2adb2c",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-006",
       "scenario": "normal",
@@ -76,18 +76,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 229,
-      "latency_ms": 235.43,
+      "latency_ms": 258.61,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-012",
-      "run_id": "RUN-20261125044308992-5d443cc862",
+      "run_id": "RUN-20261125092039096-d29d805a34",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-012",
       "scenario": "normal",
@@ -103,18 +103,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 152,
-      "latency_ms": 73.06,
+      "latency_ms": 87.46,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-021",
-      "run_id": "RUN-20261125044309106-7a986f0e1e",
+      "run_id": "RUN-20261125092039219-bf04b1af58",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-021",
       "scenario": "normal",
@@ -130,18 +130,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 99,
-      "latency_ms": 26.12,
+      "latency_ms": 25.02,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-025",
-      "run_id": "RUN-20261125044309461-754979ab27",
+      "run_id": "RUN-20261125092039588-29866408b9",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-025",
       "scenario": "normal",
@@ -157,18 +157,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 226,
-      "latency_ms": 223.63,
+      "latency_ms": 232.19,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-029",
-      "run_id": "RUN-20261125044309932-12d9187ce4",
+      "run_id": "RUN-20261125092040086-b4f4a1e414",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-029",
       "scenario": "normal",
@@ -184,18 +184,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 231,
-      "latency_ms": 246.76,
+      "latency_ms": 252.0,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-001",
-      "run_id": "RUN-20261125044310207-79d2c121bb",
+      "run_id": "RUN-20261125092040389-e8f79aa1e1",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-001",
       "scenario": "first_call_timeout",
@@ -211,18 +211,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 91,
-      "latency_ms": 25.66,
+      "latency_ms": 30.37,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-006",
-      "run_id": "RUN-20261125044310449-df03a95971",
+      "run_id": "RUN-20261125092040703-12f3db83ae",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-006",
       "scenario": "first_call_timeout",
@@ -238,18 +238,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 229,
-      "latency_ms": 223.54,
+      "latency_ms": 293.27,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-012",
-      "run_id": "RUN-20261125044310749-3036c69c4b",
+      "run_id": "RUN-20261125092041090-6d75fa2436",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-012",
       "scenario": "first_call_timeout",
@@ -265,18 +265,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 152,
-      "latency_ms": 68.71,
+      "latency_ms": 82.64,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-021",
-      "run_id": "RUN-20261125044310853-9c3420eb67",
+      "run_id": "RUN-20261125092041214-49b965f1b5",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-021",
       "scenario": "first_call_timeout",
@@ -292,18 +292,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 99,
-      "latency_ms": 26.59,
+      "latency_ms": 43.16,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-025",
-      "run_id": "RUN-20261125044311203-1b8a16fda3",
+      "run_id": "RUN-20261125092041713-efea3e4933",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-025",
       "scenario": "first_call_timeout",
@@ -319,18 +319,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 226,
-      "latency_ms": 221.14,
+      "latency_ms": 306.28,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-first_call_timeout-LOOP-029",
-      "run_id": "RUN-20261125044311680-35a3036214",
+      "run_id": "RUN-20261125092042310-bbf72f4552",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-029",
       "scenario": "first_call_timeout",
@@ -346,18 +346,18 @@
       "recovered_fault": true,
       "audit_verified": true,
       "handoff_bytes": 231,
-      "latency_ms": 243.16,
+      "latency_ms": 318.64,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-001",
-      "run_id": "RUN-20261125044311956-ba978d3377",
+      "run_id": "RUN-20261125092042689-59732d6d55",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-001",
       "scenario": "duplicate_call",
@@ -373,18 +373,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 91,
-      "latency_ms": 26.56,
+      "latency_ms": 40.98,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-006",
-      "run_id": "RUN-20261125044312203-2b2252bfd4",
+      "run_id": "RUN-20261125092042974-58175a1a8e",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-006",
       "scenario": "duplicate_call",
@@ -400,18 +400,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 229,
-      "latency_ms": 228.39,
+      "latency_ms": 268.51,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-012",
-      "run_id": "RUN-20261125044312514-be719b73fb",
+      "run_id": "RUN-20261125092043383-5881ba5795",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-012",
       "scenario": "duplicate_call",
@@ -427,18 +427,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 152,
-      "latency_ms": 68.3,
+      "latency_ms": 82.71,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-021",
-      "run_id": "RUN-20261125044312618-5e56e81f39",
+      "run_id": "RUN-20261125092043542-d089a36f2c",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-021",
       "scenario": "duplicate_call",
@@ -454,18 +454,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 99,
-      "latency_ms": 25.76,
+      "latency_ms": 28.26,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-025",
-      "run_id": "RUN-20261125044312973-10101e654f",
+      "run_id": "RUN-20261125092044028-e2669602b3",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-025",
       "scenario": "duplicate_call",
@@ -481,18 +481,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 226,
-      "latency_ms": 225.51,
+      "latency_ms": 309.48,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-duplicate_call-LOOP-029",
-      "run_id": "RUN-20261125044313439-4856edc60f",
+      "run_id": "RUN-20261125092044632-d756990fcb",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-029",
       "scenario": "duplicate_call",
@@ -508,18 +508,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 231,
-      "latency_ms": 246.25,
+      "latency_ms": 318.13,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-001",
-      "run_id": "RUN-20261125044313730-c093786bc5",
+      "run_id": "RUN-20261125092044984-5ad5b15f9c",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-001",
       "scenario": "tightened_ms_1.65_fallback",
@@ -535,18 +535,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 91,
-      "latency_ms": 27.31,
+      "latency_ms": 32.42,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-006",
-      "run_id": "RUN-20261125044313990-b45bf4be8a",
+      "run_id": "RUN-20261125092045291-986bce4291",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-006",
       "scenario": "tightened_ms_1.65_fallback",
@@ -562,18 +562,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 229,
-      "latency_ms": 240.97,
+      "latency_ms": 288.76,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-012",
-      "run_id": "RUN-20261125044314315-47522a9fdd",
+      "run_id": "RUN-20261125092045682-8431c0beda",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-012",
       "scenario": "tightened_ms_1.65_fallback",
@@ -589,18 +589,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 152,
-      "latency_ms": 81.13,
+      "latency_ms": 81.03,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-021",
-      "run_id": "RUN-20261125044314431-26fc87f908",
+      "run_id": "RUN-20261125092045809-731d3aa6b6",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-021",
       "scenario": "tightened_ms_1.65_fallback",
@@ -616,18 +616,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 99,
-      "latency_ms": 28.57,
+      "latency_ms": 29.7,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-025",
-      "run_id": "RUN-20261125044314808-fc7750d905",
+      "run_id": "RUN-20261125092046285-e43055534c",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-025",
       "scenario": "tightened_ms_1.65_fallback",
@@ -643,18 +643,18 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 226,
-      "latency_ms": 232.12,
+      "latency_ms": 279.52,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-029",
-      "run_id": "RUN-20261125044315341-a1ac5b2e5e",
+      "run_id": "RUN-20261125092046988-236fde9b50",
       "system": "B3_strong_monolithic_with_fallback",
       "loop_id": "LOOP-029",
       "scenario": "tightened_ms_1.65_fallback",
@@ -670,20 +670,20 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 235,
-      "latency_ms": 281.2,
+      "latency_ms": 403.84,
       "stage_localization": {
         "distinct_role_count": 1,
         "has_stage_field_all_steps": false,
         "independent_safety_decision_separation": false,
         "trace_step_count": 1
       },
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     }
   ],
   "c_trials": [
     {
       "experiment_id": "PAIR-normal-LOOP-001",
-      "run_id": "RUN-C-62926951",
+      "run_id": "RUN-C-2ac01d28",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-001",
       "scenario": "normal",
@@ -699,7 +699,7 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 1103,
-      "latency_ms": 20.15,
+      "latency_ms": 17.9,
       "stage_localization": {
         "distinct_role_count": 2,
         "has_stage_field_all_steps": true,
@@ -712,7 +712,7 @@
           "stage": "诊断证据",
           "agent": "DiagnosisAgent",
           "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.64,
+          "latency_ms": 2.99,
           "status": "DONE",
           "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
           "llm_telemetry": {
@@ -748,11 +748,11 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-006",
-      "run_id": "RUN-C-efdc32fd",
+      "run_id": "RUN-C-d789f728",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-006",
       "scenario": "normal",
@@ -768,7 +768,7 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 3521,
-      "latency_ms": 236.91,
+      "latency_ms": 247.78,
       "stage_localization": {
         "distinct_role_count": 5,
         "has_stage_field_all_steps": true,
@@ -781,7 +781,7 @@
           "stage": "诊断证据",
           "agent": "DiagnosisAgent",
           "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.53,
+          "latency_ms": 2.99,
           "status": "DONE",
           "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
           "llm_telemetry": {
@@ -806,7 +806,7 @@
           "stage": "模型辨识",
           "agent": "IdentificationAgent",
           "skill": "fopdt_system_identification",
-          "latency_ms": 87.19,
+          "latency_ms": 91.02,
           "status": "DONE",
           "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
           "llm_telemetry": {
@@ -834,7 +834,7 @@
           "stage": "整定候选",
           "agent": "TuningAgent",
           "skill": "adaptive_pid_tuning",
-          "latency_ms": 106.99,
+          "latency_ms": 109.98,
           "status": "DONE",
           "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
           "llm_telemetry": {
@@ -856,7 +856,7 @@
           "stage": "安全验证",
           "agent": "SafetyVerificationAgent",
           "skill": "safety_constraint_verification",
-          "latency_ms": 14.34,
+          "latency_ms": 15.43,
           "status": "CONSTRAINTS_PASS",
           "fallback_triggered": false,
           "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
@@ -875,7 +875,7 @@
           "stage": "审批建议",
           "agent": "FinalDecisionEngine",
           "skill": "final_decision_aggregation",
-          "latency_ms": 8.23,
+          "latency_ms": 7.66,
           "status": "DONE",
           "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
           "metrics": {
@@ -888,11 +888,11 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-012",
-      "run_id": "RUN-C-fb31e6b6",
+      "run_id": "RUN-C-fe8adf9b",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-012",
       "scenario": "normal",
@@ -908,7 +908,7 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 2239,
-      "latency_ms": 87.09,
+      "latency_ms": 85.19,
       "stage_localization": {
         "distinct_role_count": 3,
         "has_stage_field_all_steps": true,
@@ -921,7 +921,7 @@
           "stage": "诊断证据",
           "agent": "DiagnosisAgent",
           "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.05,
+          "latency_ms": 2.73,
           "status": "DONE",
           "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
           "llm_telemetry": {
@@ -946,7 +946,7 @@
           "stage": "模型辨识",
           "agent": "IdentificationAgent",
           "skill": "fopdt_system_identification",
-          "latency_ms": 51.61,
+          "latency_ms": 46.03,
           "status": "REJECTED",
           "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
           "llm_telemetry": {
@@ -974,7 +974,7 @@
           "stage": "安全验证与审批建议",
           "agent": "FinalDecisionEngine",
           "skill": "final_decision_aggregation",
-          "latency_ms": 14.98,
+          "latency_ms": 14.72,
           "status": "REJECTED",
           "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
           "metrics": {
@@ -986,11 +986,11 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-021",
-      "run_id": "RUN-C-a840dd06",
+      "run_id": "RUN-C-59c84a44",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-021",
       "scenario": "normal",
@@ -1005,8 +1005,8 @@
       "retry_count": 0,
       "recovered_fault": false,
       "audit_verified": true,
-      "handoff_bytes": 2313,
-      "latency_ms": 132.47,
+      "handoff_bytes": 2312,
+      "latency_ms": 137.52,
       "stage_localization": {
         "distinct_role_count": 3,
         "has_stage_field_all_steps": true,
@@ -1019,7 +1019,7 @@
           "stage": "诊断证据",
           "agent": "DiagnosisAgent",
           "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.48,
+          "latency_ms": 4.12,
           "status": "DONE",
           "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
           "llm_telemetry": {
@@ -1044,7 +1044,7 @@
           "stage": "模型辨识",
           "agent": "IdentificationAgent",
           "skill": "fopdt_system_identification",
-          "latency_ms": 96.75,
+          "latency_ms": 98.2,
           "status": "DONE",
           "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
           "llm_telemetry": {
@@ -1072,7 +1072,7 @@
           "stage": "安全验证与审批建议",
           "agent": "FinalDecisionEngine",
           "skill": "final_decision_aggregation",
-          "latency_ms": 111.97,
+          "latency_ms": 113.36,
           "status": "WARNING",
           "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
           "metrics": {
@@ -1089,11 +1089,11 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-025",
-      "run_id": "RUN-C-33328638",
+      "run_id": "RUN-C-4e9b2e15",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-025",
       "scenario": "normal",
@@ -1109,7 +1109,7 @@
       "recovered_fault": false,
       "audit_verified": true,
       "handoff_bytes": 3475,
-      "latency_ms": 224.52,
+      "latency_ms": 245.62,
       "stage_localization": {
         "distinct_role_count": 5,
         "has_stage_field_all_steps": true,
@@ -1122,7 +1122,7 @@
           "stage": "诊断证据",
           "agent": "DiagnosisAgent",
           "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 2.93,
+          "latency_ms": 2.87,
           "status": "DONE",
           "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
           "llm_telemetry": {
@@ -1147,7 +1147,7 @@
           "stage": "模型辨识",
           "agent": "IdentificationAgent",
           "skill": "fopdt_system_identification",
-          "latency_ms": 78.75,
+          "latency_ms": 86.79,
           "status": "DONE",
           "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
           "llm_telemetry": {
@@ -1175,7 +1175,7 @@
           "stage": "整定候选",
           "agent": "TuningAgent",
           "skill": "adaptive_pid_tuning",
-          "latency_ms": 103.44,
+          "latency_ms": 110.37,
           "status": "DONE",
           "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
           "llm_telemetry": {
@@ -1197,7 +1197,7 @@
           "stage": "安全验证",
           "agent": "SafetyVerificationAgent",
           "skill": "safety_constraint_verification",
-          "latency_ms": 14.79,
+          "latency_ms": 14.64,
           "status": "CONSTRAINTS_PASS",
           "fallback_triggered": false,
           "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
@@ -1216,7 +1216,7 @@
           "stage": "审批建议",
           "agent": "FinalDecisionEngine",
           "skill": "final_decision_aggregation",
-          "latency_ms": 8.04,
+          "latency_ms": 7.99,
           "status": "DONE",
           "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
           "metrics": {
@@ -1229,11 +1229,11 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     },
     {
       "experiment_id": "PAIR-normal-LOOP-029",
-      "run_id": "RUN-C-c0445203",
+      "run_id": "RUN-C-916ace53",
       "system": "C_petropid_5agent_blackboard",
       "loop_id": "LOOP-029",
       "scenario": "normal",
@@ -1248,13 +1248,2083 @@
       "retry_count": 0,
       "recovered_fault": false,
       "audit_verified": true,
-      "handoff_bytes": 3341,
-      "latency_ms": 248.15,
+      "handoff_bytes": 3342,
+      "latency_ms": 275.17,
       "stage_localization": {
         "distinct_role_count": 5,
         "has_stage_field_all_steps": true,
         "independent_safety_decision_separation": true,
         "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.59,
+          "status": "DONE",
+          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "EXTERNAL_DISTURBANCE",
+            "severity": "WARNING",
+            "harris_index": 0.17,
+            "oscillation_index": 0.4753,
+            "stiction_index": 0.0214,
+            "iae": 1.3658,
+            "overshoot_pct": 51.35
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 111.62,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.1353,
+            "tau": 14.283,
+            "theta": 12.0,
+            "val_r2": 0.87,
+            "val_nrmse": 0.109,
+            "val_accuracy_pct": 89.1,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 114.59,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.6934,
+            "Ti": 20.245,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 17.76,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 2.695,
+            "phase_margin_deg": 69.33,
+            "max_sensitivity_ms": 1.676,
+            "multi_regime_pass_rate_pct": 80.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 9.74,
+          "status": "WARNING",
+          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
+          "metrics": {
+            "final_status": "PERFORMANCE_NOT_IMPROVED",
+            "candidate_eligible_for_review": false,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-001",
+      "run_id": "RUN-C-d4db43c8",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-001",
+      "scenario": "first_call_timeout",
+      "input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
+      "paired_input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
+      "final_status": "HEALTHY_NO_CHANGE",
+      "independent_expected_status": "HEALTHY_NO_CHANGE",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 2,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 1103,
+      "latency_ms": 19.48,
+      "stage_localization": {
+        "distinct_role_count": 2,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 2
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.18,
+          "status": "DONE",
+          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "NORMAL",
+            "severity": "HEALTHY",
+            "harris_index": 0.4051,
+            "oscillation_index": 0.0312,
+            "stiction_index": 0.0,
+            "iae": 0.3895,
+            "overshoot_pct": 16.15
+          }
+        },
+        {
+          "step": 2,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 0.1,
+          "status": "DONE",
+          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
+          "metrics": {
+            "final_status": "HEALTHY_NO_CHANGE",
+            "reason_codes": [
+              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-006",
+      "run_id": "RUN-C-c8b73a48",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-006",
+      "scenario": "first_call_timeout",
+      "input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
+      "paired_input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 3522,
+      "latency_ms": 304.74,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.44,
+          "status": "DONE",
+          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "AGGRESSIVE_TUNING",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9969,
+            "stiction_index": 0.268,
+            "iae": 10.8311,
+            "overshoot_pct": 409.7
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 115.61,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.3884,
+            "tau": 16.023,
+            "theta": 7.0,
+            "val_r2": 0.9984,
+            "val_nrmse": 0.0136,
+            "val_accuracy_pct": 98.64,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 136.9,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.8456,
+            "Ti": 20.504,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 17.43,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.206,
+            "phase_margin_deg": 70.38,
+            "max_sensitivity_ms": 1.546,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 11.28,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-012",
+      "run_id": "RUN-C-608601df",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-012",
+      "scenario": "first_call_timeout",
+      "input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
+      "paired_input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "independent_expected_status": "MODEL_VALIDATION_FAILED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 2239,
+      "latency_ms": 92.68,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 2.99,
+          "status": "DONE",
+          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "SLUGGISH_TUNING",
+            "severity": "WARNING",
+            "harris_index": 0.0766,
+            "oscillation_index": 0.0705,
+            "stiction_index": 0.0,
+            "iae": 2.144,
+            "overshoot_pct": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 52.84,
+          "status": "REJECTED",
+          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.0448,
+            "tau": 16.119,
+            "theta": 6.0,
+            "val_r2": 0.6047,
+            "val_nrmse": 0.2039,
+            "val_accuracy_pct": 79.61,
+            "allow_next_stage": false,
+            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 16.94,
+          "status": "REJECTED",
+          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
+          "metrics": {
+            "final_status": "MODEL_VALIDATION_FAILED",
+            "reason_codes": [
+              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+              "VIOLATION_MODEL_VALIDATION_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-021",
+      "run_id": "RUN-C-dd213505",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-021",
+      "scenario": "first_call_timeout",
+      "input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
+      "paired_input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
+      "final_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 2313,
+      "latency_ms": 180.37,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.76,
+          "status": "DONE",
+          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "VALVE_STICTION",
+            "severity": "CRITICAL",
+            "harris_index": 0.0903,
+            "oscillation_index": 0.9899,
+            "stiction_index": 0.4561,
+            "iae": 1.6254,
+            "overshoot_pct": 76.47
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 135.73,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.2798,
+            "tau": 7.194,
+            "theta": 8.0,
+            "val_r2": 0.9155,
+            "val_nrmse": 0.0789,
+            "val_accuracy_pct": 92.11,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 157.1,
+          "status": "WARNING",
+          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
+          "metrics": {
+            "final_status": "VALVE_MAINTENANCE_REQUIRED",
+            "reason_codes": [
+              "VALVE_STICTION_MECHANICAL_FAULT",
+              "VIOLATION_LOW_GAIN_MARGIN",
+              "VIOLATION_LOW_PHASE_MARGIN",
+              "VIOLATION_HIGH_SENSITIVITY_MS",
+              "VIOLATION_EXCESSIVE_OVERSHOOT",
+              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+              "MULTI_REGIME_ROBUSTNESS_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-025",
+      "run_id": "RUN-C-9caf033a",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-025",
+      "scenario": "first_call_timeout",
+      "input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
+      "paired_input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 3476,
+      "latency_ms": 277.78,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.48,
+          "status": "DONE",
+          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "MODEL_MISMATCH",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9298,
+            "stiction_index": 0.4249,
+            "iae": 16.0286,
+            "overshoot_pct": 607.89
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 91.15,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.9572,
+            "tau": 12.009,
+            "theta": 6.0,
+            "val_r2": 0.9973,
+            "val_nrmse": 0.0184,
+            "val_accuracy_pct": 98.16,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 124.26,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.5324,
+            "Ti": 16.069,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 18.54,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.214,
+            "phase_margin_deg": 72.41,
+            "max_sensitivity_ms": 1.539,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 16.47,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-first_call_timeout-LOOP-029",
+      "run_id": "RUN-C-a7310a4b",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-029",
+      "scenario": "first_call_timeout",
+      "input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
+      "paired_input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
+      "final_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 1,
+      "recovered_fault": true,
+      "audit_verified": true,
+      "handoff_bytes": 3342,
+      "latency_ms": 337.21,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.27,
+          "status": "DONE",
+          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "EXTERNAL_DISTURBANCE",
+            "severity": "WARNING",
+            "harris_index": 0.17,
+            "oscillation_index": 0.4753,
+            "stiction_index": 0.0214,
+            "iae": 1.3658,
+            "overshoot_pct": 51.35
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 145.47,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.1353,
+            "tau": 14.283,
+            "theta": 12.0,
+            "val_r2": 0.87,
+            "val_nrmse": 0.109,
+            "val_accuracy_pct": 89.1,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 135.44,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.6934,
+            "Ti": 20.245,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 19.63,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 2.695,
+            "phase_margin_deg": 69.33,
+            "max_sensitivity_ms": 1.676,
+            "multi_regime_pass_rate_pct": 80.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 9.92,
+          "status": "WARNING",
+          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
+          "metrics": {
+            "final_status": "PERFORMANCE_NOT_IMPROVED",
+            "candidate_eligible_for_review": false,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-001",
+      "run_id": "RUN-C-bb42515b",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-001",
+      "scenario": "duplicate_call",
+      "input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
+      "paired_input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
+      "final_status": "HEALTHY_NO_CHANGE",
+      "independent_expected_status": "HEALTHY_NO_CHANGE",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 1103,
+      "latency_ms": 22.45,
+      "stage_localization": {
+        "distinct_role_count": 2,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 2
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.33,
+          "status": "DONE",
+          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "NORMAL",
+            "severity": "HEALTHY",
+            "harris_index": 0.4051,
+            "oscillation_index": 0.0312,
+            "stiction_index": 0.0,
+            "iae": 0.3895,
+            "overshoot_pct": 16.15
+          }
+        },
+        {
+          "step": 2,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 0.1,
+          "status": "DONE",
+          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
+          "metrics": {
+            "final_status": "HEALTHY_NO_CHANGE",
+            "reason_codes": [
+              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-006",
+      "run_id": "RUN-C-7dffb753",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-006",
+      "scenario": "duplicate_call",
+      "input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
+      "paired_input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 4,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3521,
+      "latency_ms": 321.83,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 5.36,
+          "status": "DONE",
+          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "AGGRESSIVE_TUNING",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9969,
+            "stiction_index": 0.268,
+            "iae": 10.8311,
+            "overshoot_pct": 409.7
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 106.32,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.3884,
+            "tau": 16.023,
+            "theta": 7.0,
+            "val_r2": 0.9984,
+            "val_nrmse": 0.0136,
+            "val_accuracy_pct": 98.64,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 148.71,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.8456,
+            "Ti": 20.504,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 17.35,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.206,
+            "phase_margin_deg": 70.38,
+            "max_sensitivity_ms": 1.546,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 9.3,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-012",
+      "run_id": "RUN-C-59f97412",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-012",
+      "scenario": "duplicate_call",
+      "input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
+      "paired_input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "independent_expected_status": "MODEL_VALIDATION_FAILED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 4,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 2239,
+      "latency_ms": 129.11,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 4.89,
+          "status": "DONE",
+          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "SLUGGISH_TUNING",
+            "severity": "WARNING",
+            "harris_index": 0.0766,
+            "oscillation_index": 0.0705,
+            "stiction_index": 0.0,
+            "iae": 2.144,
+            "overshoot_pct": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 75.02,
+          "status": "REJECTED",
+          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.0448,
+            "tau": 16.119,
+            "theta": 6.0,
+            "val_r2": 0.6047,
+            "val_nrmse": 0.2039,
+            "val_accuracy_pct": 79.61,
+            "allow_next_stage": false,
+            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 18.01,
+          "status": "REJECTED",
+          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
+          "metrics": {
+            "final_status": "MODEL_VALIDATION_FAILED",
+            "reason_codes": [
+              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+              "VIOLATION_MODEL_VALIDATION_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-021",
+      "run_id": "RUN-C-6ad42f3e",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-021",
+      "scenario": "duplicate_call",
+      "input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
+      "paired_input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
+      "final_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 4,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 2313,
+      "latency_ms": 186.61,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 4.83,
+          "status": "DONE",
+          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "VALVE_STICTION",
+            "severity": "CRITICAL",
+            "harris_index": 0.0903,
+            "oscillation_index": 0.9899,
+            "stiction_index": 0.4561,
+            "iae": 1.6254,
+            "overshoot_pct": 76.47
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 121.03,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.2798,
+            "tau": 7.194,
+            "theta": 8.0,
+            "val_r2": 0.9155,
+            "val_nrmse": 0.0789,
+            "val_accuracy_pct": 92.11,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 152.3,
+          "status": "WARNING",
+          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
+          "metrics": {
+            "final_status": "VALVE_MAINTENANCE_REQUIRED",
+            "reason_codes": [
+              "VALVE_STICTION_MECHANICAL_FAULT",
+              "VIOLATION_LOW_GAIN_MARGIN",
+              "VIOLATION_LOW_PHASE_MARGIN",
+              "VIOLATION_HIGH_SENSITIVITY_MS",
+              "VIOLATION_EXCESSIVE_OVERSHOOT",
+              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+              "MULTI_REGIME_ROBUSTNESS_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-025",
+      "run_id": "RUN-C-c4327371",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-025",
+      "scenario": "duplicate_call",
+      "input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
+      "paired_input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 4,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3475,
+      "latency_ms": 276.04,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.36,
+          "status": "DONE",
+          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "MODEL_MISMATCH",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9298,
+            "stiction_index": 0.4249,
+            "iae": 16.0286,
+            "overshoot_pct": 607.89
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 96.62,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.9572,
+            "tau": 12.009,
+            "theta": 6.0,
+            "val_r2": 0.9973,
+            "val_nrmse": 0.0184,
+            "val_accuracy_pct": 98.16,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 129.41,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.5324,
+            "Ti": 16.069,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 17.03,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.214,
+            "phase_margin_deg": 72.41,
+            "max_sensitivity_ms": 1.539,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 9.02,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-duplicate_call-LOOP-029",
+      "run_id": "RUN-C-bbd025c8",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-029",
+      "scenario": "duplicate_call",
+      "input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
+      "paired_input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
+      "final_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 4,
+      "duplicate_prevented": 1,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3343,
+      "latency_ms": 320.39,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 6.74,
+          "status": "DONE",
+          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "EXTERNAL_DISTURBANCE",
+            "severity": "WARNING",
+            "harris_index": 0.17,
+            "oscillation_index": 0.4753,
+            "stiction_index": 0.0214,
+            "iae": 1.3658,
+            "overshoot_pct": 51.35
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 134.92,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.1353,
+            "tau": 14.283,
+            "theta": 12.0,
+            "val_r2": 0.87,
+            "val_nrmse": 0.109,
+            "val_accuracy_pct": 89.1,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 112.53,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.6934,
+            "Ti": 20.245,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 25.19,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 2.695,
+            "phase_margin_deg": 69.33,
+            "max_sensitivity_ms": 1.676,
+            "multi_regime_pass_rate_pct": 80.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 11.08,
+          "status": "WARNING",
+          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
+          "metrics": {
+            "final_status": "PERFORMANCE_NOT_IMPROVED",
+            "candidate_eligible_for_review": false,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-001",
+      "run_id": "RUN-C-875ff5aa",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-001",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "9d09d04888b14b941ef0a75754f4053ebd79696e71a1021b3a89c99f68853455",
+      "paired_input_hash": "9d09d04888b14b941ef0a75754f4053ebd79696e71a1021b3a89c99f68853455",
+      "final_status": "HEALTHY_NO_CHANGE",
+      "independent_expected_status": "HEALTHY_NO_CHANGE",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 2,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 1103,
+      "latency_ms": 20.25,
+      "stage_localization": {
+        "distinct_role_count": 2,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 2
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.57,
+          "status": "DONE",
+          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "NORMAL",
+            "severity": "HEALTHY",
+            "harris_index": 0.4051,
+            "oscillation_index": 0.0312,
+            "stiction_index": 0.0,
+            "iae": 0.3895,
+            "overshoot_pct": 16.15
+          }
+        },
+        {
+          "step": 2,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 0.1,
+          "status": "DONE",
+          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
+          "metrics": {
+            "final_status": "HEALTHY_NO_CHANGE",
+            "reason_codes": [
+              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-006",
+      "run_id": "RUN-C-04475158",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-006",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "20e8f01f1aee43baab6e003fbce7124140be53b68c2944cf91b564c88ec924c7",
+      "paired_input_hash": "20e8f01f1aee43baab6e003fbce7124140be53b68c2944cf91b564c88ec924c7",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3522,
+      "latency_ms": 306.52,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 6.38,
+          "status": "DONE",
+          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "AGGRESSIVE_TUNING",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9969,
+            "stiction_index": 0.268,
+            "iae": 10.8311,
+            "overshoot_pct": 409.7
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 108.35,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.3884,
+            "tau": 16.023,
+            "theta": 7.0,
+            "val_r2": 0.9984,
+            "val_nrmse": 0.0136,
+            "val_accuracy_pct": 98.64,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 136.36,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.8456,
+            "Ti": 20.504,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 17.12,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.206,
+            "phase_margin_deg": 70.38,
+            "max_sensitivity_ms": 1.546,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 9.96,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-012",
+      "run_id": "RUN-C-e7f8c8cd",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-012",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "edbf081f797c81c30e5c9f5f64493ba7b15905da9a7460688925ddd6ae64715a",
+      "paired_input_hash": "edbf081f797c81c30e5c9f5f64493ba7b15905da9a7460688925ddd6ae64715a",
+      "final_status": "MODEL_VALIDATION_FAILED",
+      "independent_expected_status": "MODEL_VALIDATION_FAILED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 2239,
+      "latency_ms": 96.69,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.51,
+          "status": "DONE",
+          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "SLUGGISH_TUNING",
+            "severity": "WARNING",
+            "harris_index": 0.0766,
+            "oscillation_index": 0.0705,
+            "stiction_index": 0.0,
+            "iae": 2.144,
+            "overshoot_pct": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 54.08,
+          "status": "REJECTED",
+          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.0448,
+            "tau": 16.119,
+            "theta": 6.0,
+            "val_r2": 0.6047,
+            "val_nrmse": 0.2039,
+            "val_accuracy_pct": 79.61,
+            "allow_next_stage": false,
+            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 17.74,
+          "status": "REJECTED",
+          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
+          "metrics": {
+            "final_status": "MODEL_VALIDATION_FAILED",
+            "reason_codes": [
+              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
+              "VIOLATION_MODEL_VALIDATION_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-021",
+      "run_id": "RUN-C-22c9a491",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-021",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "a672198d90ccb4a5e51472ef56a82dc0056997407412c2e20b7250f0bec11eda",
+      "paired_input_hash": "a672198d90ccb4a5e51472ef56a82dc0056997407412c2e20b7250f0bec11eda",
+      "final_status": "VALVE_MAINTENANCE_REQUIRED",
+      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 2313,
+      "latency_ms": 201.4,
+      "stage_localization": {
+        "distinct_role_count": 3,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 3
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.22,
+          "status": "DONE",
+          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "VALVE_STICTION",
+            "severity": "CRITICAL",
+            "harris_index": 0.0903,
+            "oscillation_index": 0.9899,
+            "stiction_index": 0.4561,
+            "iae": 1.6254,
+            "overshoot_pct": 76.47
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 157.1,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.2798,
+            "tau": 7.194,
+            "theta": 8.0,
+            "val_r2": 0.9155,
+            "val_nrmse": 0.0789,
+            "val_accuracy_pct": 92.11,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "安全验证与审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 173.82,
+          "status": "WARNING",
+          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
+          "metrics": {
+            "final_status": "VALVE_MAINTENANCE_REQUIRED",
+            "reason_codes": [
+              "VALVE_STICTION_MECHANICAL_FAULT",
+              "VIOLATION_LOW_GAIN_MARGIN",
+              "VIOLATION_LOW_PHASE_MARGIN",
+              "VIOLATION_HIGH_SENSITIVITY_MS",
+              "VIOLATION_EXCESSIVE_OVERSHOOT",
+              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
+              "MULTI_REGIME_ROBUSTNESS_FAILED"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-025",
+      "run_id": "RUN-C-a3692bc6",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-025",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "fff6cd113cdeba70aea13a343e3961565a085a7c2aa9aa8a38272552428cf90a",
+      "paired_input_hash": "fff6cd113cdeba70aea13a343e3961565a085a7c2aa9aa8a38272552428cf90a",
+      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+      "decision_correct": true,
+      "fallback_triggered": false,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3476,
+      "latency_ms": 295.14,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 5
+      },
+      "trace": [
+        {
+          "step": 1,
+          "stage": "诊断证据",
+          "agent": "DiagnosisAgent",
+          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
+          "latency_ms": 3.35,
+          "status": "DONE",
+          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "anomaly_type": "MODEL_MISMATCH",
+            "severity": "CRITICAL",
+            "harris_index": 0.05,
+            "oscillation_index": 0.9298,
+            "stiction_index": 0.4249,
+            "iae": 16.0286,
+            "overshoot_pct": 607.89
+          }
+        },
+        {
+          "step": 2,
+          "stage": "模型辨识",
+          "agent": "IdentificationAgent",
+          "skill": "fopdt_system_identification",
+          "latency_ms": 96.64,
+          "status": "DONE",
+          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "K": 1.9572,
+            "tau": 12.009,
+            "theta": 6.0,
+            "val_r2": 0.9973,
+            "val_nrmse": 0.0184,
+            "val_accuracy_pct": 98.16,
+            "allow_next_stage": true,
+            "failure_reason": "NONE",
+            "validation_profile": "v4.3.3",
+            "validation_evidence": null
+          }
+        },
+        {
+          "step": 3,
+          "stage": "整定候选",
+          "agent": "TuningAgent",
+          "skill": "adaptive_pid_tuning",
+          "latency_ms": 145.69,
+          "status": "DONE",
+          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
+          "llm_telemetry": {
+            "mode": "deterministic_local_engine",
+            "model": "Qwen2.5-7B-Instruct (offline-verified)",
+            "request_id": "",
+            "latency_ms": null,
+            "total_tokens": null
+          },
+          "metrics": {
+            "strategy": "balanced",
+            "Kc": 0.5324,
+            "Ti": 16.069,
+            "Td": 0.0
+          }
+        },
+        {
+          "step": 4,
+          "stage": "安全验证",
+          "agent": "SafetyVerificationAgent",
+          "skill": "safety_constraint_verification",
+          "latency_ms": 19.96,
+          "status": "CONSTRAINTS_PASS",
+          "fallback_triggered": false,
+          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
+          "metrics": {
+            "approved": true,
+            "constraint_coverage_pct": 100.0,
+            "gain_margin": 3.214,
+            "phase_margin_deg": 72.41,
+            "max_sensitivity_ms": 1.539,
+            "multi_regime_pass_rate_pct": 100.0,
+            "violation_tags": []
+          }
+        },
+        {
+          "step": 5,
+          "stage": "审批建议",
+          "agent": "FinalDecisionEngine",
+          "skill": "final_decision_aggregation",
+          "latency_ms": 10.08,
+          "status": "DONE",
+          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
+          "metrics": {
+            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
+            "candidate_eligible_for_review": true,
+            "deployment_authorized": false,
+            "reason_codes": [
+              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
+            ]
+          }
+        }
+      ],
+      "code_commit": "30ff470505f8"
+    },
+    {
+      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-029",
+      "run_id": "RUN-C-e7b45cd2",
+      "system": "C_petropid_5agent_blackboard",
+      "loop_id": "LOOP-029",
+      "scenario": "tightened_ms_1.65_fallback",
+      "input_hash": "ee7793fe28dcad8333f81cdc00ec9555dfe38905e941cc423a45747994a95f62",
+      "paired_input_hash": "ee7793fe28dcad8333f81cdc00ec9555dfe38905e941cc423a45747994a95f62",
+      "final_status": "PERFORMANCE_NOT_IMPROVED",
+      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
+      "decision_correct": true,
+      "fallback_triggered": true,
+      "tool_call_count": 3,
+      "duplicate_prevented": 0,
+      "retry_count": 0,
+      "recovered_fault": false,
+      "audit_verified": true,
+      "handoff_bytes": 3770,
+      "latency_ms": 343.87,
+      "stage_localization": {
+        "distinct_role_count": 5,
+        "has_stage_field_all_steps": true,
+        "independent_safety_decision_separation": true,
+        "trace_step_count": 6
       },
       "trace": [
         {
@@ -1287,7 +3357,7 @@
           "stage": "模型辨识",
           "agent": "IdentificationAgent",
           "skill": "fopdt_system_identification",
-          "latency_ms": 103.91,
+          "latency_ms": 130.7,
           "status": "DONE",
           "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
           "llm_telemetry": {
@@ -1315,7 +3385,7 @@
           "stage": "整定候选",
           "agent": "TuningAgent",
           "skill": "adaptive_pid_tuning",
-          "latency_ms": 101.85,
+          "latency_ms": 126.75,
           "status": "DONE",
           "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
           "llm_telemetry": {
@@ -1337,2077 +3407,7 @@
           "stage": "安全验证",
           "agent": "SafetyVerificationAgent",
           "skill": "safety_constraint_verification",
-          "latency_ms": 15.4,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 2.695,
-            "phase_margin_deg": 69.33,
-            "max_sensitivity_ms": 1.676,
-            "multi_regime_pass_rate_pct": 80.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 8.14,
-          "status": "WARNING",
-          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
-          "metrics": {
-            "final_status": "PERFORMANCE_NOT_IMPROVED",
-            "candidate_eligible_for_review": false,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-001",
-      "run_id": "RUN-C-600b1da8",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-001",
-      "scenario": "first_call_timeout",
-      "input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
-      "paired_input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
-      "final_status": "HEALTHY_NO_CHANGE",
-      "independent_expected_status": "HEALTHY_NO_CHANGE",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 2,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 1103,
-      "latency_ms": 18.91,
-      "stage_localization": {
-        "distinct_role_count": 2,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 2
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.18,
-          "status": "DONE",
-          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "NORMAL",
-            "severity": "HEALTHY",
-            "harris_index": 0.4051,
-            "oscillation_index": 0.0312,
-            "stiction_index": 0.0,
-            "iae": 0.3895,
-            "overshoot_pct": 16.15
-          }
-        },
-        {
-          "step": 2,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 0.1,
-          "status": "DONE",
-          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
-          "metrics": {
-            "final_status": "HEALTHY_NO_CHANGE",
-            "reason_codes": [
-              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-006",
-      "run_id": "RUN-C-f885b2a8",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-006",
-      "scenario": "first_call_timeout",
-      "input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
-      "paired_input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 3521,
-      "latency_ms": 231.51,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.18,
-          "status": "DONE",
-          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "AGGRESSIVE_TUNING",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9969,
-            "stiction_index": 0.268,
-            "iae": 10.8311,
-            "overshoot_pct": 409.7
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 83.65,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.3884,
-            "tau": 16.023,
-            "theta": 7.0,
-            "val_r2": 0.9984,
-            "val_nrmse": 0.0136,
-            "val_accuracy_pct": 98.64,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 105.58,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.8456,
-            "Ti": 20.504,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 14.52,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.206,
-            "phase_margin_deg": 70.38,
-            "max_sensitivity_ms": 1.546,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 7.67,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-012",
-      "run_id": "RUN-C-d617c393",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-012",
-      "scenario": "first_call_timeout",
-      "input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
-      "paired_input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
-      "final_status": "MODEL_VALIDATION_FAILED",
-      "independent_expected_status": "MODEL_VALIDATION_FAILED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 2239,
-      "latency_ms": 77.57,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.19,
-          "status": "DONE",
-          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "SLUGGISH_TUNING",
-            "severity": "WARNING",
-            "harris_index": 0.0766,
-            "oscillation_index": 0.0705,
-            "stiction_index": 0.0,
-            "iae": 2.144,
-            "overshoot_pct": 0.0
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 43.98,
-          "status": "REJECTED",
-          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.0448,
-            "tau": 16.119,
-            "theta": 6.0,
-            "val_r2": 0.6047,
-            "val_nrmse": 0.2039,
-            "val_accuracy_pct": 79.61,
-            "allow_next_stage": false,
-            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 15.21,
-          "status": "REJECTED",
-          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
-          "metrics": {
-            "final_status": "MODEL_VALIDATION_FAILED",
-            "reason_codes": [
-              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-              "VIOLATION_MODEL_VALIDATION_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-021",
-      "run_id": "RUN-C-44137dcc",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-021",
-      "scenario": "first_call_timeout",
-      "input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
-      "paired_input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
-      "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 2313,
-      "latency_ms": 128.18,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 2.82,
-          "status": "DONE",
-          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "VALVE_STICTION",
-            "severity": "CRITICAL",
-            "harris_index": 0.0903,
-            "oscillation_index": 0.9899,
-            "stiction_index": 0.4561,
-            "iae": 1.6254,
-            "overshoot_pct": 76.47
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 94.71,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.2798,
-            "tau": 7.194,
-            "theta": 8.0,
-            "val_r2": 0.9155,
-            "val_nrmse": 0.0789,
-            "val_accuracy_pct": 92.11,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 109.91,
-          "status": "WARNING",
-          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
-          "metrics": {
-            "final_status": "VALVE_MAINTENANCE_REQUIRED",
-            "reason_codes": [
-              "VALVE_STICTION_MECHANICAL_FAULT",
-              "VIOLATION_LOW_GAIN_MARGIN",
-              "VIOLATION_LOW_PHASE_MARGIN",
-              "VIOLATION_HIGH_SENSITIVITY_MS",
-              "VIOLATION_EXCESSIVE_OVERSHOOT",
-              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
-              "MULTI_REGIME_ROBUSTNESS_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-025",
-      "run_id": "RUN-C-d14abfa1",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-025",
-      "scenario": "first_call_timeout",
-      "input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
-      "paired_input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 3474,
-      "latency_ms": 234.53,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 2.91,
-          "status": "DONE",
-          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "MODEL_MISMATCH",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9298,
-            "stiction_index": 0.4249,
-            "iae": 16.0286,
-            "overshoot_pct": 607.89
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 82.62,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.9572,
-            "tau": 12.009,
-            "theta": 6.0,
-            "val_r2": 0.9973,
-            "val_nrmse": 0.0184,
-            "val_accuracy_pct": 98.16,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 110.62,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.5324,
-            "Ti": 16.069,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 14.2,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.214,
-            "phase_margin_deg": 72.41,
-            "max_sensitivity_ms": 1.539,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 7.57,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-first_call_timeout-LOOP-029",
-      "run_id": "RUN-C-be12f788",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-029",
-      "scenario": "first_call_timeout",
-      "input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
-      "paired_input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
-      "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 1,
-      "recovered_fault": true,
-      "audit_verified": true,
-      "handoff_bytes": 3342,
-      "latency_ms": 248.51,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.39,
-          "status": "DONE",
-          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "EXTERNAL_DISTURBANCE",
-            "severity": "WARNING",
-            "harris_index": 0.17,
-            "oscillation_index": 0.4753,
-            "stiction_index": 0.0214,
-            "iae": 1.3658,
-            "overshoot_pct": 51.35
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 103.54,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.1353,
-            "tau": 14.283,
-            "theta": 12.0,
-            "val_r2": 0.87,
-            "val_nrmse": 0.109,
-            "val_accuracy_pct": 89.1,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 102.52,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.6934,
-            "Ti": 20.245,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 16.65,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 2.695,
-            "phase_margin_deg": 69.33,
-            "max_sensitivity_ms": 1.676,
-            "multi_regime_pass_rate_pct": 80.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 6.93,
-          "status": "WARNING",
-          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
-          "metrics": {
-            "final_status": "PERFORMANCE_NOT_IMPROVED",
-            "candidate_eligible_for_review": false,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-001",
-      "run_id": "RUN-C-54ffeafe",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-001",
-      "scenario": "duplicate_call",
-      "input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
-      "paired_input_hash": "f4c7c05fdeae0134dfae433262eafe0f60ee8074ae043e51e149278f43842a27",
-      "final_status": "HEALTHY_NO_CHANGE",
-      "independent_expected_status": "HEALTHY_NO_CHANGE",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 1103,
-      "latency_ms": 19.31,
-      "stage_localization": {
-        "distinct_role_count": 2,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 2
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.12,
-          "status": "DONE",
-          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "NORMAL",
-            "severity": "HEALTHY",
-            "harris_index": 0.4051,
-            "oscillation_index": 0.0312,
-            "stiction_index": 0.0,
-            "iae": 0.3895,
-            "overshoot_pct": 16.15
-          }
-        },
-        {
-          "step": 2,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 0.1,
-          "status": "DONE",
-          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
-          "metrics": {
-            "final_status": "HEALTHY_NO_CHANGE",
-            "reason_codes": [
-              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-006",
-      "run_id": "RUN-C-10781ce9",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-006",
-      "scenario": "duplicate_call",
-      "input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
-      "paired_input_hash": "e2f6f0e67703a14c4d9b56692b6b81d540cb55fb25850def3877dec3c7c13510",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 4,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3520,
-      "latency_ms": 240.47,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.26,
-          "status": "DONE",
-          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "AGGRESSIVE_TUNING",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9969,
-            "stiction_index": 0.268,
-            "iae": 10.8311,
-            "overshoot_pct": 409.7
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 89.95,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.3884,
-            "tau": 16.023,
-            "theta": 7.0,
-            "val_r2": 0.9984,
-            "val_nrmse": 0.0136,
-            "val_accuracy_pct": 98.64,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 108.42,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.8456,
-            "Ti": 20.504,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 14.7,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.206,
-            "phase_margin_deg": 70.38,
-            "max_sensitivity_ms": 1.546,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 6.94,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-012",
-      "run_id": "RUN-C-000e8bb9",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-012",
-      "scenario": "duplicate_call",
-      "input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
-      "paired_input_hash": "793102e5b8b45b3d5fbbde59ebe813e69882b87362c62918706d9d682308abdf",
-      "final_status": "MODEL_VALIDATION_FAILED",
-      "independent_expected_status": "MODEL_VALIDATION_FAILED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 4,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 2239,
-      "latency_ms": 79.53,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 2.94,
-          "status": "DONE",
-          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "SLUGGISH_TUNING",
-            "severity": "WARNING",
-            "harris_index": 0.0766,
-            "oscillation_index": 0.0705,
-            "stiction_index": 0.0,
-            "iae": 2.144,
-            "overshoot_pct": 0.0
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 45.71,
-          "status": "REJECTED",
-          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.0448,
-            "tau": 16.119,
-            "theta": 6.0,
-            "val_r2": 0.6047,
-            "val_nrmse": 0.2039,
-            "val_accuracy_pct": 79.61,
-            "allow_next_stage": false,
-            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 14.27,
-          "status": "REJECTED",
-          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
-          "metrics": {
-            "final_status": "MODEL_VALIDATION_FAILED",
-            "reason_codes": [
-              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-              "VIOLATION_MODEL_VALIDATION_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-021",
-      "run_id": "RUN-C-f24e2981",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-021",
-      "scenario": "duplicate_call",
-      "input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
-      "paired_input_hash": "d50b21abcfe37402b60734acdfdf3d7c1a40bc36839822980294be19cc53b54a",
-      "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 4,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 2313,
-      "latency_ms": 129.03,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.33,
-          "status": "DONE",
-          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "VALVE_STICTION",
-            "severity": "CRITICAL",
-            "harris_index": 0.0903,
-            "oscillation_index": 0.9899,
-            "stiction_index": 0.4561,
-            "iae": 1.6254,
-            "overshoot_pct": 76.47
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 94.51,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.2798,
-            "tau": 7.194,
-            "theta": 8.0,
-            "val_r2": 0.9155,
-            "val_nrmse": 0.0789,
-            "val_accuracy_pct": 92.11,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 108.98,
-          "status": "WARNING",
-          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
-          "metrics": {
-            "final_status": "VALVE_MAINTENANCE_REQUIRED",
-            "reason_codes": [
-              "VALVE_STICTION_MECHANICAL_FAULT",
-              "VIOLATION_LOW_GAIN_MARGIN",
-              "VIOLATION_LOW_PHASE_MARGIN",
-              "VIOLATION_HIGH_SENSITIVITY_MS",
-              "VIOLATION_EXCESSIVE_OVERSHOOT",
-              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
-              "MULTI_REGIME_ROBUSTNESS_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-025",
-      "run_id": "RUN-C-f1cc45d0",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-025",
-      "scenario": "duplicate_call",
-      "input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
-      "paired_input_hash": "c1bb004033e3fd8c59eeb4fb78834419eee009870edaa15c0e1cc97b16feff8a",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 4,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3475,
-      "latency_ms": 221.06,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 2.96,
-          "status": "DONE",
-          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "MODEL_MISMATCH",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9298,
-            "stiction_index": 0.4249,
-            "iae": 16.0286,
-            "overshoot_pct": 607.89
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 77.91,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.9572,
-            "tau": 12.009,
-            "theta": 6.0,
-            "val_r2": 0.9973,
-            "val_nrmse": 0.0184,
-            "val_accuracy_pct": 98.16,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 101.45,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.5324,
-            "Ti": 16.069,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 14.78,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.214,
-            "phase_margin_deg": 72.41,
-            "max_sensitivity_ms": 1.539,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 7.76,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-duplicate_call-LOOP-029",
-      "run_id": "RUN-C-4eb2ab6e",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-029",
-      "scenario": "duplicate_call",
-      "input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
-      "paired_input_hash": "8464a4f7fbfcbc2fcd44a4eda5e10fc30a7dd558e7c37742bbb7f92d8b5a38d1",
-      "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 4,
-      "duplicate_prevented": 1,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3340,
-      "latency_ms": 263.62,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.4,
-          "status": "DONE",
-          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "EXTERNAL_DISTURBANCE",
-            "severity": "WARNING",
-            "harris_index": 0.17,
-            "oscillation_index": 0.4753,
-            "stiction_index": 0.0214,
-            "iae": 1.3658,
-            "overshoot_pct": 51.35
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 113.7,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.1353,
-            "tau": 14.283,
-            "theta": 12.0,
-            "val_r2": 0.87,
-            "val_nrmse": 0.109,
-            "val_accuracy_pct": 89.1,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 103.79,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.6934,
-            "Ti": 20.245,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 15.87,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=2.69, PM=69.3°, Ms=1.68, 5 工况通过率 80.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 2.695,
-            "phase_margin_deg": 69.33,
-            "max_sensitivity_ms": 1.676,
-            "multi_regime_pass_rate_pct": 80.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 8.82,
-          "status": "WARNING",
-          "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.51），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
-          "metrics": {
-            "final_status": "PERFORMANCE_NOT_IMPROVED",
-            "candidate_eligible_for_review": false,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "EXTERNAL_DISTURBANCE_FEEDBACK_SUBOPTIMAL"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-001",
-      "run_id": "RUN-C-3748d43b",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-001",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "9d09d04888b14b941ef0a75754f4053ebd79696e71a1021b3a89c99f68853455",
-      "paired_input_hash": "9d09d04888b14b941ef0a75754f4053ebd79696e71a1021b3a89c99f68853455",
-      "final_status": "HEALTHY_NO_CHANGE",
-      "independent_expected_status": "HEALTHY_NO_CHANGE",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 2,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 1103,
-      "latency_ms": 18.08,
-      "stage_localization": {
-        "distinct_role_count": 2,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 2
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.14,
-          "status": "DONE",
-          "summary": "控制回路运行健康：Harris 指数=0.41，振荡指数 OI=0.03，阶跃超调=16.1%，未检测到调节阀粘滞或显著参数失配。 根据本体规则 R-06：回路健康，保持原参数并归档例行巡检记录。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "NORMAL",
-            "severity": "HEALTHY",
-            "harris_index": 0.4051,
-            "oscillation_index": 0.0312,
-            "stiction_index": 0.0,
-            "iae": 0.3895,
-            "overshoot_pct": 16.15
-          }
-        },
-        {
-          "step": 2,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 0.1,
-          "status": "DONE",
-          "summary": "回路运行健康（现有参数合理，无需变更），已归档例行巡检记录。",
-          "metrics": {
-            "final_status": "HEALTHY_NO_CHANGE",
-            "reason_codes": [
-              "LOOP_HEALTHY_NO_CHANGE_REQUIRED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-006",
-      "run_id": "RUN-C-93060559",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-006",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "20e8f01f1aee43baab6e003fbce7124140be53b68c2944cf91b564c88ec924c7",
-      "paired_input_hash": "20e8f01f1aee43baab6e003fbce7124140be53b68c2944cf91b564c88ec924c7",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3521,
-      "latency_ms": 244.22,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.64,
-          "status": "DONE",
-          "summary": "PID 参数过于激进（增益偏高或积分时间过短）：振荡指数 OI=1.00，阶跃超调达 409.7%，OP 频繁动作（平均步幅 4.83%/s），Harris 指数 0.05。 根据本体规则 R-02：激进整定导致相位裕度不足，应依据 FOPDT 辨识模型采用 SIMC 均衡策略降低 Kc 并适当增大 Ti，确保 Ms <= 2.0。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "AGGRESSIVE_TUNING",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9969,
-            "stiction_index": 0.268,
-            "iae": 10.8311,
-            "overshoot_pct": 409.7
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 85.96,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.388, τ=16.02s, θ=7.0s；留出验证集 R²=0.9984，NRMSE=0.0136，Fit准确率=98.64%，残差自相关=0.12。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.3884,
-            "tau": 16.023,
-            "theta": 7.0,
-            "val_r2": 0.9984,
-            "val_nrmse": 0.0136,
-            "val_accuracy_pct": 98.64,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 113.76,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.8456, Ti=20.504s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.8456,
-            "Ti": 20.504,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 15.18,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=70.4°, Ms=1.55, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.206,
-            "phase_margin_deg": 70.38,
-            "max_sensitivity_ms": 1.546,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 8.62,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 10.83 → 0.47，OI 1.00 → 0.04，阀位磨损 4.83 → 0.09%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-012",
-      "run_id": "RUN-C-a43a2b7f",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-012",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "edbf081f797c81c30e5c9f5f64493ba7b15905da9a7460688925ddd6ae64715a",
-      "paired_input_hash": "edbf081f797c81c30e5c9f5f64493ba7b15905da9a7460688925ddd6ae64715a",
-      "final_status": "MODEL_VALIDATION_FAILED",
-      "independent_expected_status": "MODEL_VALIDATION_FAILED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 2238,
-      "latency_ms": 88.5,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.2,
-          "status": "DONE",
-          "summary": "控制回路响应明显迟缓（参数过于保守）：阶跃后残余偏差比 0.52，IAE=2.14，超调几乎为 0%，抗扰恢复慢。 根据本体规则 R-03：保守整定导致高 IAE 与慢恢复，应在满足稳定裕度前提下提升 Kc 并缩短 Ti。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "SLUGGISH_TUNING",
-            "severity": "WARNING",
-            "harris_index": 0.0766,
-            "oscillation_index": 0.0705,
-            "stiction_index": 0.0,
-            "iae": 2.144,
-            "overshoot_pct": 0.0
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 52.31,
-          "status": "REJECTED",
-          "summary": "模型辨识未通过独立验证门控 [LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)]：留出验证集 R²=0.6047，NRMSE=0.2039，Fit准确率=79.61%（检测到验证段存在明显均值偏移 +0.317，可能受未测负载阶跃或慢动态激励不足影响），禁止基于不可信模型直接推荐参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.0448,
-            "tau": 16.119,
-            "theta": 6.0,
-            "val_r2": 0.6047,
-            "val_nrmse": 0.2039,
-            "val_accuracy_pct": 79.61,
-            "allow_next_stage": false,
-            "failure_reason": "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 16.81,
-          "status": "REJECTED",
-          "summary": "过程模型独立验证未通过 (LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%))，存在未测负载偏移或激励不足，拒绝推荐新参数并保持原参数。",
-          "metrics": {
-            "final_status": "MODEL_VALIDATION_FAILED",
-            "reason_codes": [
-              "LOW_VAL_R2(0.605<0.8); LOW_VAL_FIT(79.6%<85.0%)",
-              "VIOLATION_MODEL_VALIDATION_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-021",
-      "run_id": "RUN-C-6f637424",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-021",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "a672198d90ccb4a5e51472ef56a82dc0056997407412c2e20b7250f0bec11eda",
-      "paired_input_hash": "a672198d90ccb4a5e51472ef56a82dc0056997407412c2e20b7250f0bec11eda",
-      "final_status": "VALVE_MAINTENANCE_REQUIRED",
-      "independent_expected_status": "VALVE_MAINTENANCE_REQUIRED",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 2313,
-      "latency_ms": 144.77,
-      "stage_localization": {
-        "distinct_role_count": 3,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 3
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.32,
-          "status": "DONE",
-          "summary": "检测到典型调节阀粘滞-滑移(Stick-Slip)非线性振荡：粘滞指数 SI=0.46，振荡指数 OI=0.99（主周期 36.9s），PV 加速度峰度显著超标（滑跳冲击特征）且 PV-OP 呈明显滞回环。 根据化工自控本体规则 R-01：阀门粘滞属于执行器机械非线性故障，严禁盲目增大比例增益；应优先派发仪表检修工单，过渡期采用保守降增益(conservative)缓冲参数。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "VALVE_STICTION",
-            "severity": "CRITICAL",
-            "harris_index": 0.0903,
-            "oscillation_index": 0.9899,
-            "stiction_index": 0.4561,
-            "iae": 1.6254,
-            "overshoot_pct": 76.47
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 107.9,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.280, τ=7.19s, θ=8.0s；留出验证集 R²=0.9155，NRMSE=0.0789，Fit准确率=92.11%，残差自相关=0.94。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.2798,
-            "tau": 7.194,
-            "theta": 8.0,
-            "val_r2": 0.9155,
-            "val_nrmse": 0.0789,
-            "val_accuracy_pct": 92.11,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "安全验证与审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 124.29,
-          "status": "WARNING",
-          "summary": "调节阀机械粘滞属于执行机构故障，PID 整定无法根除振荡，必须优先安排仪表检维修并保持原参数。",
-          "metrics": {
-            "final_status": "VALVE_MAINTENANCE_REQUIRED",
-            "reason_codes": [
-              "VALVE_STICTION_MECHANICAL_FAULT",
-              "VIOLATION_LOW_GAIN_MARGIN",
-              "VIOLATION_LOW_PHASE_MARGIN",
-              "VIOLATION_HIGH_SENSITIVITY_MS",
-              "VIOLATION_EXCESSIVE_OVERSHOOT",
-              "VIOLATION_MULTI_REGIME_ROBUSTNESS",
-              "MULTI_REGIME_ROBUSTNESS_FAILED"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-025",
-      "run_id": "RUN-C-06a7eb6f",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-025",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "fff6cd113cdeba70aea13a343e3961565a085a7c2aa9aa8a38272552428cf90a",
-      "paired_input_hash": "fff6cd113cdeba70aea13a343e3961565a085a7c2aa9aa8a38272552428cf90a",
-      "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "independent_expected_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-      "decision_correct": true,
-      "fallback_triggered": false,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3476,
-      "latency_ms": 251.37,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 5
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.51,
-          "status": "DONE",
-          "summary": "工况漂移导致过程增益/滞后与原 PID 参数失配：振荡指数 OI=0.93，阶跃超调达 607.9%，Harris 指数降至 0.05。 根据本体规则 R-04：原油换炼或负荷切换引发增益/滞后漂移，需重辨识当前工况 FOPDT 模型并通过 ±20% 多工况鲁棒性校验。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "MODEL_MISMATCH",
-            "severity": "CRITICAL",
-            "harris_index": 0.05,
-            "oscillation_index": 0.9298,
-            "stiction_index": 0.4249,
-            "iae": 16.0286,
-            "overshoot_pct": 607.89
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 84.29,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.957, τ=12.01s, θ=6.0s；留出验证集 R²=0.9973，NRMSE=0.0184，Fit准确率=98.16%，残差自相关=0.56。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.9572,
-            "tau": 12.009,
-            "theta": 6.0,
-            "val_r2": 0.9973,
-            "val_nrmse": 0.0184,
-            "val_accuracy_pct": 98.16,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 114.58,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.5324, Ti=16.069s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.5324,
-            "Ti": 16.069,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 16.21,
-          "status": "CONSTRAINTS_PASS",
-          "fallback_triggered": false,
-          "summary": "仿真安全校验通过（11/11 项全通过）：GM=3.21, PM=72.4°, Ms=1.54, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
-          "metrics": {
-            "approved": true,
-            "constraint_coverage_pct": 100.0,
-            "gain_margin": 3.214,
-            "phase_margin_deg": 72.41,
-            "max_sensitivity_ms": 1.539,
-            "multi_regime_pass_rate_pct": 100.0,
-            "violation_tags": []
-          }
-        },
-        {
-          "step": 5,
-          "stage": "审批建议",
-          "agent": "FinalDecisionEngine",
-          "skill": "final_decision_aggregation",
-          "latency_ms": 14.66,
-          "status": "DONE",
-          "summary": "仿真闭环验证有效且通过全部 11 项安全硬约束（策略：balanced）：IAE 16.03 → 0.41，OI 0.93 → 0.04，阀位磨损 5.54 → 0.05%/s。仅仿真校验通过，待自控工程师人工复核（严禁未审批写入真实 DCS）。",
-          "metrics": {
-            "final_status": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW",
-            "candidate_eligible_for_review": true,
-            "deployment_authorized": false,
-            "reason_codes": [
-              "ALL_SIMULATION_GATES_PASSED_PENDING_MANUAL_REVIEW"
-            ]
-          }
-        }
-      ],
-      "code_commit": "e887044d539f"
-    },
-    {
-      "experiment_id": "PAIR-tightened_ms_1.65_fallback-LOOP-029",
-      "run_id": "RUN-C-e240c26e",
-      "system": "C_petropid_5agent_blackboard",
-      "loop_id": "LOOP-029",
-      "scenario": "tightened_ms_1.65_fallback",
-      "input_hash": "ee7793fe28dcad8333f81cdc00ec9555dfe38905e941cc423a45747994a95f62",
-      "paired_input_hash": "ee7793fe28dcad8333f81cdc00ec9555dfe38905e941cc423a45747994a95f62",
-      "final_status": "PERFORMANCE_NOT_IMPROVED",
-      "independent_expected_status": "PERFORMANCE_NOT_IMPROVED",
-      "decision_correct": true,
-      "fallback_triggered": true,
-      "tool_call_count": 3,
-      "duplicate_prevented": 0,
-      "retry_count": 0,
-      "recovered_fault": false,
-      "audit_verified": true,
-      "handoff_bytes": 3771,
-      "latency_ms": 281.72,
-      "stage_localization": {
-        "distinct_role_count": 5,
-        "has_stage_field_all_steps": true,
-        "independent_safety_decision_separation": true,
-        "trace_step_count": 6
-      },
-      "trace": [
-        {
-          "step": 1,
-          "stage": "诊断证据",
-          "agent": "DiagnosisAgent",
-          "skill": "pid_loop_diagnosis + petro_knowledge_lookup",
-          "latency_ms": 3.44,
-          "status": "DONE",
-          "summary": "回路存在周期性振荡（主周期 80.0s，OI=0.48，SI=0.02），OP 动作平稳（平均步幅 0.24%）。主要源于上游工艺脉动耦合。 根据本体规则 R-05：周期性外部扰动需排查上游压机/泵组脉动源并增加前馈补偿，同时优化反馈抗扰动裕度。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "anomaly_type": "EXTERNAL_DISTURBANCE",
-            "severity": "WARNING",
-            "harris_index": 0.17,
-            "oscillation_index": 0.4753,
-            "stiction_index": 0.0214,
-            "iae": 1.3658,
-            "overshoot_pct": 51.35
-          }
-        },
-        {
-          "step": 2,
-          "stage": "模型辨识",
-          "agent": "IdentificationAgent",
-          "skill": "fopdt_system_identification",
-          "latency_ms": 114.87,
-          "status": "DONE",
-          "summary": "模型辨识通过独立验证：FOPDT K=1.135, τ=14.28s, θ=12.0s；留出验证集 R²=0.8700，NRMSE=0.1090，Fit准确率=89.10%，残差自相关=0.98。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "K": 1.1353,
-            "tau": 14.283,
-            "theta": 12.0,
-            "val_r2": 0.87,
-            "val_nrmse": 0.109,
-            "val_accuracy_pct": 89.1,
-            "allow_next_stage": true,
-            "failure_reason": "NONE",
-            "validation_profile": "v4.3.3",
-            "validation_evidence": null
-          }
-        },
-        {
-          "step": 3,
-          "stage": "整定候选",
-          "agent": "TuningAgent",
-          "skill": "adaptive_pid_tuning",
-          "latency_ms": 105.27,
-          "status": "DONE",
-          "summary": "基于已验证 FOPDT 模型采用 balanced 策略生成候选参数 Kc=0.6934, Ti=20.245s, Td=0.0s。",
-          "llm_telemetry": {
-            "mode": "deterministic_local_engine",
-            "model": "Qwen2.5-7B-Instruct (offline-verified)",
-            "request_id": "",
-            "latency_ms": null,
-            "total_tokens": null
-          },
-          "metrics": {
-            "strategy": "balanced",
-            "Kc": 0.6934,
-            "Ti": 20.245,
-            "Td": 0.0
-          }
-        },
-        {
-          "step": 4,
-          "stage": "安全验证",
-          "agent": "SafetyVerificationAgent",
-          "skill": "safety_constraint_verification",
-          "latency_ms": 16.18,
+          "latency_ms": 32.99,
           "status": "REJECTED",
           "summary": "拦截 balanced 候选参数！触发安全违规：VIOLATION_HIGH_SENSITIVITY_MS。OrchestratorAgent 自动回退至保守策略重新校验。",
           "metrics": {
@@ -3422,7 +3422,7 @@
           "stage": "安全验证",
           "agent": "SafetyVerificationAgent",
           "skill": "safety_constraint_verification",
-          "latency_ms": 15.15,
+          "latency_ms": 17.2,
           "status": "CONSTRAINTS_PASS",
           "fallback_triggered": true,
           "summary": "【回退二次校验】仿真安全校验通过（11/11 项全通过）：GM=4.38, PM=69.6°, Ms=1.38, 5 工况通过率 100.0%（标称超调红线≤18.0%，扰动工况专用红线≤25.0%）。可提交自控工程师人工复核（严禁未经审批直接写入真实 DCS）。（注：仅表示 11 项安全硬约束通过，最终是否推荐变更仍需经由性能净改善门控终裁）",
@@ -3441,7 +3441,7 @@
           "stage": "审批建议",
           "agent": "FinalDecisionEngine",
           "skill": "final_decision_aggregation",
-          "latency_ms": 9.12,
+          "latency_ms": 11.92,
           "status": "WARNING",
           "summary": "候选参数未带来净性能改善（IAE: 1.37 → 1.72），属 EXTERNAL_DISTURBANCE，保持原参数并建议排查上游扰动源/前馈补偿。",
           "metrics": {
@@ -3454,7 +3454,7 @@
           }
         }
       ],
-      "code_commit": "e887044d539f"
+      "code_commit": "30ff470505f8"
     }
   ]
 }

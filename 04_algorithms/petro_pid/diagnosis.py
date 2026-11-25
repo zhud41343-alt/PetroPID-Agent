@@ -226,6 +226,76 @@ def compute_stiction_index(
     return round(stiction_idx, 4)
 
 
+def compute_scale_invariant_stiction_score(
+    pv: np.ndarray, op: np.ndarray, threshold: float = 0.40
+) -> Tuple[bool, float, Dict[str, float]]:
+    """Scale-invariant physics-fusion valve stiction detector (V4.3.4 Industrial Extension).
+
+    Addresses two fundamental limitations on heterogeneous real industrial loops (e.g., ISDB):
+    1. Engineering-unit scale invariance: z-scores PV & OP prior to derivative/plateau checks
+       so loops with small engineering units (e.g., MPa, mole fraction, 0-1 OP) are not zeroed out.
+    2. Integrating + self-regulating coverage: fuses Horch (1999) OP-PV cross-correlation
+       odd-symmetry (self-regulating loops) with normalized stick-plateau ratio (both integrating
+       and self-regulating loops) and normalized PV-OP phase-plane hysteresis area.
+
+    Uses fixed equal-scale textbook physical weights (0.50 / 0.30 / 0.20) with no label fitting.
+    """
+    pv_arr = np.asarray(pv, dtype=float)
+    op_arr = np.asarray(op, dtype=float)
+    sx, sy = float(np.std(op_arr)), float(np.std(pv_arr))
+    if len(pv_arr) < 40 or sx < 1e-9 or sy < 1e-9:
+        return False, 0.0, {"stick_flat_ratio": 0.0, "horch_odd_ratio": 0.0, "hyst_area": 0.0, "peak_ccf": 0.0}
+
+    op_z = (op_arr - float(np.mean(op_arr))) / sx
+    pv_z = (pv_arr - float(np.mean(pv_arr))) / sy
+    n = len(op_z)
+
+    # 1. Horch (1999) OP-PV cross-correlation odd-energy symmetry ratio
+    max_lag = min(60, n // 4)
+    lags = np.arange(-max_lag, max_lag + 1)
+    ccf = np.array(
+        [
+            float(np.mean(op_z[: n - abs(k)] * pv_z[abs(k) :]))
+            if k >= 0
+            else float(np.mean(op_z[abs(k) :] * pv_z[: n - abs(k)]))
+            for k in lags
+        ]
+    )
+    mid = max_lag
+    pos, neg = ccf[mid + 1 :], ccf[mid - 1 :: -1]
+    even_e = float(np.mean((0.5 * (pos + neg)) ** 2))
+    odd_e = float(np.mean((0.5 * (pos - neg)) ** 2))
+    odd_ratio = odd_e / (even_e + odd_e + 1e-12)
+    peak_ccf = float(np.max(np.abs(ccf)))
+
+    # 2. Scale-invariant stick-plateau ratio (valid for integrating & self-regulating plants)
+    kernel = np.array([0.2, 0.3, 0.3, 0.2])
+    pv_sm = np.convolve(pv_z, kernel, mode="valid")
+    op_sm = np.convolve(op_z, kernel, mode="valid")
+    dpv = np.diff(pv_sm)
+    dop = np.diff(op_sm)
+    op_moving = np.abs(dop) > 0.25 * float(np.std(dop) + 1e-9)
+    pv_flat = np.abs(dpv) < 0.25 * float(np.std(dpv) + 1e-9)
+    stick_flat = float(np.mean(pv_flat[op_moving])) if int(np.sum(op_moving)) >= 15 else 0.0
+
+    # 3. Normalized PV-OP phase hysteresis area
+    hyst_area = abs(float(np.mean(op_sm[:-1] * pv_sm[1:] - op_sm[1:] * pv_sm[:-1])))
+
+    score = float(
+        0.50 * np.clip(stick_flat / 0.40, 0.0, 1.0)
+        + 0.30 * np.clip(odd_ratio, 0.0, 1.0)
+        + 0.20 * np.clip(hyst_area / 0.15, 0.0, 1.0)
+    )
+    score = round(score, 4)
+    evidence = {
+        "stick_flat_ratio": round(stick_flat, 4),
+        "horch_odd_ratio": round(odd_ratio, 4),
+        "hyst_area": round(hyst_area, 4),
+        "peak_ccf": round(peak_ccf, 4),
+    }
+    return bool(score >= threshold), score, evidence
+
+
 def compute_step_overshoot(sp: np.ndarray, pv: np.ndarray) -> float:
     """Compute maximum percentage overshoot across setpoint step changes."""
     sp = np.asarray(sp, dtype=float)

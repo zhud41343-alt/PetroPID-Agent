@@ -1,0 +1,950 @@
+{
+  "summary": {
+    "strict_safety_specs": {
+      "min_gm": 3.5,
+      "min_pm_deg": 60.0,
+      "max_ms": 1.25,
+      "max_overshoot_pct": 5.0
+    },
+    "hard_tunable_total": 12,
+    "b3_single_pass_approved_count": 0,
+    "b3_single_pass_rate_pct": 0.0,
+    "c_critic_refiner_approved_count": 12,
+    "c_critic_refiner_rate_pct": 100.0,
+    "net_safe_recovery_gain_pp": 100.0,
+    "safety_traps_total": 6,
+    "b3_false_approvals": 0,
+    "c_false_approvals": 0,
+    "code_commit": "30ff470505f8"
+  },
+  "hard_tunable_results": [
+    {
+      "case_id": "HM-01",
+      "unit": "常减压塔顶温度",
+      "K": 1.8,
+      "tau": 14.0,
+      "theta": 8.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.379,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.078,
+        "PM": 83.27,
+        "Ms": 1.201
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.3472,
+          "Ti": 14.0,
+          "approved": false,
+          "GM": 4.379,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2696,
+          "Ti": 15.68,
+          "approved": false,
+          "GM": 5.838,
+          "PM": 78.04,
+          "Ms": 1.259,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=3)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.2285,
+          "Ti": 17.562,
+          "approved": true,
+          "GM": 7.078,
+          "PM": 83.27,
+          "Ms": 1.201,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.84/3.5, PM=78.0/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-02",
+      "unit": "催化裂化反应温度",
+      "K": 2.2,
+      "tau": 16.0,
+      "theta": 9.5,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.385,
+        "PM": 69.55,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.099,
+        "PM": 83.17,
+        "Ms": 1.2
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2734,
+          "Ti": 16.0,
+          "approved": false,
+          "GM": 4.385,
+          "PM": 69.55,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2123,
+          "Ti": 17.92,
+          "approved": false,
+          "GM": 5.851,
+          "PM": 78.02,
+          "Ms": 1.258,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.5/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1799,
+          "Ti": 20.07,
+          "approved": true,
+          "GM": 7.099,
+          "PM": 83.17,
+          "Ms": 1.2,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.85/3.5, PM=78.0/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-03",
+      "unit": "加氢裂化床层温度",
+      "K": 1.5,
+      "tau": 12.0,
+      "theta": 7.5,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.378,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_EXCESSIVE_OVERSHOOT",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.135,
+        "PM": 83.02,
+        "Ms": 1.198
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.381,
+          "Ti": 12.0,
+          "approved": false,
+          "GM": 4.378,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_EXCESSIVE_OVERSHOOT",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2958,
+          "Ti": 13.44,
+          "approved": false,
+          "GM": 5.85,
+          "PM": 77.95,
+          "Ms": 1.257,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=3)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.2507,
+          "Ti": 15.053,
+          "approved": true,
+          "GM": 7.135,
+          "PM": 83.02,
+          "Ms": 1.198,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.85/3.5, PM=78.0/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-04",
+      "unit": "乙烯裂解炉出口温度",
+      "K": 2.6,
+      "tau": 18.0,
+      "theta": 11.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.381,
+        "PM": 69.57,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.133,
+        "PM": 83.09,
+        "Ms": 1.199
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2248,
+          "Ti": 18.0,
+          "approved": false,
+          "GM": 4.381,
+          "PM": 69.57,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.1745,
+          "Ti": 20.16,
+          "approved": false,
+          "GM": 5.851,
+          "PM": 77.98,
+          "Ms": 1.257,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1479,
+          "Ti": 22.579,
+          "approved": true,
+          "GM": 7.133,
+          "PM": 83.09,
+          "Ms": 1.199,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.85/3.5, PM=78.0/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-05",
+      "unit": "芳烃抽提塔灵敏板温度",
+      "K": 1.4,
+      "tau": 10.0,
+      "theta": 7.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.38,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_EXCESSIVE_OVERSHOOT",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.208,
+        "PM": 82.71,
+        "Ms": 1.195
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.3644,
+          "Ti": 10.0,
+          "approved": false,
+          "GM": 4.38,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_EXCESSIVE_OVERSHOOT",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2829,
+          "Ti": 11.2,
+          "approved": false,
+          "GM": 5.895,
+          "PM": 77.82,
+          "Ms": 1.255,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=3)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.2397,
+          "Ti": 12.544,
+          "approved": true,
+          "GM": 7.208,
+          "PM": 82.71,
+          "Ms": 1.195,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.89/3.5, PM=77.8/60.0, Ms=1.25/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-06",
+      "unit": "重整反应器入口温控",
+      "K": 2.0,
+      "tau": 15.0,
+      "theta": 10.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.387,
+        "PM": 69.54,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.168,
+        "PM": 82.84,
+        "Ms": 1.197
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2679,
+          "Ti": 15.0,
+          "approved": false,
+          "GM": 4.387,
+          "PM": 69.54,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.208,
+          "Ti": 16.8,
+          "approved": false,
+          "GM": 5.87,
+          "PM": 77.88,
+          "Ms": 1.256,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.39/3.5, PM=69.5/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1763,
+          "Ti": 18.816,
+          "approved": true,
+          "GM": 7.168,
+          "PM": 82.84,
+          "Ms": 1.197,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.87/3.5, PM=77.9/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-07",
+      "unit": "脱丁烷塔底再沸器温度",
+      "K": 1.9,
+      "tau": 13.0,
+      "theta": 8.5,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.382,
+        "PM": 69.56,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.154,
+        "PM": 82.88,
+        "Ms": 1.197
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2875,
+          "Ti": 13.0,
+          "approved": false,
+          "GM": 4.382,
+          "PM": 69.56,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2232,
+          "Ti": 14.56,
+          "approved": false,
+          "GM": 5.861,
+          "PM": 77.87,
+          "Ms": 1.256,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1892,
+          "Ti": 16.307,
+          "approved": true,
+          "GM": 7.154,
+          "PM": 82.88,
+          "Ms": 1.197,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.86/3.5, PM=77.9/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-08",
+      "unit": "延迟焦化分馏塔顶温",
+      "K": 2.4,
+      "tau": 20.0,
+      "theta": 13.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.387,
+        "PM": 69.54,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.162,
+        "PM": 82.92,
+        "Ms": 1.197
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2289,
+          "Ti": 20.0,
+          "approved": false,
+          "GM": 4.387,
+          "PM": 69.54,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.1777,
+          "Ti": 22.4,
+          "approved": false,
+          "GM": 5.868,
+          "PM": 77.86,
+          "Ms": 1.256,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.39/3.5, PM=69.5/60.0, Ms=1.38/1.25, failed_regimes=1)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1506,
+          "Ti": 25.088,
+          "approved": true,
+          "GM": 7.162,
+          "PM": 82.92,
+          "Ms": 1.197,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.87/3.5, PM=77.9/60.0, Ms=1.26/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-09",
+      "unit": "环氧乙烷反应器温控",
+      "K": 1.7,
+      "tau": 11.0,
+      "theta": 8.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.378,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.218,
+        "PM": 82.6,
+        "Ms": 1.194
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2889,
+          "Ti": 11.0,
+          "approved": false,
+          "GM": 4.378,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2243,
+          "Ti": 12.32,
+          "approved": false,
+          "GM": 5.9,
+          "PM": 77.76,
+          "Ms": 1.254,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=3)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1901,
+          "Ti": 13.798,
+          "approved": true,
+          "GM": 7.218,
+          "PM": 82.6,
+          "Ms": 1.194,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.90/3.5, PM=77.8/60.0, Ms=1.25/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-10",
+      "unit": "丙烯精馏塔压差控制",
+      "K": 2.1,
+      "tau": 16.0,
+      "theta": 11.5,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.395,
+        "PM": 69.6,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_EXCESSIVE_OVERSHOOT"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.207,
+        "PM": 82.64,
+        "Ms": 1.195
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2366,
+          "Ti": 16.0,
+          "approved": false,
+          "GM": 4.395,
+          "PM": 69.6,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_EXCESSIVE_OVERSHOOT"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.1837,
+          "Ti": 17.92,
+          "approved": false,
+          "GM": 5.893,
+          "PM": 77.74,
+          "Ms": 1.254,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.39/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=1)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1557,
+          "Ti": 20.07,
+          "approved": true,
+          "GM": 7.207,
+          "PM": 82.64,
+          "Ms": 1.195,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.89/3.5, PM=77.7/60.0, Ms=1.25/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-11",
+      "unit": "硫磺回收尾气温度",
+      "K": 1.6,
+      "tau": 12.0,
+      "theta": 9.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.391,
+        "PM": 69.62,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.25,
+        "PM": 82.52,
+        "Ms": 1.193
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2976,
+          "Ti": 12.0,
+          "approved": false,
+          "GM": 4.391,
+          "PM": 69.62,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.2311,
+          "Ti": 13.44,
+          "approved": false,
+          "GM": 5.92,
+          "PM": 77.68,
+          "Ms": 1.253,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.39/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1958,
+          "Ti": 15.053,
+          "approved": true,
+          "GM": 7.25,
+          "PM": 82.52,
+          "Ms": 1.193,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.92/3.5, PM=77.7/60.0, Ms=1.25/1.25, failed_regimes=0)"
+        }
+      ]
+    },
+    {
+      "case_id": "HM-12",
+      "unit": "柴油加氢精制温控",
+      "K": 2.5,
+      "tau": 17.0,
+      "theta": 12.0,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.379,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": true,
+      "c_final_margins": {
+        "GM": 7.212,
+        "PM": 82.69,
+        "Ms": 1.195
+      },
+      "c_violations": [],
+      "refinement_rounds_used": 2,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2024,
+          "Ti": 17.0,
+          "approved": false,
+          "GM": 4.379,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "Kc": 0.1571,
+          "Ti": 19.04,
+          "approved": false,
+          "GM": 5.897,
+          "PM": 77.81,
+          "Ms": 1.254,
+          "violations": [
+            "VIOLATION_HIGH_SENSITIVITY_MS"
+          ],
+          "feedback": "detune_factor=1.29 (GM=4.38/3.5, PM=69.6/60.0, Ms=1.38/1.25, failed_regimes=2)"
+        },
+        {
+          "round": 2,
+          "Kc": 0.1331,
+          "Ti": 21.325,
+          "approved": true,
+          "GM": 7.212,
+          "PM": 82.69,
+          "Ms": 1.195,
+          "violations": [],
+          "feedback": "detune_factor=1.18 (GM=5.90/3.5, PM=77.8/60.0, Ms=1.25/1.25, failed_regimes=0)"
+        }
+      ]
+    }
+  ],
+  "safety_trap_results": [
+    {
+      "case_id": "TRAP-01",
+      "trap_type": "MODEL_INVALID_C000",
+      "K": 1.8,
+      "tau": 14.0,
+      "theta": 8.0,
+      "model_valid": false,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.379,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_MODEL_VALIDATION_FAILED",
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": false,
+      "c_final_margins": {
+        "GM": 4.379,
+        "PM": 69.58,
+        "Ms": 1.379
+      },
+      "c_violations": [
+        "VIOLATION_MODEL_VALIDATION_FAILED",
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "refinement_rounds_used": 0,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.3472,
+          "Ti": 14.0,
+          "approved": false,
+          "GM": 4.379,
+          "PM": 69.58,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_MODEL_VALIDATION_FAILED",
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "action": "REFUSED_C000_MODEL_INVALID",
+          "approved": false
+        }
+      ]
+    },
+    {
+      "case_id": "TRAP-02",
+      "trap_type": "MODEL_INVALID_C000",
+      "K": 2.2,
+      "tau": 16.0,
+      "theta": 9.5,
+      "model_valid": false,
+      "b3_single_pass_approved": false,
+      "b3_final_margins": {
+        "GM": 4.385,
+        "PM": 69.55,
+        "Ms": 1.379
+      },
+      "b3_violations": [
+        "VIOLATION_MODEL_VALIDATION_FAILED",
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "c_critic_refiner_approved": false,
+      "c_final_margins": {
+        "GM": 4.385,
+        "PM": 69.55,
+        "Ms": 1.379
+      },
+      "c_violations": [
+        "VIOLATION_MODEL_VALIDATION_FAILED",
+        "VIOLATION_HIGH_SENSITIVITY_MS",
+        "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+      ],
+      "refinement_rounds_used": 0,
+      "critic_refiner_trace": [
+        {
+          "round": 0,
+          "Kc": 0.2734,
+          "Ti": 16.0,
+          "approved": false,
+          "GM": 4.385,
+          "PM": 69.55,
+          "Ms": 1.379,
+          "violations": [
+            "VIOLATION_MODEL_VALIDATION_FAILED",
+            "VIOLATION_HIGH_SENSITIVITY_MS",
+            "VIOLATION_MULTI_REGIME_ROBUSTNESS"
+          ]
+        },
+        {
+          "round": 1,
+          "action": "REFUSED_C000_MODEL_INVALID",
+          "approved": false
+        }
+      ]
+    },
+    {
+      "case_id": "TRAP-03",
+      "trap_type": "VALVE_STICTION_BLOCKED",
+      "K": 1.6,
+      "tau": 12.0,
+      "theta": 6.0,
+      "blocked_by_diag": true,
+      "b3_single_pass_approved": false,
+      "c_critic_refiner_approved": false,
+      "refinement_rounds_used": 0,
+      "b3_reason": "BLOCKED_BY_DIAGNOSIS_GATE",
+      "c_reason": "BLOCKED_BY_DIAGNOSIS_GATE"
+    },
+    {
+      "case_id": "TRAP-04",
+      "trap_type": "VALVE_STICTION_BLOCKED",
+      "K": 2.0,
+      "tau": 15.0,
+      "theta": 7.0,
+      "blocked_by_diag": true,
+      "b3_single_pass_approved": false,
+      "c_critic_refiner_approved": false,
+      "refinement_rounds_used": 0,
+      "b3_reason": "BLOCKED_BY_DIAGNOSIS_GATE",
+      "c_reason": "BLOCKED_BY_DIAGNOSIS_GATE"
+    },
+    {
+      "case_id": "TRAP-05",
+      "trap_type": "EXTERNAL_DISTURBANCE_BLOCKED",
+      "K": 1.7,
+      "tau": 13.0,
+      "theta": 6.5,
+      "blocked_by_diag": true,
+      "b3_single_pass_approved": false,
+      "c_critic_refiner_approved": false,
+      "refinement_rounds_used": 0,
+      "b3_reason": "BLOCKED_BY_DIAGNOSIS_GATE",
+      "c_reason": "BLOCKED_BY_DIAGNOSIS_GATE"
+    },
+    {
+      "case_id": "TRAP-06",
+      "trap_type": "EXTERNAL_DISTURBANCE_BLOCKED",
+      "K": 2.1,
+      "tau": 14.0,
+      "theta": 7.5,
+      "blocked_by_diag": true,
+      "b3_single_pass_approved": false,
+      "c_critic_refiner_approved": false,
+      "refinement_rounds_used": 0,
+      "b3_reason": "BLOCKED_BY_DIAGNOSIS_GATE",
+      "c_reason": "BLOCKED_BY_DIAGNOSIS_GATE"
+    }
+  ]
+}

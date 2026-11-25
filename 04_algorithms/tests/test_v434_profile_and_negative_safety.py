@@ -1,5 +1,4 @@
 """V4.3.4 Formal Profile, Audit Tamper, Fail-Closed & Negative Safety Regression Suite."""
-
 from __future__ import annotations
 
 import copy
@@ -119,3 +118,55 @@ def test_frontend_profile_selector_and_fail_closed_error_contracts():
     # HTTP 500 clears currentData and disables approvalBtn; audit != PASS disables approvalBtn
     assert "currentData = null;" in js
     assert "apBtn.disabled = !(hasValidRunId && auditStatus === 'PASS');" in js
+
+
+def test_v434_scale_invariant_stiction_score_is_unit_invariant():
+    import numpy as np
+    from petro_pid.diagnosis import compute_scale_invariant_stiction_score
+
+    t = np.arange(400, dtype=float)
+    # Synthetic stick-slip waveform: triangle OP ramping while PV holds flat then jumps
+    phase = (t % 40.0) / 40.0
+    op = np.where(phase < 0.5, phase * 2.0, 2.0 - phase * 2.0) * 10.0 + 50.0
+    pv = np.where((phase < 0.35) | ((phase >= 0.5) & (phase < 0.85)), np.where(phase < 0.5, 0.0, 1.0), np.where(phase < 0.5, (phase - 0.35) / 0.15, 1.0 - (phase - 0.85) / 0.15)) * 4.0 + 100.0
+
+    pred1, sc1, _ = compute_scale_invariant_stiction_score(pv, op)
+    # Rescale to MPa / 0-1 normalized engineering units (1000x smaller PV, 100x smaller OP)
+    pred2, sc2, _ = compute_scale_invariant_stiction_score(pv * 0.001, op * 0.01)
+    assert abs(sc1 - sc2) < 1e-4
+    assert pred1 == pred2
+    assert pred1 is True
+
+
+def test_v434_critic_refiner_refuses_c000_model_invalid():
+    from petro_pid.simulator import PlantParams, PIDParams
+    from petro_pid.tuning import refine_pid_from_safety_feedback
+
+    plant = PlantParams(K=1.8, tau=14.0, theta=8.0, pv_bias=200.0, op_bias=50.0)
+    pid = PIDParams(Kc=0.5, Ti=14.0, Td=0.0)
+    refined, reason = refine_pid_from_safety_feedback(
+        plant,
+        pid,
+        {"violation_tags": ["VIOLATION_MODEL_VALIDATION_FAILED", "VIOLATION_HIGH_SENSITIVITY_MS"], "max_sensitivity_ms": 1.8},
+    )
+    assert refined is None
+    assert "C000" in reason
+
+
+def test_v434_critic_refiner_converges_on_tight_margin_plant():
+    from petro_pid.simulator import PlantParams
+    from petro_pid.tuning import _simc_pid, refine_pid_from_safety_feedback
+    from petro_pid.safety_verifier import verify_pid_safety
+
+    plant = PlantParams(K=2.2, tau=16.0, theta=9.5, pv_bias=200.0, op_bias=50.0)
+    specs = {"min_gm": 3.5, "min_pm_deg": 60.0, "max_ms": 1.25, "max_overshoot_pct": 5.0}
+    pid = _simc_pid(plant.K, plant.tau, plant.theta, tau_c_factor=1.8)
+    sv = verify_pid_safety(plant, pid, model_valid=True, **specs)
+    assert sv.approved is False
+    for _ in range(3):
+        pid, _ = refine_pid_from_safety_feedback(plant, pid, sv.to_dict(), min_gm=3.5, min_pm_deg=60.0, max_ms=1.25)
+        assert pid is not None
+        sv = verify_pid_safety(plant, pid, model_valid=True, **specs)
+        if sv.approved:
+            break
+    assert sv.approved is True

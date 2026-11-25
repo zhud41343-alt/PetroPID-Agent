@@ -192,3 +192,48 @@ def tune_pid(
         improved_metrics=improved_metrics,
         summary=summary,
     )
+
+
+def refine_pid_from_safety_feedback(
+    plant: PlantParams,
+    prev_pid: PIDParams,
+    safety_feedback: Dict[str, object],
+    *,
+    min_gm: float = 1.8,
+    min_pm_deg: float = 35.0,
+    max_ms: float = 2.2,
+    kc_bounds: tuple[float, float] = (0.05, 8.0),
+    ti_bounds: tuple[float, float] = (1.5, 200.0),
+) -> tuple[PIDParams | None, str]:
+    """Deterministic Tuner-Refiner update driven by SafetyVerifierAgent margin feedback.
+
+    Never bypasses C-000 model-validity failures (returns None immediately).
+    For frequency-domain / overshoot / multi-regime robustness deficits, detunes |Kc|
+    and relaxes Ti proportionally to the worst normalized margin deficit.
+    """
+    violations = set(safety_feedback.get("violation_tags", []) or [])
+    if "VIOLATION_MODEL_VALIDATION_FAILED" in violations:
+        return None, "REFUSED_C000_MODEL_INVALID"
+
+    gm = float(safety_feedback.get("gain_margin", min_gm))
+    pm = float(safety_feedback.get("phase_margin_deg", min_pm_deg))
+    ms = float(safety_feedback.get("max_sensitivity_ms", max_ms))
+    failed_regimes = list(safety_feedback.get("failed_regimes", []) or [])
+
+    gm_ratio = max(1.0, min_gm / max(gm, 0.25))
+    ms_ratio = max(1.0, ms / max(max_ms, 0.5))
+    pm_scale = 1.0 + max(0.0, (min_pm_deg - pm) / 55.0)
+    regime_scale = 1.15 if failed_regimes else 1.0
+
+    detune_factor = max(1.18, min(2.20, 1.12 * max(gm_ratio, ms_ratio, pm_scale, regime_scale)))
+    sign_k = 1.0 if prev_pid.Kc >= 0 else -1.0
+    new_kc_abs = float(np.clip(abs(prev_pid.Kc) / detune_factor, kc_bounds[0], kc_bounds[1]))
+    ti_relax = 1.12 if (pm < min_pm_deg or ms > max_ms or failed_regimes) else 1.05
+    new_ti = float(np.clip(prev_pid.Ti * ti_relax, ti_bounds[0], ti_bounds[1]))
+
+    refined = PIDParams(Kc=round(sign_k * new_kc_abs, 4), Ti=round(new_ti, 3), Td=0.0)
+    reason = (
+        f"detune_factor={detune_factor:.2f} (GM={gm:.2f}/{min_gm}, "
+        f"PM={pm:.1f}/{min_pm_deg}, Ms={ms:.2f}/{max_ms}, failed_regimes={len(failed_regimes)})"
+    )
+    return refined, reason

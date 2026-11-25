@@ -1,7 +1,7 @@
 {
   "summary": {
-    "evaluated_at_utc": "2026-11-25T04:43:07Z",
-    "code_commit": "e887044d539f",
+    "evaluated_at_utc": "2026-11-25T09:20:44Z",
+    "code_commit": "30ff470505f8",
     "validation_profile": "v4.3.4",
     "algorithm_version": "petropid-alg-v4.3.4",
     "total_loops": 30,
@@ -31,10 +31,10 @@
       "PERFORMANCE_NOT_IMPROVED": 3
     },
     "latency_s": {
-      "mean": 0.1738,
-      "p50": 0.2034,
-      "p95": 0.2559,
-      "max": 0.2615
+      "mean": 0.2082,
+      "p50": 0.2444,
+      "p95": 0.3243,
+      "max": 0.3763
     }
   },
   "per_loop_results": [
@@ -54,10 +54,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301795-73d159d553",
+      "run_id": "RUN-20261125092038486-193a8fc1af",
       "input_hash": "74a79a2b6411ccf2946a431ca7e3f3eb5a42a19443237f70383845d7c248a8ef",
-      "record_digest_sha256": "c4b32df01911c047df335d3c3fd5d3f24b3592d7e6811f5da8485b01bd2bc142",
-      "elapsed_s": 0.037
+      "record_digest_sha256": "dbbbb0fd4585c191c62013e5683204577a304f4c7dd1ce0c399452ff7703e49b",
+      "elapsed_s": 0.036
     },
     {
       "loop_id": "LOOP-002",
@@ -75,10 +75,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301821-7d8f17798f",
+      "run_id": "RUN-20261125092038504-c115c7b33e",
       "input_hash": "b268174330fccb11fa880c0e50861097d4d71513fb56a91811b900cdaf47876a",
-      "record_digest_sha256": "f87e5bc8cdd505864b38c164b7b9447fc6b40e40525b61ccdb2291a7fa6b6ecf",
-      "elapsed_s": 0.0175
+      "record_digest_sha256": "bf91867ddb65ef377328a1298dd3d50445a42dadfed2eb1e3541338055e0b49c",
+      "elapsed_s": 0.0173
     },
     {
       "loop_id": "LOOP-003",
@@ -96,10 +96,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301839-1f5afa0f35",
+      "run_id": "RUN-20261125092038521-0d4933fc65",
       "input_hash": "8b2cbc683606cb2ba6c8b5064e84cd188b1d21510ee776a8ccaf28ce8bc83904",
-      "record_digest_sha256": "ad5af9897c1b9e6aab93f55b75ec0815670bf7eb6343578866ce7a119fbe2db6",
-      "elapsed_s": 0.0182
+      "record_digest_sha256": "6059d1bf086abe5925d2cbcbcf25e5563dc971d490610268cb8c89927eca3b4a",
+      "elapsed_s": 0.0165
     },
     {
       "loop_id": "LOOP-004",
@@ -117,10 +117,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301855-a0b33da9d8",
+      "run_id": "RUN-20261125092038538-6cdd10f547",
       "input_hash": "b653a80667db82cd2732b046c38a75134515ca6c27b4e0afdced55240d20a10a",
-      "record_digest_sha256": "5cfeac9a78a3cc4245293d8ba4b356d38991166a8e7bf3cc25f06a95b2d25418",
-      "elapsed_s": 0.0186
+      "record_digest_sha256": "0db4f82254096df9749fdb27a5140ef4c513f0dd7e719dd67108de65e00bbf11",
+      "elapsed_s": 0.0158
     },
     {
       "loop_id": "LOOP-005",
@@ -138,10 +138,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301877-0add174ae0",
+      "run_id": "RUN-20261125092038555-1d63b1c46b",
       "input_hash": "0b205d093acaa2288400d314c4fbeca913e71f9949c6f135749e8fce17ba53e7",
-      "record_digest_sha256": "2472f9513cafecec7b7a25f457f05052b6b7394051a481d3a42951667d8684f1",
-      "elapsed_s": 0.0187
+      "record_digest_sha256": "f3813f6ce3612b88a4285f002423e716ac31537f14e0e9fbea22033c5d653b7d",
+      "elapsed_s": 0.0163
     },
     {
       "loop_id": "LOOP-006",
@@ -184,10 +184,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044301897-8768804e02",
+      "run_id": "RUN-20261125092038572-74a3e6e1d2",
       "input_hash": "69df0f8fd70d9083d1b47552f6f2dd5c84b6db9a99e044723f761c8ff6dc3d7d",
-      "record_digest_sha256": "50d861b899634d53600bd61630e828d316129b5f9693f2643b9c106a6ed736b8",
-      "elapsed_s": 0.2452
+      "record_digest_sha256": "74a27eadb39a3c95411ec11ab0f620ae3b709dbef30c3314feb0969416d5fb28",
+      "elapsed_s": 0.2538
     },
     {
       "loop_id": "LOOP-007",
@@ -230,10 +230,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044302139-f19f9e3550",
+      "run_id": "RUN-20261125092038827-07d726a10c",
       "input_hash": "c0580d3d8cd843983c05c40950d3d715796f4516b3ad444f572184122f48427d",
-      "record_digest_sha256": "99527d4ad5c3d23bf0e161848fc97ef78859a5507181b8ec0b71cb087904dae2",
-      "elapsed_s": 0.2391
+      "record_digest_sha256": "23e6778720b9112e53187974ce6a3c447343036a011ae6f1cbdb31b6793aadeb",
+      "elapsed_s": 0.2437
     },
     {
       "loop_id": "LOOP-008",
@@ -276,10 +276,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044302383-c31fef8534",
+      "run_id": "RUN-20261125092039072-203834f6ec",
       "input_hash": "11843a28ad0349e27218b4e03353165f96604dbd560e2f64aaf5c991a378678d",
-      "record_digest_sha256": "a589ed2a31676098de2de24c036b6b2cd3b39a112a7260a62438ad189e505927",
-      "elapsed_s": 0.2434
+      "record_digest_sha256": "432a831afd30d04a71493b000d796277ebf7ad921dcce7ebd562a9a0a7910d74",
+      "elapsed_s": 0.2572
     },
     {
       "loop_id": "LOOP-009",
@@ -322,10 +322,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044302627-5c95ff8549",
+      "run_id": "RUN-20261125092039330-31b75e312b",
       "input_hash": "65a7e8862766443c9338fed49ffa81e19d290d9bc945a036fade685903af2739",
-      "record_digest_sha256": "6f34a8db6879c12da75c7af4f3ef598041403c9fb23b3a5ab10c420127644f98",
-      "elapsed_s": 0.2615
+      "record_digest_sha256": "e2375a1a17168653feb0747669a7f09e791a3bab2a5e99f715371c030896e534",
+      "elapsed_s": 0.2455
     },
     {
       "loop_id": "LOOP-010",
@@ -368,10 +368,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044302890-184561a805",
+      "run_id": "RUN-20261125092039577-71af878ca2",
       "input_hash": "3ed9e20c0b409ff818ccbc11a27aeedc8957e1ce47e69e55e114cc20ac5056f3",
-      "record_digest_sha256": "c086f4993b0c283261dfe69b3c82f133a35766af578b9fab9888cd45715d1b39",
-      "elapsed_s": 0.2284
+      "record_digest_sha256": "b996529b43e4a548d0c8b21871a1b336cf9dad77457c26ee6f8de12975a11423",
+      "elapsed_s": 0.245
     },
     {
       "loop_id": "LOOP-011",
@@ -414,10 +414,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044303121-c69f570845",
+      "run_id": "RUN-20261125092039823-20a370e2a0",
       "input_hash": "f26ba36057164eb3238e412f768dcd6574f8245e666c8c1db0971685e1174df3",
-      "record_digest_sha256": "9edf13522461a6d66cc468de0a00096a688267c30fd9b12115a60a9a7af490a3",
-      "elapsed_s": 0.215
+      "record_digest_sha256": "f2ddeef530884067f54c3e70d3867d54d2f22d4269f056e2afe497fce8370228",
+      "elapsed_s": 0.2159
     },
     {
       "loop_id": "LOOP-012",
@@ -460,10 +460,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044303337-15b71b4a4e",
+      "run_id": "RUN-20261125092040039-ccdf5773f6",
       "input_hash": "a58d0ad09554f17d7ea0105248c92a751192809af6e6f89d38fdf0dae2643c39",
-      "record_digest_sha256": "f810b7a6b775d627104dd054ece7e6235970b51e885e8ae309096119b73ab9a5",
-      "elapsed_s": 0.1905
+      "record_digest_sha256": "429ff8b1f92f0005553ad1f86f5a0321f6472a5bc586c1ecd123f311060c571e",
+      "elapsed_s": 0.2
     },
     {
       "loop_id": "LOOP-013",
@@ -506,10 +506,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044303528-de39ef9fd2",
+      "run_id": "RUN-20261125092040241-e0f88ad531",
       "input_hash": "73bd705a9216c1d2724e3e1f62466446b01abbf1593cb26bfdcf4028bb720392",
-      "record_digest_sha256": "25f83d69bbde97d102a899938510738ce3568ba432f08302da78431e6f5bb273",
-      "elapsed_s": 0.1971
+      "record_digest_sha256": "c21a637b3d11c1e8b36f40ff6cb683d96741671f5db8192bd8f5efe08a38a88e",
+      "elapsed_s": 0.2529
     },
     {
       "loop_id": "LOOP-014",
@@ -552,10 +552,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044303726-10050e862d",
+      "run_id": "RUN-20261125092040495-eb04e16ce6",
       "input_hash": "82041ba4f4c71f1dd16cdbb75e73ed0b899b5778c6ebfe707af35a21d3b6a5df",
-      "record_digest_sha256": "e046f6689a951b3b4d76db6ac5dee51afb9a9eb8144b94044ea43709656b5bb1",
-      "elapsed_s": 0.1902
+      "record_digest_sha256": "27fc0d78e90894fcd42d3035ef20613a6153e6fba1d08fc364ae5a41e134f8ae",
+      "elapsed_s": 0.2307
     },
     {
       "loop_id": "LOOP-015",
@@ -598,10 +598,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044303917-c1578cf1d7",
+      "run_id": "RUN-20261125092040728-0119d37cd8",
       "input_hash": "3edc979cfe3178247be839aed354b2748e9c4c475fb3db28cce3d23ccbc2e2ea",
-      "record_digest_sha256": "ce0fca7270c9aef698c081598c16cdd8a3655f756ce039ea147b72f1392ead54",
-      "elapsed_s": 0.2081
+      "record_digest_sha256": "2c8c55a62507831ec8fc249fdfdd4babb05fd69978b3248ea79c800c51a76540",
+      "elapsed_s": 0.2582
     },
     {
       "loop_id": "LOOP-016",
@@ -644,10 +644,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304126-ae015be4fd",
+      "run_id": "RUN-20261125092040987-1ae8b55767",
       "input_hash": "80ed04504c3673db33b4b5c097c6adb30ce6311f0345bb99b0982b355ffafe85",
-      "record_digest_sha256": "a99529e0ce9a64a985357630d04eb072780db64dfe55217460c2ae473432f6e6",
-      "elapsed_s": 0.1973
+      "record_digest_sha256": "e28b8fd6c3748fb4597e5e76385c77f659c25bd611baafa9b129f38f59912561",
+      "elapsed_s": 0.2295
     },
     {
       "loop_id": "LOOP-017",
@@ -690,10 +690,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304324-8f75877948",
+      "run_id": "RUN-20261125092041217-7884e76147",
       "input_hash": "9d2c2ce5abe4ced7c1c62ae9af42835e48c30101f273f302175d5d846b21e137",
-      "record_digest_sha256": "05002a0619b3ef08fc3ecca02308fe661cde9f52c77d5c235f38dfeef07150fb",
-      "elapsed_s": 0.1986
+      "record_digest_sha256": "ba0acd80ec03f443d9e3188346c1f1057f5cfca9535c15007e257eae54086db2",
+      "elapsed_s": 0.2545
     },
     {
       "loop_id": "LOOP-018",
@@ -742,10 +742,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304524-12808f8443",
+      "run_id": "RUN-20261125092041473-6dc565ef74",
       "input_hash": "b9bcd223df66516c70abd30f3da389bbeeb808f506703f467a00d2388b6dd3b9",
-      "record_digest_sha256": "1085641530889c799d8868052b631f74ca9724e4d39742d3fd094aedcb0ac040",
-      "elapsed_s": 0.1199
+      "record_digest_sha256": "a08caa941c28d04dc4e6a45e590dd94b22de39509cf4b49a4b7234bcabce662f",
+      "elapsed_s": 0.1629
     },
     {
       "loop_id": "LOOP-019",
@@ -794,10 +794,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304644-0b7f17780d",
+      "run_id": "RUN-20261125092041638-d42fbaf104",
       "input_hash": "62c52d9ffd88e82051862aaddeb480c85ef8458e0c987ca77f00b5207b70bba9",
-      "record_digest_sha256": "2e3a9f7de0b68f3ee1d9a1c718adfd82d7adee19c254e19055b269b84f77cc37",
-      "elapsed_s": 0.1375
+      "record_digest_sha256": "fc5265ad2add5c2aced0bbe68c13ad08546757679471d5342a396a114ba7266b",
+      "elapsed_s": 0.1701
     },
     {
       "loop_id": "LOOP-020",
@@ -845,10 +845,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304783-1f6858f2f8",
+      "run_id": "RUN-20261125092041809-779ced50e6",
       "input_hash": "0b6f478abfd67db7d217f278c8c5a9e675eb9a8d522da0b39df3bf20192cefb0",
-      "record_digest_sha256": "ac53d30d52478064e525f16d64882d7f64767296f43d7e1c76e9e00a8eb58903",
-      "elapsed_s": 0.0884
+      "record_digest_sha256": "6e7d7a92be17be31229faefaf89d83e4ac0975afb6f8405c5ee88fd42b7919bb",
+      "elapsed_s": 0.1138
     },
     {
       "loop_id": "LOOP-021",
@@ -897,10 +897,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044304873-87133e82db",
+      "run_id": "RUN-20261125092041923-3a73ee92ca",
       "input_hash": "7adf2f504074c0d9c2231e8644667dbf7081413877b6fb3300df3bc0307cd24c",
-      "record_digest_sha256": "cb123b92f8da3b32daee2d624e8036b2e0a55f2062426d5c8da02a8df298a259",
-      "elapsed_s": 0.131
+      "record_digest_sha256": "e5807f163057fab3d69d1e573be4bad80be1cee28cf7ec06d7bfc1df76cad539",
+      "elapsed_s": 0.1751
     },
     {
       "loop_id": "LOOP-022",
@@ -949,10 +949,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044305005-7a8be74389",
+      "run_id": "RUN-20261125092042099-c47fdc9abf",
       "input_hash": "6997afb3889640e1459e2afadec72772ac9abb2c2392097bd49abace46de9de3",
-      "record_digest_sha256": "8401132c4de5586db83d9d95a566076ab1299b55076f485a93cdf8d5f264184a",
-      "elapsed_s": 0.135
+      "record_digest_sha256": "dd950dd8d4a9d757a6b166e096f707d8edeb8a6ff868c8f532d3af80bae01b6a",
+      "elapsed_s": 0.1701
     },
     {
       "loop_id": "LOOP-023",
@@ -995,10 +995,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044305139-42ef0dd02b",
+      "run_id": "RUN-20261125092042272-4a4edd9d7b",
       "input_hash": "6a601599325c9d9a26ef4cf06721afe7f3ac836680c1e28790e60360801b7191",
-      "record_digest_sha256": "ea92c25155e589dd98cc5b597e06178d487784a3243f17d27558ffd0cdaa0709",
-      "elapsed_s": 0.2221
+      "record_digest_sha256": "54a73c0cfa48c1f37bf961e1b266a34b1699275711464f9863e25a6ddf367240",
+      "elapsed_s": 0.2813
     },
     {
       "loop_id": "LOOP-024",
@@ -1041,10 +1041,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044305363-42d28ad9ac",
+      "run_id": "RUN-20261125092042554-6fc4f18eb1",
       "input_hash": "62c0f9bf4c15ce40162a38b26f152edb91b3ff40968a3a6979b2339e060fe0fe",
-      "record_digest_sha256": "1e61c29e99aac822811c96f44d7b4a33c93b7b153e0f315c85fa63b14df20f06",
-      "elapsed_s": 0.2363
+      "record_digest_sha256": "80445447c65847723b0e532aba968a121068ecb42c3d10e6733d43ff55e8fa85",
+      "elapsed_s": 0.2813
     },
     {
       "loop_id": "LOOP-025",
@@ -1087,10 +1087,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044305600-58d2e842b3",
+      "run_id": "RUN-20261125092042837-d5c7a72ec8",
       "input_hash": "2c3c5fbf3ec21bd7201250b22eb7c5db87bf3fab55251c5a15946507446b586a",
-      "record_digest_sha256": "7e03f015e0173b9196b13026bcdd520b9f9c3bf0a92367cdb593dbc74a7b6766",
-      "elapsed_s": 0.2179
+      "record_digest_sha256": "942ab18509cb0e2a52f4c6c6369fb5eb35bd2da0ed4ae7a8c4af70794d9f2286",
+      "elapsed_s": 0.3016
     },
     {
       "loop_id": "LOOP-026",
@@ -1133,10 +1133,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044305819-c70ab30f3c",
+      "run_id": "RUN-20261125092043140-01084d6a24",
       "input_hash": "64d239583cd0774ef633b7a833d28166cba0da00078bedd67750e5338700fb41",
-      "record_digest_sha256": "7f11996a038ac0109085c300076d8642a39c9f78b2e309b97eaf05a8fd409b18",
-      "elapsed_s": 0.2181
+      "record_digest_sha256": "1707df7a81c58753efcb845a23da34ffc1e38637300327bcbcdff853e18b7ab9",
+      "elapsed_s": 0.2749
     },
     {
       "loop_id": "LOOP-027",
@@ -1179,10 +1179,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044306038-94b62aeca3",
+      "run_id": "RUN-20261125092043418-cfca3365ac",
       "input_hash": "1200aaba45ab378b977d81b8cc5e9c5f7c5a7c9e3ab825a05218f7a404e01b6c",
-      "record_digest_sha256": "bde9ffd4ef5d0767eca34a706c04493371cfe8aa8c5a54963f3333ea461dcbb2",
-      "elapsed_s": 0.2236
+      "record_digest_sha256": "3fda93f1816aa381c1aeeeb925720c71d0d0f0f47a2734fd7d3892db9f3b846c",
+      "elapsed_s": 0.319
     },
     {
       "loop_id": "LOOP-028",
@@ -1225,10 +1225,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044306260-c925732e4e",
+      "run_id": "RUN-20261125092043740-a2fb7209f8",
       "input_hash": "f1d67024f9b94067027fa33557c681beac1db49d8c4e78feb67236f53011bf37",
-      "record_digest_sha256": "9c97ee41be67ad4101cf64ad534c35166c4d4403a89daa9ff1b05d9aceddf5c4",
-      "elapsed_s": 0.2597
+      "record_digest_sha256": "3ef415a6e74401acc3e27d4582def7f02fe4206e5ab45f0451a34a31e8da641c",
+      "elapsed_s": 0.3763
     },
     {
       "loop_id": "LOOP-029",
@@ -1271,10 +1271,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044306525-fe9e60ca4e",
+      "run_id": "RUN-20261125092044116-9045ca8553",
       "input_hash": "2491f3374be79c81492b165db7d58f10a1547e1d619b6dfd196cddc820e97967",
-      "record_digest_sha256": "3d86a5415f4b4ab3a63687ee5d90edf86a1516e98bea730eacb14952c8030d9b",
-      "elapsed_s": 0.2513
+      "record_digest_sha256": "929a91e6116b94f49ede845c72bf6df711845d17789e78a12ce49dfa4692c733",
+      "elapsed_s": 0.3287
     },
     {
       "loop_id": "LOOP-030",
@@ -1317,10 +1317,10 @@
       "audit_status": "PASS",
       "independent_verify_audit_record_pass": true,
       "deployment_authorized": false,
-      "run_id": "RUN-20261125044306777-607afdb488",
+      "run_id": "RUN-20261125092044446-72514664ab",
       "input_hash": "0d8750aa1d9a4fc033fc6352f2a6c2215aa639af67946fedc201df132d85417c",
-      "record_digest_sha256": "a25216df6e5b513eb306433303de0d80f38e7823d3e3a21f4b3e5a072b888757",
-      "elapsed_s": 0.2493
+      "record_digest_sha256": "c30103440bfac5c255e099d489d03c5cbd44e67b40aef101bc11d533619e0d4b",
+      "elapsed_s": 0.3034
     }
   ]
 }

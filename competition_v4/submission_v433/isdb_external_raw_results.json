@@ -75,6 +75,46 @@
           "recall_pct": 30.0,
           "f1_pct": 37.5
         }
+      },
+      "v434_scale_invariant_physics_fusion_fixed_prior": {
+        "strict_16_loops_10pos_vs_6explicit_no_stiction": {
+          "TP": 8,
+          "FN": 2,
+          "FP": 2,
+          "TN": 4,
+          "precision_pct": 80.0,
+          "recall_pct": 80.0,
+          "f1_pct": 80.0
+        },
+        "exploratory_28_loops_10pos_vs_18non_stiction": {
+          "TP": 8,
+          "FN": 2,
+          "FP": 7,
+          "TN": 11,
+          "precision_pct": 53.33,
+          "recall_pct": 80.0,
+          "f1_pct": 64.0
+        }
+      },
+      "v434_scale_invariant_physics_fusion_loocv": {
+        "strict_16_loops_10pos_vs_6explicit_no_stiction": {
+          "TP": 8,
+          "FN": 2,
+          "FP": 2,
+          "TN": 4,
+          "precision_pct": 80.0,
+          "recall_pct": 80.0,
+          "f1_pct": 80.0
+        },
+        "exploratory_28_loops_10pos_vs_18non_stiction": {
+          "TP": 8,
+          "FN": 2,
+          "FP": 6,
+          "TN": 12,
+          "precision_pct": 57.14,
+          "recall_pct": 80.0,
+          "f1_pct": 66.67
+        }
       }
     },
     "v433_frozen_abnormal_detection": {
@@ -113,6 +153,14 @@
       "horch_1999_odd_ratio": 0.9325,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1128,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6997,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2645,
+        "horch_odd_ratio": 0.9325,
+        "hyst_area": 0.067,
+        "peak_ccf": 0.9123
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -135,6 +183,14 @@
       "horch_1999_odd_ratio": 0.1158,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.4078,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3778,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2527,
+        "horch_odd_ratio": 0.1158,
+        "hyst_area": 0.0204,
+        "peak_ccf": 0.9511
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -157,6 +213,14 @@
       "horch_1999_odd_ratio": 0.8432,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.4272,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.772,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2552,
+        "horch_odd_ratio": 0.8432,
+        "hyst_area": 0.19,
+        "peak_ccf": 0.5298
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -179,6 +243,14 @@
       "horch_1999_odd_ratio": 0.1036,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0802,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2183,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0571,
+        "horch_odd_ratio": 0.1036,
+        "hyst_area": 0.0868,
+        "peak_ccf": 0.9614
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -201,6 +273,14 @@
       "horch_1999_odd_ratio": 0.7432,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.6083,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.8908,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.3743,
+        "horch_odd_ratio": 0.7432,
+        "hyst_area": 0.4818,
+        "peak_ccf": 0.7219
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -223,6 +303,14 @@
       "horch_1999_odd_ratio": 0.1191,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.2872,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6187,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.4491,
+        "horch_odd_ratio": 0.1191,
+        "hyst_area": 0.0622,
+        "peak_ccf": 0.926
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -245,6 +333,14 @@
       "horch_1999_odd_ratio": 0.8194,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0034,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7205,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.375,
+        "horch_odd_ratio": 0.8194,
+        "hyst_area": 0.0045,
+        "peak_ccf": 0.0422
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -267,6 +363,14 @@
       "horch_1999_odd_ratio": 0.2933,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.401,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.623,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.5125,
+        "horch_odd_ratio": 0.2933,
+        "hyst_area": 0.0263,
+        "peak_ccf": 0.9038
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -289,6 +393,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0726,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3384,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.27,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0007,
+        "peak_ccf": 0.9616
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -311,6 +423,14 @@
       "horch_1999_odd_ratio": 0.8798,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0574,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7539,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.3034,
+        "horch_odd_ratio": 0.8798,
+        "hyst_area": 0.0831,
+        "peak_ccf": 0.9588
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -333,6 +453,14 @@
       "horch_1999_odd_ratio": 0.7149,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1399,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5541,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1838,
+        "horch_odd_ratio": 0.7149,
+        "hyst_area": 0.0825,
+        "peak_ccf": 0.9887
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -355,6 +483,14 @@
       "horch_1999_odd_ratio": 0.9278,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.019,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6053,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2322,
+        "horch_odd_ratio": 0.9278,
+        "hyst_area": 0.0275,
+        "peak_ccf": 0.7103
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -377,6 +513,14 @@
       "horch_1999_odd_ratio": 0.0088,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.015,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0575,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0219,
+        "horch_odd_ratio": 0.0088,
+        "hyst_area": 0.0206,
+        "peak_ccf": 0.6626
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -399,6 +543,14 @@
       "horch_1999_odd_ratio": 0.418,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.3476,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6776,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2818,
+        "horch_odd_ratio": 0.418,
+        "hyst_area": 0.3193,
+        "peak_ccf": 0.8194
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -421,6 +573,14 @@
       "horch_1999_odd_ratio": 0.867,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.353,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7036,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1948,
+        "horch_odd_ratio": 0.867,
+        "hyst_area": 0.3616,
+        "peak_ccf": 0.6399
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -443,6 +603,14 @@
       "horch_1999_odd_ratio": 0.545,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.3776,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6375,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2192,
+        "horch_odd_ratio": 0.545,
+        "hyst_area": 0.3415,
+        "peak_ccf": 0.6627
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -465,6 +633,14 @@
       "horch_1999_odd_ratio": 0.0103,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1374,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.304,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1627,
+        "horch_odd_ratio": 0.0103,
+        "hyst_area": 0.0732,
+        "peak_ccf": 0.9486
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -487,6 +663,14 @@
       "horch_1999_odd_ratio": 0.0595,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.096,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3307,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1974,
+        "horch_odd_ratio": 0.0595,
+        "hyst_area": 0.0496,
+        "peak_ccf": 0.8456
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -509,6 +693,14 @@
       "horch_1999_odd_ratio": 0.2632,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.2256,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5482,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.3182,
+        "horch_odd_ratio": 0.2632,
+        "hyst_area": 0.0536,
+        "peak_ccf": 0.9114
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -531,6 +723,14 @@
       "horch_1999_odd_ratio": 0.0015,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1681,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2618,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1955,
+        "horch_odd_ratio": 0.0015,
+        "hyst_area": 0.0127,
+        "peak_ccf": 0.9672
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -553,6 +753,14 @@
       "horch_1999_odd_ratio": 0.0442,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0797,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0829,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0473,
+        "horch_odd_ratio": 0.0442,
+        "hyst_area": 0.0079,
+        "peak_ccf": 0.4021
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -575,6 +783,14 @@
       "horch_1999_odd_ratio": 0.6551,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.4844,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7801,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.8665,
+        "horch_odd_ratio": 0.6551,
+        "hyst_area": 0.0627,
+        "peak_ccf": 0.8454
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -597,6 +813,14 @@
       "horch_1999_odd_ratio": 0.9954,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1378,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6634,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1803,
+        "horch_odd_ratio": 0.9954,
+        "hyst_area": 0.1046,
+        "peak_ccf": 0.8738
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -619,6 +843,14 @@
       "horch_1999_odd_ratio": 0.9534,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.5031,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.986,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.6138,
+        "horch_odd_ratio": 0.9534,
+        "hyst_area": 0.2043,
+        "peak_ccf": 0.7185
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -641,6 +873,14 @@
       "horch_1999_odd_ratio": 0.5129,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.5102,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.782,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.3425,
+        "horch_odd_ratio": 0.5129,
+        "hyst_area": 0.4073,
+        "peak_ccf": 0.8675
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -663,6 +903,14 @@
       "horch_1999_odd_ratio": 0.0674,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0155,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1228,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0584,
+        "horch_odd_ratio": 0.0674,
+        "hyst_area": 0.0222,
+        "peak_ccf": 0.9675
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -685,6 +933,14 @@
       "horch_1999_odd_ratio": 0.0544,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0124,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1098,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0556,
+        "horch_odd_ratio": 0.0544,
+        "hyst_area": 0.018,
+        "peak_ccf": 0.9808
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -707,6 +963,14 @@
       "horch_1999_odd_ratio": 0.9809,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.2503,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5524,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1022,
+        "horch_odd_ratio": 0.9809,
+        "hyst_area": 0.0977,
+        "peak_ccf": 0.9965
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -729,6 +993,14 @@
       "horch_1999_odd_ratio": 0.2284,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.3295,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5179,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1995,
+        "horch_odd_ratio": 0.2284,
+        "hyst_area": 0.2391,
+        "peak_ccf": 0.9425
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -751,6 +1023,14 @@
       "horch_1999_odd_ratio": 0.5351,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1941,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7038,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2746,
+        "horch_odd_ratio": 0.5351,
+        "hyst_area": 0.1562,
+        "peak_ccf": 0.7772
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -773,6 +1053,14 @@
       "horch_1999_odd_ratio": 0.2086,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.3607,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.4392,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1413,
+        "horch_odd_ratio": 0.2086,
+        "hyst_area": 0.2206,
+        "peak_ccf": 0.7832
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -795,6 +1083,14 @@
       "horch_1999_odd_ratio": 0.3987,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.2534,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7347,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.3902,
+        "horch_odd_ratio": 0.3987,
+        "hyst_area": 0.0955,
+        "peak_ccf": 0.9823
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -817,6 +1113,14 @@
       "horch_1999_odd_ratio": 0.0133,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0813,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0609,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0418,
+        "horch_odd_ratio": 0.0133,
+        "hyst_area": 0.0035,
+        "peak_ccf": 0.4614
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -839,6 +1143,14 @@
       "horch_1999_odd_ratio": 0.763,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.077,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5602,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1846,
+        "horch_odd_ratio": 0.763,
+        "hyst_area": 0.0754,
+        "peak_ccf": 0.328
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -861,6 +1173,14 @@
       "horch_1999_odd_ratio": 0.0012,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0459,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3559,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2538,
+        "horch_odd_ratio": 0.0012,
+        "hyst_area": 0.0287,
+        "peak_ccf": 0.8371
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -883,6 +1203,14 @@
       "horch_1999_odd_ratio": 0.054,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0108,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1043,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0539,
+        "horch_odd_ratio": 0.054,
+        "hyst_area": 0.0156,
+        "peak_ccf": 0.9676
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -905,6 +1233,14 @@
       "horch_1999_odd_ratio": 0.0572,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0079,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0824,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0399,
+        "horch_odd_ratio": 0.0572,
+        "hyst_area": 0.0116,
+        "peak_ccf": 0.9447
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -927,6 +1263,14 @@
       "horch_1999_odd_ratio": 0.3388,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0228,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2916,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1166,
+        "horch_odd_ratio": 0.3388,
+        "hyst_area": 0.0332,
+        "peak_ccf": 0.9878
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -949,6 +1293,14 @@
       "horch_1999_odd_ratio": 0.3174,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0704,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.4042,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1562,
+        "horch_odd_ratio": 0.3174,
+        "hyst_area": 0.0853,
+        "peak_ccf": 0.7619
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -971,6 +1323,14 @@
       "horch_1999_odd_ratio": 0.7449,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0186,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.4045,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1223,
+        "horch_odd_ratio": 0.7449,
+        "hyst_area": 0.0211,
+        "peak_ccf": 0.1187
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -993,6 +1353,14 @@
       "horch_1999_odd_ratio": 0.0269,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.087,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1944,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0786,
+        "horch_odd_ratio": 0.0269,
+        "hyst_area": 0.066,
+        "peak_ccf": 0.7992
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1015,6 +1383,14 @@
       "horch_1999_odd_ratio": 0.0735,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0223,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1125,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0429,
+        "horch_odd_ratio": 0.0735,
+        "hyst_area": 0.0276,
+        "peak_ccf": 0.3131
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1037,6 +1413,14 @@
       "horch_1999_odd_ratio": 0.6556,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.009,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3231,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0875,
+        "horch_odd_ratio": 0.6556,
+        "hyst_area": 0.0127,
+        "peak_ccf": 0.2806
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1059,6 +1443,14 @@
       "horch_1999_odd_ratio": 0.5909,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.3125,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2813,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0502,
+        "horch_odd_ratio": 0.5909,
+        "hyst_area": 0.031,
+        "peak_ccf": 0.767
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1081,6 +1473,14 @@
       "horch_1999_odd_ratio": 0.4195,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0295,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3742,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1803,
+        "horch_odd_ratio": 0.4195,
+        "hyst_area": 0.0172,
+        "peak_ccf": 0.2481
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1103,6 +1503,14 @@
       "horch_1999_odd_ratio": 0.0002,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0746,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1657,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1322,
+        "horch_odd_ratio": 0.0002,
+        "hyst_area": 0.0003,
+        "peak_ccf": 0.9071
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1125,6 +1533,14 @@
       "horch_1999_odd_ratio": 0.0034,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1228,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2544,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1809,
+        "horch_odd_ratio": 0.0034,
+        "hyst_area": 0.0205,
+        "peak_ccf": 0.7445
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1147,6 +1563,14 @@
       "horch_1999_odd_ratio": 0.0005,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0182,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0196,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0142,
+        "horch_odd_ratio": 0.0005,
+        "hyst_area": 0.0012,
+        "peak_ccf": 0.903
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1169,6 +1593,14 @@
       "horch_1999_odd_ratio": 0.9441,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.4507,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7015,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1746,
+        "horch_odd_ratio": 0.9441,
+        "hyst_area": 0.4858,
+        "peak_ccf": 0.7957
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1191,6 +1623,14 @@
       "horch_1999_odd_ratio": 0.0254,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0275,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1289,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.066,
+        "horch_odd_ratio": 0.0254,
+        "hyst_area": 0.0291,
+        "peak_ccf": 0.4713
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1213,6 +1653,14 @@
       "horch_1999_odd_ratio": 0.7422,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1107,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5699,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1919,
+        "horch_odd_ratio": 0.7422,
+        "hyst_area": 0.0805,
+        "peak_ccf": 0.3714
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1235,6 +1683,14 @@
       "horch_1999_odd_ratio": 0.4847,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0494,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3699,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1139,
+        "horch_odd_ratio": 0.4847,
+        "hyst_area": 0.0616,
+        "peak_ccf": 0.4316
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1257,6 +1713,14 @@
       "horch_1999_odd_ratio": 0.4788,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.057,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3332,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0762,
+        "horch_odd_ratio": 0.4788,
+        "hyst_area": 0.0708,
+        "peak_ccf": 0.6463
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1279,6 +1743,14 @@
       "horch_1999_odd_ratio": 0.3292,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.2048,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7987,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.4074,
+        "horch_odd_ratio": 0.3292,
+        "hyst_area": 0.1542,
+        "peak_ccf": 0.6808
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1301,6 +1773,14 @@
       "horch_1999_odd_ratio": 0.9402,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.3003,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.8021,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.256,
+        "horch_odd_ratio": 0.9402,
+        "hyst_area": 0.3166,
+        "peak_ccf": 0.7004
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1323,6 +1803,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0909,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2463,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1961,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0008,
+        "peak_ccf": 0.947
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1345,6 +1833,14 @@
       "horch_1999_odd_ratio": 0.9941,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0063,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.5291,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1759,
+        "horch_odd_ratio": 0.9941,
+        "hyst_area": 0.0082,
+        "peak_ccf": 0.1001
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1367,6 +1863,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1025,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2519,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2014,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0001,
+        "peak_ccf": 0.9267
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1389,6 +1893,14 @@
       "horch_1999_odd_ratio": 0.0002,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1128,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2232,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1757,
+        "horch_odd_ratio": 0.0002,
+        "hyst_area": 0.0026,
+        "peak_ccf": 0.9326
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1411,6 +1923,14 @@
       "horch_1999_odd_ratio": 0.9893,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.4164,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7996,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2422,
+        "horch_odd_ratio": 0.9893,
+        "hyst_area": 0.4126,
+        "peak_ccf": 0.6251
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1433,6 +1953,14 @@
       "horch_1999_odd_ratio": 0.0003,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0667,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2747,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2084,
+        "horch_odd_ratio": 0.0003,
+        "hyst_area": 0.0106,
+        "peak_ccf": 0.8653
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1455,6 +1983,14 @@
       "horch_1999_odd_ratio": 0.0012,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0981,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2313,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1807,
+        "horch_odd_ratio": 0.0012,
+        "hyst_area": 0.0037,
+        "peak_ccf": 0.8848
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1477,6 +2013,14 @@
       "horch_1999_odd_ratio": 0.6695,
       "scale_norm_hyst_pred_stiction": true,
       "scale_norm_hyst_score": 0.5551,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.4207,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.152,
+        "horch_odd_ratio": 0.6695,
+        "hyst_area": 0.0225,
+        "peak_ccf": 0.793
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1499,6 +2043,14 @@
       "horch_1999_odd_ratio": 0.9978,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1234,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.7731,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.2418,
+        "horch_odd_ratio": 0.9978,
+        "hyst_area": 0.1286,
+        "peak_ccf": 0.4522
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1521,6 +2073,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0,
+        "peak_ccf": 0.0
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1543,6 +2103,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0,
+        "peak_ccf": 0.0
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1565,6 +2133,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0,
+        "peak_ccf": 0.0
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1587,6 +2163,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0,
+        "peak_ccf": 0.0
+      },
       "final_status": "HEALTHY_NO_CHANGE",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1609,6 +2193,14 @@
       "horch_1999_odd_ratio": 0.0,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.0,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0,
+        "horch_odd_ratio": 0.0,
+        "hyst_area": 0.0,
+        "peak_ccf": 0.0
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1631,6 +2223,14 @@
       "horch_1999_odd_ratio": 0.412,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0188,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3882,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1824,
+        "horch_odd_ratio": 0.412,
+        "hyst_area": 0.0274,
+        "peak_ccf": 0.9386
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1653,6 +2253,14 @@
       "horch_1999_odd_ratio": 0.2463,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0199,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1767,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0572,
+        "horch_odd_ratio": 0.2463,
+        "hyst_area": 0.0235,
+        "peak_ccf": 0.7245
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1675,6 +2283,14 @@
       "horch_1999_odd_ratio": 0.7652,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.1348,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.6272,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.1644,
+        "horch_odd_ratio": 0.7652,
+        "hyst_area": 0.1441,
+        "peak_ccf": 0.5858
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1697,6 +2313,14 @@
       "horch_1999_odd_ratio": 0.5244,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0655,
+      "v434_physics_fusion_pred_stiction": true,
+      "v434_physics_fusion_score": 0.4761,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.172,
+        "horch_odd_ratio": 0.5244,
+        "hyst_area": 0.0779,
+        "peak_ccf": 0.451
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1719,6 +2343,14 @@
       "horch_1999_odd_ratio": 0.1795,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0144,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.1835,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0816,
+        "horch_odd_ratio": 0.1795,
+        "hyst_area": 0.0207,
+        "peak_ccf": 0.6853
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1741,6 +2373,14 @@
       "horch_1999_odd_ratio": 0.2833,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0689,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.3701,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.137,
+        "horch_odd_ratio": 0.2833,
+        "hyst_area": 0.0854,
+        "peak_ccf": 0.7285
+      },
       "final_status": "VALVE_MAINTENANCE_REQUIRED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",
@@ -1763,6 +2403,14 @@
       "horch_1999_odd_ratio": 0.3075,
       "scale_norm_hyst_pred_stiction": false,
       "scale_norm_hyst_score": 0.0718,
+      "v434_physics_fusion_pred_stiction": false,
+      "v434_physics_fusion_score": 0.2906,
+      "v434_physics_fusion_evidence": {
+        "stick_flat_ratio": 0.0813,
+        "horch_odd_ratio": 0.3075,
+        "hyst_area": 0.0725,
+        "peak_ccf": 0.7781
+      },
       "final_status": "MODEL_VALIDATION_FAILED",
       "deployment_authorized": false,
       "pipeline_audit_status": "PASS",

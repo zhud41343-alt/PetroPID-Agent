@@ -1,4 +1,4 @@
-"""Read-only, zero-tuning external industrial evaluation on ISDB (Jelali & Huang, 2010).
+"""Read-only, zero-actuation external industrial evaluation on ISDB (Jelali & Huang, 2010).
 
 Evaluates the FROZEN PetroPID-Agent V4.3.3 diagnosis & Fail-Closed decision pipeline
 on all 76 real chemical/refinery control loops (`cdata.chemicals.loop1..loop76`) from
@@ -10,7 +10,10 @@ STRICT SCIENTIFIC RULES:
 1. ZERO modifications to frozen V4.3.3 backend diagnosis/identification/safety code.
 2. Runs independent secondary `verify_audit_record()` on every single one of the 76 runs.
 3. Explicitly separates 5 label groups (strict 6 `no stiction` vs 12 other-fault heuristic).
-4. Never redistributes copyrighted `isdb10.mat`; records exact source SHA-256.
+4. Reports the V4.3.4 scale-invariant physics-fusion extension separately from the
+   frozen V4.3.3 baseline. Its fixed-prior and LOOCV scores are exploratory evidence,
+   not a replacement for the frozen-baseline result.
+5. Never redistributes copyrighted `isdb10.mat`; records exact source SHA-256.
 """
 
 from __future__ import annotations
@@ -18,9 +21,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
+
+os.environ.setdefault("PETROPID_LLM_DISABLE_DOTENV", "1")
 
 import numpy as np
 import scipy.io as sio
@@ -31,7 +37,7 @@ sys.path.insert(0, str(ROOT / "05_skills"))
 sys.path.insert(0, str(ROOT / "06_mcp"))
 sys.path.insert(0, str(ROOT / "07_agents"))
 
-from petro_pid.diagnosis import diagnose_loop  # noqa: E402
+from petro_pid.diagnosis import diagnose_loop, compute_scale_invariant_stiction_score  # noqa: E402
 from decision_engine import verify_audit_record  # noqa: E402
 from orchestrator import PetroPIDOrchestrator  # noqa: E402
 
@@ -168,9 +174,10 @@ def run_isdb_eval(mat_path: Path, out_dir: Path) -> Dict[str, Any]:
             # Method 1: Frozen V4.3.3 Heuristic (ZERO modification)
             diag = diagnose_loop(sp, pv, op, dt=dt)
 
-            # Method 2 & 3: Side-by-side scale-invariant external reference detectors
+            # Method 2, 3 & 4: Side-by-side scale-invariant external reference detectors + V4.3.4 physics fusion
             horch_pred, horch_odd_ratio = _horch_crosscorr_stiction(pv, op)
             norm_pred, norm_score = _scale_norm_hysteresis_stiction(pv, op)
+            fusion_pred, fusion_score, fusion_ev = compute_scale_invariant_stiction_score(pv, op, threshold=0.40)
 
             safe_pv_bias = float(np.nanmean(pv[:15])) if np.any(np.isfinite(pv[:15])) else 50.0
             safe_op_bias = float(np.nanmean(op[:15])) if np.any(np.isfinite(op[:15])) else 50.0
@@ -232,6 +239,9 @@ def run_isdb_eval(mat_path: Path, out_dir: Path) -> Dict[str, Any]:
                     "horch_1999_odd_ratio": horch_odd_ratio,
                     "scale_norm_hyst_pred_stiction": norm_pred,
                     "scale_norm_hyst_score": norm_score,
+                    "v434_physics_fusion_pred_stiction": fusion_pred,
+                    "v434_physics_fusion_score": fusion_score,
+                    "v434_physics_fusion_evidence": fusion_ev,
                     "final_status": wf["final_status"],
                     "deployment_authorized": wf.get("deployment_authorized", False),
                     "pipeline_audit_status": (wf.get("audit_meta", {}).get("audit_verification", {}) or {}).get("audit_status", "UNVERIFIED"),
@@ -248,10 +258,26 @@ def run_isdb_eval(mat_path: Path, out_dir: Path) -> Dict[str, Any]:
     likely = [r for r in rows if r["ground_truth_5way"] == "LIKELY_STICTION"]
     unlabeled = [r for r in rows if r["ground_truth_5way"] == "UNLABELED_REFINERY"]
 
+    def _loocv_physics_fusion(pos_rows: List[Dict[str, Any]], neg_rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+        combined = [(1, r["v434_physics_fusion_score"]) for r in pos_rows] + [(0, r["v434_physics_fusion_score"]) for r in neg_rows]
+        pos_preds: List[bool] = []
+        neg_preds: List[bool] = []
+        for idx, (y_true, score_i) in enumerate(combined):
+            train_pos = [sc for j, (y, sc) in enumerate(combined) if j != idx and y == 1]
+            train_neg = [sc for j, (y, sc) in enumerate(combined) if j != idx and y == 0]
+            thr = 0.5 * (float(np.median(train_pos)) + float(np.median(train_neg)))
+            pred = bool(score_i >= thr)
+            if y_true == 1:
+                pos_preds.append(pred)
+            else:
+                neg_preds.append(pred)
+        return _binary_metrics(pos_preds, neg_preds)
+
     methods = {
         "v433_frozen_heuristic": lambda r: r["pred_anomaly_v433_frozen"] == "VALVE_STICTION",
         "horch_1999_crosscorr_scale_invariant": lambda r: r["horch_1999_pred_stiction"],
         "scale_normalized_pvop_hysteresis": lambda r: r["scale_norm_hyst_pred_stiction"],
+        "v434_scale_invariant_physics_fusion_fixed_prior": lambda r: r["v434_physics_fusion_pred_stiction"],
     }
     benchmark_comparison = {
         name: {
@@ -259,6 +285,10 @@ def run_isdb_eval(mat_path: Path, out_dir: Path) -> Dict[str, Any]:
             "exploratory_28_loops_10pos_vs_18non_stiction": _binary_metrics([fn(r) for r in pos], [fn(r) for r in neg_all]),
         }
         for name, fn in methods.items()
+    }
+    benchmark_comparison["v434_scale_invariant_physics_fusion_loocv"] = {
+        "strict_16_loops_10pos_vs_6explicit_no_stiction": _loocv_physics_fusion(pos, neg_strict),
+        "exploratory_28_loops_10pos_vs_18non_stiction": _loocv_physics_fusion(pos, neg_all),
     }
 
     status_counts: Dict[str, int] = {}
