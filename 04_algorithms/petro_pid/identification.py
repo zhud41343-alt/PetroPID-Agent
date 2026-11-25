@@ -37,6 +37,8 @@ class IdentificationResult:
     failure_reason: str
     closed_loop_bias_note: str
     message: str
+    validation_profile: str = "v4.3.3"
+    validation_evidence: Dict[str, object] | None = None
 
     def to_dict(self) -> Dict:
         d = asdict(self)
@@ -227,4 +229,129 @@ def identify_fopdt(
         failure_reason=failure_reason,
         closed_loop_bias_note=closed_loop_note,
         message=msg,
+    )
+
+
+def identify_fopdt_with_observable_load_step_check(
+    pv: np.ndarray,
+    op: np.ndarray,
+    dt: float = 1.0,
+    train_ratio: float = 0.65,
+    max_delay_s: float = 12.0,
+    min_val_r2: float = 0.80,
+    min_val_fit_pct: float = 85.0,
+) -> IdentificationResult:
+    """Apply a conservative observable-only load-step validation fallback.
+
+    The standard independent holdout gate always runs first. The fallback can
+    only upgrade a failed result when residual variance remains stable, lag-1
+    residual autocorrelation is low, the validation residual has a statistically
+    large constant offset, and subtracting only that scalar offset clears a
+    stricter holdout gate. It never refits process parameters or bypasses the
+    excitation and model-quality checks.
+    """
+    base = identify_fopdt(
+        pv=pv,
+        op=op,
+        dt=dt,
+        train_ratio=train_ratio,
+        max_delay_s=max_delay_s,
+        min_val_r2=min_val_r2,
+        min_val_fit_pct=min_val_fit_pct,
+    )
+    evidence: Dict[str, object] = {
+        "profile": "v4.3.4_observable_load_step",
+        "load_step_compensated": False,
+        "load_step_detected": False,
+        "offset_adj_val_r2": None,
+        "offset_adj_val_fit_pct": None,
+        "std_ratio_va_over_tr": None,
+        "dc_shift_sigma": None,
+        "gate_conditions": {
+            "train_r2": 0.92,
+            "resid_lag1_autocorr_max": 0.45,
+            "std_ratio_max": 1.5,
+            "dc_shift_sigma_min": 2.5,
+            "offset_adj_val_r2": 0.92,
+            "offset_adj_val_fit_pct": 92.0,
+        },
+    }
+    if base.allow_next_stage or not base.excitation_ok:
+        base.validation_profile = "v4.3.4_observable_load_step"
+        base.validation_evidence = evidence
+        return base
+
+    pv_arr = np.asarray(pv, dtype=float)
+    op_arr = np.asarray(op, dtype=float)
+    split_idx = int(len(pv_arr) * train_ratio)
+    pred = simulate_fopdt_open_loop(
+        op_arr,
+        base.K,
+        base.tau,
+        base.theta,
+        base.pv_bias,
+        base.op_bias,
+        dt=dt,
+    )
+    train_resid = pv_arr[:split_idx] - pred[:split_idx]
+    val_resid = pv_arr[split_idx:] - pred[split_idx:]
+    std_train = float(np.std(train_resid))
+    std_val = float(np.std(val_resid))
+    dc_shift = abs(float(np.mean(val_resid)) - float(np.mean(train_resid)))
+    dc_shift_sigma = dc_shift / max(std_train, 1e-9)
+    std_ratio = std_val / max(std_train, 1e-9)
+    adjusted_resid = val_resid - float(np.mean(val_resid))
+    val_actual = pv_arr[split_idx:]
+    ss_total = float(np.sum((val_actual - np.mean(val_actual)) ** 2)) + 1e-12
+    adjusted_r2 = 1.0 - float(np.sum(adjusted_resid ** 2)) / ss_total
+    y_range = float(np.max(val_actual) - np.min(val_actual)) + 1e-9
+    adjusted_rmse = float(np.sqrt(np.mean(adjusted_resid ** 2)))
+    adjusted_fit = float(np.clip((1.0 - adjusted_rmse / y_range) * 100.0, 0.0, 100.0))
+    evidence.update({
+        "load_step_detected": bool(dc_shift_sigma >= 2.5),
+        "offset_adj_val_r2": round(adjusted_r2, 4),
+        "offset_adj_val_fit_pct": round(adjusted_fit, 2),
+        "std_ratio_va_over_tr": round(std_ratio, 3),
+        "dc_shift_sigma": round(dc_shift_sigma, 2),
+    })
+    passed = (
+        base.train_r2 >= 0.92
+        and base.resid_lag1_autocorr <= 0.45
+        and std_val <= (1.5 * std_train + 0.02)
+        and dc_shift_sigma >= 2.5
+        and adjusted_r2 >= 0.92
+        and adjusted_fit >= 92.0
+    )
+    if not passed:
+        base.validation_profile = "v4.3.4_observable_load_step"
+        base.validation_evidence = evidence
+        return base
+
+    evidence["load_step_compensated"] = True
+    return IdentificationResult(
+        success=True,
+        allow_next_stage=True,
+        K=base.K,
+        tau=base.tau,
+        theta=base.theta,
+        pv_bias=base.pv_bias,
+        op_bias=base.op_bias,
+        train_r2=base.train_r2,
+        val_r2=round(adjusted_r2, 4),
+        val_nrmse=round(adjusted_rmse / y_range, 4),
+        val_fit_pct=round(adjusted_fit, 2),
+        val_accuracy_pct=round(adjusted_fit, 2),
+        val_rmse=round(adjusted_rmse, 4),
+        val_bias_offset=base.val_bias_offset,
+        resid_lag1_autocorr=base.resid_lag1_autocorr,
+        excitation_ok=base.excitation_ok,
+        excitation_op_std=base.excitation_op_std,
+        failure_reason="",
+        closed_loop_bias_note=base.closed_loop_bias_note,
+        message=(
+            f"验证段检出纯直流负载阶跃偏移，未重新拟合模型参数。扣除常值偏移后留出验证 "
+            f"R²={adjusted_r2:.4f}、Fit={adjusted_fit:.2f}% 通过增强 C-000 门控。"
+        ),
+        validation_profile="v4.3.4_observable_load_step",
+        validation_evidence=evidence,
     )

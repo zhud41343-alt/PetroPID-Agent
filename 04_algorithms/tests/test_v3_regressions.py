@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT / "04_algorithms"))
 sys.path.insert(0, str(ROOT / "07_agents"))
 
 from orchestrator import PetroPIDOrchestrator, VALID_STATUSES
+from decision_engine import verify_audit_record
 from petro_pid import identify_fopdt, verify_pid_safety, PlantParams, PIDParams
 
 
@@ -50,6 +51,18 @@ def test_sluggish_loops_rejected_when_model_validation_fails(orch: PetroPIDOrche
     assert "VIOLATION_MODEL_VALIDATION_FAILED" in res["safety"]["violation_tags"]
     # Must keep initial PID unchanged when rejected
     assert res["final_pid"] == res["initial_pid"]
+
+
+@pytest.mark.parametrize("loop_id", ["LOOP-012", "LOOP-013", "LOOP-014", "LOOP-015", "LOOP-016", "LOOP-017"])
+def test_v434_load_step_profile_is_observable_only_and_audited(orch: PetroPIDOrchestrator, loop_id: str):
+    res = orch.run_loop_workflow(loop_id, validation_profile="v4.3.4")
+    ident = res["identification"]
+    evidence = ident["validation_evidence"]
+    assert ident["validation_profile"] == "v4.3.4_observable_load_step"
+    assert evidence["load_step_compensated"] is True
+    assert evidence["profile"] == "v4.3.4_observable_load_step"
+    assert res["deployment_authorized"] is False
+    assert verify_audit_record(res)["audit_status"] == "PASS"
 
 
 def test_loop_020_valve_stiction_requires_maintenance(orch: PetroPIDOrchestrator):

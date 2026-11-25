@@ -163,6 +163,7 @@ class RunOptions(BaseModel):
     min_gm: float = 1.8
     min_pm_deg: float = 35.0
     preferred_strategy: Optional[str] = None
+    validation_profile: str = "v4.3.3"
 
 
 class SandboxRequest(BaseModel):
@@ -215,6 +216,7 @@ def run_workflow(loop_id: str, opts: Optional[RunOptions] = None) -> JSONRespons
             min_gm=opts.min_gm,
             min_pm_deg=opts.min_pm_deg,
             preferred_strategy=opts.preferred_strategy,
+            validation_profile=opts.validation_profile,
         ))
         return JSONResponse(content=result)
     except ValueError as exc:

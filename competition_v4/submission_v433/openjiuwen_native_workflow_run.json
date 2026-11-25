@@ -1,0 +1,27 @@
+{
+  "openjiuwen_native_workflow_verified": true,
+  "workflow_id": "petropid_native_wf_v1",
+  "cases": [
+    {
+      "loop_id": "LOOP-006",
+      "workflow_state": "WorkflowExecutionState.COMPLETED",
+      "result": {
+        "response": "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
+      }
+    },
+    {
+      "loop_id": "LOOP-012",
+      "workflow_state": "WorkflowExecutionState.COMPLETED",
+      "result": {
+        "response": "MODEL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "loop_id": "LOOP-021",
+      "workflow_state": "WorkflowExecutionState.COMPLETED",
+      "result": {
+        "response": "VALVE_MAINTENANCE_REQUIRED"
+      }
+    }
+  ]
+}

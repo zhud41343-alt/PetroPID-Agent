@@ -78,6 +78,10 @@
           <div class="card-head">
             <h2 id="selectedTitle">正在加载控制回路...</h2>
             <div class="toolbar">
+              <select id="profileSelect" class="btn" title="切换辨识验证 Profile（默认 V4.3.3 冻结基线）">
+                <option value="v4.3.3" selected>Profile: V4.3.3 冻结基线</option>
+                <option value="v4.3.4">Profile: V4.3.4 负载阶跃增强</option>
+              </select>
               <select id="strategySelect" class="btn">
                 <option value="">自动策略</option>
                 <option value="conservative">保守稳健</option>
@@ -130,6 +134,7 @@
               <span>审计存证：等待执行...</span>
               <span>deployment_authorized=false</span>
             </div>
+            <div class="audit-strip" id="profileEvidenceBar" style="margin-top:4px;background:#f8fafc;display:none"></div>
           </div>
         </div>
 

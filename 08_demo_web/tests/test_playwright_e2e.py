@@ -101,7 +101,7 @@ def run_e2e() -> None:
             pill_box = page.locator(".fp-delta").first.bounding_box()
             assert pill_box and pill_box["height"] < 28, f"Faceplate pill wrapped: {pill_box}"
 
-            # 2. Canonical LOOP-012 (MODEL_VALIDATION_FAILED)
+            # 2. Canonical LOOP-012: default V4.3.3 rejects -> switch to V4.3.4 approves with enhanced C-000 evidence!
             page.locator("#loopSearch").fill("LOOP-012")
             page.locator(".loop-row").first.click()
             page.wait_for_function(
@@ -109,6 +109,25 @@ def run_e2e() -> None:
                 timeout=15000,
             )
             assert "danger" in (page.locator("#riskBanner").get_attribute("class") or "")
+            assert "petropid-alg-v4.3.3" in page.locator("#auditStrip").inner_text()
+
+            # Switch to V4.3.4 profile -> LOOP-012 passes C-000 with observable DC load-step evidence
+            page.locator("#profileSelect").select_option("v4.3.4")
+            page.wait_for_function(
+                "document.getElementById('statusBadge').textContent.includes('仿真通过')",
+                timeout=15000,
+            )
+            assert "petropid-alg-v4.3.4" in page.locator("#auditStrip").inner_text()
+            assert "审计: PASS" in page.locator("#auditStrip").inner_text()
+            assert "增强 C-000 已触发" in page.locator("#profileEvidenceBar").inner_text()
+            assert not page.locator("#approvalBtn").is_disabled()
+
+            # Switch back to default V4.3.3 before continuing
+            page.locator("#profileSelect").select_option("v4.3.3")
+            page.wait_for_function(
+                "document.getElementById('statusBadge').textContent.includes('模型未过')",
+                timeout=15000,
+            )
 
             # 3. Canonical LOOP-021 (VALVE_MAINTENANCE_REQUIRED + phase chart)
             page.locator("#loopSearch").fill("LOOP-021")

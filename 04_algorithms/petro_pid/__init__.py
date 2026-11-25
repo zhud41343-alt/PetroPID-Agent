@@ -17,7 +17,11 @@ from .simulator import (
     get_standard_chemical_loops,
 )
 from .diagnosis import diagnose_loop, DiagnosisResult
-from .identification import identify_fopdt, IdentificationResult
+from .identification import (
+    identify_fopdt,
+    identify_fopdt_with_observable_load_step_check,
+    IdentificationResult,
+)
 from .tuning import tune_pid, TuningResult
 from .safety_verifier import verify_pid_safety, SafetyVerificationResult
 
@@ -31,6 +35,7 @@ __all__ = [
     "diagnose_loop",
     "DiagnosisResult",
     "identify_fopdt",
+    "identify_fopdt_with_observable_load_step_check",
     "IdentificationResult",
     "tune_pid",
     "TuningResult",

@@ -44,6 +44,7 @@ from petro_pid import (
     simulate_loop,
     diagnose_loop,
     identify_fopdt,
+    identify_fopdt_with_observable_load_step_check,
     tune_pid,
     verify_pid_safety,
 )
@@ -171,7 +172,10 @@ class PetroPIDOrchestrator:
         min_gm: float = 1.8,
         min_pm_deg: float = 35.0,
         preferred_strategy: Optional[str] = None,
+        validation_profile: str = "v4.3.3",
     ) -> Dict[str, Any]:
+        if validation_profile not in {"v4.3.3", "v4.3.4"}:
+            raise ValueError(f"Unsupported validation_profile: {validation_profile}")
         meta = _load_loop_metadata(loop_id)
         df = _load_loop_dataframe(meta)
         return self._execute_pipeline(
@@ -186,6 +190,7 @@ class PetroPIDOrchestrator:
             min_pm_deg=min_pm_deg,
             preferred_strategy=preferred_strategy,
             is_sandbox=False,
+            validation_profile=validation_profile,
         )
 
     def run_sandbox_workflow(
@@ -241,6 +246,7 @@ class PetroPIDOrchestrator:
             min_pm_deg=35.0,
             preferred_strategy=preferred_strategy,
             is_sandbox=True,
+            validation_profile="v4.3.3",
         )
 
     def _execute_pipeline(
@@ -257,11 +263,17 @@ class PetroPIDOrchestrator:
         preferred_strategy: Optional[str],
         is_sandbox: bool,
         request_id: Optional[str] = None,
+        validation_profile: str = "v4.3.3",
     ) -> Dict[str, Any]:
         t_start = time.perf_counter()
         self.runner.reset_session()
         trace: List[Dict[str, Any]] = []
         raw_bytes = int(len(t) * 4 * 16)
+        effective_algorithm_version = (
+            "petropid-alg-v4.3.4"
+            if validation_profile == "v4.3.4"
+            else ALGORITHM_VERSION
+        )
 
         # P0-01: Globally unique run_id + distinct request_id / input_hash / cache_key
         now_utc = datetime.now(timezone.utc)
@@ -299,12 +311,13 @@ class PetroPIDOrchestrator:
                 "max_ms": max_ms,
                 "min_gm": min_gm,
                 "min_pm_deg": min_pm_deg,
+                "validation_profile": validation_profile,
             },
             preferred_strategy=preferred_strategy,
             data_source_type=data_source_type,
             plant_context=plant_ctx,
             dataset_version=DATASET_VERSION,
-            algorithm_version=ALGORITHM_VERSION,
+            algorithm_version=effective_algorithm_version,
         )
         cache_key = f"CACHE-{in_hash[:16]}"
         audit_ctx = {
@@ -316,6 +329,8 @@ class PetroPIDOrchestrator:
             "timestamp": now_str,
             "data_source_type": data_source_type,
             "has_known_plant_truth": has_known_plant_truth,
+            "validation_profile": validation_profile,
+            "algorithm_version": effective_algorithm_version,
         }
 
         def _pre_audit(require_trace: bool = True) -> tuple[str, List[str]]:
@@ -324,7 +339,7 @@ class PetroPIDOrchestrator:
                 request_id=req_id,
                 input_hash=in_hash,
                 dataset_version=DATASET_VERSION,
-                algorithm_version=ALGORITHM_VERSION,
+                algorithm_version=effective_algorithm_version,
                 code_commit=CODE_COMMIT,
                 timestamp=now_str,
                 trace=trace,
@@ -463,9 +478,17 @@ class PetroPIDOrchestrator:
         # --- Stage 2: IdentificationAgent ---
         t2 = time.perf_counter()
         if not is_sandbox:
-            ident = self.runner.invoke("fopdt_system_identification", {"loop_id": meta["loop_id"]})
+            ident = self.runner.invoke(
+                "fopdt_system_identification",
+                {"loop_id": meta["loop_id"], "validation_profile": validation_profile},
+            )
         else:
-            ident = identify_fopdt(pv, op, dt=meta["dt"]).to_dict()
+            identify_fn = (
+                identify_fopdt_with_observable_load_step_check
+                if validation_profile == "v4.3.4"
+                else identify_fopdt
+            )
+            ident = identify_fn(pv, op, dt=meta["dt"]).to_dict()
             ident["loop_id"] = meta["loop_id"]
 
         id_llm = self.llm.synthesize_decision(
@@ -479,6 +502,8 @@ class PetroPIDOrchestrator:
                 "val_r2": ident["val_r2"],
                 "val_fit_pct": ident["val_fit_pct"],
                 "failure_reason": ident["failure_reason"],
+                "validation_profile": ident.get("validation_profile", validation_profile),
+                "validation_evidence": ident.get("validation_evidence"),
             },
             fallback_text=ident["message"],
         )
@@ -506,6 +531,8 @@ class PetroPIDOrchestrator:
                 "val_accuracy_pct": ident["val_accuracy_pct"],
                 "allow_next_stage": ident["allow_next_stage"],
                 "failure_reason": ident["failure_reason"],
+                "validation_profile": ident.get("validation_profile", validation_profile),
+                "validation_evidence": ident.get("validation_evidence"),
             },
         })
 
@@ -906,10 +933,11 @@ class PetroPIDOrchestrator:
                 "input_sha256": in_hash[:12],
                 "output_sha256": out_hash[:12],
                 "dataset_version": DATASET_VERSION,
-                "algorithm_version": ALGORITHM_VERSION,
+                "algorithm_version": ctx.get("algorithm_version", ALGORITHM_VERSION),
                 "code_commit": CODE_COMMIT,
                 "data_source_type": ctx.get("data_source_type", "SIMULATOR_BENCHMARK_30LOOPS"),
                 "has_known_plant_truth": bool(ctx.get("has_known_plant_truth", True)),
+                "validation_profile": ctx.get("validation_profile", "v4.3.3"),
                 "runtime_mode": self.llm.mode,
                 "final_status": final_status,
                 "reason_codes": final_decision["reason_codes"],

@@ -1,0 +1,121 @@
+"""V4.3.4 Formal Profile, Audit Tamper, Fail-Closed & Negative Safety Regression Suite."""
+
+from __future__ import annotations
+
+import copy
+import importlib.util
+import os
+import sys
+from pathlib import Path
+
+import pytest
+from fastapi.testclient import TestClient
+
+os.environ["PETROPID_LLM_DISABLE_DOTENV"] = "1"
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "04_algorithms"))
+sys.path.insert(0, str(ROOT / "05_skills"))
+sys.path.insert(0, str(ROOT / "07_agents"))
+
+from decision_engine import verify_audit_record  # noqa: E402
+from orchestrator import PetroPIDOrchestrator  # noqa: E402
+
+
+def _load_web_app():
+    mod_name = "petropid_demo_web_app_v434_neg"
+    if mod_name in sys.modules:
+        return sys.modules[mod_name].app
+    spec = importlib.util.spec_from_file_location(mod_name, ROOT / "08_demo_web" / "app.py")
+    mod = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    sys.modules[mod_name] = mod
+    spec.loader.exec_module(mod)
+    return mod.app
+
+
+client = TestClient(_load_web_app())
+orch = PetroPIDOrchestrator()
+
+
+def test_unsupported_validation_profile_rejected_fail_closed():
+    with pytest.raises(ValueError, match="Unsupported validation_profile"):
+        orch.run_loop_workflow("LOOP-012", validation_profile="v9.9.9")
+
+    resp = client.post("/api/run/LOOP-012", json={"validation_profile": "v9.9.9"})
+    assert resp.status_code in (400, 404, 422)
+
+
+def test_v434_audit_algorithm_version_and_digest_tamper_detected():
+    rec = orch.run_loop_workflow("LOOP-012", validation_profile="v4.3.4")
+    assert rec["audit_meta"]["algorithm_version"] == "petropid-alg-v4.3.4"
+    assert verify_audit_record(rec)["audit_status"] == "PASS"
+
+    # 1. Tamper algorithm_version -> FAIL
+    bad_alg = copy.deepcopy(rec)
+    bad_alg["audit_meta"]["algorithm_version"] = "petropid-alg-v4.3.3"
+    assert verify_audit_record(bad_alg)["audit_status"] == "FAIL"
+
+    # 2. Tamper / remove validation_evidence -> FAIL
+    bad_ev = copy.deepcopy(rec)
+    bad_ev["identification"]["validation_evidence"] = None
+    assert verify_audit_record(bad_ev)["audit_status"] == "FAIL"
+
+    # 3. Tamper record_digest_sha256 -> FAIL
+    bad_dig = copy.deepcopy(rec)
+    bad_dig["audit_meta"]["record_digest_sha256"] = "0" * 64
+    assert verify_audit_record(bad_dig)["audit_status"] == "FAIL"
+
+
+def test_deployment_authorized_always_false_across_profiles_and_loops():
+    for profile in ("v4.3.3", "v4.3.4"):
+        for lid in ("LOOP-001", "LOOP-006", "LOOP-012", "LOOP-021", "LOOP-029"):
+            rec = orch.run_loop_workflow(lid, validation_profile=profile)
+            assert rec["deployment_authorized"] is False
+
+
+def test_v434_never_misclassifies_periodic_disturbance_as_dc_load_step():
+    for lid in ("LOOP-028", "LOOP-029", "LOOP-030"):
+        rec = orch.run_loop_workflow(lid, validation_profile="v4.3.4")
+        assert rec["final_status"] == "PERFORMANCE_NOT_IMPROVED"
+        ev = (rec.get("identification") or {}).get("validation_evidence") or {}
+        assert ev.get("load_step_compensated") is not True
+
+
+def test_v434_never_falsely_approves_valve_stiction():
+    for lid in ("LOOP-018", "LOOP-019", "LOOP-020", "LOOP-021", "LOOP-022"):
+        rec = orch.run_loop_workflow(lid, validation_profile="v4.3.4")
+        assert rec["final_status"] == "VALVE_MAINTENANCE_REQUIRED"
+        assert rec["deployment_authorized"] is False
+
+
+def test_profile_switch_run_id_input_hash_and_algorithm_version_consistency():
+    r3 = client.post("/api/run/LOOP-012", json={"validation_profile": "v4.3.3"})
+    r4 = client.post("/api/run/LOOP-012", json={"validation_profile": "v4.3.4"})
+    assert r3.status_code == 200 and r4.status_code == 200
+    d3, d4 = r3.json(), r4.json()
+
+    assert d3["final_status"] == "MODEL_VALIDATION_FAILED"
+    assert d4["final_status"] == "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
+    assert d3["audit_meta"]["algorithm_version"] == "petropid-alg-v4.3.3"
+    assert d4["audit_meta"]["algorithm_version"] == "petropid-alg-v4.3.4"
+    assert d3["audit_meta"]["run_id"] != d4["audit_meta"]["run_id"]
+    assert d3["audit_meta"]["input_hash"] != d4["audit_meta"]["input_hash"]
+
+    # Approval sheet binds strictly to the exact run_id
+    sheet4 = client.get(f"/api/approval/LOOP-012?run_id={d4['audit_meta']['run_id']}")
+    assert sheet4.status_code == 200
+    assert d4["audit_meta"]["run_id"] in sheet4.text
+    assert "deployment_authorized=<b>false</b>" in sheet4.text
+
+
+def test_frontend_profile_selector_and_fail_closed_error_contracts():
+    html = (ROOT / "08_demo_web" / "static" / "index.html").read_text(encoding="utf-8")
+    js = (ROOT / "08_demo_web" / "static" / "app.js").read_text(encoding="utf-8")
+    assert 'id="profileSelect"' in html
+    assert '<option value="v4.3.3" selected>' in html
+    assert '<option value="v4.3.4">' in html
+    assert 'id="profileEvidenceBar"' in html
+    # HTTP 500 clears currentData and disables approvalBtn; audit != PASS disables approvalBtn
+    assert "currentData = null;" in js
+    assert "apBtn.disabled = !(hasValidRunId && auditStatus === 'PASS');" in js

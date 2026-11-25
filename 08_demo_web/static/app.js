@@ -129,8 +129,15 @@ function setupEvents() {
   document.getElementById('runBtn').onclick = () => {
     if (!selectedLoop) return;
     const strat = document.getElementById('strategySelect').value || null;
-    runWorkflow(selectedLoop.loop_id, { preferred_strategy: strat });
+    const prof = (document.getElementById('profileSelect') && document.getElementById('profileSelect').value) || 'v4.3.3';
+    runWorkflow(selectedLoop.loop_id, { preferred_strategy: strat, validation_profile: prof });
   };
+  document.getElementById('profileSelect')?.addEventListener('change', () => {
+    if (!selectedLoop) return;
+    const strat = document.getElementById('strategySelect').value || null;
+    const prof = document.getElementById('profileSelect').value || 'v4.3.3';
+    runWorkflow(selectedLoop.loop_id, { preferred_strategy: strat, validation_profile: prof });
+  });
   document.getElementById('approvalBtn').onclick = () => {
     if (!selectedLoop) return;
     const rid = currentData && currentData.audit_meta ? `?run_id=${encodeURIComponent(currentData.audit_meta.run_id)}` : '';
@@ -379,11 +386,16 @@ async function runWorkflow(loopId, opts = {}) {
   const seq = ++latestRequestSeq;
   const btn = document.getElementById('runBtn');
   btn.disabled = true; btn.textContent = '诊断与安全校验中...';
+  const profEl = document.getElementById('profileSelect');
+  const reqBody = {
+    validation_profile: (profEl && profEl.value) || 'v4.3.3',
+    ...opts,
+  };
   try {
     const res = await fetch(`/api/run/${loopId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(opts),
+      body: JSON.stringify(reqBody),
     });
     if (!res.ok) {
       let detail = `HTTP ${res.status}`;
@@ -420,6 +432,8 @@ async function runWorkflow(loopId, opts = {}) {
     if (strip) {
       strip.innerHTML = `<span><b>审计:</b> UNVERIFIED · 请求未完成</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
     }
+    const evBar = document.getElementById('profileEvidenceBar');
+    if (evBar) { evBar.style.display = 'none'; evBar.innerHTML = ''; }
   } finally {
     if (seq === latestRequestSeq) {
       btn.disabled = false; btn.textContent = '执行诊断整定';
@@ -451,10 +465,26 @@ function renderResult(data) {
   }
 
   const strip = document.getElementById('auditStrip');
+  const profName = am0.validation_profile || 'v4.3.3';
+  const algVer = am0.algorithm_version || 'petropid-alg-v4.3.3';
   if (strip) {
     const rawDig = am0.record_digest_sha256 || am0.output_sha256 || '';
     const dig = rawDig ? `${escHtml(rawDig.slice(0, 12))}…` : '--';
-    strip.innerHTML = `<span><b>工单:</b> ${escHtml(am0.run_id || '--')} &nbsp;|&nbsp; <b>状态码:</b> ${escHtml(data.final_status || 'UNKNOWN')} &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${escHtml(auditStatus)}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+    strip.innerHTML = `<span><b>工单:</b> ${escHtml(am0.run_id || '--')} &nbsp;|&nbsp; <b>Profile:</b> ${escHtml(profName)} (${escHtml(algVer)}) &nbsp;|&nbsp; <b>摘要:</b> ${dig} &nbsp;|&nbsp; <b>审计:</b> ${escHtml(auditStatus)}</span><span><b>deployment_authorized=false</b> · 隔离仿真专用</span>`;
+  }
+  const evBar = document.getElementById('profileEvidenceBar');
+  if (evBar) {
+    const ve = data.identification && data.identification.validation_evidence;
+    if (ve && ve.load_step_compensated) {
+      evBar.style.display = 'flex';
+      evBar.innerHTML = `<span style="color:#046c4e"><b>增强 C-000 已触发 (V4.3.4):</b> 纯直流负载阶跃偏移=${escHtml(ve.dc_shift_sigma)}σ · 扣偏移验证 R²=${escHtml(ve.offset_adj_val_r2)} · Fit=${escHtml(ve.offset_adj_val_fit_pct)}% · 标准差比=${escHtml(ve.std_ratio_va_over_tr)}</span><span><b>profile:</b> ${escHtml(ve.profile || profName)}</span>`;
+    } else if (profName === 'v4.3.4') {
+      evBar.style.display = 'flex';
+      evBar.innerHTML = `<span style="color:#475569"><b>增强 C-000 (V4.3.4):</b> 未触发直流偏移补偿（沿用标准 65/35 留出校验）</span><span><b>alg:</b> ${escHtml(algVer)}</span>`;
+    } else {
+      evBar.style.display = 'none';
+      evBar.innerHTML = '';
+    }
   }
   if (hasValidRunId) {
     document.getElementById('rRunMeta').textContent = `当前工单: ${am0.run_id} | 哈希:${(am0.output_sha256 || '').slice(0, 8)}`;

@@ -235,10 +235,12 @@ def run_system_c_petropid_swarm(
         return {
             "completed": True, "recovered_fault": recovered, "error": None,
             "final_status": res["final_status"],
+            "input_hash": res["audit_meta"]["input_hash"],
             "actual_tool_executions": actual_execs,
             "duplicate_calls_prevented": dup_prev,
             "handoff_bytes": res["anti_bloat_metrics"]["compact_handoff_bytes"],
             "audit_verified": audit_ok,
+            "trace": res.get("trace", []),
             "latency_ms": round((time.perf_counter() - t0) * 1000.0, 2),
         }
     finally:

@@ -12,6 +12,7 @@ Tests:
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -24,6 +25,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class StdioMCPClient:
     def __init__(self, server_script: Path) -> None:
+        child_env = os.environ.copy()
+        # Keep JSON-RPC stdout and diagnostic stderr UTF-8 on Windows hosts
+        # whose default console code page is GBK. This makes the documented
+        # local reproduction command behave like Linux CI.
+        child_env.setdefault("PYTHONIOENCODING", "utf-8")
         self.proc = subprocess.Popen(
             [sys.executable, str(server_script)],
             stdin=subprocess.PIPE,
@@ -31,6 +37,8 @@ class StdioMCPClient:
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
+            errors="replace",
+            env=child_env,
         )
         self._id = 0
 

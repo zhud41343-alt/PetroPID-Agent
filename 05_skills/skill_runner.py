@@ -23,6 +23,7 @@ from petro_pid import (
     PIDParams,
     diagnose_loop,
     identify_fopdt,
+    identify_fopdt_with_observable_load_step_check,
     tune_pid,
     verify_pid_safety,
 )
@@ -119,7 +120,12 @@ class SkillRunner:
     def _run_identification(self, params: Dict[str, Any]) -> Dict[str, Any]:
         meta = _load_loop_metadata(params["loop_id"])
         df = _load_loop_dataframe(meta)
-        res = identify_fopdt(
+        identify_fn = (
+            identify_fopdt_with_observable_load_step_check
+            if params.get("validation_profile") == "v4.3.4"
+            else identify_fopdt
+        )
+        res = identify_fn(
             pv=df["pv"].to_numpy(),
             op=df["op"].to_numpy(),
             dt=float(params.get("dt", meta.get("dt", 1.0))),

@@ -93,3 +93,20 @@ def test_openjiuwen_native_sdk_tool_registration():
     diag_tool = next(t for t in built["tools"] if t.card.name == "pid_loop_diagnosis")
     out = asyncio.run(diag_tool.invoke({"loop_id": "LOOP-006"}))
     assert out["anomaly_type"] == "AGGRESSIVE_TUNING"
+
+
+def test_openjiuwen_native_workflow_end_to_end():
+    import importlib.util
+    import pytest
+    if importlib.util.find_spec("openjiuwen") is None:
+        pytest.skip("openjiuwen native SDK not installed in lightweight Linux CI container")
+    sys.path.insert(0, str(ROOT / "07_agents"))
+    from openjiuwen_native_workflow import run_native_workflow_demo
+    import asyncio
+
+    res = asyncio.run(run_native_workflow_demo())
+    assert res["openjiuwen_native_workflow_verified"] is True
+    by_id = {c["loop_id"]: c["result"]["response"] for c in res["cases"]}
+    assert by_id["LOOP-006"] == "SIMULATION_VALIDATED_PENDING_ENGINEERING_REVIEW"
+    assert by_id["LOOP-012"] == "MODEL_VALIDATION_FAILED"
+    assert by_id["LOOP-021"] == "VALVE_MAINTENANCE_REQUIRED"
