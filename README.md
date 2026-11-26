@@ -48,7 +48,7 @@
 
 - **审计完整性边界**：提供全记录规范化 SHA-256 哈希完整性校验（可检出字段篡改与意外修改），不含外部 KMS/PKI 签名根，不宣称密码学不可抵赖。
 - **版本与运行态溯源说明**：本仓库 `main` 为最新封版源码（默认 Profile 保留 `V4.3.3` 冻结基线，前端与 API 支持切换 `V4.3.4` 正式编排候选）；Render 公网 `/healthz` 返回实际部署的 `code_commit` 与默认 `version` 字段，最终视频与演示均严格标注对应版本号与离线/在线运行模式。
-- **配套视频（10 分）与答辩 PPT**：主演示脚本 [05_DEMO_VIDEO_SCRIPT.md](competition_v4/submission_v433/05_DEMO_VIDEO_SCRIPT.md)、3 份分镜脚本（`01_docs/`）与 12 页成品答辩 PPT（[PetroPID-Agent_V4.3.4_终审答辩.pptx](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_终审答辩.pptx)）已就绪；正式 MP4 录屏视频待最终录制上传。
+- **配套视频（10 分）与答辩 PPT**：主演示 1080p MP4（[PetroPID-Agent_V4.3.4_主演示视频_2分40秒正式版.mp4](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_主演示视频_2分40秒正式版.mp4)，2 分 58 秒）与 8+3 精简终版答辩 PPT（[精简终版.pptx](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_终审答辩_精简终版.pptx) · [精简终版.pdf](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_终审答辩_精简终版.pdf)）均已就绪入库。
 
 ---
 

@@ -11,7 +11,7 @@
 | :--- | :--- | :--- |
 | **公网可交互 Demo** | https://petropid-agent.onrender.com | 匿名直连已测：`/healthz` HTTP 200，当前线上版本为 **V4.3.3 / commit `cfd568a02eab`**；V4.3.4 候选暂以本地离线证据包为准 |
 | **本地离线备演入口** | `python 08_demo_web/app.py` → `http://127.0.0.1:8000` | 零外网依赖，离线规则无缝运行 |
-| **主视频脚本（2 分 30 秒）** | [05_DEMO_VIDEO_SCRIPT.md](competition_v4/submission_v433/05_DEMO_VIDEO_SCRIPT.md) | 覆盖 `LOOP-006` 放行导出 → `LOOP-012` 模型拒批 → `LOOP-021` 阀检建议（待人工录屏配音） |
+| **主演示视频（2 分 58 秒 1080p MP4）** | [主演示视频_2分40秒正式版.mp4](competition_v4/submission_v433/PetroPID-Agent_V4.3.4_主演示视频_2分40秒正式版.mp4) · [05_DEMO_VIDEO_SCRIPT.md](competition_v4/submission_v433/05_DEMO_VIDEO_SCRIPT.md) | 1920×1080 30fps 带中文配音与字幕，完整实机演示 `LOOP-006` 放行导出 → `LOOP-012` V4.3.3/V4.3.4 对比 → `LOOP-021` 阀粘滞相图 → 全厂总览与 ISDB 80% |
 | **全口径主成绩单** | [00_MASTER_SCORECARD.md](competition_v4/submission_v433/00_MASTER_SCORECARD.md) | V4.3.3 冻结基线（`24/30`, `11/17`, `0/19`）与 V4.3.4 正式编排候选（`30/30`, `17/17`, `0/13`, `30/30` 审计 PASS）并列可溯源 |
 | **正式 V4.3.4 编排 30 回路评测** | [09_V434_FORMAL_BENCHMARK.md](competition_v4/submission_v433/09_V434_FORMAL_BENCHMARK.md) · [v434_formal_benchmark.json](competition_v4/submission_v433/v434_formal_benchmark.json) | 经 `PetroPIDOrchestrator(..., validation_profile="v4.3.4")` 全链路实测 `30/30`、`0` 误放行；24 回路预隔离合成留出检验 `23/24 (95.83%)` |
 | **强单体（B3）vs 五阶段（C）公平对照** | [07_B3_VS_C_FAIR_AGENT_BENCHMARK.md](competition_v4/submission_v433/07_B3_VS_C_FAIR_AGENT_BENCHMARK.md) | 同等回退决策打平（`24/24 vs 24/24`），多智能体增量归因为阶段职责隔离、独立审批与失败阶段定位（`100% vs 0%`） |
